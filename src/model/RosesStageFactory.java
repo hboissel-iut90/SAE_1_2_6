@@ -6,8 +6,8 @@ import boardifier.model.StageElementsFactory;
 import boardifier.model.TextElement;
 
 /**
- * HoleStageFactory must create the game elements that are defined in HoleStageModel
- * WARNING: it just creates the game element and NOT their look, which is done in HoleStageView.
+ * RosesStageFactory must create the game elements that are defined in RosesStageModel
+ * WARNING: it just creates the game element and NOT their look, which is done in RosesStageView.
  *
  * If there must be a precise position in the display for the look of a game element, then this element must be created
  * with that position in the virtual space and MUST NOT be placed in a container element. Indeed, for such
@@ -21,12 +21,12 @@ import boardifier.model.TextElement;
  * look of the container.
  *
  */
-public class HoleStageFactory extends StageElementsFactory {
-    private HoleStageModel stageModel;
+public class RosesStageFactory extends StageElementsFactory {
+    private RosesStageModel stageModel;
 
-    public HoleStageFactory(GameStageModel gameStageModel) {
+    public RosesStageFactory(GameStageModel gameStageModel) {
         super(gameStageModel);
-        stageModel = (HoleStageModel) gameStageModel;
+        stageModel = (RosesStageModel) gameStageModel;
     }
 
     @Override
@@ -38,16 +38,16 @@ public class HoleStageFactory extends StageElementsFactory {
         stageModel.setPlayerName(text);
 
         // create the board, in 0,1 in the virtual space
-        HoleBoard board = new HoleBoard(0, 1, stageModel);
+        RosesBoard board = new RosesBoard(0, 1, stageModel);
         // assign the board to the game stage model
         stageModel.setBoard(board);
 
         //create the black pot in 18,0 in the virtual space
-        HolePawnPot blackPot = new HolePawnPot(45,13, stageModel);
+        RosesPawnPot blackPot = new RosesPawnPot(45,13, stageModel);
         // assign the black pot to the game stage model
         stageModel.setBlackPot(blackPot);
         //create the black pot in 25,0 in the virtual space
-        HolePawnPot redPot = new HolePawnPot(45,1, stageModel);
+        RosesPawnPot redPot = new RosesPawnPot(45,1, stageModel);
         // assign the red pot to the game stage model
         stageModel.setRedPot(redPot);
 
@@ -55,15 +55,15 @@ public class HoleStageFactory extends StageElementsFactory {
             NB: their coordinates are by default 0,0 but since they are put
             within the pots, their real coordinates will be computed by the view
          */
-        Pawn[] blackPawns = new Pawn[6];
+        RosesPawn[] blackPawns = new RosesPawn[6];
         for(int i=0;i<6;i++) {
-            blackPawns[i] = new Pawn(i + 1, Pawn.PAWN_BLUE, stageModel);
+            blackPawns[i] = new RosesPawn(i + 1, RosesPawn.PAWN_BLUE, stageModel);
         }
         // assign the black pawns to the game stage model
         stageModel.setBlackPawns(blackPawns);
-        Pawn[] redPawns = new Pawn[6];
+        RosesPawn[] redPawns = new RosesPawn[6];
         for(int i=0;i<6;i++) {
-            redPawns[i] = new Pawn(i + 1, Pawn.PAWN_RED, stageModel);
+            redPawns[i] = new RosesPawn(i + 1, RosesPawn.PAWN_RED, stageModel);
         }
         // assign the black pawns to the game stage model
         stageModel.setRedPawns(redPawns);
@@ -83,7 +83,7 @@ public class HoleStageFactory extends StageElementsFactory {
            of the element that are put within.
            If we put text, board, black/red pots within this container, their initial
            location in the virtual space is no more relevant.
-           In such a case, we also need to create a look for the main container, see HoleStageView
+           In such a case, we also need to create a look for the main container, see RosesStageView
            comment at the end of the class.
 
         // create the main container with 2 rows and 3 columns, in 0,0 in the virtual space

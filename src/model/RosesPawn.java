@@ -8,14 +8,14 @@ import boardifier.model.GameStageModel;
  * A basic pawn element, with only 2 fixed parameters : number and color
  * There are no setters because the state of a Hole pawn is fixed.
  */
-public class Pawn extends GameElement {
+public class RosesPawn extends GameElement {
 
     private int number;
     private int color;
     public static int PAWN_BLUE = 0;
     public static int PAWN_RED = 1;
 
-    public Pawn(int number, int color, GameStageModel gameStageModel) {
+    public RosesPawn(int number, int color, GameStageModel gameStageModel) {
         super(gameStageModel);
         // registering element types defined especially for this game
         ElementTypes.register("pawn",50);

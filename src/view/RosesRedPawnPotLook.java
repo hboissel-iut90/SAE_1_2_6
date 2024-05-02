@@ -11,9 +11,9 @@ import boardifier.view.GridLook;
  * too big to fit within a cell, it will overlap neighbors cells.
  * The default alignment is also changed and set to the middle of the cells.
  */
-public class RedPawnPotLook extends GridLook {
+public class RosesRedPawnPotLook extends GridLook {
 
-    public RedPawnPotLook(int rowHeight, int colWidth, ContainerElement containerElement) {
+    public RosesRedPawnPotLook(int rowHeight, int colWidth, ContainerElement containerElement) {
         super(rowHeight, colWidth, containerElement, -1, 1);
         setVerticalAlignment(ALIGN_MIDDLE);
         setHorizontalAlignment(ALIGN_CENTER);

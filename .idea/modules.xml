@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/HoleConsole.iml" filepath="$PROJECT_DIR$/HoleConsole.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RoseConsole.iml" filepath="$PROJECT_DIR$/RoseConsole.iml" />
     </modules>
   </component>
 </project>

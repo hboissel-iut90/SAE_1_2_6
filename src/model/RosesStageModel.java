@@ -3,47 +3,47 @@ package model;
 import boardifier.model.*;
 
 /**
- * HoleStageModel defines the model for the single stage in "The Hole". Indeed,
+ * RosesStageModel defines the model for the single stage in "The king of roses". Indeed,
  * there are no levels in this game: a party starts and when it's done, the game is also done.
  *
- * HoleStageModel must define all that is needed to manage a party : state variables and game elements.
+ * RosesStageModel must define all that is needed to manage a party : state variables and game elements.
  * In the present case, there are only 2 state variables that represent the number of pawns to play by each player.
  * It is used to detect the end of the party.
  * For game elements, it depends on what is chosen as a final UI design. For that demo, there are 12 elements used
  * to represent the state : the main board, 2 pots, 8 pawns, and a text for current player.
  *
- * WARNING ! HoleStageModel DOES NOT create itself the game elements because it would prevent the possibility to mock
- * game element classes for unit testing purposes. This is why HoleStageModel just defines the game elements and the methods
+ * WARNING ! RosesStageModel DOES NOT create itself the game elements because it would prevent the possibility to mock
+ * game element classes for unit testing purposes. This is why RosesStageModel just defines the game elements and the methods
  * to set this elements.
- * The instanciation of the elements is done by the HoleStageFactory, which uses the provided setters.
+ * The instanciation of the elements is done by the RosesStageFactory, which uses the provided setters.
  *
- * HoleStageModel must also contain methods to check/modify the game state when given events occur. This is the role of
+ * RosesStageModel must also contain methods to check/modify the game state when given events occur. This is the role of
  * setupCallbacks() method that defines a callback function that must be called when a pawn is put in a container.
  * This is done by calling onPutInContainer() method, with the callback function as a parameter. After that call, boardifier
  * will be able to call the callback function automatically when a pawn is put in a container.
  * NB1: callback functions MUST BE defined with a lambda expression (i.e. an arrow function).
  * NB2:  there are other methods to defines callbacks for other events (see onXXX methods in GameStageModel)
- * In "The Hole", everytime a pawn is put in the main board, we have to check if the party is ended and in this case, who is the winner.
+ * In "The king of roses", everytime a pawn is put in the main board, we have to check if the party is ended and in this case, who is the winner.
  * This is the role of computePartyResult(), which is called by the callback function if there is no more pawn to play.
  *
  */
-public class HoleStageModel extends GameStageModel {
+public class RosesStageModel extends GameStageModel {
 
     // define stage state variables
     private int blackPawnsToPlay;
     private int redPawnsToPlay;
 
     // define stage game elements
-    private HoleBoard board;
-    private HolePawnPot blackPot;
-    private HolePawnPot redPot;
-    private Pawn[] blackPawns;
-    private Pawn[] redPawns;
+    private RosesBoard board;
+    private RosesPawnPot blackPot;
+    private RosesPawnPot redPot;
+    private RosesPawn[] blackPawns;
+    private RosesPawn[] redPawns;
     private TextElement playerName;
-    // Uncomment next line if the example with a main container is used. see end of HoleStageFactory and HoleStageView
+    // Uncomment next line if the example with a main container is used. see end of RosesStageFactory and RosesStageView
     //private ContainerElement mainContainer;
 
-    public HoleStageModel(String name, Model model) {
+    public RosesStageModel(String name, Model model) {
         super(name, model);
         blackPawnsToPlay = 26;
         redPawnsToPlay = 26;
@@ -62,44 +62,44 @@ public class HoleStageModel extends GameStageModel {
     }
      */
 
-    public HoleBoard getBoard() {
+    public RosesBoard getBoard() {
         return board;
     }
-    public void setBoard(HoleBoard board) {
+    public void setBoard(RosesBoard board) {
         this.board = board;
         addContainer(board);
     }
 
-    public HolePawnPot getBlackPot() {
+    public RosesPawnPot getBlackPot() {
         return blackPot;
     }
-    public void setBlackPot(HolePawnPot blackPot) {
+    public void setBlackPot(RosesPawnPot blackPot) {
         this.blackPot = blackPot;
         addContainer(blackPot);
     }
 
-    public HolePawnPot getRedPot() {
+    public RosesPawnPot getRedPot() {
         return redPot;
     }
-    public void setRedPot(HolePawnPot redPot) {
+    public void setRedPot(RosesPawnPot redPot) {
         this.redPot = redPot;
         addContainer(redPot);
     }
 
-    public Pawn[] getBlackPawns() {
+    public RosesPawn[] getBlackPawns() {
         return blackPawns;
     }
-    public void setBlackPawns(Pawn[] blackPawns) {
+    public void setBlackPawns(RosesPawn[] blackPawns) {
         this.blackPawns = blackPawns;
         for(int i=0;i<blackPawns.length;i++) {
             addElement(blackPawns[i]);
         }
     }
 
-    public Pawn[] getRedPawns() {
+    public RosesPawn[] getRedPawns() {
         return redPawns;
     }
-    public void setRedPawns(Pawn[] redPawns) {
+    public void setRedPawns(RosesPawn[] redPawns) {
         this.redPawns = redPawns;
         for(int i=0;i<redPawns.length;i++) {
             addElement(redPawns[i]);
@@ -119,7 +119,7 @@ public class HoleStageModel extends GameStageModel {
         onPutInContainer( (element, gridDest, rowDest, colDest) -> {
             // just check when pawns are put in 3x3 board
             if (gridDest != board) return;
-            Pawn p = (Pawn) element;
+            RosesPawn p = (RosesPawn) element;
             if (p.getColor() == 0) {
                 blackPawnsToPlay--;
             }
@@ -141,7 +141,7 @@ public class HoleStageModel extends GameStageModel {
         int nbRed = 0;
         int countBlack = 0;
         int countRed = 0;
-        Pawn p = null;
+        RosesPawn p = null;
         int row, col;
         for (i = 0; i < 9; i+=2) {
             if (board.isEmptyAt(i / 3, i % 3)) break;
@@ -152,8 +152,8 @@ public class HoleStageModel extends GameStageModel {
         for (int j = 0; j < 4; j++) {
             // skip invalid cells
             if ((row >= 0) && (row <= 2) && (col >= 0) && (col <= 2)) {
-                p = (Pawn) (board.getElement(row, col));
-                if (p.getColor() == Pawn.PAWN_BLUE) {
+                p = (RosesPawn) (board.getElement(row, col));
+                if (p.getColor() == RosesPawn.PAWN_BLUE) {
                     nbBlack++;
                     countBlack += p.getNumber();
                 } else {
@@ -195,6 +195,6 @@ public class HoleStageModel extends GameStageModel {
 
     @Override
     public StageElementsFactory getDefaultElementFactory() {
-        return new HoleStageFactory(this);
+        return new RosesStageFactory(this);
     }
 }

@@ -3,14 +3,13 @@ package view;
 import boardifier.control.Logger;
 import boardifier.model.GameStageModel;
 import boardifier.view.ClassicBoardLook;
-import boardifier.view.ContainerLook;
 import boardifier.view.GameStageView;
 
 import boardifier.view.TextLook;
-import model.HoleStageModel;
+import model.RosesStageModel;
 
 /**
- * HoleStageView has to create all the looks for all game elements created by the HoleStageFactory.
+ * RosesStageView has to create all the looks for all game elements created by the RosesStageFactory.
  * The desired UI is the following:
  * player            ╔═╗    ┏━━━┓
  *    A   B   C      ║1║    ┃ 1 ┃
@@ -32,22 +31,22 @@ import model.HoleStageModel;
  *   for red pot, a subclass RedPotLook of GridLook is used, in order to override the method that render the borders.
  */
 
-public class HoleStageView extends GameStageView {
-    public HoleStageView(String name, GameStageModel gameStageModel) {
+public class RosesStageView extends GameStageView {
+    public RosesStageView(String name, GameStageModel gameStageModel) {
         super(name, gameStageModel);
     }
 
     @Override
     public void createLooks() {
-        HoleStageModel model = (HoleStageModel)gameStageModel;
+        RosesStageModel model = (RosesStageModel)gameStageModel;
 
         /* Creating all the looks for all the game elements that are created by
-           the HoleStageFactory.
+           the RosesStageFactory.
            WARNING ! If there is a game element that has no associated look, the execution
            will fail.
 
            NB1: no need to put the pawn looks within the pot looks: boardifier handles that itself, provided
-           pawn elements are put within their pot element (which is the case in HoleStageFactory)
+           pawn elements are put within their pot element (which is the case in RosesStageFactory)
 
            NB2: the real location of pawn looks within the pot looks is also managed directly by boardifier. This
            location takes the paddings & alignments into account.
@@ -58,17 +57,17 @@ public class HoleStageView extends GameStageView {
         // create a ClassicBoardLook (with borders and coordinates) for the main board.
         addLook(new ClassicBoardLook(2, 4, model.getBoard(), 1, 1, true));
         // create looks for both pots
-        addLook(new BlackPawnPotLook(model.getBlackPot()));
-        addLook(new RedPawnPotLook(2, 2, model.getRedPot()));
+        addLook(new RosesBlackPawnPotLook(model.getBlackPot()));
+        addLook(new RosesRedPawnPotLook(2, 2, model.getRedPot()));
         // create looks for all pawns
         for(int i=0;i<6;i++) {
-            addLook(new PawnLook(model.getBlackPawns()[i]));
-            addLook(new PawnLook(model.getRedPawns()[i]));
+            addLook(new RosesPawnLook(model.getBlackPawns()[i]));
+            addLook(new RosesPawnLook(model.getRedPawns()[i]));
         }
 
 
         /*
-        Example using a main container (see HoleStageFactory),
+        Example using a main container (see RosesStageFactory),
 
 
         // create a look for the main container element, with flexible cell size and no borders

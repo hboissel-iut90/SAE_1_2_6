@@ -9,16 +9,16 @@ import java.util.List;
 import java.awt.*;
 
 /**
- * Hole main board represent the element where pawns are put when played
+ * King of roses main board represent the element where pawns are put when played
  * Thus, a simple ContainerElement with 3 rows and 3 column is needed.
  * Nevertheless, in order to "simplify" the work for the controller part,
  * this class also contains method to determine all the valid cells to put a
  * pawn with a given value.
  */
-public class HoleBoard extends ContainerElement {
-    public HoleBoard(int x, int y, GameStageModel gameStageModel) {
-        // call the super-constructor to create a 3x3 grid, named "holeboard", and in x,y in space
-        super("holeboard", x, y, 9 , 9, gameStageModel);
+public class RosesBoard extends ContainerElement {
+    public RosesBoard(int x, int y, GameStageModel gameStageModel) {
+        // call the super-constructor to create a 3x3 grid, named "rosesboard", and in x,y in space
+        super("rosesboard", x, y, 9 , 9, gameStageModel);
     }
 
     public void setValidCells(int number) {
@@ -34,7 +34,7 @@ public class HoleBoard extends ContainerElement {
 
     public List<Point> computeValidCells(int number) {
         List<Point> lst = new ArrayList<>();
-        Pawn p = null;
+        RosesPawn p = null;
         // if the grid is empty, is it the first turn and thus, all cells are valid
         if (isEmpty()) {
             // i are rows
@@ -54,7 +54,7 @@ public class HoleBoard extends ContainerElement {
                     // check adjacence in row-1
                     if (i-1 >= 0) {
                         if (j-1>=0) {
-                            p = (Pawn)getElement(i-1,j-1);
+                            p = (RosesPawn)getElement(i-1,j-1);
 
                             // check if same parity
                             if ((p != null) && ( p.getNumber()%2 == number%2)) {
@@ -62,14 +62,14 @@ public class HoleBoard extends ContainerElement {
                                 continue; // go to the next point
                             }
                         }
-                        p = (Pawn)getElement(i-1,j);
+                        p = (RosesPawn)getElement(i-1,j);
                         // check if different parity
                         if ((p != null) && ( p.getNumber()%2 != number%2)) {
                             lst.add(new Point(j,i));
                             continue; // go to the next point
                         }
                         if (j+1<=2) {
-                            p = (Pawn)getElement(i-1,j+1);
+                            p = (RosesPawn)getElement(i-1,j+1);
                             // check if same parity
                             if ((p != null) && ( p.getNumber()%2 == number%2)) {
                                 lst.add(new Point(j,i));
@@ -80,21 +80,21 @@ public class HoleBoard extends ContainerElement {
                     // check adjacence in row+1
                     if (i+1 <= 2) {
                         if (j-1>=0) {
-                            p = (Pawn)getElement(i+1,j-1);
+                            p = (RosesPawn)getElement(i+1,j-1);
                             // check if same parity
                             if ((p != null) && ( p.getNumber()%2 == number%2)) {
                                 lst.add(new Point(j,i));
                                 continue; // go to the next point
                             }
                         }
-                        p = (Pawn)getElement(i+1,j);
+                        p = (RosesPawn)getElement(i+1,j);
                         // check if different parity
                         if ((p != null) && ( p.getNumber()%2 != number%2)) {
                             lst.add(new Point(j,i));
                             continue; // go to the next point
                         }
                         if (j+1<=2) {
-                            p = (Pawn)getElement(i+1,j+1);
+                            p = (RosesPawn)getElement(i+1,j+1);
                             // check if same parity
                             if ((p != null) && ( p.getNumber()%2 == number%2)) {
                                 lst.add(new Point(j,i));
@@ -104,7 +104,7 @@ public class HoleBoard extends ContainerElement {
                     }
                     // check adjacence in row
                     if (j-1>=0) {
-                        p = (Pawn)getElement(i,j-1);
+                        p = (RosesPawn)getElement(i,j-1);
                         // check if different parity
                         if ((p != null) && ( p.getNumber()%2 != number%2)) {
                             lst.add(new Point(j,i));
@@ -112,7 +112,7 @@ public class HoleBoard extends ContainerElement {
                         }
                     }
                     if (j+1<=2) {
-                        p = (Pawn)getElement(i,j+1);
+                        p = (RosesPawn)getElement(i,j+1);
                         // check if different parity
                         if ((p != null) && ( p.getNumber()%2 != number%2)) {
                             lst.add(new Point(j,i));

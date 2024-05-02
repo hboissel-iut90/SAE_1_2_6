@@ -1,11 +1,12 @@
+import boardifier.control.Controller;
 import boardifier.control.Logger;
 import boardifier.model.GameException;
 import boardifier.view.View;
 import boardifier.control.StageFactory;
 import boardifier.model.Model;
-import control.HoleController;
+import control.RosesController;
 
-public class HoleConsole {
+public class RosesConsole {
 
     public static void main(String[] args) {
 
@@ -35,10 +36,10 @@ public class HoleConsole {
             model.addComputerPlayer("computer2");
         }
 
-        StageFactory.registerModelAndView("hole", "model.HoleStageModel", "view.HoleStageView");
-        View holeView = new View(model);
-        HoleController control = new HoleController(model,holeView);
-        control.setFirstStageName("hole");
+        StageFactory.registerModelAndView("roses", "model.RosesStageModel", "view.RosesStageView");
+        View rosesView = new View(model);
+        Controller control = new RosesController(model,rosesView);
+        control.setFirstStageName("roses");
         try {
             control.startGame();
             control.stageLoop();

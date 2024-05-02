@@ -9,18 +9,18 @@ import boardifier.model.Model;
 import boardifier.model.Player;
 import boardifier.model.action.ActionList;
 import boardifier.view.View;
-import model.HoleStageModel;
+import model.RosesStageModel;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class HoleController extends Controller {
+public class RosesController extends Controller {
 
     BufferedReader consoleIn;
     boolean firstPlayer;
 
-    public HoleController(Model model, View view) {
+    public RosesController(Model model, View view) {
         super(model, view);
         firstPlayer = true;
     }
@@ -45,7 +45,7 @@ public class HoleController extends Controller {
         Player p = model.getCurrentPlayer();
         if (p.getType() == Player.COMPUTER) {
             System.out.println("COMPUTER PLAYS");
-            HoleDecider decider = new HoleDecider(model,this);
+            RosesDecider decider = new RosesDecider(model,this);
             ActionPlayer play = new ActionPlayer(model, this, decider, null);
             play.start();
         }
@@ -72,11 +72,11 @@ public class HoleController extends Controller {
         model.setNextPlayer();
         // get the new player to display its name
         Player p = model.getCurrentPlayer();
-        HoleStageModel stageModel = (HoleStageModel) model.getGameStage();
+        RosesStageModel stageModel = (RosesStageModel) model.getGameStage();
         stageModel.getPlayerName().setText(p.getName());
     }
     private boolean analyseAndPlay(String line) {
-        HoleStageModel gameStage = (HoleStageModel) model.getGameStage();
+        RosesStageModel gameStage = (RosesStageModel) model.getGameStage();
         // get the pawn value from the first char
         int pawnIndex = (int) (line.charAt(0) - '1');
         if ((pawnIndex<0)||(pawnIndex>3)) return false;
@@ -100,7 +100,7 @@ public class HoleController extends Controller {
         gameStage.getBoard().setValidCells(pawnIndex+1);
         if (!gameStage.getBoard().canReachCell(row,col)) return false;
 
-        ActionList actions = ActionFactory.generatePutInContainer(model, pawn, "holeboard", row, col);
+        ActionList actions = ActionFactory.generatePutInContainer(model, pawn, "board", row, col);
         actions.setDoEndOfTurn(true); // after playing this action list, it will be the end of turn for current player.
         ActionPlayer play = new ActionPlayer(model, this, actions);
         play.start();
