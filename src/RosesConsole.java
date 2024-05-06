@@ -1,4 +1,3 @@
-import boardifier.control.Controller;
 import boardifier.control.Logger;
 import boardifier.model.GameException;
 import boardifier.view.View;
@@ -36,10 +35,10 @@ public class RosesConsole {
             model.addComputerPlayer("computer2");
         }
 
-        StageFactory.registerModelAndView("roses", "model.RosesStageModel", "view.RosesStageView");
-        View rosesView = new View(model);
-        Controller control = new RosesController(model,rosesView);
-        control.setFirstStageName("roses");
+        StageFactory.registerModelAndView("hole", "model.RosesStageModel", "view.RosesStageView");
+        View holeView = new View(model);
+        RosesController control = new RosesController(model,holeView);
+        control.setFirstStageName("hole");
         try {
             control.startGame();
             control.stageLoop();

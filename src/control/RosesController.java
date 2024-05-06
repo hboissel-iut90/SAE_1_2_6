@@ -55,7 +55,7 @@ public class RosesController extends Controller {
                 System.out.print(p.getName()+ " > ");
                 try {
                     String line = consoleIn.readLine();
-                    if (line.length() == 3) {
+                    if (line.length() == 2) {
                         ok = analyseAndPlay(line);
                     }
                     if (!ok) {
@@ -78,11 +78,8 @@ public class RosesController extends Controller {
     private boolean analyseAndPlay(String line) {
         RosesStageModel gameStage = (RosesStageModel) model.getGameStage();
         // get the pawn value from the first char
-        int pawnIndex = (int) (line.charAt(0) - '1');
-        if ((pawnIndex<0)||(pawnIndex>3)) return false;
-        // get the ccords in the board
-        int col = (int) (line.charAt(1) - 'A');
-        int row = (int) (line.charAt(2) - '1');
+        int col = (int) (line.charAt(0) - 'A');
+        int row = (int) (line.charAt(1) - '1');
         // check coords validity
         if ((row<0)||(row>2)) return false;
         if ((col<0)||(col>2)) return false;
@@ -94,13 +91,13 @@ public class RosesController extends Controller {
         else {
             pot = gameStage.getRedPot();
         }
-        if (pot.isEmptyAt(pawnIndex,0)) return false;
-        GameElement pawn = pot.getElement(pawnIndex,0);
+        if (pot.isEmptyAt(0,0)) return false;
+        GameElement pawn = pot.getElement(0,0);
         // compute valid cells for the chosen pawn
-        gameStage.getBoard().setValidCells(pawnIndex+1);
+        gameStage.getBoard().setValidCells(0+1);
         if (!gameStage.getBoard().canReachCell(row,col)) return false;
 
-        ActionList actions = ActionFactory.generatePutInContainer(model, pawn, "board", row, col);
+        ActionList actions = ActionFactory.generatePutInContainer(model, pawn, "holeboard", row, col);
         actions.setDoEndOfTurn(true); // after playing this action list, it will be the end of turn for current player.
         ActionPlayer play = new ActionPlayer(model, this, actions);
         play.start();

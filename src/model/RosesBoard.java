@@ -9,7 +9,7 @@ import java.util.List;
 import java.awt.*;
 
 /**
- * King of roses main board represent the element where pawns are put when played
+ * Hole main board represent the element where pawns are put when played
  * Thus, a simple ContainerElement with 3 rows and 3 column is needed.
  * Nevertheless, in order to "simplify" the work for the controller part,
  * this class also contains method to determine all the valid cells to put a
@@ -17,8 +17,8 @@ import java.awt.*;
  */
 public class RosesBoard extends ContainerElement {
     public RosesBoard(int x, int y, GameStageModel gameStageModel) {
-        // call the super-constructor to create a 3x3 grid, named "rosesboard", and in x,y in space
-        super("rosesboard", x, y, 9 , 9, gameStageModel);
+        // call the super-constructor to create a 3x3 grid, named "holeboard", and in x,y in space
+        super("holeboard", x, y, 9 , 9, gameStageModel);
     }
 
     public void setValidCells(int number) {
@@ -38,9 +38,9 @@ public class RosesBoard extends ContainerElement {
         // if the grid is empty, is it the first turn and thus, all cells are valid
         if (isEmpty()) {
             // i are rows
-            for(int i=0;i<3;i++) {
+            for(int i=0;i<9;i++) {
                 // j are cols
-                for (int j = 0; j < 3; j++) {
+                for (int j = 0; j < 9; j++) {
                     // cols is in x direction and rows are in y direction, so create a point in (j,i)
                     lst.add(new Point(j,i));
                 }
@@ -48,8 +48,8 @@ public class RosesBoard extends ContainerElement {
             return lst;
         }
         // else, take each empty cell and check if it is valid
-        for(int i=0;i<3;i++) {
-            for(int j=0;j<3;j++) {
+        for(int i=0;i<9;i++) {
+            for(int j=0;j<9;j++) {
                 if (isEmptyAt(i,j)) {
                     // check adjacence in row-1
                     if (i-1 >= 0) {

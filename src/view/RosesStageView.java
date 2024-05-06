@@ -9,7 +9,7 @@ import boardifier.view.TextLook;
 import model.RosesStageModel;
 
 /**
- * RosesStageView has to create all the looks for all game elements created by the RosesStageFactory.
+ * HoleStageView has to create all the looks for all game elements created by the HoleStageFactory.
  * The desired UI is the following:
  * player            ╔═╗    ┏━━━┓
  *    A   B   C      ║1║    ┃ 1 ┃
@@ -41,12 +41,12 @@ public class RosesStageView extends GameStageView {
         RosesStageModel model = (RosesStageModel)gameStageModel;
 
         /* Creating all the looks for all the game elements that are created by
-           the RosesStageFactory.
+           the HoleStageFactory.
            WARNING ! If there is a game element that has no associated look, the execution
            will fail.
 
            NB1: no need to put the pawn looks within the pot looks: boardifier handles that itself, provided
-           pawn elements are put within their pot element (which is the case in RosesStageFactory)
+           pawn elements are put within their pot element (which is the case in HoleStageFactory)
 
            NB2: the real location of pawn looks within the pot looks is also managed directly by boardifier. This
            location takes the paddings & alignments into account.
@@ -54,20 +54,23 @@ public class RosesStageView extends GameStageView {
          */
         // create a TextLook for the text element
         addLook(new TextLook(model.getPlayerName()));
+
         // create a ClassicBoardLook (with borders and coordinates) for the main board.
         addLook(new ClassicBoardLook(2, 4, model.getBoard(), 1, 1, true));
         // create looks for both pots
         addLook(new RosesBlackPawnPotLook(model.getBlackPot()));
         addLook(new RosesRedPawnPotLook(2, 2, model.getRedPot()));
         // create looks for all pawns
-        for(int i=0;i<6;i++) {
+        for(int i=0;i<26;i++) {
             addLook(new RosesPawnLook(model.getBlackPawns()[i]));
             addLook(new RosesPawnLook(model.getRedPawns()[i]));
         }
 
 
+
+
         /*
-        Example using a main container (see RosesStageFactory),
+        Example using a main container (see HoleStageFactory),
 
 
         // create a look for the main container element, with flexible cell size and no borders

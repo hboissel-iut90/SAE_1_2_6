@@ -10,7 +10,7 @@ import boardifier.view.TableLook;
  * the black pot will reduce in size because of pawn are removed from the pot to be placed
  * on the main board. At then end, it will totally disappear.
  *
- * Note that this class is not necessary and the RosesStageView could create directly an instance of TableLook.
+ * Note that this class is not necessary and the HoleStageView could create directly an instance of TableLook.
  * So, this subclass is just in case of we would like to change the look of the black pot in the future.
  */
 public class RosesBlackPawnPotLook extends TableLook {

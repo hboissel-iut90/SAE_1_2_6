@@ -34,11 +34,11 @@ public class RosesStageModel extends GameStageModel {
     private int redPawnsToPlay;
 
     // define stage game elements
-    private HoleBoard board;
-    private HolePawnPot blackPot;
-    private HolePawnPot redPot;
-    private Pawn[] blackPawns;
-    private Pawn[] redPawns;
+    private RosesBoard board;
+    private RosesPawnPot blackPot;
+    private RosesPawnPot redPot;
+    private RosesPawn[] blackPawns;
+    private RosesPawn[] redPawns;
     private TextElement playerName;
 
 
@@ -64,44 +64,44 @@ public class RosesStageModel extends GameStageModel {
     }
      */
 
-    public HoleBoard getBoard() {
+    public RosesBoard getBoard() {
         return board;
     }
-    public void setBoard(HoleBoard board) {
+    public void setBoard(RosesBoard board) {
         this.board = board;
         addContainer(board);
     }
 
-    public HolePawnPot getBlackPot() {
+    public RosesPawnPot getBlackPot() {
         return blackPot;
     }
-    public void setBlackPot(HolePawnPot blackPot) {
+    public void setBlackPot(RosesPawnPot blackPot) {
         this.blackPot = blackPot;
         addContainer(blackPot);
     }
 
-    public HolePawnPot getRedPot() {
+    public RosesPawnPot getRedPot() {
         return redPot;
     }
-    public void setRedPot(HolePawnPot redPot) {
+    public void setRedPot(RosesPawnPot redPot) {
         this.redPot = redPot;
         addContainer(redPot);
     }
 
-    public Pawn[] getBlackPawns() {
+    public RosesPawn[] getBlackPawns() {
         return blackPawns;
     }
-    public void setBlackPawns(Pawn[] blackPawns) {
+    public void setBlackPawns(RosesPawn[] blackPawns) {
         this.blackPawns = blackPawns;
         for(int i=0;i<blackPawns.length;i++) {
             addElement(blackPawns[i]);
         }
     }
 
-    public Pawn[] getRedPawns() {
+    public RosesPawn[] getRedPawns() {
         return redPawns;
     }
-    public void setRedPawns(Pawn[] redPawns) {
+    public void setRedPawns(RosesPawn[] redPawns) {
         this.redPawns = redPawns;
         for(int i=0;i<redPawns.length;i++) {
             addElement(redPawns[i]);
@@ -121,7 +121,7 @@ public class RosesStageModel extends GameStageModel {
         onPutInContainer( (element, gridDest, rowDest, colDest) -> {
             // just check when pawns are put in 3x3 board
             if (gridDest != board) return;
-            Pawn p = (Pawn) element;
+            RosesPawn p = (RosesPawn) element;
             if (p.getColor() == 0) {
                 blackPawnsToPlay--;
             }
@@ -143,7 +143,7 @@ public class RosesStageModel extends GameStageModel {
         int nbRed = 0;
         int countBlack = 0;
         int countRed = 0;
-        Pawn p = null;
+        RosesPawn p = null;
         int row, col;
         for (i = 0; i < 9; i+=2) {
             if (board.isEmptyAt(i / 3, i % 3)) break;
@@ -154,8 +154,8 @@ public class RosesStageModel extends GameStageModel {
         for (int j = 0; j < 4; j++) {
             // skip invalid cells
             if ((row >= 0) && (row <= 2) && (col >= 0) && (col <= 2)) {
-                p = (Pawn) (board.getElement(row, col));
-                if (p.getColor() == Pawn.PAWN_BLUE) {
+                p = (RosesPawn) (board.getElement(row, col));
+                if (p.getColor() == RosesPawn.PAWN_BLUE) {
                     nbBlack++;
                     countBlack += p.getNumber();
                 } else {
@@ -198,6 +198,6 @@ public class RosesStageModel extends GameStageModel {
 
     @Override
     public StageElementsFactory getDefaultElementFactory() {
-        return new HoleStageFactory(this);
+        return new RosesStageFactory(this);
     }
 }

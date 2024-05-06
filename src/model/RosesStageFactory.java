@@ -1,6 +1,5 @@
 package model;
 
-import boardifier.model.ContainerElement;
 import boardifier.model.GameStageModel;
 import boardifier.model.StageElementsFactory;
 import boardifier.model.TextElement;
@@ -22,11 +21,11 @@ import boardifier.model.TextElement;
  *
  */
 public class RosesStageFactory extends StageElementsFactory {
-    private HoleStageModel stageModel;
+    private RosesStageModel stageModel;
 
     public RosesStageFactory(GameStageModel gameStageModel) {
         super(gameStageModel);
-        stageModel = (HoleStageModel) gameStageModel;
+        stageModel = (RosesStageModel) gameStageModel;
     }
 
     @Override
@@ -38,16 +37,16 @@ public class RosesStageFactory extends StageElementsFactory {
         stageModel.setPlayerName(text);
 
         // create the board, in 0,1 in the virtual space
-        HoleBoard board = new HoleBoard(0, 1, stageModel);
+        RosesBoard board = new RosesBoard(0, 1, stageModel);
         // assign the board to the game stage model
         stageModel.setBoard(board);
 
         //create the black pot in 18,0 in the virtual space
-        HolePawnPot blackPot = new HolePawnPot(42,4, stageModel);
+        RosesPawnPot blackPot = new RosesPawnPot(42,4, stageModel);
         // assign the black pot to the game stage model
         stageModel.setBlackPot(blackPot);
         //create the black pot in 25,0 in the virtual space
-        HolePawnPot redPot = new HolePawnPot(42,15, stageModel);
+        RosesPawnPot redPot = new RosesPawnPot(42,15, stageModel);
         // assign the red pot to the game stage model
         stageModel.setRedPot(redPot);
 
@@ -55,15 +54,15 @@ public class RosesStageFactory extends StageElementsFactory {
             NB: their coordinates are by default 0,0 but since they are put
             within the pots, their real coordinates will be computed by the view
          */
-        Pawn[] blackPawns = new Pawn[26];
+        RosesPawn[] blackPawns = new RosesPawn[26];
         for(int i=0;i<26;i++) {
-            blackPawns[i] = new Pawn(Pawn.PAWN_BLUE, stageModel);
+            blackPawns[i] = new RosesPawn(RosesPawn.PAWN_BLUE, stageModel);
         }
         // assign the black pawns to the game stage model
         stageModel.setBlackPawns(blackPawns);
-        Pawn[] redPawns = new Pawn[26];
+        RosesPawn[] redPawns = new RosesPawn[26];
         for(int i=0;i<26;i++) {
-            redPawns[i] = new Pawn(Pawn.PAWN_RED, stageModel);
+            redPawns[i] = new RosesPawn(RosesPawn.PAWN_RED, stageModel);
         }
         // assign the black pawns to the game stage model
         stageModel.setRedPawns(redPawns);

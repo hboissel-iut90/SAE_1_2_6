@@ -17,11 +17,12 @@ public class RosesPawnLook extends ElementLook {
 
     protected void render() {
 
-        RosesPawn pawn = (RosesPawn)element;
+        RosesPawn pawn = (RosesPawn) element;
         if (pawn.getColor() == RosesPawn.PAWN_BLUE) {
-            shape[0][0] = ConsoleColor.WHITE + ConsoleColor.BLUE_BACKGROUND + pawn.getNumber() + ConsoleColor.RESET;
-        }
-        else {
+            shape[0][0] = ConsoleColor.BLACK + ConsoleColor.BLUE_BACKGROUND + pawn.getNumber() + ConsoleColor.RESET;
+        } else if (pawn.getColor() == RosesPawn.PAWN_YELLOW) {
+            shape[0][0] = ConsoleColor.BLACK + ConsoleColor.YELLOW_BACKGROUND + pawn.getNumber() + ConsoleColor.RESET;
+        } else {
             shape[0][0] = ConsoleColor.BLACK + ConsoleColor.RED_BACKGROUND + pawn.getNumber() + ConsoleColor.RESET;
         }
     }

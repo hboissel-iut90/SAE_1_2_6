@@ -26,7 +26,7 @@ public class RosesDecider extends Decider {
 
     @Override
     public ActionList decide() {
-        // do a cast get a variable of the real type to get access to the attributes of RosesStageModel
+        // do a cast get a variable of the real type to get access to the attributes of HoleStageModel
         RosesStageModel stage = (RosesStageModel)model.getGameStage();
         RosesBoard board = stage.getBoard(); // get the board
         RosesPawnPot pot = null; // the pot where to take a pawn
@@ -58,7 +58,7 @@ public class RosesDecider extends Decider {
             }
         }
 
-        ActionList actions = ActionFactory.generatePutInContainer( model, pawn, "board", rowDest, colDest);
+        ActionList actions = ActionFactory.generatePutInContainer( model, pawn, "holeboard", rowDest, colDest);
         actions.setDoEndOfTurn(true); // after playing this action list, it will be the end of turn for current player.
 
         return actions;
