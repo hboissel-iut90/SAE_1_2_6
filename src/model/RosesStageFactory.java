@@ -3,6 +3,7 @@ package model;
 import boardifier.model.GameStageModel;
 import boardifier.model.StageElementsFactory;
 import boardifier.model.TextElement;
+import boardifier.view.ConsoleColor;
 import org.w3c.dom.Text;
 
 /**
@@ -37,11 +38,11 @@ public class RosesStageFactory extends StageElementsFactory {
         text.setLocation(0,0);
         stageModel.setPlayerName(text);
 
-        TextElement bluePawnsCounter = new TextElement("Blue pawns left : " + stageModel.getBlackPawnsToPlay(), stageModel);
+        TextElement bluePawnsCounter = new TextElement("Blue pawns left : " + ConsoleColor.BLUE + stageModel.getBlackPawnsToPlay() + ConsoleColor.RESET, stageModel);
         bluePawnsCounter.setLocation(47, 11);
         stageModel.setBluePawnsCounter(bluePawnsCounter);
 
-        TextElement redPawnsCounter = new TextElement("Red pawns left : " + stageModel.getBlackPawnsToPlay(), stageModel);
+        TextElement redPawnsCounter = new TextElement("Red pawns left : " + ConsoleColor.RED + stageModel.getRedPawnsToPlay() + ConsoleColor.RESET, stageModel);
         redPawnsCounter.setLocation(47, 21);
         stageModel.setRedPawnsCounter(redPawnsCounter);
 
@@ -93,15 +94,19 @@ public class RosesStageFactory extends StageElementsFactory {
         stageModel.setRedPawns(redPawns);
 
         RosesPawn[] yellowPawns = new RosesPawn[1];
-        for(int i=0;i<0;i++) {
-            yellowPawns[i] = new RosesPawn(RosesPawn.PAWN_YELLOW, stageModel);
+        for(int i=0;i<1;i++) {
+            yellowPawns[i] = new RosesPawn("C", RosesPawn.PAWN_YELLOW, stageModel);
+
         }
+        stageModel.setYellowPawns(yellowPawns);
 
         // finally put the pawns to their pot
         for (int i=0;i<26;i++) {
             bluePot.addElement(bluePawns[i], 0,0);
             redPot.addElement(redPawns[i], 0,0);
         }
+
+        board.addElement(yellowPawns[0], 4, 4);
 
 
 
