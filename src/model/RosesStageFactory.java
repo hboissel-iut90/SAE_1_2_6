@@ -3,6 +3,7 @@ package model;
 import boardifier.model.GameStageModel;
 import boardifier.model.StageElementsFactory;
 import boardifier.model.TextElement;
+import org.w3c.dom.Text;
 
 /**
  * HoleStageFactory must create the game elements that are defined in HoleStageModel
@@ -36,17 +37,26 @@ public class RosesStageFactory extends StageElementsFactory {
         text.setLocation(0,0);
         stageModel.setPlayerName(text);
 
+        TextElement bluePawnsCounter = new TextElement("Blue pawns left : " + stageModel.getBlackPawnsToPlay(), stageModel);
+        bluePawnsCounter.setLocation(47, 11);
+        stageModel.setBluePawnsCounter(bluePawnsCounter);
+
+        TextElement redPawnsCounter = new TextElement("Red pawns left : " + stageModel.getBlackPawnsToPlay(), stageModel);
+        redPawnsCounter.setLocation(47, 21);
+        stageModel.setRedPawnsCounter(redPawnsCounter);
+
+
         // create the board, in 0,1 in the virtual space
-        RosesBoard board = new RosesBoard(0, 1, stageModel);
+        RosesBoard board = new RosesBoard(0, 5, stageModel);
         // assign the board to the game stage model
         stageModel.setBoard(board);
 
         //create the black pot in 18,0 in the virtual space
-        RosesPawnPot blackPot = new RosesPawnPot(42,4, stageModel);
+        RosesPawnPot blackPot = new RosesPawnPot(42,10, stageModel);
         // assign the black pot to the game stage model
         stageModel.setBlackPot(blackPot);
         //create the black pot in 25,0 in the virtual space
-        RosesPawnPot redPot = new RosesPawnPot(42,15, stageModel);
+        RosesPawnPot redPot = new RosesPawnPot(42,20, stageModel);
         // assign the red pot to the game stage model
         stageModel.setRedPot(redPot);
 
@@ -67,11 +77,21 @@ public class RosesStageFactory extends StageElementsFactory {
         // assign the black pawns to the game stage model
         stageModel.setRedPawns(redPawns);
 
+        RosesPawn[] yellowPawns = new RosesPawn[1];
+        for(int i=0;i<0;i++) {
+            yellowPawns[i] = new RosesPawn(RosesPawn.PAWN_YELLOW, stageModel);
+        }
+
         // finally put the pawns to their pot
         for (int i=0;i<26;i++) {
             blackPot.addElement(blackPawns[i], 0,0);
             redPot.addElement(redPawns[i], 0,0);
         }
+
+
+
+
+
 
         /* Example with a main container that takes the ownership of the location
            of the element that are put within.

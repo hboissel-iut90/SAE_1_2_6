@@ -1,6 +1,9 @@
 package model;
 
 import boardifier.model.*;
+import boardifier.view.GameStageView;
+import boardifier.view.TextLook;
+import org.w3c.dom.Text;
 
 /**
  * HoleStageModel defines the model for the single stage in "The Hole". Indeed,
@@ -41,6 +44,9 @@ public class RosesStageModel extends GameStageModel {
     private RosesPawn[] redPawns;
     private TextElement playerName;
 
+    private TextElement bluePawnsCounter;
+    private TextElement redPawnsCounter;
+
 
     // Uncomment next line if the example with a main container is used. see end of HoleStageFactory and HoleStageView
     //private ContainerElement mainContainer;
@@ -63,6 +69,8 @@ public class RosesStageModel extends GameStageModel {
         addContainer(mainContainer);
     }
      */
+
+
 
     public RosesBoard getBoard() {
         return board;
@@ -111,10 +119,51 @@ public class RosesStageModel extends GameStageModel {
     public TextElement getPlayerName() {
         return playerName;
     }
+
+    public TextElement getRedPawnsCounter() {
+        return this.redPawnsCounter;
+    }
+
+    public TextElement getBluePawnsCounter() {
+        return this.bluePawnsCounter;
+    }
+
+    public void setBluePawnsCounter(TextElement bluePawnsCounter) {
+        this.bluePawnsCounter = bluePawnsCounter;
+        addElement(bluePawnsCounter);
+    }
+
+    public void setRedPawnsCounter(TextElement redPawnsCounter) {
+        this.redPawnsCounter = redPawnsCounter;
+        addElement(redPawnsCounter);
+    }
+
+    public int getBlackPawnsToPlay() {
+        return this.blackPawnsToPlay;
+    }
+
+    public int getRedPawnsToPlay() {
+        return this.redPawnsToPlay;
+    }
+
+
     public void setPlayerName(TextElement playerName) {
         this.playerName = playerName;
         addElement(playerName);
     }
+
+    public void updatePawnsToPlay(GameStageView gameStageView) {
+            bluePawnsCounter.setText("Blue pawns left : " + this.getBlackPawnsToPlay());
+            bluePawnsCounter.setLocation(47, 11);
+            this.setBluePawnsCounter(bluePawnsCounter);
+            gameStageView.addLook(new TextLook(this.getBluePawnsCounter()));
+            redPawnsCounter.setText("Red pawns left : " + this.getBlackPawnsToPlay());
+            redPawnsCounter.setLocation(47, 21);
+            this.setRedPawnsCounter(redPawnsCounter);
+            gameStageView.addLook(new TextLook(this.getRedPawnsCounter()));
+
+    }
+
 
 
     private void setupCallbacks() {

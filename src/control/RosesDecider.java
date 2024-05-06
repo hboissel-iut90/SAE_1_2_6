@@ -41,13 +41,13 @@ public class RosesDecider extends Decider {
             pot = stage.getRedPot();
         }
 
-        for(int i=0;i<4;i++) {
-            RosesPawn p = (RosesPawn)pot.getElement(i,0);
+        for(int i=0;i<1;i++) {
+            RosesPawn p = (RosesPawn)pot.getElement(0,0);
             // if there is a pawn in i.
             if (p != null) {
                 // get the valid cells
                 List<Point> valid = board.computeValidCells(p.getNumber());
-                if (valid.size() != 0) {
+                if (!valid.isEmpty()) {
                     // choose at random one of the valid cells
                     int id = loto.nextInt(valid.size());
                     pawn = p;

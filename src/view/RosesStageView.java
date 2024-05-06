@@ -54,6 +54,8 @@ public class RosesStageView extends GameStageView {
          */
         // create a TextLook for the text element
         addLook(new TextLook(model.getPlayerName()));
+        addLook(new TextLook(model.getBluePawnsCounter()));
+        addLook(new TextLook(model.getRedPawnsCounter()));
 
         // create a ClassicBoardLook (with borders and coordinates) for the main board.
         addLook(new ClassicBoardLook(2, 4, model.getBoard(), 1, 1, true));
@@ -86,4 +88,6 @@ public class RosesStageView extends GameStageView {
         */
         Logger.debug("finished creating game stage looks", this);
     }
+
+
 }

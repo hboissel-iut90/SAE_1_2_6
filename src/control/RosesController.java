@@ -3,13 +3,12 @@ package control;
 import boardifier.control.ActionFactory;
 import boardifier.control.ActionPlayer;
 import boardifier.control.Controller;
-import boardifier.model.GameElement;
-import boardifier.model.ContainerElement;
-import boardifier.model.Model;
-import boardifier.model.Player;
+import boardifier.model.*;
 import boardifier.model.action.ActionList;
+import boardifier.view.TextLook;
 import boardifier.view.View;
 import model.RosesStageModel;
+import view.RosesStageView;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -74,6 +73,7 @@ public class RosesController extends Controller {
         Player p = model.getCurrentPlayer();
         RosesStageModel stageModel = (RosesStageModel) model.getGameStage();
         stageModel.getPlayerName().setText(p.getName());
+        stageModel.updatePawnsToPlay(view.getGameStageView());
     }
     private boolean analyseAndPlay(String line) {
         RosesStageModel gameStage = (RosesStageModel) model.getGameStage();
@@ -81,8 +81,8 @@ public class RosesController extends Controller {
         int col = (int) (line.charAt(0) - 'A');
         int row = (int) (line.charAt(1) - '1');
         // check coords validity
-        if ((row<0)||(row>2)) return false;
-        if ((col<0)||(col>2)) return false;
+        if ((row<0)||(row>8)) return false;
+        if ((col<0)||(col>8)) return false;
         // check if the pawn is still in its pot
         ContainerElement pot = null;
         if (model.getIdPlayer() == 0) {
@@ -94,7 +94,7 @@ public class RosesController extends Controller {
         if (pot.isEmptyAt(0,0)) return false;
         GameElement pawn = pot.getElement(0,0);
         // compute valid cells for the chosen pawn
-        gameStage.getBoard().setValidCells(0+1);
+        gameStage.getBoard().setValidCells(1);
         if (!gameStage.getBoard().canReachCell(row,col)) return false;
 
         ActionList actions = ActionFactory.generatePutInContainer(model, pawn, "holeboard", row, col);
