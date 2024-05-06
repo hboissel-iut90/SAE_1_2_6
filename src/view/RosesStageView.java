@@ -68,6 +68,10 @@ public class RosesStageView extends GameStageView {
             addLook(new RosesPawnLook(model.getRedPawns()[i]));
         }
 
+        addLook(new RosesPawnLook(model.getYellowPawns()[0]));
+
+
+
 
 
 

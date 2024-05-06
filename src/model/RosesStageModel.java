@@ -1,6 +1,7 @@
 package model;
 
 import boardifier.model.*;
+import boardifier.view.ConsoleColor;
 import boardifier.view.GameStageView;
 import boardifier.view.TextLook;
 import org.w3c.dom.Text;
@@ -42,6 +43,8 @@ public class RosesStageModel extends GameStageModel {
     private RosesPawnPot redPot;
     private RosesPawn[] blackPawns;
     private RosesPawn[] redPawns;
+
+    private RosesPawn[] yellowPawns;
     private TextElement playerName;
 
     private TextElement bluePawnsCounter;
@@ -99,6 +102,17 @@ public class RosesStageModel extends GameStageModel {
     public RosesPawn[] getBlackPawns() {
         return blackPawns;
     }
+
+    public RosesPawn[] getYellowPawns() {
+        return this.yellowPawns;
+    }
+
+    public void setYellowPawns(RosesPawn[] yellowPawns) {
+        this.yellowPawns = yellowPawns;
+        for (int i = 0; i < yellowPawns.length; i++) {
+            addElement(yellowPawns[i]);
+        }
+    }
     public void setBlackPawns(RosesPawn[] blackPawns) {
         this.blackPawns = blackPawns;
         for(int i=0;i<blackPawns.length;i++) {
@@ -153,11 +167,11 @@ public class RosesStageModel extends GameStageModel {
     }
 
     public void updatePawnsToPlay(GameStageView gameStageView) {
-            bluePawnsCounter.setText("Blue pawns left : " + this.getBlackPawnsToPlay());
+            bluePawnsCounter.setText("Blue pawns left : " + ConsoleColor.BLUE + this.getBlackPawnsToPlay() + ConsoleColor.RESET);
             bluePawnsCounter.setLocation(47, 11);
             this.setBluePawnsCounter(bluePawnsCounter);
             gameStageView.addLook(new TextLook(this.getBluePawnsCounter()));
-            redPawnsCounter.setText("Red pawns left : " + this.getBlackPawnsToPlay());
+            redPawnsCounter.setText("Red pawns left : " + ConsoleColor.RED + this.getRedPawnsToPlay() + ConsoleColor.RESET);
             redPawnsCounter.setLocation(47, 21);
             this.setRedPawnsCounter(redPawnsCounter);
             gameStageView.addLook(new TextLook(this.getRedPawnsCounter()));
