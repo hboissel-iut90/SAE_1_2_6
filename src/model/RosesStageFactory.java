@@ -59,9 +59,9 @@ public class RosesStageFactory extends StageElementsFactory {
         stageModel.setBoard(board);
 
         //create the black pot in 18,0 in the virtual space
-        RosesPawnPot blackPot = new RosesPawnPot(42,10, stageModel);
+        RosesPawnPot bluePot = new RosesPawnPot(42,10, stageModel);
         // assign the black pot to the game stage model
-        stageModel.setBlackPot(blackPot);
+        stageModel.setBlackPot(bluePot);
         //create the black pot in 25,0 in the virtual space
         RosesPawnPot redPot = new RosesPawnPot(42,20, stageModel);
         // assign the red pot to the game stage model
@@ -79,12 +79,12 @@ public class RosesStageFactory extends StageElementsFactory {
             NB: their coordinates are by default 0,0 but since they are put
             within the pots, their real coordinates will be computed by the view
          */
-        RosesPawn[] blackPawns = new RosesPawn[26];
+        RosesPawn[] bluePawns = new RosesPawn[26];
         for(int i=0;i<26;i++) {
-            blackPawns[i] = new RosesPawn(RosesPawn.PAWN_BLUE, stageModel);
+            bluePawns[i] = new RosesPawn(RosesPawn.PAWN_BLUE, stageModel);
         }
         // assign the black pawns to the game stage model
-        stageModel.setBlackPawns(blackPawns);
+        stageModel.setBlackPawns(bluePawns);
         RosesPawn[] redPawns = new RosesPawn[26];
         for(int i=0;i<26;i++) {
             redPawns[i] = new RosesPawn(RosesPawn.PAWN_RED, stageModel);
@@ -99,7 +99,7 @@ public class RosesStageFactory extends StageElementsFactory {
 
         // finally put the pawns to their pot
         for (int i=0;i<26;i++) {
-            blackPot.addElement(blackPawns[i], 0,0);
+            bluePot.addElement(bluePawns[i], 0,0);
             redPot.addElement(redPawns[i], 0,0);
         }
 
@@ -126,7 +126,7 @@ public class RosesStageFactory extends StageElementsFactory {
         // assign elements to main container cells
         mainContainer.addElement(text,0,0);
         mainContainer.addElement(board, 1,0);
-        mainContainer.addElement(blackPot,0,1);
+        mainContainer.addElement(bluePot,0,1);
         mainContainer.addElement(redPot,0,2);
         */
     }

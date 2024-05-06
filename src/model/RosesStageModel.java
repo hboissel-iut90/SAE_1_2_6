@@ -3,7 +3,6 @@ package model;
 import boardifier.model.*;
 import boardifier.view.GameStageView;
 import boardifier.view.TextLook;
-import org.w3c.dom.Text;
 
 /**
  * HoleStageModel defines the model for the single stage in "The Hole". Indeed,
@@ -45,6 +44,13 @@ public class RosesStageModel extends GameStageModel {
     private RosesPawn[] blackPawns;
     private RosesPawn[] redPawns;
 
+    private RosesCard[] pickCards;
+    private RosesCard[] discardCards;
+    private RosesCard[] player1HeroCards;
+    private RosesCard[] player1MovementCards;
+    private RosesCard[] player2MovementCards;
+    private RosesCard[] player2HeroCards;
+
     private TextElement playerName;
     private TextElement pick;
     private TextElement discard;
@@ -84,7 +90,7 @@ public class RosesStageModel extends GameStageModel {
         addContainer(board);
     }
 
-    public RosesPawnPot getBlackPot() {
+    public RosesPawnPot getBluePot() {
         return blackPot;
     }
     public void setBlackPot(RosesPawnPot blackPot) {

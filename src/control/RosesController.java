@@ -5,10 +5,8 @@ import boardifier.control.ActionPlayer;
 import boardifier.control.Controller;
 import boardifier.model.*;
 import boardifier.model.action.ActionList;
-import boardifier.view.TextLook;
 import boardifier.view.View;
 import model.RosesStageModel;
-import view.RosesStageView;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -86,7 +84,7 @@ public class RosesController extends Controller {
         // check if the pawn is still in its pot
         ContainerElement pot = null;
         if (model.getIdPlayer() == 0) {
-            pot = gameStage.getBlackPot();
+            pot = gameStage.getBluePot();
         }
         else {
             pot = gameStage.getRedPot();

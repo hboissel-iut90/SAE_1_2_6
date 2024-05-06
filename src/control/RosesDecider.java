@@ -35,7 +35,7 @@ public class RosesDecider extends Decider {
         int colDest = 0; // the dest. col in board
 
         if (model.getIdPlayer() == RosesPawn.PAWN_BLUE) {
-            pot = stage.getBlackPot();
+            pot = stage.getBluePot();
         }
         else {
             pot = stage.getRedPot();
