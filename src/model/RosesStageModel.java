@@ -40,10 +40,14 @@ public class RosesStageModel extends GameStageModel {
     private RosesBoard board;
     private RosesPawnPot blackPot;
     private RosesPawnPot redPot;
+    private RosesCardPot pickPot;
+    private RosesCardPot discardPot;
     private RosesPawn[] blackPawns;
     private RosesPawn[] redPawns;
-    private TextElement playerName;
 
+    private TextElement playerName;
+    private TextElement pick;
+    private TextElement discard;
     private TextElement bluePawnsCounter;
     private TextElement redPawnsCounter;
 
@@ -96,6 +100,24 @@ public class RosesStageModel extends GameStageModel {
         addContainer(redPot);
     }
 
+    public RosesCardPot getPickPot(){
+        return pickPot;
+    }
+
+    public void setPickPot(RosesCardPot pickPot){
+        this.pickPot = pickPot;
+        addContainer(pickPot);
+    }
+
+    public RosesCardPot getDiscardPot(){
+        return discardPot;
+    }
+
+    public void setDiscardPot(RosesCardPot discardPot){
+        this.discardPot = discardPot;
+        addContainer(discardPot);
+    }
+
     public RosesPawn[] getBlackPawns() {
         return blackPawns;
     }
@@ -124,8 +146,26 @@ public class RosesStageModel extends GameStageModel {
         return this.redPawnsCounter;
     }
 
+    public TextElement getPick() {
+        return pick;
+    }
+
+    public TextElement getDiscard() {
+        return discard;
+    }
+
     public TextElement getBluePawnsCounter() {
         return this.bluePawnsCounter;
+    }
+
+    public void setPlayerName(TextElement playerName) {
+        this.playerName = playerName;
+        addElement(playerName);
+    }
+
+    public void setRedPawnsCounter(TextElement redPawnsCounter) {
+        this.redPawnsCounter = redPawnsCounter;
+        addElement(redPawnsCounter);
     }
 
     public void setBluePawnsCounter(TextElement bluePawnsCounter) {
@@ -133,9 +173,14 @@ public class RosesStageModel extends GameStageModel {
         addElement(bluePawnsCounter);
     }
 
-    public void setRedPawnsCounter(TextElement redPawnsCounter) {
-        this.redPawnsCounter = redPawnsCounter;
-        addElement(redPawnsCounter);
+    public void setPick(TextElement pick) {
+        this.pick = pick;
+        addElement(pick);
+    }
+
+    public void setDiscard(TextElement discard) {
+        this.discard = discard;
+        addElement(discard);
     }
 
     public int getBlackPawnsToPlay() {
@@ -144,12 +189,6 @@ public class RosesStageModel extends GameStageModel {
 
     public int getRedPawnsToPlay() {
         return this.redPawnsToPlay;
-    }
-
-
-    public void setPlayerName(TextElement playerName) {
-        this.playerName = playerName;
-        addElement(playerName);
     }
 
     public void updatePawnsToPlay(GameStageView gameStageView) {

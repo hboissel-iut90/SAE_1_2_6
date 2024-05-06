@@ -56,17 +56,21 @@ public class RosesStageView extends GameStageView {
         addLook(new TextLook(model.getPlayerName()));
         addLook(new TextLook(model.getBluePawnsCounter()));
         addLook(new TextLook(model.getRedPawnsCounter()));
+        addLook(new TextLook(model.getPick()));
+        addLook(new TextLook(model.getDiscard()));
 
         // create a ClassicBoardLook (with borders and coordinates) for the main board.
         addLook(new ClassicBoardLook(2, 4, model.getBoard(), 1, 1, true));
         // create looks for both pots
-        addLook(new RosesBlackPawnPotLook(model.getBlackPot()));
-        addLook(new RosesRedPawnPotLook(2, 2, model.getRedPot()));
+        addLook(new RosesPawnPotLook(2, 2, model.getBlackPot()));
+        addLook(new RosesPawnPotLook(2, 2, model.getRedPot()));
         // create looks for all pawns
         for(int i=0;i<26;i++) {
             addLook(new RosesPawnLook(model.getBlackPawns()[i]));
             addLook(new RosesPawnLook(model.getRedPawns()[i]));
         }
+        addLook(new RosesCardPotLook(2, 2, model.getPickPot()));
+        addLook(new RosesCardPotLook(2, 2, model.getDiscardPot()));
 
 
 

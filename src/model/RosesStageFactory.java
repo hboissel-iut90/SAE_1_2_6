@@ -45,6 +45,13 @@ public class RosesStageFactory extends StageElementsFactory {
         redPawnsCounter.setLocation(47, 21);
         stageModel.setRedPawnsCounter(redPawnsCounter);
 
+        TextElement pick = new TextElement("Pick", stageModel);
+        pick.setLocation(41, 14);
+        stageModel.setPick(pick);
+
+        TextElement discard = new TextElement("Dis", stageModel);
+        discard.setLocation(47, 14);
+        stageModel.setDiscard(discard);
 
         // create the board, in 0,1 in the virtual space
         RosesBoard board = new RosesBoard(0, 5, stageModel);
@@ -59,6 +66,14 @@ public class RosesStageFactory extends StageElementsFactory {
         RosesPawnPot redPot = new RosesPawnPot(42,20, stageModel);
         // assign the red pot to the game stage model
         stageModel.setRedPot(redPot);
+
+        //create the pick pot in the virtual space
+        RosesCardPot pickPot = new RosesCardPot(42, 15, stageModel);
+        //assign the pick pot to the game stage model
+        stageModel.setPickPot(pickPot);
+
+        RosesCardPot discardPot = new RosesCardPot(47, 15, stageModel);
+        stageModel.setDiscardPot(discardPot);
 
         /* create the pawns
             NB: their coordinates are by default 0,0 but since they are put
