@@ -38,15 +38,20 @@ public class RosesStageModel extends GameStageModel {
 
     // define stage game elements
     private RosesBoard board;
+
     private RosesPawnPot blackPot;
     private RosesPawnPot redPot;
+
     private RosesCardPot pickPot;
     private RosesCardPot discardPot;
+    private RosesCardPot redHeroPot;
+    private RosesCardPot blueHeroPot;
+    private RosesCardPot moovRedPot;
+    private RosesCardPot moovBluePot;
+
     private RosesPawn[] blackPawns;
     private RosesPawn[] redPawns;
-
     private RosesPawn[] yellowPawns;
-    private TextElement playerName;
 
     private RosesCard[] pickCards;
     private RosesCard[] discardCards;
@@ -121,6 +126,42 @@ public class RosesStageModel extends GameStageModel {
 
     public RosesCardPot getDiscardPot(){
         return discardPot;
+    }
+
+    public RosesCardPot getRedHeroPot() {
+        return redHeroPot;
+    }
+
+    public void setRedHeroPot(RosesCardPot redHeroPot){
+        this.redHeroPot = redHeroPot;
+        addContainer(redHeroPot);
+    }
+
+    public RosesCardPot getBlueHeroPot() {
+        return blueHeroPot;
+    }
+
+    public void setBlueHeroPot(RosesCardPot blueHeroPot) {
+        this.blueHeroPot = blueHeroPot;
+        addContainer(blueHeroPot);
+    }
+
+    public RosesCardPot getMoovRedPot(){
+        return moovRedPot;
+    }
+
+    public void setMoovRedPot(RosesCardPot moovRedPot) {
+        this.moovRedPot = moovRedPot;
+        addContainer(moovRedPot);
+    }
+
+    public RosesCardPot getMoovBluePot(){
+        return moovBluePot;
+    }
+
+    public void setMoovBluePot(RosesCardPot moovBluePot) {
+        this.moovBluePot = moovBluePot;
+        addContainer(moovBluePot);
     }
 
     public void setDiscardPot(RosesCardPot discardPot){

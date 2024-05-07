@@ -39,42 +39,57 @@ public class RosesStageFactory extends StageElementsFactory {
         stageModel.setPlayerName(text);
 
         TextElement bluePawnsCounter = new TextElement("Blue pawns left : " + ConsoleColor.BLUE + stageModel.getBlackPawnsToPlay() + ConsoleColor.RESET, stageModel);
-        bluePawnsCounter.setLocation(47, 11);
+        bluePawnsCounter.setLocation(60, 9);
         stageModel.setBluePawnsCounter(bluePawnsCounter);
 
         TextElement redPawnsCounter = new TextElement("Red pawns left : " + ConsoleColor.RED + stageModel.getRedPawnsToPlay() + ConsoleColor.RESET, stageModel);
-        redPawnsCounter.setLocation(47, 21);
+        redPawnsCounter.setLocation(60, 21);
         stageModel.setRedPawnsCounter(redPawnsCounter);
 
         TextElement pick = new TextElement("Pick", stageModel);
-        pick.setLocation(41, 14);
+        pick.setLocation(18, 2);
         stageModel.setPick(pick);
 
         TextElement discard = new TextElement("Dis", stageModel);
-        discard.setLocation(47, 14);
+        discard.setLocation(27, 26);
         stageModel.setDiscard(discard);
 
         // create the board, in 0,1 in the virtual space
-        RosesBoard board = new RosesBoard(0, 5, stageModel);
+        RosesBoard board = new RosesBoard(5, 5, stageModel);
         // assign the board to the game stage model
         stageModel.setBoard(board);
 
-        //create the black pot in 18,0 in the virtual space
-        RosesPawnPot bluePot = new RosesPawnPot(42,10, stageModel);
-        // assign the black pot to the game stage model
+        //create the blue pot in 18,0 in the virtual space
+        RosesPawnPot bluePot = new RosesPawnPot(55,8, stageModel);
+        // assign the blue pot to the game stage model
         stageModel.setBlackPot(bluePot);
         //create the black pot in 25,0 in the virtual space
-        RosesPawnPot redPot = new RosesPawnPot(42,20, stageModel);
+        RosesPawnPot redPot = new RosesPawnPot(55,20, stageModel);
         // assign the red pot to the game stage model
         stageModel.setRedPot(redPot);
 
         //create the pick pot in the virtual space
-        RosesCardPot pickPot = new RosesCardPot(42, 15, stageModel);
+        RosesCardPot pickPot = new RosesCardPot(23, 1, stageModel);
         //assign the pick pot to the game stage model
         stageModel.setPickPot(pickPot);
 
-        RosesCardPot discardPot = new RosesCardPot(47, 15, stageModel);
+        //create the discard pot in the virtual place and assign to the game stage model
+        RosesCardPot discardPot = new RosesCardPot(23, 25, stageModel);
         stageModel.setDiscardPot(discardPot);
+
+        //create the red hero pot in the virtual place and assign to the game stage model
+        RosesCardPot redHeroPot = new RosesCardPot(0, 6, stageModel);
+        stageModel.setRedHeroPot(redHeroPot);
+
+        //create the blue hero pot in the virtual place and assign to the game stage model
+        RosesCardPot blueHeroPot = new RosesCardPot(46, 22, stageModel);
+        stageModel.setBlueHeroPot(blueHeroPot);
+
+        RosesCardPot moovRedPot = new RosesCardPot(0, 9, 5, 1,  stageModel);
+        stageModel.setMoovRedPot(moovRedPot);
+
+        RosesCardPot moovBluePot = new RosesCardPot(46, 6, 5, 1, stageModel);
+        stageModel.setMoovBluePot(moovBluePot);
 
         /* create the pawns
             NB: their coordinates are by default 0,0 but since they are put
