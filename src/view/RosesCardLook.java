@@ -12,13 +12,14 @@ import static model.RosesCard.CARD_BLUE;
 public class RosesCardLook extends ElementLook {
 
     public RosesCardLook(GameElement element) {
-        super(element, 1, 1);
+        super(element, 1, 2);
         setAnchorType(ANCHOR_TOPLEFT);
     }
 
     protected void render() {
         RosesCard card = (RosesCard) element;
         if (Objects.equals(card.getCardType(), "MOUVEMENT")) {
+            System.out.println("azerty");
             this.setHeight(2);
             switch (card.getDirection()) {
                 case "N":

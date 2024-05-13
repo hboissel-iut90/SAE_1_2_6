@@ -38,6 +38,8 @@ public class RosesCard extends GameElement {
         this.color = CARD_WHITE;
     }
 
+
+
     public int getValue(){
         return value;
     }

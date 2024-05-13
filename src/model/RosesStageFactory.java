@@ -6,6 +6,8 @@ import boardifier.model.TextElement;
 import boardifier.view.ConsoleColor;
 import org.w3c.dom.Text;
 
+import java.util.Random;
+
 /**
  * HoleStageFactory must create the game elements that are defined in HoleStageModel
  * WARNING: it just creates the game element and NOT their look, which is done in HoleStageView.
@@ -32,6 +34,8 @@ public class RosesStageFactory extends StageElementsFactory {
 
     @Override
     public void setup() {
+
+        Random random = new Random();
 
         // create the text that displays the player name and put it in 0,0 in the virtual space
         TextElement text = new TextElement(stageModel.getCurrentPlayerName(), stageModel);
@@ -91,6 +95,20 @@ public class RosesStageFactory extends StageElementsFactory {
         RosesCardPot moovBluePot = new RosesCardPot(46, 6, 5, 1, stageModel);
         stageModel.setMoovBluePot(moovBluePot);
 
+<<<<<<< Updated upstream
+=======
+        RosesCard[] player1MovementCards = new RosesCard[5];
+        for (int i = 0; i < 5; i++) {
+            player1MovementCards[i] = new RosesCard(random.nextInt(1, 3), stageModel.generateDirectionOfACard(), stageModel);
+        }
+        stageModel.setPlayer1MovementCards(player1MovementCards);
+
+        RosesCard[] player2MovementCards = new RosesCard[5];
+        for (int i = 0; i < 5; i++) {
+            player2MovementCards[i] = new RosesCard(random.nextInt(1, 3), stageModel.generateDirectionOfACard(), stageModel);
+        }
+        stageModel.setPlayer2MovementCards(player2MovementCards);
+>>>>>>> Stashed changes
         /* create the pawns
             NB: their coordinates are by default 0,0 but since they are put
             within the pots, their real coordinates will be computed by the view
@@ -119,6 +137,11 @@ public class RosesStageFactory extends StageElementsFactory {
         for (int i=0;i<26;i++) {
             bluePot.addElement(bluePawns[i], 0,0);
             redPot.addElement(redPawns[i], 0,0);
+        }
+
+        for (int i = 0; i < 5; i++) {
+            moovRedPot.addElement(player1MovementCards[i], i, 0);
+            moovBluePot.addElement(player2MovementCards[i], i, 0);
         }
 
         board.addElement(yellowPawns[0], 4, 4);

@@ -5,6 +5,8 @@ import boardifier.view.ConsoleColor;
 import boardifier.view.GameStageView;
 import boardifier.view.TextLook;
 
+import java.util.Random;
+
 /**
  * HoleStageModel defines the model for the single stage in "The Hole". Indeed,
  * there are no levels in this game: a party starts and when it's done, the game is also done.
@@ -200,6 +202,28 @@ public class RosesStageModel extends GameStageModel {
         }
     }
 
+    public void setPlayer1MovementCards(RosesCard[] player1MovementCards) {
+        this.player1MovementCards = player1MovementCards;
+        for (int i = 0; i < player1MovementCards.length ; i++) {
+            addElement(player1MovementCards[i]);
+        }
+    }
+
+    public void setPlayer2MovementCards(RosesCard[] player2MovementCards) {
+        this.player2MovementCards = player2MovementCards;
+        for (int i = 0; i < player2MovementCards.length ; i++) {
+            addElement(player2MovementCards[i]);
+        }
+    }
+
+    public RosesCard[] getPlayer1MovementCards() {
+        return this.player1MovementCards;
+    }
+
+    public RosesCard[] getPlayer2MovementCards() {
+        return this.player2MovementCards;
+    }
+
     public TextElement getPlayerName() {
         return playerName;
     }
@@ -264,6 +288,13 @@ public class RosesStageModel extends GameStageModel {
             gameStageView.addLook(new TextLook(this.getRedPawnsCounter()));
 
     }
+
+    public String generateDirectionOfACard() {
+        Random random = new Random();
+        String[] movementLists = new String[]{"N", "N-E", "E", "S-E", "S", "S-W", "W"};
+        return movementLists[random.nextInt(7)];
+    }
+
 
 
 
