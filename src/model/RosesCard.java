@@ -38,6 +38,17 @@ public class RosesCard extends GameElement {
         this.color = CARD_WHITE;
     }
 
+    public RosesCard(RosesCard other) {
+        super(other.getGameStage());
+        ElementTypes.register("card", 60);
+        type = ElementTypes.getType("card");
+        this.value = other.getValue();
+        this.direction = other.getDirection();
+        this.cardType = other.getCardType();
+        this.color = other.getColor();
+    }
+
+
 
 
     public int getValue(){

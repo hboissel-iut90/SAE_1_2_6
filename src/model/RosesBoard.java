@@ -17,8 +17,8 @@ import java.awt.*;
  */
 public class RosesBoard extends ContainerElement {
     public RosesBoard(int x, int y, GameStageModel gameStageModel) {
-        // call the super-constructor to create a 3x3 grid, named "holeboard", and in x,y in space
-        super("holeboard", x, y, 9 , 9, gameStageModel);
+        // call the super-constructor to create a 9x9 grid, named "RoseBoard", and in x,y in space
+        super("RoseBoard", x, y, 9 , 9, gameStageModel);
     }
 
     public void setValidCells(int number) {
@@ -41,7 +41,7 @@ public class RosesBoard extends ContainerElement {
             for(int i=0;i<9;i++) {
                 // j are cols
                 for (int j = 0; j < 9; j++) {
-                    // cols is in x direction and rows are in y direction, so create a point in (j,i)
+                    // cols are in x direction and rows are in y direction, so create a point in (j,i)
                     lst.add(new Point(j,i));
                 }
             }

@@ -6,7 +6,10 @@ import boardifier.model.TextElement;
 import boardifier.view.ConsoleColor;
 import org.w3c.dom.Text;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 /**
  * HoleStageFactory must create the game elements that are defined in HoleStageModel
@@ -39,7 +42,7 @@ public class RosesStageFactory extends StageElementsFactory {
 
         // create the text that displays the player name and put it in 0,0 in the virtual space
         TextElement text = new TextElement(stageModel.getCurrentPlayerName(), stageModel);
-        text.setLocation(0,0);
+        text.setLocation(0, 0);
         stageModel.setPlayerName(text);
 
         TextElement bluePawnsCounter = new TextElement("Blue pawns left : " + ConsoleColor.BLUE + stageModel.getBlackPawnsToPlay() + ConsoleColor.RESET, stageModel);
@@ -49,6 +52,8 @@ public class RosesStageFactory extends StageElementsFactory {
         TextElement redPawnsCounter = new TextElement("Red pawns left : " + ConsoleColor.RED + stageModel.getRedPawnsToPlay() + ConsoleColor.RESET, stageModel);
         redPawnsCounter.setLocation(60, 21);
         stageModel.setRedPawnsCounter(redPawnsCounter);
+
+
 
         TextElement pick = new TextElement("Pick", stageModel);
         pick.setLocation(18, 2);
@@ -64,11 +69,11 @@ public class RosesStageFactory extends StageElementsFactory {
         stageModel.setBoard(board);
 
         //create the blue pot in 18,0 in the virtual space
-        RosesPawnPot bluePot = new RosesPawnPot(55,8, stageModel);
+        RosesPawnPot bluePot = new RosesPawnPot(55, 8, stageModel);
         // assign the blue pot to the game stage model
         stageModel.setBlackPot(bluePot);
         //create the black pot in 25,0 in the virtual space
-        RosesPawnPot redPot = new RosesPawnPot(55,20, stageModel);
+        RosesPawnPot redPot = new RosesPawnPot(55, 20, stageModel);
         // assign the red pot to the game stage model
         stageModel.setRedPot(redPot);
 
@@ -89,27 +94,63 @@ public class RosesStageFactory extends StageElementsFactory {
         RosesCardPot blueHeroPot = new RosesCardPot(46, 22, stageModel);
         stageModel.setBlueHeroPot(blueHeroPot);
 
-        RosesCardPot moovRedPot = new RosesCardPot(0, 9, 5, 1,  stageModel);
+        RosesCardPot moovRedPot = new RosesCardPot(0, 9, 5, 1, stageModel);
         stageModel.setMoovRedPot(moovRedPot);
 
         RosesCardPot moovBluePot = new RosesCardPot(46, 6, 5, 1, stageModel);
         stageModel.setMoovBluePot(moovBluePot);
 
-        RosesCard[] player1MovementCards = new RosesCard[5];
-        for (int i = 0; i < 5; i++) {
-            player1MovementCards[i] = new RosesCard(random.nextInt(1, 3), stageModel.generateDirectionOfACard(), stageModel);
+        RosesCard[] pickPotCards = new RosesCard[24];
+        int index = 0;
+        for (int i = 0; i < stageModel.getMovementsList().length; i++) {
+            for (int j = 0; j < stageModel.getNumberList().length; j++) {
+                pickPotCards[index++] = new RosesCard(stageModel.getNumberList()[j], stageModel.getMovementsList()[i], stageModel);
+                if (index >= 24) // Exit the loop when all 24 cards are created
+                    break;
+            }
+            if (index >= 24) // Exit the outer loop when all 24 cards are created
+                break;
         }
-        stageModel.setPlayer1MovementCards(player1MovementCards);
 
-        RosesCard[] player2MovementCards = new RosesCard[5];
-        for (int i = 0; i < 5; i++) {
-            player2MovementCards[i] = new RosesCard(random.nextInt(1, 3), stageModel.generateDirectionOfACard(), stageModel);
+
+        for (int i = 0; i < 24; i++) {
+            pickPot.addElement(pickPotCards[i], 0, 0);
         }
+
+        RosesCard[] player1MovementCards = new RosesCard[5];
+        RosesCard[] player2MovementCards = new RosesCard[5];
+
+        for (int i = 0; i < 5; i++) {
+            if (player1MovementCards[i] == null) {
+                player1MovementCards[i] = new RosesCard(pickPotCards[pickPotCards.length - 1]);
+                player1MovementCards[i].flip();
+            }
+            RosesCard[] copyOfPickPotCards = new RosesCard[pickPotCards.length - 1];
+            System.arraycopy(pickPotCards, 0, copyOfPickPotCards, 0, copyOfPickPotCards.length);
+            pickPotCards = copyOfPickPotCards;
+            if (player2MovementCards[i] == null) {
+                player2MovementCards[i] = new RosesCard(pickPotCards[pickPotCards.length - 1]);
+                player2MovementCards[i].flip();
+            }
+            copyOfPickPotCards = new RosesCard[pickPotCards.length - 1];
+            System.arraycopy(pickPotCards, 0, copyOfPickPotCards, 0, copyOfPickPotCards.length);
+            pickPotCards = copyOfPickPotCards;
+        }
+
+
+
+
+        stageModel.setPlayer1MovementCards(player1MovementCards);
         stageModel.setPlayer2MovementCards(player2MovementCards);
-        /* create the pawns
-            NB: their coordinates are by default 0,0 but since they are put
-            within the pots, their real coordinates will be computed by the view
-         */
+
+
+
+
+
+
+
+
+
         RosesPawn[] bluePawns = new RosesPawn[26];
         for(int i=0;i<26;i++) {
             bluePawns[i] = new RosesPawn(RosesPawn.PAWN_BLUE, stageModel);
@@ -137,11 +178,26 @@ public class RosesStageFactory extends StageElementsFactory {
         }
 
         for (int i = 0; i < 5; i++) {
-            moovRedPot.addElement(player1MovementCards[i], i, 0);
-            moovBluePot.addElement(player2MovementCards[i], i, 0);
+            moovBluePot.addElement(player1MovementCards[i], i, 0);
+            moovRedPot.addElement(player2MovementCards[i], i, 0);
         }
 
+        TextElement cardPickCounter = new TextElement("Cards left : " + ConsoleColor.GREY_BACKGROUND + pickPotCards.length + ConsoleColor.RESET, stageModel);
+        cardPickCounter.setLocation(16, 0);
+        stageModel.setCardPickCounter(cardPickCounter);
+
+        stageModel.setPickCards(pickPotCards);
+
+
+
+
+
+
+
+
         board.addElement(yellowPawns[0], 4, 4);
+
+
 
 
 

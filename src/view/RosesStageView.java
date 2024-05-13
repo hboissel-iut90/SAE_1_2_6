@@ -2,6 +2,7 @@ package view;
 
 import boardifier.control.Logger;
 import boardifier.model.GameStageModel;
+import boardifier.model.TextElement;
 import boardifier.view.ClassicBoardLook;
 import boardifier.view.GameStageView;
 
@@ -60,7 +61,7 @@ public class RosesStageView extends GameStageView {
         addLook(new TextLook(model.getDiscard()));
 
         // create a ClassicBoardLook (with borders and coordinates) for the main board.
-        addLook(new ClassicBoardLook(2, 4, model.getBoard(), 1, 1, true));
+        addLook(new ClassicBoardLook(2, 4, model.getBoard(), 1, 1, false));
         // create looks for both pots
         addLook(new RosesPawnPotLook(2, 2, model.getBluePot()));
         addLook(new RosesPawnPotLook(2, 2, model.getRedPot()));
@@ -78,10 +79,18 @@ public class RosesStageView extends GameStageView {
 
         addLook(new RosesPawnLook(model.getYellowPawns()[0]));
 
+
+
         for (int i = 0; i < 5; i++) {
             addLook(new RosesCardLook(model.getPlayer1MovementCards()[i]));
             addLook(new RosesCardLook(model.getPlayer2MovementCards()[i]));
         }
+
+        for (int i = 0; i < model.getPickCards().length; i++) {
+            addLook(new RosesCardLook(model.getPickCards()[i]));
+        }
+        addLook(new TextLook(model.getCardPickCounter()));
+
 
 
 

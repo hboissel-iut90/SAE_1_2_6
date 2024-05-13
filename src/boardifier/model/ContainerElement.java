@@ -184,7 +184,7 @@ public class ContainerElement extends StaticElement {
         }
     }
 
-    public boolean canReachCell(int row, int col) {
+    public boolean canReachCell(int row, int col) { // 7, 5
         if ((row >= 0) && (row < nbRows) && (col >= 0) && (col < nbCols)) {
             return reachableCells[row][col];
         }

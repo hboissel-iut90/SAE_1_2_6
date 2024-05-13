@@ -19,32 +19,31 @@ public class RosesCardLook extends ElementLook {
     protected void render() {
         RosesCard card = (RosesCard) element;
         if (Objects.equals(card.getCardType(), "MOUVEMENT")) {
-            System.out.println("azerty");
             this.setSize(1, 2);
             switch (card.getDirection()) {
                 case "N":
-                    shape[0][0] = ConsoleColor.BLACK + ConsoleColor.WHITE_BACKGROUND + "⬆" + ConsoleColor.RESET;
+                    shape[0][0] = ConsoleColor.BLACK + ConsoleColor.WHITE_BACKGROUND + "↑" + ConsoleColor.RESET;
                     break;
                 case "N-E":
-                    shape[0][0] = ConsoleColor.BLACK + ConsoleColor.WHITE_BACKGROUND + "⬈" + ConsoleColor.RESET;
+                    shape[0][0] = ConsoleColor.BLACK + ConsoleColor.WHITE_BACKGROUND + "↗" + ConsoleColor.RESET;
                     break;
                 case "E":
-                    shape[0][0] = ConsoleColor.BLACK + ConsoleColor.WHITE_BACKGROUND + "➡" + ConsoleColor.RESET;
+                    shape[0][0] = ConsoleColor.BLACK + ConsoleColor.WHITE_BACKGROUND + "→" + ConsoleColor.RESET;
                     break;
                 case "S-E":
-                    shape[0][0] = ConsoleColor.BLACK + ConsoleColor.WHITE_BACKGROUND + "⬊" + ConsoleColor.RESET;
+                    shape[0][0] = ConsoleColor.BLACK + ConsoleColor.WHITE_BACKGROUND + "↘" + ConsoleColor.RESET;
                     break;
                 case "S":
-                    shape[0][0] = ConsoleColor.BLACK + ConsoleColor.WHITE_BACKGROUND + "⬇" + ConsoleColor.RESET;
+                    shape[0][0] = ConsoleColor.BLACK + ConsoleColor.WHITE_BACKGROUND + "↓" + ConsoleColor.RESET;
                     break;
                 case "S-W":
-                    shape[0][0] = ConsoleColor.BLACK + ConsoleColor.WHITE_BACKGROUND + "⬋" + ConsoleColor.RESET;
+                    shape[0][0] = ConsoleColor.BLACK + ConsoleColor.WHITE_BACKGROUND + "↙" + ConsoleColor.RESET;
                     break;
                 case "W":
-                    shape[0][0] = ConsoleColor.BLACK + ConsoleColor.WHITE_BACKGROUND + "⬅" + ConsoleColor.RESET;
+                    shape[0][0] = ConsoleColor.BLACK + ConsoleColor.WHITE_BACKGROUND + "←" + ConsoleColor.RESET;
                     break;
                 default:
-                    shape[0][0] = ConsoleColor.BLACK + ConsoleColor.WHITE_BACKGROUND + "⬉" + ConsoleColor.RESET;
+                    shape[0][0] = ConsoleColor.BLACK + ConsoleColor.WHITE_BACKGROUND + "↖" + ConsoleColor.RESET;
                     break;
             }
             shape[1][0] = ConsoleColor.BLACK + ConsoleColor.WHITE_BACKGROUND + card.getValue() + ConsoleColor.RESET;
