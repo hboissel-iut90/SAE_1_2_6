@@ -95,8 +95,6 @@ public class RosesStageFactory extends StageElementsFactory {
         RosesCardPot moovBluePot = new RosesCardPot(46, 6, 5, 1, stageModel);
         stageModel.setMoovBluePot(moovBluePot);
 
-<<<<<<< Updated upstream
-=======
         RosesCard[] player1MovementCards = new RosesCard[5];
         for (int i = 0; i < 5; i++) {
             player1MovementCards[i] = new RosesCard(random.nextInt(1, 3), stageModel.generateDirectionOfACard(), stageModel);
@@ -108,7 +106,6 @@ public class RosesStageFactory extends StageElementsFactory {
             player2MovementCards[i] = new RosesCard(random.nextInt(1, 3), stageModel.generateDirectionOfACard(), stageModel);
         }
         stageModel.setPlayer2MovementCards(player2MovementCards);
->>>>>>> Stashed changes
         /* create the pawns
             NB: their coordinates are by default 0,0 but since they are put
             within the pots, their real coordinates will be computed by the view

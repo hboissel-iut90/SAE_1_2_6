@@ -12,7 +12,7 @@ import static model.RosesCard.CARD_BLUE;
 public class RosesCardLook extends ElementLook {
 
     public RosesCardLook(GameElement element) {
-        super(element, 1, 2);
+        super(element, 1, 1);
         setAnchorType(ANCHOR_TOPLEFT);
     }
 
@@ -20,7 +20,7 @@ public class RosesCardLook extends ElementLook {
         RosesCard card = (RosesCard) element;
         if (Objects.equals(card.getCardType(), "MOUVEMENT")) {
             System.out.println("azerty");
-            this.setHeight(2);
+            this.setSize(1, 2);
             switch (card.getDirection()) {
                 case "N":
                     shape[0][0] = ConsoleColor.BLACK + ConsoleColor.WHITE_BACKGROUND + "⬆" + ConsoleColor.RESET;
