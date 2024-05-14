@@ -26,6 +26,7 @@ public class RosesCard extends GameElement {
         type = ElementTypes.getType("card");
         this.cardType = "HEROS";
         this.color = color;
+        this.isFlipped = false;
     }
 
     public RosesCard (int value, String direction, GameStageModel gameStageModel){

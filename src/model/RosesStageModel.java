@@ -71,6 +71,10 @@ public class RosesStageModel extends GameStageModel {
 
     private TextElement cardPickCounter;
 
+    private TextElement instructions1;
+    private TextElement instructions2;
+    private TextElement instructions3;
+
     private String[] movementLists = new String[]{"N", "N-E", "E", "S-E", "S", "S-W", "W", "N-W"};
     private int[] numberList = new int[]{1, 2, 3};
 
@@ -118,6 +122,32 @@ public class RosesStageModel extends GameStageModel {
     public void setCardPickCounter(TextElement cardPickCounter) {
         this.cardPickCounter = cardPickCounter;
         addElement(cardPickCounter);
+    }
+
+    public void setInstructions1(TextElement instructions1){
+        this.instructions1 = instructions1;
+        addElement(instructions1);
+    }
+
+    public void setInstructions2(TextElement instructions2){
+        this.instructions2 = instructions2;
+        addElement(instructions2);
+    }
+
+    public void setInstructions3(TextElement instructions3){
+        this.instructions3 = instructions3;
+        addElement(instructions3);
+    }
+    public TextElement getInstruction1(){
+        return this.instructions1;
+    }
+
+    public TextElement getInstruction2(){
+        return this.instructions2;
+    }
+
+    public TextElement getInstruction3(){
+        return this.instructions3;
     }
 
     public int[] getNumberList() {

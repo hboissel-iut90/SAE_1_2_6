@@ -90,6 +90,9 @@ public class RosesStageView extends GameStageView {
             addLook(new RosesCardLook(model.getPickCards()[i]));
         }
         addLook(new TextLook(model.getCardPickCounter()));
+        addLook(new TextLook(model.getInstruction1()));
+        addLook(new TextLook(model.getInstruction2()));
+        addLook(new TextLook(model.getInstruction3()));
 
 
 

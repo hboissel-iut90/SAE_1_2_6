@@ -185,6 +185,16 @@ public class RosesStageFactory extends StageElementsFactory {
         TextElement cardPickCounter = new TextElement("Cards left : " + ConsoleColor.GREY_BACKGROUND + pickPotCards.length + ConsoleColor.RESET, stageModel);
         cardPickCounter.setLocation(16, 0);
         stageModel.setCardPickCounter(cardPickCounter);
+        TextElement instructions1 = new TextElement("Entrez P pour piocher une carte.", stageModel);
+        TextElement instructions2 = new TextElement("Entrez M + numéro de la carte pour jouer une carte mouvement. ex: M1.", stageModel);
+        TextElement instructions3 = new TextElement("Entrez H + numéro de la carte pour jouer une carte héros + mouvement. ex: H1.", stageModel);
+        instructions1.setLocation(55, 14);
+        instructions2.setLocation(55, 15);
+        instructions3.setLocation(55, 16);
+        stageModel.setInstructions1(instructions1);
+        stageModel.setInstructions2(instructions2);
+        stageModel.setInstructions3(instructions3);
+
 
         stageModel.setPickCards(pickPotCards);
 
