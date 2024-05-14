@@ -87,17 +87,17 @@ public class RosesStageFactory extends StageElementsFactory {
         stageModel.setDiscardPot(discardPot);
 
         //create the red hero pot in the virtual place and assign to the game stage model
-        RosesCardPot redHeroPot = new RosesCardPot(0, 6, stageModel);
+        RosesCardPot redHeroPot = new RosesCardPot(0, 5, stageModel);
         stageModel.setRedHeroPot(redHeroPot);
 
         //create the blue hero pot in the virtual place and assign to the game stage model
-        RosesCardPot blueHeroPot = new RosesCardPot(46, 22, stageModel);
+        RosesCardPot blueHeroPot = new RosesCardPot(46, 21, stageModel);
         stageModel.setBlueHeroPot(blueHeroPot);
 
-        RosesCardPot moovRedPot = new RosesCardPot(0, 9, 5, 1, stageModel);
+        RosesCardPot moovRedPot = new RosesCardPot(0, 8, 5, 1, stageModel);
         stageModel.setMoovRedPot(moovRedPot);
 
-        RosesCardPot moovBluePot = new RosesCardPot(46, 6, 5, 1, stageModel);
+        RosesCardPot moovBluePot = new RosesCardPot(46, 5, 5, 1, stageModel);
         stageModel.setMoovBluePot(moovBluePot);
 
         RosesCard[] pickPotCards = new RosesCard[24];
