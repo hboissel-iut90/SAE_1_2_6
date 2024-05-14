@@ -5,44 +5,40 @@ import boardifier.view.ConsoleColor;
 import boardifier.view.GameStageView;
 import boardifier.view.TextLook;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
-
 /**
- * HoleStageModel defines the model for the single stage in "The Hole". Indeed,
+ * RosesStageModel defines the model for the single stage in "The Roses". Indeed,
  * there are no levels in this game: a party starts and when it's done, the game is also done.
  * <p>
- * HoleStageModel must define all that is needed to manage a party : state variables and game elements.
+ * RosesStageModel must define all that is needed to manage a party : state variables and game elements.
  * In the present case, there are only 2 state variables that represent the number of pawns to play by each player.
  * It is used to detect the end of the party.
  * For game elements, it depends on what is chosen as a final UI design. For that demo, there are 12 elements used
  * to represent the state : the main board, 2 pots, 8 pawns, and a text for current player.
  * <p>
- * WARNING ! HoleStageModel DOES NOT create itself the game elements because it would prevent the possibility to mock
- * game element classes for unit testing purposes. This is why HoleStageModel just defines the game elements and the methods
+ * WARNING ! RosesStageModel DOES NOT create itself the game elements because it would prevent the possibility to mock
+ * game element classes for unit testing purposes. This is why RosesStageModel just defines the game elements and the methods
  * to set this elements.
- * The instanciation of the elements is done by the HoleStageFactory, which uses the provided setters.
+ * The instanciation of the elements is done by the RosesStageFactory, which uses the provided setters.
  * <p>
- * HoleStageModel must also contain methods to check/modify the game state when given events occur. This is the role of
+ * RosesStageModel must also contain methods to check/modify the game state when given events occur. This is the role of
  * setupCallbacks() method that defines a callback function that must be called when a pawn is put in a container.
  * This is done by calling onPutInContainer() method, with the callback function as a parameter. After that call, boardifier
  * will be able to call the callback function automatically when a pawn is put in a container.
  * NB1: callback functions MUST BE defined with a lambda expression (i.e. an arrow function).
  * NB2:  there are other methods to defines callbacks for other events (see onXXX methods in GameStageModel)
- * In "The Hole", everytime a pawn is put in the main board, we have to check if the party is ended and in this case, who is the winner.
+ * In "The Roses", everytime a pawn is put in the main board, we have to check if the party is ended and in this case, who is the winner.
  * This is the role of computePartyResult(), which is called by the callback function if there is no more pawn to play.
  */
 public class RosesStageModel extends GameStageModel {
 
     // define stage state variables
-    private int blackPawnsToPlay;
+    private int bluePawnsToPlay;
     private int redPawnsToPlay;
 
     // define stage game elements
     private RosesBoard board;
 
-    private RosesPawnPot blackPot;
+    private RosesPawnPot bluePot;
     private RosesPawnPot redPot;
 
     private RosesCardPot pickPot;
@@ -52,7 +48,7 @@ public class RosesStageModel extends GameStageModel {
     private RosesCardPot moovRedPot;
     private RosesCardPot moovBluePot;
 
-    private RosesPawn[] blackPawns;
+    private RosesPawn[] bluePawns;
     private RosesPawn[] redPawns;
     private RosesPawn[] yellowPawns;
 
@@ -79,12 +75,12 @@ public class RosesStageModel extends GameStageModel {
     private int[] numberList = new int[]{1, 2, 3};
 
 
-    // Uncomment next line if the example with a main container is used. see end of HoleStageFactory and HoleStageView
+    // Uncomment next line if the example with a main container is used. see end of RosesStageFactory and RosesStageView
     //private ContainerElement mainContainer;
 
     public RosesStageModel(String name, Model model) {
         super(name, model);
-        blackPawnsToPlay = 26;
+        bluePawnsToPlay = 26;
         redPawnsToPlay = 26;
         setupCallbacks();
     }
@@ -155,12 +151,12 @@ public class RosesStageModel extends GameStageModel {
     }
 
     public RosesPawnPot getBluePot() {
-        return blackPot;
+        return bluePot;
     }
 
-    public void setBlackPot(RosesPawnPot blackPot) {
-        this.blackPot = blackPot;
-        addContainer(blackPot);
+    public void setBluePot(RosesPawnPot bluePot) {
+        this.bluePot = bluePot;
+        addContainer(bluePot);
     }
 
     public RosesPawnPot getRedPot() {
@@ -237,8 +233,8 @@ public class RosesStageModel extends GameStageModel {
         addContainer(discardPot);
     }
 
-    public RosesPawn[] getBlackPawns() {
-        return blackPawns;
+    public RosesPawn[] getBluePawns() {
+        return bluePawns;
     }
 
     public RosesPawn[] getYellowPawns() {
@@ -252,10 +248,10 @@ public class RosesStageModel extends GameStageModel {
         }
     }
 
-    public void setBlackPawns(RosesPawn[] blackPawns) {
-        this.blackPawns = blackPawns;
-        for (int i = 0; i < blackPawns.length; i++) {
-            addElement(blackPawns[i]);
+    public void setBluePawns(RosesPawn[] bluePawns) {
+        this.bluePawns = bluePawns;
+        for (int i = 0; i < bluePawns.length; i++) {
+            addElement(bluePawns[i]);
         }
     }
 
@@ -359,8 +355,8 @@ public class RosesStageModel extends GameStageModel {
         addElement(discard);
     }
 
-    public int getBlackPawnsToPlay() {
-        return this.blackPawnsToPlay;
+    public int getBluePawnsToPlay() {
+        return this.bluePawnsToPlay;
     }
 
     public int getRedPawnsToPlay() {
@@ -380,7 +376,7 @@ public class RosesStageModel extends GameStageModel {
 
 
     public void updatePawnsToPlay(GameStageView gameStageView) {
-        bluePawnsCounter.setText("Blue pawns left : " + ConsoleColor.BLUE + this.getBlackPawnsToPlay() + ConsoleColor.RESET);
+        bluePawnsCounter.setText("Blue pawns left : " + ConsoleColor.BLUE + this.getBluePawnsToPlay() + ConsoleColor.RESET);
         bluePawnsCounter.setLocation(60, 9);
         this.setBluePawnsCounter(bluePawnsCounter);
         gameStageView.addLook(new TextLook(this.getBluePawnsCounter()));
@@ -401,11 +397,11 @@ public class RosesStageModel extends GameStageModel {
             if (gridDest != board) return;
             RosesPawn p = (RosesPawn) element;
             if (p.getColor() == 0) {
-                blackPawnsToPlay--;
+                bluePawnsToPlay--;
             } else {
                 redPawnsToPlay--;
             }
-            if ((blackPawnsToPlay == 0) && (redPawnsToPlay == 0)) {
+            if ((bluePawnsToPlay == 0) && (redPawnsToPlay == 0)) {
                 computePartyResult();
             }
         });
@@ -416,9 +412,9 @@ public class RosesStageModel extends GameStageModel {
         // get the empty cell, which should be in 2D at [0,0], [0,2], [1,1], [2,0] or [2,2]
         // i.e. or in 1D at index 0, 2, 4, 6 or 8
         int i = 0;
-        int nbBlack = 0;
+        int nbBlue = 0;
         int nbRed = 0;
-        int countBlack = 0;
+        int countBlue = 0;
         int countRed = 0;
         RosesPawn p = null;
         int row, col;
@@ -433,8 +429,8 @@ public class RosesStageModel extends GameStageModel {
             if ((row >= 0) && (row <= 2) && (col >= 0) && (col <= 2)) {
                 p = (RosesPawn) (board.getElement(row, col));
                 if (p.getColor() == RosesPawn.PAWN_BLUE) {
-                    nbBlack++;
-                    countBlack += p.getNumber();
+                    nbBlue++;
+                    countBlue += p.getNumber();
                 } else {
                     nbRed++;
                     countRed += p.getNumber();
@@ -451,18 +447,18 @@ public class RosesStageModel extends GameStageModel {
         }
 
         // decide whose winning
-        if (nbBlack < nbRed) {
+        if (nbBlue < nbRed) {
             idWinner = 0;
-        } else if (nbBlack > nbRed) {
+        } else if (nbBlue > nbRed) {
             idWinner = 1;
         } else {
-            if (countBlack < countRed) {
+            if (countBlue < countRed) {
                 idWinner = 0;
-            } else if (countBlack > countRed) {
+            } else if (countBlue > countRed) {
                 idWinner = 1;
             }
         }
-        System.out.println("nb black: " + nbBlack + ", nb red: " + nbRed + ", count black: " + countBlack + ", count red: " + countRed + ", winner is player " + idWinner);
+        System.out.println("nb blue: " + nbBlue + ", nb red: " + nbRed + ", count blue: " + countBlue + ", count red: " + countRed + ", winner is player " + idWinner);
         // set the winner
         model.setIdWinner(idWinner);
         // stop de the game

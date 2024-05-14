@@ -4,21 +4,17 @@ import boardifier.model.GameStageModel;
 import boardifier.model.StageElementsFactory;
 import boardifier.model.TextElement;
 import boardifier.view.ConsoleColor;
-import org.w3c.dom.Text;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Random;
-import java.util.Set;
 
 /**
- * HoleStageFactory must create the game elements that are defined in HoleStageModel
- * WARNING: it just creates the game element and NOT their look, which is done in HoleStageView.
+ * RosesStageFactory must create the game elements that are defined in RosesStageModel
+ * WARNING: it just creates the game element and NOT their look, which is done in RosesStageView.
  *
  * If there must be a precise position in the display for the look of a game element, then this element must be created
  * with that position in the virtual space and MUST NOT be placed in a container element. Indeed, for such
  * elements, the position in their virtual space will match the position on the display. For example, in the following,
- * the black pot is placed in 18,0. When displayed on screen, the top-left character of the black pot will be effectively
+ * the blue pot is placed in 18,0. When displayed on screen, the top-left character of the blue pot will be effectively
  * placed at column 18 and row 0.
  *
  * Otherwise, game elements must be put in a container and it will be the look of the container that will manage
@@ -45,7 +41,7 @@ public class RosesStageFactory extends StageElementsFactory {
         text.setLocation(0, 0);
         stageModel.setPlayerName(text);
 
-        TextElement bluePawnsCounter = new TextElement("Blue pawns left : " + ConsoleColor.BLUE + stageModel.getBlackPawnsToPlay() + ConsoleColor.RESET, stageModel);
+        TextElement bluePawnsCounter = new TextElement("Blue pawns left : " + ConsoleColor.BLUE + stageModel.getBluePawnsToPlay() + ConsoleColor.RESET, stageModel);
         bluePawnsCounter.setLocation(60, 9);
         stageModel.setBluePawnsCounter(bluePawnsCounter);
 
@@ -69,8 +65,8 @@ public class RosesStageFactory extends StageElementsFactory {
         //create the blue pot in 18,0 in the virtual space
         RosesPawnPot bluePot = new RosesPawnPot(55, 8, stageModel);
         // assign the blue pot to the game stage model
-        stageModel.setBlackPot(bluePot);
-        //create the black pot in 25,0 in the virtual space
+        stageModel.setBluePot(bluePot);
+        //create the blue pot in 25,0 in the virtual space
         RosesPawnPot redPot = new RosesPawnPot(55, 20, stageModel);
         // assign the red pot to the game stage model
         stageModel.setRedPot(redPot);
@@ -153,13 +149,13 @@ public class RosesStageFactory extends StageElementsFactory {
         for(int i=0;i<26;i++) {
             bluePawns[i] = new RosesPawn(RosesPawn.PAWN_BLUE, stageModel);
         }
-        // assign the black pawns to the game stage model
-        stageModel.setBlackPawns(bluePawns);
+        // assign the blue pawns to the game stage model
+        stageModel.setBluePawns(bluePawns);
         RosesPawn[] redPawns = new RosesPawn[26];
         for(int i=0;i<26;i++) {
             redPawns[i] = new RosesPawn(RosesPawn.PAWN_RED, stageModel);
         }
-        // assign the black pawns to the game stage model
+        // assign the blue pawns to the game stage model
         stageModel.setRedPawns(redPawns);
 
         RosesPawn[] yellowPawns = new RosesPawn[1];
@@ -214,9 +210,9 @@ public class RosesStageFactory extends StageElementsFactory {
 
         /* Example with a main container that takes the ownership of the location
            of the element that are put within.
-           If we put text, board, black/red pots within this container, their initial
+           If we put text, board, blue/red pots within this container, their initial
            location in the virtual space is no more relevant.
-           In such a case, we also need to create a look for the main container, see HoleStageView
+           In such a case, we also need to create a look for the main container, see RosesStageView
            comment at the end of the class.
 
         // create the main container with 2 rows and 3 columns, in 0,0 in the virtual space
