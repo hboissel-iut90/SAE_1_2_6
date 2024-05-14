@@ -270,6 +270,28 @@ public class RosesStageModel extends GameStageModel {
         }
     }
 
+    public RosesCard[] getPlayer1HeroCards() {
+        return this.player1HeroCards;
+    }
+
+    public void setPlayer1HeroCards(RosesCard[] player1HeroCards) {
+        this.player1HeroCards = player1HeroCards;
+        for (int i = 0; i < player1HeroCards.length; i++) {
+            addElement(player1HeroCards[i]);
+        }
+    }
+
+    public RosesCard[] getPlayer2HeroCards() {
+        return this.player2HeroCards;
+    }
+
+    public void setPlayer2HeroCards(RosesCard[] player2HeroCards) {
+        this.player2HeroCards = player2HeroCards;
+        for (int i = 0; i < player2HeroCards.length; i++) {
+            addElement(player2HeroCards[i]);
+        }
+    }
+
     public void setPlayer1MovementCards(RosesCard[] player1MovementCards) {
         this.player1MovementCards = player1MovementCards;
         for (int i = 0; i < player1MovementCards.length; i++) {

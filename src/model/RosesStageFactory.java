@@ -53,8 +53,6 @@ public class RosesStageFactory extends StageElementsFactory {
         redPawnsCounter.setLocation(60, 21);
         stageModel.setRedPawnsCounter(redPawnsCounter);
 
-
-
         TextElement pick = new TextElement("Pick", stageModel);
         pick.setLocation(18, 2);
         stageModel.setPick(pick);
@@ -183,7 +181,7 @@ public class RosesStageFactory extends StageElementsFactory {
         }
 
         TextElement cardPickCounter = new TextElement("Cards left : " + ConsoleColor.GREY_BACKGROUND + pickPotCards.length + ConsoleColor.RESET, stageModel);
-        cardPickCounter.setLocation(16, 0);
+        cardPickCounter.setLocation(28, 2);
         stageModel.setCardPickCounter(cardPickCounter);
         TextElement instructions1 = new TextElement("Entrez P pour piocher une carte.", stageModel);
         TextElement instructions2 = new TextElement("Entrez M + numéro de la carte pour jouer une carte mouvement. ex: M1.", stageModel);

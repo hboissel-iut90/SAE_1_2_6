@@ -8,6 +8,7 @@ import model.RosesCard;
 import java.util.Objects;
 
 import static model.RosesCard.CARD_BLUE;
+import static model.RosesCard.CARD_RED;
 
 public class RosesCardLook extends ElementLook {
 
@@ -54,7 +55,7 @@ public class RosesCardLook extends ElementLook {
         }else{
             if (card.getColor() == CARD_BLUE) {
                 shape[0][0] = ConsoleColor.BLACK + ConsoleColor.BLUE_BACKGROUND + "H" + ConsoleColor.RESET;
-            } else {
+            } else if (card.getColor() == CARD_RED){
                 shape[0][0] = ConsoleColor.BLACK + ConsoleColor.RED_BACKGROUND + "H" + ConsoleColor.RESET;
             }
             if (card.isFlipped()) {
