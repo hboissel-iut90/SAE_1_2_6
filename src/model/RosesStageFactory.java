@@ -4,17 +4,21 @@ import boardifier.model.GameStageModel;
 import boardifier.model.StageElementsFactory;
 import boardifier.model.TextElement;
 import boardifier.view.ConsoleColor;
+import org.w3c.dom.Text;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 /**
- * RosesStageFactory must create the game elements that are defined in RosesStageModel
- * WARNING: it just creates the game element and NOT their look, which is done in RosesStageView.
+ * HoleStageFactory must create the game elements that are defined in HoleStageModel
+ * WARNING: it just creates the game element and NOT their look, which is done in HoleStageView.
  *
  * If there must be a precise position in the display for the look of a game element, then this element must be created
  * with that position in the virtual space and MUST NOT be placed in a container element. Indeed, for such
  * elements, the position in their virtual space will match the position on the display. For example, in the following,
- * the blue pot is placed in 18,0. When displayed on screen, the top-left character of the blue pot will be effectively
+ * the black pot is placed in 18,0. When displayed on screen, the top-left character of the black pot will be effectively
  * placed at column 18 and row 0.
  *
  * Otherwise, game elements must be put in a container and it will be the look of the container that will manage
@@ -38,60 +42,60 @@ public class RosesStageFactory extends StageElementsFactory {
 
         // create the text that displays the player name and put it in 0,0 in the virtual space
         TextElement text = new TextElement(stageModel.getCurrentPlayerName(), stageModel);
-        text.setLocation(0, 0);
+        text.setLocation(0, 1);
         stageModel.setPlayerName(text);
 
         TextElement bluePawnsCounter = new TextElement("Blue pawns left : " + ConsoleColor.BLUE + stageModel.getBluePawnsToPlay() + ConsoleColor.RESET, stageModel);
-        bluePawnsCounter.setLocation(60, 9);
+        bluePawnsCounter.setLocation(60, 10);
         stageModel.setBluePawnsCounter(bluePawnsCounter);
 
         TextElement redPawnsCounter = new TextElement("Red pawns left : " + ConsoleColor.RED + stageModel.getRedPawnsToPlay() + ConsoleColor.RESET, stageModel);
-        redPawnsCounter.setLocation(60, 21);
+        redPawnsCounter.setLocation(60, 22);
         stageModel.setRedPawnsCounter(redPawnsCounter);
 
         TextElement pick = new TextElement("Pick", stageModel);
-        pick.setLocation(18, 2);
+        pick.setLocation(17, 2);
         stageModel.setPick(pick);
 
-        TextElement discard = new TextElement("Dis", stageModel);
-        discard.setLocation(27, 26);
+        TextElement discard = new TextElement("Discard", stageModel);
+        discard.setLocation(26, 27);
         stageModel.setDiscard(discard);
 
         // create the board, in 0,1 in the virtual space
-        RosesBoard board = new RosesBoard(5, 5, stageModel);
+        RosesBoard board = new RosesBoard(5, 6, stageModel);
         // assign the board to the game stage model
         stageModel.setBoard(board);
 
         //create the blue pot in 18,0 in the virtual space
-        RosesPawnPot bluePot = new RosesPawnPot(55, 8, stageModel);
+        RosesPawnPot bluePot = new RosesPawnPot(55, 9, stageModel);
         // assign the blue pot to the game stage model
         stageModel.setBluePot(bluePot);
-        //create the blue pot in 25,0 in the virtual space
-        RosesPawnPot redPot = new RosesPawnPot(55, 20, stageModel);
+        //create the black pot in 25,0 in the virtual space
+        RosesPawnPot redPot = new RosesPawnPot(55, 21, stageModel);
         // assign the red pot to the game stage model
         stageModel.setRedPot(redPot);
 
         //create the pick pot in the virtual space
-        RosesCardPot pickPot = new RosesCardPot(23, 1, stageModel);
+        RosesCardPot pickPot = new RosesCardPot(22, 1, stageModel);
         //assign the pick pot to the game stage model
         stageModel.setPickPot(pickPot);
 
         //create the discard pot in the virtual place and assign to the game stage model
-        RosesCardPot discardPot = new RosesCardPot(23, 25, stageModel);
+        RosesCardPot discardPot = new RosesCardPot(22, 26, stageModel);
         stageModel.setDiscardPot(discardPot);
 
         //create the red hero pot in the virtual place and assign to the game stage model
-        RosesCardPot redHeroPot = new RosesCardPot(0, 5, stageModel);
+        RosesCardPot redHeroPot = new RosesCardPot(0, 6, stageModel);
         stageModel.setRedHeroPot(redHeroPot);
 
         //create the blue hero pot in the virtual place and assign to the game stage model
-        RosesCardPot blueHeroPot = new RosesCardPot(46, 21, stageModel);
+        RosesCardPot blueHeroPot = new RosesCardPot(46, 22, stageModel);
         stageModel.setBlueHeroPot(blueHeroPot);
 
-        RosesCardPot moovRedPot = new RosesCardPot(0, 8, 5, 1, stageModel);
+        RosesCardPot moovRedPot = new RosesCardPot(0, 9, 5, 1, stageModel);
         stageModel.setMoovRedPot(moovRedPot);
 
-        RosesCardPot moovBluePot = new RosesCardPot(46, 5, 5, 1, stageModel);
+        RosesCardPot moovBluePot = new RosesCardPot(46, 6, 5, 1, stageModel);
         stageModel.setMoovBluePot(moovBluePot);
 
         RosesCard[] pickPotCards = new RosesCard[24];
@@ -137,6 +141,17 @@ public class RosesStageFactory extends StageElementsFactory {
         stageModel.setPlayer1MovementCards(player1MovementCards);
         stageModel.setPlayer2MovementCards(player2MovementCards);
 
+        RosesCard[] heroRedCards = new RosesCard[4];
+        RosesCard[] heroBlueCards = new RosesCard[4];
+
+        for (int i = 0; i < 4; i++) {
+            heroRedCards[i] = new RosesCard(1, stageModel);
+            heroBlueCards[i] = new RosesCard(0, stageModel);
+        }
+
+        stageModel.setPlayer2HeroCards(heroRedCards);
+        stageModel.setPlayer1HeroCards(heroBlueCards);
+
 
 
 
@@ -149,13 +164,13 @@ public class RosesStageFactory extends StageElementsFactory {
         for(int i=0;i<26;i++) {
             bluePawns[i] = new RosesPawn(RosesPawn.PAWN_BLUE, stageModel);
         }
-        // assign the blue pawns to the game stage model
+        // assign the black pawns to the game stage model
         stageModel.setBluePawns(bluePawns);
         RosesPawn[] redPawns = new RosesPawn[26];
         for(int i=0;i<26;i++) {
             redPawns[i] = new RosesPawn(RosesPawn.PAWN_RED, stageModel);
         }
-        // assign the blue pawns to the game stage model
+        // assign the black pawns to the game stage model
         stageModel.setRedPawns(redPawns);
 
         RosesPawn[] yellowPawns = new RosesPawn[1];
@@ -176,18 +191,30 @@ public class RosesStageFactory extends StageElementsFactory {
             moovRedPot.addElement(player2MovementCards[i], i, 0);
         }
 
+        for (int i = 0; i < 4; i++) {
+            redHeroPot.addElement(heroRedCards[i], 0, 0);
+            blueHeroPot.addElement(heroBlueCards[i], 0, 0);
+        }
+
         TextElement cardPickCounter = new TextElement("Cards left : " + ConsoleColor.GREY_BACKGROUND + pickPotCards.length + ConsoleColor.RESET, stageModel);
-        cardPickCounter.setLocation(28, 2);
+        cardPickCounter.setLocation(26, 2);
         stageModel.setCardPickCounter(cardPickCounter);
         TextElement instructions1 = new TextElement("Entrez P pour piocher une carte.", stageModel);
         TextElement instructions2 = new TextElement("Entrez M + numéro de la carte pour jouer une carte mouvement. ex: M1.", stageModel);
         TextElement instructions3 = new TextElement("Entrez H + numéro de la carte pour jouer une carte héros + mouvement. ex: H1.", stageModel);
-        instructions1.setLocation(55, 14);
-        instructions2.setLocation(55, 15);
-        instructions3.setLocation(55, 16);
+        TextElement numberOfBlueHeroCards = new TextElement(ConsoleColor.BLUE + heroBlueCards.length + ConsoleColor.RESET, stageModel);
+        TextElement numberOfRedHeroCards = new TextElement(ConsoleColor.RED + heroRedCards.length + ConsoleColor.RESET, stageModel);
+        numberOfBlueHeroCards.setLocation(47, 25);
+        numberOfRedHeroCards.setLocation(1, 5);
+        stageModel.setRedHeroCardsCounter(numberOfRedHeroCards);
+        stageModel.setBlueHeroCardsCounter(numberOfBlueHeroCards);
+        instructions1.setLocation(55, 15);
+        instructions2.setLocation(55, 16);
+        instructions3.setLocation(55, 17);
         stageModel.setInstructions1(instructions1);
         stageModel.setInstructions2(instructions2);
         stageModel.setInstructions3(instructions3);
+
 
 
         stageModel.setPickCards(pickPotCards);
@@ -210,9 +237,9 @@ public class RosesStageFactory extends StageElementsFactory {
 
         /* Example with a main container that takes the ownership of the location
            of the element that are put within.
-           If we put text, board, blue/red pots within this container, their initial
+           If we put text, board, black/red pots within this container, their initial
            location in the virtual space is no more relevant.
-           In such a case, we also need to create a look for the main container, see RosesStageView
+           In such a case, we also need to create a look for the main container, see HoleStageView
            comment at the end of the class.
 
         // create the main container with 2 rows and 3 columns, in 0,0 in the virtual space
