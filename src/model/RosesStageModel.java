@@ -57,7 +57,7 @@ public class RosesStageModel extends GameStageModel {
     private RosesPawn[] yellowPawns;
 
     private RosesCard[] pickCards;
-    private RosesCard[] discardCards;
+    private RosesCard[] discardCards = new RosesCard[14];
     private RosesCard[] player1HeroCards;
     private RosesCard[] player1MovementCards;
     private RosesCard[] player2MovementCards;
@@ -145,29 +145,30 @@ public class RosesStageModel extends GameStageModel {
         addElement(cardPickCounter);
     }
 
-    public void setInstructions1(TextElement instructions1){
+    public void setInstructions1(TextElement instructions1) {
         this.instructions1 = instructions1;
         addElement(instructions1);
     }
 
-    public void setInstructions2(TextElement instructions2){
+    public void setInstructions2(TextElement instructions2) {
         this.instructions2 = instructions2;
         addElement(instructions2);
     }
 
-    public void setInstructions3(TextElement instructions3){
+    public void setInstructions3(TextElement instructions3) {
         this.instructions3 = instructions3;
         addElement(instructions3);
     }
-    public TextElement getInstruction1(){
+
+    public TextElement getInstruction1() {
         return this.instructions1;
     }
 
-    public TextElement getInstruction2(){
+    public TextElement getInstruction2() {
         return this.instructions2;
     }
 
-    public TextElement getInstruction3(){
+    public TextElement getInstruction3() {
         return this.instructions3;
     }
 
@@ -296,9 +297,6 @@ public class RosesStageModel extends GameStageModel {
     }
 
 
-
-
-
     public void setPlayer1HeroCards(RosesCard[] player1HeroCards) {
         this.player1HeroCards = player1HeroCards;
         for (int i = 0; i < player1HeroCards.length; i++) {
@@ -384,6 +382,16 @@ public class RosesStageModel extends GameStageModel {
         addElement(discard);
     }
 
+    public void setDiscardCards(RosesCard[] discardCards) {
+        this.discardCards = discardCards;
+        for (int i = 0; i < discardCards.length; i++)
+            addElement(discardCards[i]);
+    }
+
+    public RosesCard[] getDiscardCards() {
+        return this.discardCards;
+    }
+
     public int getBluePawnsToPlay() {
         return this.bluePawnsToPlay;
     }
@@ -401,7 +409,6 @@ public class RosesStageModel extends GameStageModel {
 //            }
 //        }
 //    }
-
 
 
     public void updatePawnsToPlay(GameStageView gameStageView) {

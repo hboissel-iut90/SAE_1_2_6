@@ -23,6 +23,8 @@ public class RosesController extends Controller {
     int lastRow = 0;
     int lastCol = 0;
 
+    int nbMovements = 0;
+
     public RosesController(Model model, View view) {
         super(model, view);
         firstPlayer = true;
@@ -221,11 +223,18 @@ public class RosesController extends Controller {
         play.start();
         if (model.getIdPlayer() == 0) {
             gameStage.removeElement(gameStage.getPlayer1MovementCards()[choice]);
+            gameStage.getDiscardCards()[nbMovements] = gameStage.getPlayer1MovementCards()[choice];
+            gameStage.getPlayer1MovementCards()[choice].flip();
+            gameStage.getDiscardPot().addElement(gameStage.getPlayer1MovementCards()[choice], 0, 0);
             gameStage.getPlayer1MovementCards()[choice] = null;
         } else {
             gameStage.removeElement(gameStage.getPlayer2MovementCards()[choice]);
+            gameStage.getDiscardCards()[nbMovements] = gameStage.getPlayer2MovementCards()[choice];
+            gameStage.getPlayer2MovementCards()[choice].flip();
+            gameStage.getDiscardPot().addElement(gameStage.getPlayer2MovementCards()[choice], 0, 0);
             gameStage.getPlayer2MovementCards()[choice] = null;
         }
+        nbMovements++;
 
 
         return true;

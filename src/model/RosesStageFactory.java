@@ -231,6 +231,7 @@ public class RosesStageFactory extends StageElementsFactory {
 
 
 
+
         board.addElement(yellowPawns[0], 4, 4);
 
 
