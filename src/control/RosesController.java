@@ -8,6 +8,8 @@ import boardifier.model.action.ActionList;
 import boardifier.view.View;
 import model.RosesCard;
 import model.RosesStageModel;
+import view.RosesCardLook;
+import view.RosesStageView;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -55,7 +57,7 @@ public class RosesController extends Controller {
                 System.out.print(p.getName() + " > ");
                 try {
                     String line = consoleIn.readLine();
-                    if (line.length() == 2) {
+                    if (line.length() == 2 || String.valueOf(line.charAt(0)).equals("P")) {
                         ok = analyseAndPlay(line);
                     }
                     if (!ok) {
@@ -79,6 +81,7 @@ public class RosesController extends Controller {
 
     private boolean analyseAndPlay(String line) {
 
+
         int row, col;
         if (isTheFirstTime) {
             row = 4;
@@ -91,12 +94,48 @@ public class RosesController extends Controller {
 
 
         RosesStageModel gameStage = (RosesStageModel) model.getGameStage();
+        RosesStageView viewStage = (RosesStageView) view.getGameStageView();
         int pawnIndex = 0;
         System.out.println("derniere colonne : " + col + ", derniere ligne : " + row);
         String direction = "";
         String cardType = "";
         int number = 0;
         cardType = String.valueOf(line.charAt(0));
+        if (cardType.equals("P") && model.getIdPlayer() == 0) {
+            for (int i = 0; i < gameStage.getPlayer1MovementCards().length; i++) {
+                if (gameStage.getPlayer1MovementCards()[i] == null) {
+                    gameStage.getPlayer1MovementCards()[i] = gameStage.getPickCards()[gameStage.getPickCards().length - 1];
+                    gameStage.getPlayer1MovementCards()[i].flip();
+                    gameStage.getMoovBluePot().addElement(gameStage.getPlayer1MovementCards()[i], i, 0);
+                    RosesCard[] tempPickCard = gameStage.getPickCards();
+                    RosesCard[] copyOfPickPotCards = new RosesCard[tempPickCard.length - 1];
+                    System.arraycopy(tempPickCard, 0, copyOfPickPotCards, 0, copyOfPickPotCards.length);
+                    tempPickCard = copyOfPickPotCards;
+                    gameStage.setPickCards(tempPickCard);
+                    return true;
+                }
+            }
+        } else if (cardType.equals("P") && model.getIdPlayer() == 1) {
+            for (int i = 0; i < gameStage.getPlayer2MovementCards().length; i++) {
+                if (gameStage.getPlayer2MovementCards()[i] == null) {
+                    gameStage.getPlayer2MovementCards()[i] = gameStage.getPickCards()[gameStage.getPickCards().length - 1];
+                    gameStage.getPlayer2MovementCards()[i].flip();
+                    gameStage.getMoovRedPot().addElement(gameStage.getPlayer2MovementCards()[i], i, 0);
+                    RosesCard[] tempPickCard = gameStage.getPickCards();
+                    RosesCard[] copyOfPickPotCards = new RosesCard[tempPickCard.length - 1];
+                    System.arraycopy(tempPickCard, 0, copyOfPickPotCards, 0, copyOfPickPotCards.length);
+                    tempPickCard = copyOfPickPotCards;
+                    gameStage.setPickCards(tempPickCard);
+                    return true;
+                }
+            }
+        }
+
+        if (cardType.equals("P")) { // si il est passé par les conditions et qu'il a pas return true, il est impossible de piocher
+            // car aucun emplacement nul
+            System.out.println("Invalid choice : u cant pick a card. Retry ! ");
+            return false;
+        }
         int choice = (int) (line.charAt(1) - '1');
         if (choice >= 0 && choice < gameStage.getPlayer1MovementCards().length && model.getIdPlayer() == 0 && cardType.equals("M") &&
         gameStage.getPlayer1MovementCards()[choice] != null) {
@@ -110,13 +149,6 @@ public class RosesController extends Controller {
             System.out.println("Invalid choice. Retry!");
             return false;
         }
-
-        System.out.println("neuille 1 : " + direction);
-        System.out.println("neuille 2 : " + number);
-
-        // get the pawn value from the first char
-
-
 
         switch (direction) {
             case "W":
@@ -179,9 +211,6 @@ public class RosesController extends Controller {
             row = lastRow;
             return false;
         }
-        System.out.println("row : " + row);
-        System.out.println("col : " + col);
-
 
         ActionList actions = ActionFactory.generatePutInContainer(model, pawn, "RoseBoard", row, col);
         actions.setDoEndOfTurn(true); // after playing this action list, it will be the end of turn for current player.
