@@ -126,13 +126,18 @@ public class RosesStageFactory extends StageElementsFactory {
             RosesCard[] copyOfPickPotCards = new RosesCard[pickPotCards.length - 1];
             System.arraycopy(pickPotCards, 0, copyOfPickPotCards, 0, copyOfPickPotCards.length);
             pickPotCards = copyOfPickPotCards;
+
+        }
+
+        for (int i = 0; i < 5; i++) {
             if (player2MovementCards[i] == null) {
                 player2MovementCards[i] = new RosesCard(pickPotCards[pickPotCards.length - 1]);
                 player2MovementCards[i].flip();
             }
-            copyOfPickPotCards = new RosesCard[pickPotCards.length - 1];
+            RosesCard[] copyOfPickPotCards = new RosesCard[pickPotCards.length - 1];
             System.arraycopy(pickPotCards, 0, copyOfPickPotCards, 0, copyOfPickPotCards.length);
             pickPotCards = copyOfPickPotCards;
+
         }
 
 
@@ -200,7 +205,7 @@ public class RosesStageFactory extends StageElementsFactory {
         cardPickCounter.setLocation(26, 2);
         stageModel.setCardPickCounter(cardPickCounter);
         TextElement instructions1 = new TextElement("Entrez P pour piocher une carte.", stageModel);
-        TextElement instructions2 = new TextElement("Entrez M + numéro de la carte pour jouer une carte mouvement. ex: M1.", stageModel);
+        TextElement instructions2 = new TextElement("Entrez M + numéro de la carte pour jouer une carte mouvement. ex: M1. Le numéro des cartes se fait de haut en bas (1 en haut, 5 en bas)", stageModel);
         TextElement instructions3 = new TextElement("Entrez H + numéro de la carte pour jouer une carte héros + mouvement. ex: H1.", stageModel);
         TextElement numberOfBlueHeroCards = new TextElement(ConsoleColor.BLUE + heroBlueCards.length + ConsoleColor.RESET, stageModel);
         TextElement numberOfRedHeroCards = new TextElement(ConsoleColor.RED + heroRedCards.length + ConsoleColor.RESET, stageModel);

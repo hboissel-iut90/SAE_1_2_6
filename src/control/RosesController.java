@@ -6,6 +6,7 @@ import boardifier.control.Controller;
 import boardifier.model.*;
 import boardifier.model.action.ActionList;
 import boardifier.view.View;
+import model.RosesCard;
 import model.RosesStageModel;
 
 import java.io.BufferedReader;
@@ -54,7 +55,7 @@ public class RosesController extends Controller {
                 System.out.print(p.getName() + " > ");
                 try {
                     String line = consoleIn.readLine();
-                    if (line.length() == 1) {
+                    if (line.length() == 2) {
                         ok = analyseAndPlay(line);
                     }
                     if (!ok) {
@@ -77,46 +78,87 @@ public class RosesController extends Controller {
     }
 
     private boolean analyseAndPlay(String line) {
-            int row = lastRow;
-            int col = lastCol;
-        RosesStageModel gameStage = (RosesStageModel) model.getGameStage();
-        String direction = "";
-        int number = 0;
-        int choice = (int) (line.charAt(0) - '1');
-        switch (choice) {
-            case 0:
-                direction = gameStage.getPlayer1MovementCards()[choice].getDirection();
-                number = gameStage.getPlayer1MovementCards()[choice].getValue();
-            case 1:
-                direction = gameStage.getPlayer1MovementCards()[choice].getDirection();
-                number = gameStage.getPlayer1MovementCards()[choice].getValue();
-            case 2:
-                direction = gameStage.getPlayer1MovementCards()[choice].getDirection();
-                number = gameStage.getPlayer1MovementCards()[choice].getValue();
-            case 3:
-                direction = gameStage.getPlayer1MovementCards()[choice].getDirection();
-                number = gameStage.getPlayer1MovementCards()[choice].getValue();
-            case 4:
-                direction = gameStage.getPlayer1MovementCards()[choice].getDirection();
-                number = gameStage.getPlayer1MovementCards()[choice].getValue();
 
+        int row, col;
+        if (isTheFirstTime) {
+            row = 4;
+            col = 4;
+        } else {
+            row = lastRow;
+            col = lastCol;
         }
+
+
+
+        RosesStageModel gameStage = (RosesStageModel) model.getGameStage();
+        int pawnIndex = 0;
+        System.out.println("derniere colonne : " + col + ", derniere ligne : " + row);
+        String direction = "";
+        String cardType = "";
+        int number = 0;
+        cardType = String.valueOf(line.charAt(0));
+        int choice = (int) (line.charAt(1) - '1');
+        if (choice >= 0 && choice < gameStage.getPlayer1MovementCards().length && model.getIdPlayer() == 0 && cardType.equals("M") &&
+        gameStage.getPlayer1MovementCards()[choice] != null) {
+            direction = gameStage.getPlayer1MovementCards()[choice].getDirection();
+            number = gameStage.getPlayer1MovementCards()[choice].getValue();
+        } else if (choice >= 0 && choice < gameStage.getPlayer2MovementCards().length && model.getIdPlayer() == 1 && cardType.equals("M") &&
+                gameStage.getPlayer2MovementCards()[choice] != null) {
+            direction = gameStage.getPlayer2MovementCards()[choice].getDirection();
+            number = gameStage.getPlayer2MovementCards()[choice].getValue();
+        } else {
+            System.out.println("Invalid choice. Retry!");
+            return false;
+        }
+
+        System.out.println("neuille 1 : " + direction);
+        System.out.println("neuille 2 : " + number);
 
         // get the pawn value from the first char
-        if (isTheFirstTime) {
-             row = 5;
-             col = 5;
-        }
 
-        isTheFirstTime = false;
 
-            if (direction.equals("W")) {
-            row = row + number;
-            System.out.println("neeeeee : " + row + "xdxd" + col);
+
+        switch (direction) {
+            case "W":
+                col = col - number;
+                break;
+            case "N-E":
+                col = col + number;
+                row = row - number;
+                break;
+            case "E":
+                col = col + number;
+                break;
+            case "S-E":
+                col = col + number;
+                row = row + number;
+                break;
+            case "S":
+                row = row + number;
+                break;
+            case "S-W":
+                row = row + number;
+                col = col - number;
+                break;
+            case "N":
+                row = row - number;
+                break;
+            default:
+                row = row - number;
+                col = col - number;
+
         }
         // check coords validity
-        if ((row < 0) || (row > 8)) return false;
-        if ((col < 0) || (col > 8)) return false;
+        if ((row < 0) || (row > 8)) {
+            col = lastCol;
+            row = lastRow;
+            return false;
+        }
+        if ((col < 0) || (col > 8)) {
+            col = lastCol;
+            row = lastRow;
+            return false;
+        }
         // check if the pawn is still in its pot
         ContainerElement pot = null;
         if (model.getIdPlayer() == 0) {
@@ -124,24 +166,39 @@ public class RosesController extends Controller {
         } else {
             pot = gameStage.getRedPot();
         }
-        System.out.println(row);
-        if (pot.isEmptyAt(0, 0)) return false;
-        GameElement pawn = pot.getElement(0, 0);
+        if (pot.isEmptyAt(pawnIndex, 0)) {
+            col = lastCol;
+            row = lastRow;
+            return false;
+        }
+        GameElement pawn = pot.getElement(pawnIndex, 0);
         // compute valid cells for the chosen pawn
-        gameStage.getBoard().setValidCells(1);
-        System.out.println("apayian");
-        if (!gameStage.getBoard().canReachCell(row, col)) return false;
+        gameStage.getBoard().setValidCells(pawnIndex);
+        if (!gameStage.getBoard().canReachCell(row, col)) {
+            col = lastCol;
+            row = lastRow;
+            return false;
+        }
+        System.out.println("row : " + row);
+        System.out.println("col : " + col);
 
 
-
-
-
-        ActionList actions = ActionFactory.generatePutInContainer(model, pawn, "holeboard", row, col);
+        ActionList actions = ActionFactory.generatePutInContainer(model, pawn, "RoseBoard", row, col);
         actions.setDoEndOfTurn(true); // after playing this action list, it will be the end of turn for current player.
         ActionPlayer play = new ActionPlayer(model, this, actions);
-        lastCol = col;
         lastRow = row;
+        lastCol = col;
+        isTheFirstTime = false;
         play.start();
+        if (model.getIdPlayer() == 0) {
+            gameStage.removeElement(gameStage.getPlayer1MovementCards()[choice]);
+            gameStage.getPlayer1MovementCards()[choice] = null;
+        } else {
+            gameStage.removeElement(gameStage.getPlayer2MovementCards()[choice]);
+            gameStage.getPlayer2MovementCards()[choice] = null;
+        }
+
+
         return true;
     }
 }

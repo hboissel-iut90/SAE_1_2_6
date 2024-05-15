@@ -8,23 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.awt.*;
 
-/**
- * Hole main board represent the element where pawns are put when played
- * Thus, a simple ContainerElement with 3 rows and 3 column is needed.
- * Nevertheless, in order to "simplify" the work for the controller part,
- * this class also contains method to determine all the valid cells to put a
- * pawn with a given value.
- */
 public class RosesBoard extends ContainerElement {
     public RosesBoard(int x, int y, GameStageModel gameStageModel) {
-        // call the super-constructor to create a 9x9 grid, named "RoseBoard", and in x,y in space
         super("RoseBoard", x, y, 9 , 9, gameStageModel);
     }
 
     public void setValidCells(int number) {
         Logger.debug("called",this);
         resetReachableCells(false);
-        List<Point> valid = computeValidCells(number);
+        List<Point> valid = computeValidCells(number); // Appel de la méthode avec le nombre en paramètre
         if (valid != null) {
             for(Point p : valid) {
                 reachableCells[p.y][p.x] = true;
@@ -32,94 +24,22 @@ public class RosesBoard extends ContainerElement {
         }
     }
 
-    public List<Point> computeValidCells(int number) {
+    public List<Point> computeValidCells(int number) { // Ajout du paramètre ici
         List<Point> lst = new ArrayList<>();
-        RosesPawn p = null;
-        // if the grid is empty, is it the first turn and thus, all cells are valid
+        // if the grid is empty, all cells are valid
         if (isEmpty()) {
-            // i are rows
-            for(int i=0;i<9;i++) {
-                // j are cols
+            for(int i = 0; i < 9; i++) {
                 for (int j = 0; j < 9; j++) {
-                    // cols are in x direction and rows are in y direction, so create a point in (j,i)
                     lst.add(new Point(j,i));
                 }
             }
             return lst;
         }
-        // else, take each empty cell and check if it is valid
-        for(int i=0;i<9;i++) {
-            for(int j=0;j<9;j++) {
+        // else, take each empty cell and add it to the valid list
+        for(int i = 0; i < 9; i++) {
+            for(int j = 0; j < 9; j++) {
                 if (isEmptyAt(i,j)) {
-                    // check adjacence in row-1
-                    if (i-1 >= 0) {
-                        if (j-1>=0) {
-                            p = (RosesPawn)getElement(i-1,j-1);
-
-                            // check if same parity
-                            if ((p != null) && ( p.getNumber()%2 == number%2)) {
-                                lst.add(new Point(j,i));
-                                continue; // go to the next point
-                            }
-                        }
-                        p = (RosesPawn)getElement(i-1,j);
-                        // check if different parity
-                        if ((p != null) && ( p.getNumber()%2 != number%2)) {
-                            lst.add(new Point(j,i));
-                            continue; // go to the next point
-                        }
-                        if (j+1<=2) {
-                            p = (RosesPawn)getElement(i-1,j+1);
-                            // check if same parity
-                            if ((p != null) && ( p.getNumber()%2 == number%2)) {
-                                lst.add(new Point(j,i));
-                                continue; // go to the next point
-                            }
-                        }
-                    }
-                    // check adjacence in row+1
-                    if (i+1 <= 2) {
-                        if (j-1>=0) {
-                            p = (RosesPawn)getElement(i+1,j-1);
-                            // check if same parity
-                            if ((p != null) && ( p.getNumber()%2 == number%2)) {
-                                lst.add(new Point(j,i));
-                                continue; // go to the next point
-                            }
-                        }
-                        p = (RosesPawn)getElement(i+1,j);
-                        // check if different parity
-                        if ((p != null) && ( p.getNumber()%2 != number%2)) {
-                            lst.add(new Point(j,i));
-                            continue; // go to the next point
-                        }
-                        if (j+1<=2) {
-                            p = (RosesPawn)getElement(i+1,j+1);
-                            // check if same parity
-                            if ((p != null) && ( p.getNumber()%2 == number%2)) {
-                                lst.add(new Point(j,i));
-                                continue; // go to the next point
-                            }
-                        }
-                    }
-                    // check adjacence in row
-                    if (j-1>=0) {
-                        p = (RosesPawn)getElement(i,j-1);
-                        // check if different parity
-                        if ((p != null) && ( p.getNumber()%2 != number%2)) {
-                            lst.add(new Point(j,i));
-                            continue; // go to the next point
-                        }
-                    }
-                    if (j+1<=2) {
-                        p = (RosesPawn)getElement(i,j+1);
-                        // check if different parity
-                        if ((p != null) && ( p.getNumber()%2 != number%2)) {
-                            lst.add(new Point(j,i));
-                            continue; // go to the next point
-                        }
-
-                    }
+                    lst.add(new Point(j,i));
                 }
             }
         }
