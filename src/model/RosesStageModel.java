@@ -296,7 +296,10 @@ public class RosesStageModel extends GameStageModel {
         return this.player1HeroCards;
     }
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
     public void setPlayer1HeroCards(RosesCard[] player1HeroCards) {
         this.player1HeroCards = player1HeroCards;
         for (int i = 0; i < player1HeroCards.length; i++) {
