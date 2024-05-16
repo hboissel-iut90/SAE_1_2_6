@@ -1,16 +1,9 @@
 import boardifier.model.GameStageModel;
 import model.RosesCard;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
 
 public class TestSurRosesCard {
 
