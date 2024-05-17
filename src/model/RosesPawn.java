@@ -6,7 +6,7 @@ import boardifier.model.GameStageModel;
 
 /**
  * A basic pawn element, with only 2 fixed parameters : number and color
- * There are no setters because the state of a Hole pawn is fixed.
+ * There are no setters because the state of a Roses pawn is fixed.
  */
 public class RosesPawn extends GameElement {
 
@@ -40,6 +40,18 @@ public class RosesPawn extends GameElement {
 
     public int getColor() {
         return color;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
+    public void setCaracter(String caracter) {
+        this.caracter = caracter;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
     }
 
     public String getCaracter() {

@@ -7,13 +7,19 @@ import boardifier.model.*;
 import boardifier.model.action.ActionList;
 import boardifier.view.View;
 import model.RosesCard;
+import model.RosesPawn;
 import model.RosesStageModel;
-import view.RosesCardLook;
 import view.RosesStageView;
+import boardifier.model.ContainerElement;
 
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
+
+import static model.RosesPawn.PAWN_BLUE;
+import static model.RosesPawn.PAWN_RED;
 
 public class RosesController extends Controller {
 
@@ -61,6 +67,7 @@ public class RosesController extends Controller {
                     String line = consoleIn.readLine();
                     if (line.length() == 2 || String.valueOf(line.charAt(0)).equals("P")) {
                         ok = analyseAndPlay(line);
+                        System.out.println("ok = " + ok);
                     }
                     if (!ok) {
                         System.out.println("incorrect instruction. retry !");
@@ -78,7 +85,7 @@ public class RosesController extends Controller {
         Player p = model.getCurrentPlayer();
         RosesStageModel stageModel = (RosesStageModel) model.getGameStage();
         stageModel.getPlayerName().setText(p.getName());
-        stageModel.updatePawnsToPlay(view.getGameStageView());
+        stageModel.update(view.getGameStageView());
     }
 
     private boolean analyseAndPlay(String line) {
@@ -138,6 +145,12 @@ public class RosesController extends Controller {
             System.out.println("Invalid choice : u cant pick a card. Retry ! ");
             return false;
         }
+        List<Point> ValidCells = null;
+        if (cardType.equals("H")){
+            ValidCells = gameStage.getBoard().computeValidCells(cardType, model.getIdPlayer());
+            gameStage.getBoard().setValidCells(ValidCells);
+            System.out.println("Valid cells : " + ValidCells);
+        }
         int choice = (int) (line.charAt(1) - '1');
         if (choice >= 0 && choice < gameStage.getPlayer1MovementCards().length && model.getIdPlayer() == 0 && cardType.equals("M") &&
         gameStage.getPlayer1MovementCards()[choice] != null) {
@@ -145,9 +158,18 @@ public class RosesController extends Controller {
             number = gameStage.getPlayer1MovementCards()[choice].getValue();
         } else if (choice >= 0 && choice < gameStage.getPlayer2MovementCards().length && model.getIdPlayer() == 1 && cardType.equals("M") &&
                 gameStage.getPlayer2MovementCards()[choice] != null) {
+           direction = gameStage.getPlayer2MovementCards()[choice].getDirection();
+            number = gameStage.getPlayer2MovementCards()[choice].getValue();
+        } else if (choice >= 0 && choice < gameStage.getPlayer1MovementCards().length && model.getIdPlayer() == 0 && cardType.equals("H") &&
+                gameStage.getPlayer1MovementCards()[choice] != null && !ValidCells.isEmpty()  && gameStage.getPlayer1HeroCards().length > 0) {
+            direction = gameStage.getPlayer1MovementCards()[choice].getDirection();
+            number = gameStage.getPlayer1MovementCards()[choice].getValue();
+        }else if (choice >= 0 && choice < gameStage.getPlayer2MovementCards().length && model.getIdPlayer() == 1 && cardType.equals("H") &&
+                    gameStage.getPlayer2MovementCards()[choice] != null && !ValidCells.isEmpty() && gameStage.getPlayer2HeroCards().length > 0) {
             direction = gameStage.getPlayer2MovementCards()[choice].getDirection();
             number = gameStage.getPlayer2MovementCards()[choice].getValue();
-        } else {
+        }
+        else {
             System.out.println("Invalid choice. Retry!");
             return false;
         }
@@ -207,36 +229,79 @@ public class RosesController extends Controller {
         }
         GameElement pawn = pot.getElement(pawnIndex, 0);
         // compute valid cells for the chosen pawn
-        gameStage.getBoard().setValidCells(pawnIndex);
+        if (cardType.equals("M")) {
+            gameStage.getBoard().setValidCells(cardType, model.getIdPlayer());
+        }
         if (!gameStage.getBoard().canReachCell(row, col)) {
             col = lastCol;
             row = lastRow;
             return false;
         }
-
-        ActionList actions = ActionFactory.generatePutInContainer(model, pawn, "RoseBoard", row, col);
-        actions.setDoEndOfTurn(true); // after playing this action list, it will be the end of turn for current player.
-        ActionPlayer play = new ActionPlayer(model, this, actions);
-        lastRow = row;
-        lastCol = col;
-        isTheFirstTime = false;
-        play.start();
+        if (cardType.equals("M")) {
+            ActionList actions = ActionFactory.generatePutInContainer(model, pawn, "RoseBoard", row, col);
+            actions.setDoEndOfTurn(true); // after playing this action list, it will be the end of turn for current player.
+            ActionPlayer play = new ActionPlayer(model, this, actions);
+            lastRow = row;
+            lastCol = col;
+            isTheFirstTime = false;
+            play.start();
+        }
+        if (cardType.equals("H")) {
+            if (model.getIdPlayer() == 0 && gameStage.getPlayer1HeroCards().length > 0){
+                ActionList actions = new ActionList(true);
+                ActionPlayer play = new ActionPlayer(model, this, actions);
+                RosesPawn pawnToSwap = (RosesPawn) gameStage.getBoard().getElement(row, col);
+                if (pawnToSwap != null) {
+                    pawnToSwap.setColor(PAWN_BLUE);
+                    lastRow = row;
+                    lastCol = col;
+                    isTheFirstTime = false;
+                    System.out.println(pawnToSwap.getColor());
+                    play.start();
+                } else {
+                    System.out.println("Invalid move. No pawn at the specified location.");
+                    return false;
+                }
+            } else if (model.getIdPlayer() == 1 && gameStage.getPlayer2HeroCards().length > 0) {
+                ActionList actions = new ActionList(true);
+                ActionPlayer play = new ActionPlayer(model, this, actions);
+                RosesPawn pawnToSwap = (RosesPawn) gameStage.getBoard().getElement(row, col);
+                if (pawnToSwap != null) {
+                    pawnToSwap.setColor(PAWN_RED);
+                    lastRow = row;
+                    lastCol = col;
+                    isTheFirstTime = false;
+                    System.out.println(pawnToSwap.getColor());
+                    play.start();
+                } else {
+                    System.out.println("Invalid move. No pawn at the specified location.");
+                    return false;
+                }
+            } else {
+                System.out.println("Invalid choice. No hero cards available. Retry!");
+                return false;
+            }
+        }
         if (model.getIdPlayer() == 0) {
             gameStage.removeElement(gameStage.getPlayer1MovementCards()[choice]);
+            if (cardType.equals("H")){
+                gameStage.removeElement(gameStage.getPlayer1HeroCards()[gameStage.getPlayer1HeroCards().length - 1]);
+            }
             gameStage.getDiscardCards()[nbMovements] = gameStage.getPlayer1MovementCards()[choice];
             gameStage.getPlayer1MovementCards()[choice].flip();
             gameStage.getDiscardPot().addElement(gameStage.getPlayer1MovementCards()[choice], 0, 0);
             gameStage.getPlayer1MovementCards()[choice] = null;
         } else {
             gameStage.removeElement(gameStage.getPlayer2MovementCards()[choice]);
+            if (cardType.equals("H")){
+                gameStage.removeElement(gameStage.getPlayer2HeroCards()[gameStage.getPlayer2HeroCards().length - 1]);
+            }
             gameStage.getDiscardCards()[nbMovements] = gameStage.getPlayer2MovementCards()[choice];
             gameStage.getPlayer2MovementCards()[choice].flip();
             gameStage.getDiscardPot().addElement(gameStage.getPlayer2MovementCards()[choice], 0, 0);
             gameStage.getPlayer2MovementCards()[choice] = null;
         }
         nbMovements++;
-
-
         return true;
     }
 }
