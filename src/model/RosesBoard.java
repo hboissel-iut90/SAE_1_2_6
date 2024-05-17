@@ -79,5 +79,9 @@ public class RosesBoard extends ContainerElement {
         }
         return lst;
     }
+<<<<<<< Updated upstream
 }
 
+=======
+}
+>>>>>>> Stashed changes

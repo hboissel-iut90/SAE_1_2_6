@@ -16,6 +16,10 @@ import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+<<<<<<< Updated upstream
+=======
+import java.sql.SQLOutput;
+>>>>>>> Stashed changes
 import java.util.List;
 
 import static model.RosesPawn.PAWN_BLUE;
@@ -28,6 +32,7 @@ public class RosesController extends Controller {
     boolean isTheFirstTime = true;
     int lastRow = 0;
     int lastCol = 0;
+
 
     int nbMovements = 0;
 
@@ -101,7 +106,6 @@ public class RosesController extends Controller {
         }
 
 
-
         RosesStageModel gameStage = (RosesStageModel) model.getGameStage();
         RosesStageView viewStage = (RosesStageView) view.getGameStageView();
         int pawnIndex = 0;
@@ -110,6 +114,7 @@ public class RosesController extends Controller {
         String cardType = "";
         int number = 0;
         cardType = String.valueOf(line.charAt(0));
+        checkIfPlayerPlay(cardType);
         if (cardType.equals("P") && model.getIdPlayer() == 0) {
             for (int i = 0; i < gameStage.getPlayer1MovementCards().length; i++) {
                 if (gameStage.getPlayer1MovementCards()[i] == null) {
@@ -146,14 +151,18 @@ public class RosesController extends Controller {
             return false;
         }
         List<Point> ValidCells = null;
+<<<<<<< Updated upstream
         if (cardType.equals("H")){
+=======
+        if (cardType.equals("H")) {
+>>>>>>> Stashed changes
             ValidCells = gameStage.getBoard().computeValidCells(cardType, model.getIdPlayer());
             gameStage.getBoard().setValidCells(ValidCells);
             System.out.println("Valid cells : " + ValidCells);
         }
         int choice = (int) (line.charAt(1) - '1');
         if (choice >= 0 && choice < gameStage.getPlayer1MovementCards().length && model.getIdPlayer() == 0 && cardType.equals("M") &&
-        gameStage.getPlayer1MovementCards()[choice] != null) {
+                gameStage.getPlayer1MovementCards()[choice] != null) {
             direction = gameStage.getPlayer1MovementCards()[choice].getDirection();
             number = gameStage.getPlayer1MovementCards()[choice].getValue();
         } else if (choice >= 0 && choice < gameStage.getPlayer2MovementCards().length && model.getIdPlayer() == 1 && cardType.equals("M") &&
@@ -168,8 +177,20 @@ public class RosesController extends Controller {
                     gameStage.getPlayer2MovementCards()[choice] != null && !ValidCells.isEmpty() && gameStage.getPlayer2HeroCards().length > 0) {
             direction = gameStage.getPlayer2MovementCards()[choice].getDirection();
             number = gameStage.getPlayer2MovementCards()[choice].getValue();
+<<<<<<< Updated upstream
         }
         else {
+=======
+        } else if (choice >= 0 && choice < gameStage.getPlayer1MovementCards().length && model.getIdPlayer() == 0 && cardType.equals("H") &&
+                gameStage.getPlayer1MovementCards()[choice] != null && !ValidCells.isEmpty() && gameStage.getPlayer1HeroCards().length > 0) {
+            direction = gameStage.getPlayer1MovementCards()[choice].getDirection();
+            number = gameStage.getPlayer1MovementCards()[choice].getValue();
+        } else if (choice >= 0 && choice < gameStage.getPlayer2MovementCards().length && model.getIdPlayer() == 1 && cardType.equals("H") &&
+                gameStage.getPlayer2MovementCards()[choice] != null && !ValidCells.isEmpty() && gameStage.getPlayer2HeroCards().length > 0) {
+            direction = gameStage.getPlayer2MovementCards()[choice].getDirection();
+            number = gameStage.getPlayer2MovementCards()[choice].getValue();
+        } else {
+>>>>>>> Stashed changes
             System.out.println("Invalid choice. Retry!");
             return false;
         }
@@ -215,6 +236,11 @@ public class RosesController extends Controller {
             row = lastRow;
             return false;
         }
+        // a pawn is already there
+        if (gameStage.getBoard().isElementAt(row, col) && cardType.equals("M")) {
+            System.out.println("Invalid move: There is already a pawn at the specified location.");
+            return false;
+        }
         // check if the pawn is still in its pot
         ContainerElement pot = null;
         if (model.getIdPlayer() == 0) {
@@ -247,7 +273,11 @@ public class RosesController extends Controller {
             play.start();
         }
         if (cardType.equals("H")) {
+<<<<<<< Updated upstream
             if (model.getIdPlayer() == 0 && gameStage.getPlayer1HeroCards().length > 0){
+=======
+            if (model.getIdPlayer() == 0 && gameStage.getPlayer1HeroCards().length > 0) {
+>>>>>>> Stashed changes
                 ActionList actions = new ActionList(true);
                 ActionPlayer play = new ActionPlayer(model, this, actions);
                 RosesPawn pawnToSwap = (RosesPawn) gameStage.getBoard().getElement(row, col);
@@ -284,8 +314,18 @@ public class RosesController extends Controller {
         }
         if (model.getIdPlayer() == 0) {
             gameStage.removeElement(gameStage.getPlayer1MovementCards()[choice]);
+<<<<<<< Updated upstream
             if (cardType.equals("H")){
                 gameStage.removeElement(gameStage.getPlayer1HeroCards()[gameStage.getPlayer1HeroCards().length - 1]);
+=======
+            if (cardType.equals("H")) {
+                gameStage.removeElement(gameStage.getPlayer1HeroCards()[gameStage.getPlayer1HeroCards().length - 1]);
+                RosesCard[] tempHeroCards = gameStage.getPlayer1HeroCards();
+                RosesCard[] copyOfPickPotCards = new RosesCard[tempHeroCards.length - 1];
+                System.arraycopy(tempHeroCards, 0, copyOfPickPotCards, 0, copyOfPickPotCards.length);
+                tempHeroCards = copyOfPickPotCards;
+                gameStage.setPlayer1HeroCards(tempHeroCards);
+>>>>>>> Stashed changes
             }
             gameStage.getDiscardCards()[nbMovements] = gameStage.getPlayer1MovementCards()[choice];
             gameStage.getPlayer1MovementCards()[choice].flip();
@@ -293,8 +333,18 @@ public class RosesController extends Controller {
             gameStage.getPlayer1MovementCards()[choice] = null;
         } else {
             gameStage.removeElement(gameStage.getPlayer2MovementCards()[choice]);
+<<<<<<< Updated upstream
             if (cardType.equals("H")){
                 gameStage.removeElement(gameStage.getPlayer2HeroCards()[gameStage.getPlayer2HeroCards().length - 1]);
+=======
+            if (cardType.equals("H")) {
+                gameStage.removeElement(gameStage.getPlayer2HeroCards()[gameStage.getPlayer2HeroCards().length - 1]);
+                RosesCard[] tempHeroCards = gameStage.getPlayer2HeroCards();
+                RosesCard[] copyOfPickPotCards = new RosesCard[tempHeroCards.length - 1];
+                System.arraycopy(tempHeroCards, 0, copyOfPickPotCards, 0, copyOfPickPotCards.length);
+                tempHeroCards = copyOfPickPotCards;
+                gameStage.setPlayer2HeroCards(tempHeroCards);
+>>>>>>> Stashed changes
             }
             gameStage.getDiscardCards()[nbMovements] = gameStage.getPlayer2MovementCards()[choice];
             gameStage.getPlayer2MovementCards()[choice].flip();
@@ -304,4 +354,117 @@ public class RosesController extends Controller {
         nbMovements++;
         return true;
     }
+
+
+
+
+
+    private void checkIfPlayerPlay(String cardType) {
+        int row, col;
+        if (isTheFirstTime) {
+            row = 4;
+            col = 4;
+        } else {
+            row = lastRow;
+            col = lastCol;
+        }
+
+        RosesStageModel gameStage = (RosesStageModel) model.getGameStage();
+        RosesStageView viewStage = (RosesStageView) view.getGameStageView();
+        System.out.println("entre boucle, tempcheck : " + gameStage.getChecked());
+
+        boolean tempCheck = false;
+
+        for (int i = 0; i < gameStage.getPlayer1MovementCards().length; i++) {
+            if (isTheFirstTime) {
+                row = 4;
+                col = 4;
+            } else {
+                row = lastRow;
+                col = lastCol;
+            }
+
+            if (model.getIdPlayer() == 0 && gameStage.getPlayer2MovementCards()[i] == null) {
+                tempCheck = true; // il peut piocher donc jouer
+                gameStage.setChecked(tempCheck);
+                return;
+            } else if (model.getIdPlayer() == 1 && gameStage.getPlayer1MovementCards()[i] == null) {
+                tempCheck = true;
+                gameStage.setChecked(tempCheck);
+                return;
+            } else if (model.getIdPlayer() == 0 && gameStage.getPlayer1HeroCards() != null) {
+                tempCheck = false;
+            }
+
+            if (!tempCheck) {
+                String checkDirection;
+                int checkCardValue;
+
+                if (model.getIdPlayer() == 0) {
+                    checkDirection = gameStage.getPlayer2MovementCards()[i].getDirection();
+                    checkCardValue = gameStage.getPlayer2MovementCards()[i].getValue();
+                } else {
+                    checkDirection = gameStage.getPlayer1MovementCards()[i].getDirection();
+                    checkCardValue = gameStage.getPlayer1MovementCards()[i].getValue();
+                }
+
+                switch (checkDirection) {
+                    case "W":
+                        col = col - checkCardValue;
+                        break;
+                    case "N-E":
+                        col = col + checkCardValue;
+                        row = row - checkCardValue;
+                        break;
+                    case "E":
+                        col = col + checkCardValue;
+                        break;
+                    case "S-E":
+                        col = col + checkCardValue;
+                        row = row + checkCardValue;
+                        break;
+                    case "S":
+                        row = row + checkCardValue;
+                        break;
+                    case "S-W":
+                        row = row + checkCardValue;
+                        col = col - checkCardValue;
+                        break;
+                    case "N":
+                        row = row - checkCardValue;
+                        break;
+                    default:
+                        row = row - checkCardValue;
+                        col = col - checkCardValue;
+                }
+
+                if (row >= 0 && col >= 0 && gameStage.getBoard().canReachCell(row, col)) {
+                    tempCheck = true;
+                    gameStage.setChecked(tempCheck);
+                    return;
+                } else if (row >= 0 && col >= 0 && row <= 8 && col <= 8 && i > 0 && gameStage.getBoard().isElementAt(row, col) && cardType.equals("H")) {
+                    if (model.getIdPlayer() == 0 && gameStage.getPlayer2HeroCards()[i - 1] != null) {
+                        tempCheck = true;
+                        System.out.println("can play hero cards");
+                        gameStage.setChecked(tempCheck);
+                        return;
+                    } else if (model.getIdPlayer() == 1 && gameStage.getPlayer1HeroCards()[i - 1] != null) {
+                        tempCheck = true;
+                        System.out.println("can play hero cards");
+                        gameStage.setChecked(tempCheck);
+                        return;
+                    }
+                } else {
+                    System.out.println("apayian");
+                    tempCheck = false;
+                }
+            }
+            gameStage.setChecked(tempCheck);
+            System.out.println("tempcheck : " + gameStage.getChecked());
+        }
+
+        lastRow = row;
+        lastCol = col;
+    }
+
 }

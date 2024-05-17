@@ -53,7 +53,7 @@ public class RosesStageModel extends GameStageModel {
     private RosesPawn[] yellowPawns;
 
     private RosesCard[] pickCards;
-    private RosesCard[] discardCards = new RosesCard[14];
+    private RosesCard[] discardCards = new RosesCard[26];
     private RosesCard[] player1HeroCards;
     private RosesCard[] player1MovementCards;
     private RosesCard[] player2MovementCards;
@@ -76,6 +76,11 @@ public class RosesStageModel extends GameStageModel {
 
     private String[] movementLists = new String[]{"N-W", "N-E", "S-E", "W", "S", "S-W", "N", "E"};
     private int[] numberList = new int[]{3, 1, 2};
+<<<<<<< Updated upstream
+=======
+
+    private boolean checked = true;
+>>>>>>> Stashed changes
 
 
     // Uncomment next line if the example with a main container is used. see end of RosesStageFactory and RosesStageView
@@ -116,6 +121,14 @@ public class RosesStageModel extends GameStageModel {
 
     public TextElement getCardPickCounter() {
         return this.cardPickCounter;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
+    }
+
+    public boolean getChecked() {
+        return this.checked;
     }
 
     public void setBlueHeroCardsCounter(TextElement blueHeroCardsCounter) {
@@ -411,11 +424,9 @@ public class RosesStageModel extends GameStageModel {
         bluePawnsCounter.setText("Blue pawns left : " + ConsoleColor.BLUE + this.getBluePawnsToPlay() + ConsoleColor.RESET);
         bluePawnsCounter.setLocation(60, 9);
         this.setBluePawnsCounter(bluePawnsCounter);
-        gameStageView.addLook(new TextLook(this.getBluePawnsCounter()));
         redPawnsCounter.setText("Red pawns left : " + ConsoleColor.RED + this.getRedPawnsToPlay() + ConsoleColor.RESET);
         redPawnsCounter.setLocation(60, 21);
         this.setRedPawnsCounter(redPawnsCounter);
-        gameStageView.addLook(new TextLook(this.getRedPawnsCounter()));
         cardPickCounter.setText("Cards left : " + ConsoleColor.GREY_BACKGROUND + this.pickCards.length + ConsoleColor.RESET);
         cardPickCounter.setLocation(16, 0);
         this.setCardPickCounter(cardPickCounter);
@@ -423,18 +434,27 @@ public class RosesStageModel extends GameStageModel {
         redHeroCardsCounter.setText("" + ConsoleColor.GREY_BACKGROUND + this.player2HeroCards.length + ConsoleColor.RESET);
         this.setBlueHeroCardsCounter(blueHeroCardsCounter);
         this.setRedHeroCardsCounter(redHeroCardsCounter);
-        gameStageView.addLook(new TextLook(this.getBlueHeroCardsCounter()));
-        gameStageView.addLook(new TextLook(this.getRedHeroCardsCounter()));
     }
 
     private void setupCallbacks() {
         onPutInContainer((element, gridDest, rowDest, colDest) -> {
             // just check when pawns are put in 3x3 board
+            if (model.getGameStage() != null) {
+                RosesStageModel tempModel = (RosesStageModel) model.getGameStage();
+                if (!tempModel.getChecked()) {
+                    computePartyResult();
+                    return;
+                }
+            }
             if (gridDest != board) return;
             RosesPawn p = (RosesPawn) element;
             if (p.getColor() == 0) {
                 bluePawnsToPlay--;
+<<<<<<< Updated upstream
             } else if (p.getColor() == 1){
+=======
+            } else if (p.getColor() == 1) {
+>>>>>>> Stashed changes
                 redPawnsToPlay--;
             }
             if ((bluePawnsToPlay == 0) && (redPawnsToPlay == 0)) {
@@ -444,6 +464,7 @@ public class RosesStageModel extends GameStageModel {
     }
 
     private void computePartyResult() {
+        System.out.println("neuille supreme a terminé le jeu");
         int idWinner = -1;
         // get the empty cell, which should be in 2D at [0,0], [0,2], [1,1], [2,0] or [2,2]
         // i.e. or in 1D at index 0, 2, 4, 6 or 8
@@ -454,46 +475,46 @@ public class RosesStageModel extends GameStageModel {
         int countRed = 0;
         RosesPawn p = null;
         int row, col;
-        for (i = 0; i < 9; i += 2) {
-            if (board.isEmptyAt(i / 3, i % 3)) break;
-        }
-        // get the 4 adjacent cells (if they exist) starting by the upper one
-        row = (i / 3) - 1;
-        col = i % 3;
-        for (int j = 0; j < 4; j++) {
-            // skip invalid cells
-            if ((row >= 0) && (row <= 2) && (col >= 0) && (col <= 2)) {
-                p = (RosesPawn) (board.getElement(row, col));
-                if (p.getColor() == RosesPawn.PAWN_BLUE) {
-                    nbBlue++;
-                    countBlue += p.getNumber();
-                } else {
-                    nbRed++;
-                    countRed += p.getNumber();
-                }
-            }
-            // change row & col to set them at the correct value for the next iteration
-            if ((j == 0) || (j == 2)) {
-                row++;
-                col--;
-            } else if (j == 1) {
-                col += 2;
-            }
-
-        }
-
-        // decide whose winning
-        if (nbBlue < nbRed) {
-            idWinner = 0;
-        } else if (nbBlue > nbRed) {
-            idWinner = 1;
-        } else {
-            if (countBlue < countRed) {
+//        for (i = 0; i < 9; i += 2) {
+//            if (board.isEmptyAt(i / 3, i % 3)) break;
+//        }
+//        // get the 4 adjacent cells (if they exist) starting by the upper one
+//        row = (i / 3) - 1;
+//        col = i % 3;
+//        for (int j = 0; j < 4; j++) {
+//            // skip invalid cells
+//            if ((row >= 0) && (row <= 2) && (col >= 0) && (col <= 2)) {
+//                p = (RosesPawn) (board.getElement(row, col));
+//                if (p.getColor() == RosesPawn.PAWN_BLUE) {
+//                    nbBlue++;
+//                    countBlue += p.getNumber();
+//                } else {
+//                    nbRed++;
+//                    countRed += p.getNumber();
+//                }
+//            }
+//            // change row & col to set them at the correct value for the next iteration
+//            if ((j == 0) || (j == 2)) {
+//                row++;
+//                col--;
+//            } else if (j == 1) {
+//                col += 2;
+//            }
+//
+//        }
+//
+//        // decide whose winning
+//        if (nbBlue < nbRed) {
+//            idWinner = 0;
+//        } else if (nbBlue > nbRed) {
+//            idWinner = 1;
+//        } else {
+            if (model.getIdPlayer() == 0) {
                 idWinner = 0;
-            } else if (countBlue > countRed) {
+            } else {
                 idWinner = 1;
             }
-        }
+
         System.out.println("nb blue: " + nbBlue + ", nb red: " + nbRed + ", count blue: " + countBlue + ", count red: " + countRed + ", winner is player " + idWinner);
         // set the winner
         model.setIdWinner(idWinner);
