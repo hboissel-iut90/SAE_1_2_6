@@ -534,7 +534,7 @@ public class ContainerLook extends ElementLook {
         int rs = rowSrc;
         int cs = colSrc;
         int rd = rowDest;
-        int cd = colDest;
+        int cd = rowDest;
 
         // if row,col corresponds to a covered cell, get the origin
         if ((rowSpans[rowSrc][colSrc] < 1) && (colSpans[rowSrc][colSrc] < 1)) {
