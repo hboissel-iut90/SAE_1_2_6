@@ -184,7 +184,7 @@ public class ContainerElement extends StaticElement {
         }
     }
 
-    public boolean canReachCell(int row, int col) {
+    public boolean canReachCell(int row, int col) { // 7, 5
         if ((row >= 0) && (row < nbRows) && (col >= 0) && (col < nbCols)) {
             return reachableCells[row][col];
         }
@@ -266,7 +266,7 @@ public class ContainerElement extends StaticElement {
         int rs = coords[0];
         int cs = coords[1];
         int rd = rowDest;
-        int cd = rowDest;
+        int cd = colDest;
 
         // if row,col corresponds to a covered cell, get the origin
         if ((rowSpans[coords[0]][coords[1]] < 1) && (colSpans[coords[0]][coords[1]] < 1)) {
