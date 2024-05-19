@@ -16,10 +16,7 @@ import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-<<<<<<< Updated upstream
-=======
 import java.sql.SQLOutput;
->>>>>>> Stashed changes
 import java.util.List;
 
 import static model.RosesPawn.PAWN_BLUE;
@@ -72,7 +69,6 @@ public class RosesController extends Controller {
                     String line = consoleIn.readLine();
                     if (line.length() == 2 || String.valueOf(line.charAt(0)).equals("P")) {
                         ok = analyseAndPlay(line);
-                        System.out.println("ok = " + ok);
                     }
                     if (!ok) {
                         System.out.println("incorrect instruction. retry !");
@@ -84,7 +80,6 @@ public class RosesController extends Controller {
     }
 
     public void endOfTurn() {
-
         model.setNextPlayer();
         // get the new player to display its name
         Player p = model.getCurrentPlayer();
@@ -117,7 +112,7 @@ public class RosesController extends Controller {
         checkIfPlayerPlay(cardType);
         if (cardType.equals("P") && model.getIdPlayer() == 0) {
             for (int i = 0; i < gameStage.getPlayer1MovementCards().length; i++) {
-                if (gameStage.getPlayer1MovementCards()[i] == null) {
+                if (gameStage.getPlayer1MovementCards()[i] == null && gameStage.getPickCards().length > 0) {
                     gameStage.getPlayer1MovementCards()[i] = gameStage.getPickCards()[gameStage.getPickCards().length - 1];
                     gameStage.getPlayer1MovementCards()[i].flip();
                     gameStage.getMoovBluePot().addElement(gameStage.getPlayer1MovementCards()[i], i, 0);
@@ -126,12 +121,53 @@ public class RosesController extends Controller {
                     System.arraycopy(tempPickCard, 0, copyOfPickPotCards, 0, copyOfPickPotCards.length);
                     tempPickCard = copyOfPickPotCards;
                     gameStage.setPickCards(tempPickCard);
+                    if (gameStage.getPickCards().length > 0) {
+                        return true;
+                    }
+                }
+
+
+                if (gameStage.getPickCards().length == 0) {
+                    System.out.println("La pioche est vide.");
+
+                    // Compter le nombre de cartes non nulles dans la défausse
+                    int newLength = 0;
+                    for (int n = 0; n < gameStage.getDiscardCards().length; n++) {
+                        if (gameStage.getDiscardCards()[n] != null) {
+                            newLength++;
+                        }
+                    }
+
+                    // Transférer les cartes de la défausse à la pioche
+                    RosesCard[] tempPickCard = new RosesCard[newLength];
+                    int index = 0;
+                    for (int p = 0; p < gameStage.getDiscardCards().length; p++) {
+                        if (gameStage.getDiscardCards()[p] != null) {
+                            tempPickCard[index] = gameStage.getDiscardCards()[p];
+                            index++;
+                        }
+                        gameStage.getDiscardPot().removeElement(gameStage.getDiscardCards()[p]);
+
+                    }
+
+                    // Réinitialiser la défausse à zéro
+                    RosesCard[] newEmptyDiscard = new RosesCard[26];
+                    gameStage.setPickCards(tempPickCard);
+                    gameStage.setDiscardCards(newEmptyDiscard);
+
+                    // Mettre à jour la pioche avec les nouvelles cartes
+                    nbMovements = 0;
                     return true;
                 }
             }
+
+
+
+
+
         } else if (cardType.equals("P") && model.getIdPlayer() == 1) {
             for (int i = 0; i < gameStage.getPlayer2MovementCards().length; i++) {
-                if (gameStage.getPlayer2MovementCards()[i] == null) {
+                if (gameStage.getPlayer2MovementCards()[i] == null && gameStage.getPickCards().length > 0) {
                     gameStage.getPlayer2MovementCards()[i] = gameStage.getPickCards()[gameStage.getPickCards().length - 1];
                     gameStage.getPlayer2MovementCards()[i].flip();
                     gameStage.getMoovRedPot().addElement(gameStage.getPlayer2MovementCards()[i], i, 0);
@@ -140,10 +176,51 @@ public class RosesController extends Controller {
                     System.arraycopy(tempPickCard, 0, copyOfPickPotCards, 0, copyOfPickPotCards.length);
                     tempPickCard = copyOfPickPotCards;
                     gameStage.setPickCards(tempPickCard);
+                    if (gameStage.getPickCards().length > 0) {
+                        return true;
+                    }
+                }
+
+
+                if (gameStage.getPickCards().length == 0) {
+                    System.out.println("La pioche est vide.");
+
+                    // Compter le nombre de cartes non nulles dans la défausse
+                    int newLength = 0;
+                    for (int n = 0; n < gameStage.getDiscardCards().length; n++) {
+                        if (gameStage.getDiscardCards()[n] != null) {
+                            newLength++;
+                        }
+                    }
+
+                    // Transférer les cartes de la défausse à la pioche
+                    RosesCard[] tempPickCard = new RosesCard[newLength];
+                    int index = 0;
+                    for (int p = 0; p < gameStage.getDiscardCards().length; p++) {
+                        if (gameStage.getDiscardCards()[p] != null) {
+                            tempPickCard[index] = gameStage.getDiscardCards()[p];
+                            index++;
+                        }
+                        gameStage.getDiscardPot().removeElement(gameStage.getDiscardCards()[p]);
+                    }
+
+                    // Réinitialiser la défausse à zéro
+                    RosesCard[] newEmptyDiscard = new RosesCard[26];
+                    gameStage.setDiscardCards(newEmptyDiscard);
+
+                    // Mettre à jour la pioche avec les nouvelles cartes
+                    gameStage.setPickCards(tempPickCard);
+                    nbMovements = 0;
                     return true;
                 }
             }
+
+
+
+
+
         }
+
 
         if (cardType.equals("P")) { // si il est passé par les conditions et qu'il a pas return true, il est impossible de piocher
             // car aucun emplacement nul
@@ -151,46 +228,25 @@ public class RosesController extends Controller {
             return false;
         }
         List<Point> ValidCells = null;
-<<<<<<< Updated upstream
-        if (cardType.equals("H")){
-=======
         if (cardType.equals("H")) {
->>>>>>> Stashed changes
             ValidCells = gameStage.getBoard().computeValidCells(cardType, model.getIdPlayer());
             gameStage.getBoard().setValidCells(ValidCells);
             System.out.println("Valid cells : " + ValidCells);
         }
         int choice = (int) (line.charAt(1) - '1');
-        if (choice >= 0 && choice < gameStage.getPlayer1MovementCards().length && model.getIdPlayer() == 0 && cardType.equals("M") &&
-                gameStage.getPlayer1MovementCards()[choice] != null) {
+        if (choice >= 0 && choice < gameStage.getPlayer1MovementCards().length && model.getIdPlayer() == 0 && cardType.equals("M") && gameStage.getPlayer1MovementCards()[choice] != null) {
             direction = gameStage.getPlayer1MovementCards()[choice].getDirection();
             number = gameStage.getPlayer1MovementCards()[choice].getValue();
-        } else if (choice >= 0 && choice < gameStage.getPlayer2MovementCards().length && model.getIdPlayer() == 1 && cardType.equals("M") &&
-                gameStage.getPlayer2MovementCards()[choice] != null) {
-           direction = gameStage.getPlayer2MovementCards()[choice].getDirection();
-            number = gameStage.getPlayer2MovementCards()[choice].getValue();
-        } else if (choice >= 0 && choice < gameStage.getPlayer1MovementCards().length && model.getIdPlayer() == 0 && cardType.equals("H") &&
-                gameStage.getPlayer1MovementCards()[choice] != null && !ValidCells.isEmpty()  && gameStage.getPlayer1HeroCards().length > 0) {
-            direction = gameStage.getPlayer1MovementCards()[choice].getDirection();
-            number = gameStage.getPlayer1MovementCards()[choice].getValue();
-        }else if (choice >= 0 && choice < gameStage.getPlayer2MovementCards().length && model.getIdPlayer() == 1 && cardType.equals("H") &&
-                    gameStage.getPlayer2MovementCards()[choice] != null && !ValidCells.isEmpty() && gameStage.getPlayer2HeroCards().length > 0) {
+        } else if (choice >= 0 && choice < gameStage.getPlayer2MovementCards().length && model.getIdPlayer() == 1 && cardType.equals("M") && gameStage.getPlayer2MovementCards()[choice] != null) {
             direction = gameStage.getPlayer2MovementCards()[choice].getDirection();
             number = gameStage.getPlayer2MovementCards()[choice].getValue();
-<<<<<<< Updated upstream
-        }
-        else {
-=======
-        } else if (choice >= 0 && choice < gameStage.getPlayer1MovementCards().length && model.getIdPlayer() == 0 && cardType.equals("H") &&
-                gameStage.getPlayer1MovementCards()[choice] != null && !ValidCells.isEmpty() && gameStage.getPlayer1HeroCards().length > 0) {
+        } else if (choice >= 0 && choice < gameStage.getPlayer1MovementCards().length && model.getIdPlayer() == 0 && cardType.equals("H") && gameStage.getPlayer1MovementCards()[choice] != null && !ValidCells.isEmpty() && gameStage.getPlayer1HeroCards().length > 0) {
             direction = gameStage.getPlayer1MovementCards()[choice].getDirection();
             number = gameStage.getPlayer1MovementCards()[choice].getValue();
-        } else if (choice >= 0 && choice < gameStage.getPlayer2MovementCards().length && model.getIdPlayer() == 1 && cardType.equals("H") &&
-                gameStage.getPlayer2MovementCards()[choice] != null && !ValidCells.isEmpty() && gameStage.getPlayer2HeroCards().length > 0) {
+        } else if (choice >= 0 && choice < gameStage.getPlayer2MovementCards().length && model.getIdPlayer() == 1 && cardType.equals("H") && gameStage.getPlayer2MovementCards()[choice] != null && !ValidCells.isEmpty() && gameStage.getPlayer2HeroCards().length > 0) {
             direction = gameStage.getPlayer2MovementCards()[choice].getDirection();
             number = gameStage.getPlayer2MovementCards()[choice].getValue();
         } else {
->>>>>>> Stashed changes
             System.out.println("Invalid choice. Retry!");
             return false;
         }
@@ -273,11 +329,7 @@ public class RosesController extends Controller {
             play.start();
         }
         if (cardType.equals("H")) {
-<<<<<<< Updated upstream
-            if (model.getIdPlayer() == 0 && gameStage.getPlayer1HeroCards().length > 0){
-=======
             if (model.getIdPlayer() == 0 && gameStage.getPlayer1HeroCards().length > 0) {
->>>>>>> Stashed changes
                 ActionList actions = new ActionList(true);
                 ActionPlayer play = new ActionPlayer(model, this, actions);
                 RosesPawn pawnToSwap = (RosesPawn) gameStage.getBoard().getElement(row, col);
@@ -314,10 +366,6 @@ public class RosesController extends Controller {
         }
         if (model.getIdPlayer() == 0) {
             gameStage.removeElement(gameStage.getPlayer1MovementCards()[choice]);
-<<<<<<< Updated upstream
-            if (cardType.equals("H")){
-                gameStage.removeElement(gameStage.getPlayer1HeroCards()[gameStage.getPlayer1HeroCards().length - 1]);
-=======
             if (cardType.equals("H")) {
                 gameStage.removeElement(gameStage.getPlayer1HeroCards()[gameStage.getPlayer1HeroCards().length - 1]);
                 RosesCard[] tempHeroCards = gameStage.getPlayer1HeroCards();
@@ -325,7 +373,6 @@ public class RosesController extends Controller {
                 System.arraycopy(tempHeroCards, 0, copyOfPickPotCards, 0, copyOfPickPotCards.length);
                 tempHeroCards = copyOfPickPotCards;
                 gameStage.setPlayer1HeroCards(tempHeroCards);
->>>>>>> Stashed changes
             }
             gameStage.getDiscardCards()[nbMovements] = gameStage.getPlayer1MovementCards()[choice];
             gameStage.getPlayer1MovementCards()[choice].flip();
@@ -333,10 +380,6 @@ public class RosesController extends Controller {
             gameStage.getPlayer1MovementCards()[choice] = null;
         } else {
             gameStage.removeElement(gameStage.getPlayer2MovementCards()[choice]);
-<<<<<<< Updated upstream
-            if (cardType.equals("H")){
-                gameStage.removeElement(gameStage.getPlayer2HeroCards()[gameStage.getPlayer2HeroCards().length - 1]);
-=======
             if (cardType.equals("H")) {
                 gameStage.removeElement(gameStage.getPlayer2HeroCards()[gameStage.getPlayer2HeroCards().length - 1]);
                 RosesCard[] tempHeroCards = gameStage.getPlayer2HeroCards();
@@ -344,7 +387,6 @@ public class RosesController extends Controller {
                 System.arraycopy(tempHeroCards, 0, copyOfPickPotCards, 0, copyOfPickPotCards.length);
                 tempHeroCards = copyOfPickPotCards;
                 gameStage.setPlayer2HeroCards(tempHeroCards);
->>>>>>> Stashed changes
             }
             gameStage.getDiscardCards()[nbMovements] = gameStage.getPlayer2MovementCards()[choice];
             gameStage.getPlayer2MovementCards()[choice].flip();
@@ -354,9 +396,6 @@ public class RosesController extends Controller {
         nbMovements++;
         return true;
     }
-
-
-
 
 
     private void checkIfPlayerPlay(String cardType) {

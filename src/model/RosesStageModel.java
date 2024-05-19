@@ -76,11 +76,8 @@ public class RosesStageModel extends GameStageModel {
 
     private String[] movementLists = new String[]{"N-W", "N-E", "S-E", "W", "S", "S-W", "N", "E"};
     private int[] numberList = new int[]{3, 1, 2};
-<<<<<<< Updated upstream
-=======
 
     private boolean checked = true;
->>>>>>> Stashed changes
 
 
     // Uncomment next line if the example with a main container is used. see end of RosesStageFactory and RosesStageView
@@ -450,11 +447,7 @@ public class RosesStageModel extends GameStageModel {
             RosesPawn p = (RosesPawn) element;
             if (p.getColor() == 0) {
                 bluePawnsToPlay--;
-<<<<<<< Updated upstream
-            } else if (p.getColor() == 1){
-=======
             } else if (p.getColor() == 1) {
->>>>>>> Stashed changes
                 redPawnsToPlay--;
             }
             if ((bluePawnsToPlay == 0) && (redPawnsToPlay == 0)) {
