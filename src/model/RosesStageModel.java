@@ -2,7 +2,6 @@ package model;
 
 import boardifier.model.*;
 import boardifier.view.ConsoleColor;
-import boardifier.view.GameStageView;
 
 /**
  * RosesStageModel defines the model for the single stage in "King of roses". Indeed,
@@ -414,7 +413,7 @@ public class RosesStageModel extends GameStageModel {
 //    }
 
 
-    public void update(GameStageView gameStageView) {
+    public void update() {
         bluePawnsCounter.setText("Blue pawns left : " + ConsoleColor.BLUE + this.getBluePawnsToPlay() + ConsoleColor.RESET);
         bluePawnsCounter.setLocation(60, 9);
         this.setBluePawnsCounter(bluePawnsCounter);
@@ -424,8 +423,8 @@ public class RosesStageModel extends GameStageModel {
         cardPickCounter.setText("Cards left : " + ConsoleColor.GREY_BACKGROUND + this.pickCards.length + ConsoleColor.RESET);
         cardPickCounter.setLocation(16, 0);
         this.setCardPickCounter(cardPickCounter);
-        blueHeroCardsCounter.setText("" + ConsoleColor.GREY_BACKGROUND + this.player1HeroCards.length + ConsoleColor.RESET);
-        redHeroCardsCounter.setText("" + ConsoleColor.GREY_BACKGROUND + this.player2HeroCards.length + ConsoleColor.RESET);
+        blueHeroCardsCounter.setText(ConsoleColor.BLUE + this.player1HeroCards.length + ConsoleColor.RESET);
+        redHeroCardsCounter.setText(ConsoleColor.RED + this.player2HeroCards.length + ConsoleColor.RESET);
         this.setBlueHeroCardsCounter(blueHeroCardsCounter);
         this.setRedHeroCardsCounter(redHeroCardsCounter);
     }

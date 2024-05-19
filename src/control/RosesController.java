@@ -85,7 +85,7 @@ public class RosesController extends Controller {
         Player p = model.getCurrentPlayer();
         RosesStageModel stageModel = (RosesStageModel) model.getGameStage();
         stageModel.getPlayerName().setText(p.getName());
-        stageModel.update(view.getGameStageView());
+        stageModel.update();
     }
 
     private boolean analyseAndPlay(String line) {
@@ -110,123 +110,75 @@ public class RosesController extends Controller {
         int number = 0;
         cardType = String.valueOf(line.charAt(0));
         checkIfPlayerPlay(cardType);
-        if (cardType.equals("P") && model.getIdPlayer() == 0) {
-            for (int i = 0; i < gameStage.getPlayer1MovementCards().length; i++) {
-                if (gameStage.getPlayer1MovementCards()[i] == null && gameStage.getPickCards().length > 0) {
-                    gameStage.getPlayer1MovementCards()[i] = gameStage.getPickCards()[gameStage.getPickCards().length - 1];
-                    gameStage.getPlayer1MovementCards()[i].flip();
-                    gameStage.getMoovBluePot().addElement(gameStage.getPlayer1MovementCards()[i], i, 0);
-                    RosesCard[] tempPickCard = gameStage.getPickCards();
-                    RosesCard[] copyOfPickPotCards = new RosesCard[tempPickCard.length - 1];
-                    System.arraycopy(tempPickCard, 0, copyOfPickPotCards, 0, copyOfPickPotCards.length);
-                    tempPickCard = copyOfPickPotCards;
-                    gameStage.setPickCards(tempPickCard);
-                    if (gameStage.getPickCards().length > 0) {
-                        return true;
+        if (cardType.equals("P")){
+            if (model.getIdPlayer() == 0){
+                for (int i = 0; i < gameStage.getPlayer1MovementCards().length; i++) {
+                    if (gameStage.getPlayer1MovementCards()[i] == null && gameStage.getPickCards().length > 0) {
+                        gameStage.getPlayer1MovementCards()[i] = gameStage.getPickCards()[gameStage.getPickCards().length - 1];
+                        gameStage.getPlayer1MovementCards()[i].flip();
+                        gameStage.getMoovBluePot().addElement(gameStage.getPlayer1MovementCards()[i], i, 0);
+                        RosesCard[] tempPickCard = gameStage.getPickCards();
+                        RosesCard[] copyOfPickPotCards = new RosesCard[tempPickCard.length - 1];
+                        System.arraycopy(tempPickCard, 0, copyOfPickPotCards, 0, copyOfPickPotCards.length);
+                        tempPickCard = copyOfPickPotCards;
+                        gameStage.setPickCards(tempPickCard);
+                        if (gameStage.getPickCards().length > 0) {
+                            return true;
+                        }
                     }
                 }
-
-
-                if (gameStage.getPickCards().length == 0) {
-                    System.out.println("La pioche est vide.");
-
-                    // Compter le nombre de cartes non nulles dans la défausse
-                    int newLength = 0;
-                    for (int n = 0; n < gameStage.getDiscardCards().length; n++) {
-                        if (gameStage.getDiscardCards()[n] != null) {
-                            newLength++;
+            } else {
+                for (int i = 0; i < gameStage.getPlayer2MovementCards().length; i++) {
+                    if (gameStage.getPlayer2MovementCards()[i] == null && gameStage.getPickCards().length > 0) {
+                        gameStage.getPlayer2MovementCards()[i] = gameStage.getPickCards()[gameStage.getPickCards().length - 1];
+                        gameStage.getPlayer2MovementCards()[i].flip();
+                        gameStage.getMoovRedPot().addElement(gameStage.getPlayer2MovementCards()[i], i, 0);
+                        RosesCard[] tempPickCard = gameStage.getPickCards();
+                        RosesCard[] copyOfPickPotCards = new RosesCard[tempPickCard.length - 1];
+                        System.arraycopy(tempPickCard, 0, copyOfPickPotCards, 0, copyOfPickPotCards.length);
+                        tempPickCard = copyOfPickPotCards;
+                        gameStage.setPickCards(tempPickCard);
+                        if (gameStage.getPickCards().length > 0) {
+                            return true;
                         }
                     }
-
-                    // Transférer les cartes de la défausse à la pioche
-                    RosesCard[] tempPickCard = new RosesCard[newLength];
-                    int index = 0;
-                    for (int p = 0; p < gameStage.getDiscardCards().length; p++) {
-                        if (gameStage.getDiscardCards()[p] != null) {
-                            tempPickCard[index] = gameStage.getDiscardCards()[p];
-                            index++;
-                        }
-                        gameStage.getDiscardPot().removeElement(gameStage.getDiscardCards()[p]);
-
-                    }
-
-                    // Réinitialiser la défausse à zéro
-                    RosesCard[] newEmptyDiscard = new RosesCard[26];
-                    gameStage.setPickCards(tempPickCard);
-                    gameStage.setDiscardCards(newEmptyDiscard);
-
-                    // Mettre à jour la pioche avec les nouvelles cartes
-                    nbMovements = 0;
-                    return true;
                 }
             }
+            if (gameStage.getPickCards().length == 0) {
+                System.out.println("La pioche est vide.");
 
-
-
-
-
-        } else if (cardType.equals("P") && model.getIdPlayer() == 1) {
-            for (int i = 0; i < gameStage.getPlayer2MovementCards().length; i++) {
-                if (gameStage.getPlayer2MovementCards()[i] == null && gameStage.getPickCards().length > 0) {
-                    gameStage.getPlayer2MovementCards()[i] = gameStage.getPickCards()[gameStage.getPickCards().length - 1];
-                    gameStage.getPlayer2MovementCards()[i].flip();
-                    gameStage.getMoovRedPot().addElement(gameStage.getPlayer2MovementCards()[i], i, 0);
-                    RosesCard[] tempPickCard = gameStage.getPickCards();
-                    RosesCard[] copyOfPickPotCards = new RosesCard[tempPickCard.length - 1];
-                    System.arraycopy(tempPickCard, 0, copyOfPickPotCards, 0, copyOfPickPotCards.length);
-                    tempPickCard = copyOfPickPotCards;
-                    gameStage.setPickCards(tempPickCard);
-                    if (gameStage.getPickCards().length > 0) {
-                        return true;
+                // Compter le nombre de cartes non nulles dans la défausse
+                int newLength = 0;
+                for (int n = 0; n < gameStage.getDiscardCards().length; n++) {
+                    if (gameStage.getDiscardCards()[n] != null) {
+                        newLength++;
                     }
                 }
 
-
-                if (gameStage.getPickCards().length == 0) {
-                    System.out.println("La pioche est vide.");
-
-                    // Compter le nombre de cartes non nulles dans la défausse
-                    int newLength = 0;
-                    for (int n = 0; n < gameStage.getDiscardCards().length; n++) {
-                        if (gameStage.getDiscardCards()[n] != null) {
-                            newLength++;
-                        }
+                // Transférer les cartes de la défausse à la pioche
+                RosesCard[] tempPickCard = new RosesCard[newLength];
+                int index = 0;
+                for (int p = 0; p < gameStage.getDiscardCards().length; p++) {
+                    if (gameStage.getDiscardCards()[p] != null) {
+                        tempPickCard[index] = gameStage.getDiscardCards()[p];
+                        index++;
                     }
+                    gameStage.getDiscardPot().removeElement(gameStage.getDiscardCards()[p]);
 
-                    // Transférer les cartes de la défausse à la pioche
-                    RosesCard[] tempPickCard = new RosesCard[newLength];
-                    int index = 0;
-                    for (int p = 0; p < gameStage.getDiscardCards().length; p++) {
-                        if (gameStage.getDiscardCards()[p] != null) {
-                            tempPickCard[index] = gameStage.getDiscardCards()[p];
-                            index++;
-                        }
-                        gameStage.getDiscardPot().removeElement(gameStage.getDiscardCards()[p]);
-                    }
-
-                    // Réinitialiser la défausse à zéro
-                    RosesCard[] newEmptyDiscard = new RosesCard[26];
-                    gameStage.setDiscardCards(newEmptyDiscard);
-
-                    // Mettre à jour la pioche avec les nouvelles cartes
-                    gameStage.setPickCards(tempPickCard);
-                    nbMovements = 0;
-                    return true;
                 }
+                // Réinitialiser la défausse à zéro
+                RosesCard[] newEmptyDiscard = new RosesCard[26];
+                gameStage.setPickCards(tempPickCard);
+                gameStage.setDiscardCards(newEmptyDiscard);
+
+                // Mettre à jour la pioche avec les nouvelles cartes
+                nbMovements = 0;
+                return true;
             }
-
-
-
-
-
-        }
-
-
-        if (cardType.equals("P")) { // si il est passé par les conditions et qu'il a pas return true, il est impossible de piocher
-            // car aucun emplacement nul
             System.out.println("Invalid choice : u cant pick a card. Retry ! ");
             return false;
         }
+
         List<Point> ValidCells = null;
         if (cardType.equals("H")) {
             ValidCells = gameStage.getBoard().computeValidCells(cardType, model.getIdPlayer());
@@ -336,7 +288,7 @@ public class RosesController extends Controller {
                 ActionList actions = new ActionList(true);
                 ActionPlayer play = new ActionPlayer(model, this, actions);
                 RosesPawn pawnToSwap = (RosesPawn) gameStage.getBoard().getElement(row, col);
-                if (pawnToSwap != null) {
+                if (pawnToSwap != null && pawnToSwap.getColor() == PAWN_RED) {
                     pawnToSwap.setColor(PAWN_BLUE);
                     lastRow = row;
                     lastCol = col;
@@ -344,14 +296,14 @@ public class RosesController extends Controller {
                     System.out.println(pawnToSwap.getColor());
                     play.start();
                 } else {
-                    System.out.println("Invalid move. No pawn at the specified location.");
+                    System.out.println("Invalid move. No pawn at the specified location or the pawn is already of your color.");
                     return false;
                 }
             } else if (model.getIdPlayer() == 1 && gameStage.getPlayer2HeroCards().length > 0) {
                 ActionList actions = new ActionList(true);
                 ActionPlayer play = new ActionPlayer(model, this, actions);
                 RosesPawn pawnToSwap = (RosesPawn) gameStage.getBoard().getElement(row, col);
-                if (pawnToSwap != null) {
+                if (pawnToSwap != null && pawnToSwap.getColor() == PAWN_BLUE){
                     pawnToSwap.setColor(PAWN_RED);
                     lastRow = row;
                     lastCol = col;
@@ -359,7 +311,7 @@ public class RosesController extends Controller {
                     System.out.println(pawnToSwap.getColor());
                     play.start();
                 } else {
-                    System.out.println("Invalid move. No pawn at the specified location.");
+                    System.out.println("Invalid move. No pawn at the specified location or the pawn is already of your color.");
                     return false;
                 }
             } else {
