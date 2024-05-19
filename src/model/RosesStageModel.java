@@ -3,7 +3,6 @@ package model;
 import boardifier.model.*;
 import boardifier.view.ConsoleColor;
 import boardifier.view.GameStageView;
-import boardifier.view.TextLook;
 
 /**
  * RosesStageModel defines the model for the single stage in "King of roses". Indeed,
@@ -50,7 +49,7 @@ public class RosesStageModel extends GameStageModel {
 
     private RosesPawn[] bluePawns;
     private RosesPawn[] redPawns;
-    private RosesPawn[] yellowPawns;
+    private RosesPawn crownPawn;
 
     private RosesCard[] pickCards;
     private RosesCard[] discardCards = new RosesCard[26];
@@ -269,15 +268,13 @@ public class RosesStageModel extends GameStageModel {
         return bluePawns;
     }
 
-    public RosesPawn[] getYellowPawns() {
-        return this.yellowPawns;
+    public RosesPawn getCrownPawn() {
+        return this.crownPawn;
     }
 
-    public void setYellowPawns(RosesPawn[] yellowPawns) {
-        this.yellowPawns = yellowPawns;
-        for (int i = 0; i < yellowPawns.length; i++) {
-            addElement(yellowPawns[i]);
-        }
+    public void setCrownPawn(RosesPawn crownPawn) {
+        this.crownPawn = crownPawn;
+        addElement(crownPawn);
     }
 
     public void setBluePawns(RosesPawn[] bluePawns) {

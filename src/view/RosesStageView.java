@@ -2,7 +2,6 @@ package view;
 
 import boardifier.control.Logger;
 import boardifier.model.GameStageModel;
-import boardifier.model.TextElement;
 import boardifier.view.ClassicBoardLook;
 import boardifier.view.GameStageView;
 
@@ -77,7 +76,7 @@ public class RosesStageView extends GameStageView {
         addLook(new RosesCardPotLook(3, 2, model.getMoovRedPot()));
         addLook(new RosesCardPotLook(3, 2, model.getMoovBluePot()));
 
-        addLook(new RosesPawnLook(model.getYellowPawns()[0]));
+        addLook(new RosesPawnLook(model.getCrownPawn()));
 
 
 

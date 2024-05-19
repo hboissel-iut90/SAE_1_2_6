@@ -178,12 +178,8 @@ public class RosesStageFactory extends StageElementsFactory {
         // assign the black pawns to the game stage model
         stageModel.setRedPawns(redPawns);
 
-        RosesPawn[] yellowPawns = new RosesPawn[1];
-        for(int i=0;i<1;i++) {
-            yellowPawns[i] = new RosesPawn("C", RosesPawn.PAWN_YELLOW, stageModel);
-
-        }
-        stageModel.setYellowPawns(yellowPawns);
+        RosesPawn crownPawn = new RosesPawn("C", RosesPawn.PAWN_YELLOW, stageModel);
+        stageModel.setCrownPawn(crownPawn);
 
         // finally put the pawns to their pot
         for (int i=0;i<26;i++) {
@@ -232,7 +228,7 @@ public class RosesStageFactory extends StageElementsFactory {
 
 
 
-        board.addElement(yellowPawns[0], 4, 4);
+        board.addElement(crownPawn, 4, 4);
 
 
 
