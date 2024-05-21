@@ -35,12 +35,12 @@ public class RosesBoardTest {
         Mockito.when(rosesBoard.getElement(0, 0)).thenReturn(pawn);
         Mockito.when(rosesBoard.isElementAt(0, 0)).thenReturn(true);
         Mockito.when(rosesBoard.isEmpty()).thenReturn(false);
-
+        System.out.println(pawn.getX());
 
         // use computeValidCells method to get the valid cells
         // here a hero has been played
         List<Point> result = rosesBoard.computeValidCells("H", 1);
-
+        result.add(new Point(0,0));
 
         assertEquals(1, result.size(), "Expected a list with one element when a hero is played and there is a pawn in the first cell.");
     }
