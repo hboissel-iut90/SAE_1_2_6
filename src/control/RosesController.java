@@ -67,11 +67,18 @@ public class RosesController extends Controller {
                 System.out.print(p.getName() + " > ");
                 try {
                     String line = consoleIn.readLine();
+                    if (line == null || line.trim().isEmpty()) {
+                        System.out.println("wrong instructions");
+                        continue;
+                    }
                     if (line.length() == 2 || String.valueOf(line.charAt(0)).equals("P")) {
                         ok = analyseAndPlay(line);
                     }
                     if (!ok) {
                         System.out.println("incorrect instruction. retry !");
+                        RosesStageModel stageModel = (RosesStageModel) model.getGameStage();
+
+
                     }
                 } catch (IOException e) {
                 }
@@ -104,7 +111,6 @@ public class RosesController extends Controller {
         RosesStageModel gameStage = (RosesStageModel) model.getGameStage();
         RosesStageView viewStage = (RosesStageView) view.getGameStageView();
         int pawnIndex = 0;
-        System.out.println("derniere colonne : " + col + ", derniere ligne : " + row);
         String direction = "";
         String cardType = "";
         int number = 0;
@@ -117,11 +123,7 @@ public class RosesController extends Controller {
                         gameStage.getPlayer1MovementCards()[i] = gameStage.getPickCards()[gameStage.getPickCards().length - 1];
                         gameStage.getPlayer1MovementCards()[i].flip();
                         gameStage.getMoovBluePot().addElement(gameStage.getPlayer1MovementCards()[i], i, 0);
-                        RosesCard[] tempPickCard = gameStage.getPickCards();
-                        RosesCard[] copyOfPickPotCards = new RosesCard[tempPickCard.length - 1];
-                        System.arraycopy(tempPickCard, 0, copyOfPickPotCards, 0, copyOfPickPotCards.length);
-                        tempPickCard = copyOfPickPotCards;
-                        gameStage.setPickCards(tempPickCard);
+                        setTempPickCards(gameStage);
                         if (gameStage.getPickCards().length > 0) {
                             return true;
                         }
@@ -133,11 +135,7 @@ public class RosesController extends Controller {
                         gameStage.getPlayer2MovementCards()[i] = gameStage.getPickCards()[gameStage.getPickCards().length - 1];
                         gameStage.getPlayer2MovementCards()[i].flip();
                         gameStage.getMoovRedPot().addElement(gameStage.getPlayer2MovementCards()[i], i, 0);
-                        RosesCard[] tempPickCard = gameStage.getPickCards();
-                        RosesCard[] copyOfPickPotCards = new RosesCard[tempPickCard.length - 1];
-                        System.arraycopy(tempPickCard, 0, copyOfPickPotCards, 0, copyOfPickPotCards.length);
-                        tempPickCard = copyOfPickPotCards;
-                        gameStage.setPickCards(tempPickCard);
+                        setTempPickCards(gameStage);
                         if (gameStage.getPickCards().length > 0) {
                             return true;
                         }
@@ -163,15 +161,18 @@ public class RosesController extends Controller {
                         tempPickCard[index] = gameStage.getDiscardCards()[p];
                         index++;
                     }
-                    gameStage.getDiscardPot().removeElement(gameStage.getDiscardCards()[p]);
-
                 }
+
                 // Réinitialiser la défausse à zéro
                 RosesCard[] newEmptyDiscard = new RosesCard[26];
                 gameStage.setPickCards(tempPickCard);
                 gameStage.setDiscardCards(newEmptyDiscard);
 
+
+
+
                 // Mettre à jour la pioche avec les nouvelles cartes
+                gameStage.computePartyResult();
                 nbMovements = 0;
                 return true;
             }
@@ -449,16 +450,22 @@ public class RosesController extends Controller {
                         return;
                     }
                 } else {
-                    System.out.println("apayian");
                     tempCheck = false;
                 }
             }
             gameStage.setChecked(tempCheck);
-            System.out.println("tempcheck : " + gameStage.getChecked());
         }
 
         lastRow = row;
         lastCol = col;
+    }
+
+    public void setTempPickCards(RosesStageModel stageModel) {
+        RosesCard[] tempPickCard = stageModel.getPickCards();
+        RosesCard[] copyOfPickPotCards = new RosesCard[tempPickCard.length - 1];
+        System.arraycopy(tempPickCard, 0, copyOfPickPotCards, 0, copyOfPickPotCards.length);
+        tempPickCard = copyOfPickPotCards;
+        stageModel.setPickCards(tempPickCard);
     }
 
 }

@@ -3,6 +3,8 @@ package model;
 import boardifier.model.*;
 import boardifier.view.ConsoleColor;
 
+import java.util.Stack;
+
 /**
  * RosesStageModel defines the model for the single stage in "King of roses". Indeed,
  * there are no levels in this game: a party starts and when it's done, the game is also done.
@@ -452,64 +454,81 @@ public class RosesStageModel extends GameStageModel {
         });
     }
 
-    private void computePartyResult() {
-        System.out.println("neuille supreme a terminé le jeu");
+    public void computePartyResult() {
+        System.out.println("La partie est terminée");
         int idWinner = -1;
-        // get the empty cell, which should be in 2D at [0,0], [0,2], [1,1], [2,0] or [2,2]
-        // i.e. or in 1D at index 0, 2, 4, 6 or 8
-        int i = 0;
         int nbBlue = 0;
         int nbRed = 0;
-        int countBlue = 0;
-        int countRed = 0;
-        RosesPawn p = null;
-        int row, col;
-//        for (i = 0; i < 9; i += 2) {
-//            if (board.isEmptyAt(i / 3, i % 3)) break;
-//        }
-//        // get the 4 adjacent cells (if they exist) starting by the upper one
-//        row = (i / 3) - 1;
-//        col = i % 3;
-//        for (int j = 0; j < 4; j++) {
-//            // skip invalid cells
-//            if ((row >= 0) && (row <= 2) && (col >= 0) && (col <= 2)) {
-//                p = (RosesPawn) (board.getElement(row, col));
-//                if (p.getColor() == RosesPawn.PAWN_BLUE) {
-//                    nbBlue++;
-//                    countBlue += p.getNumber();
-//                } else {
-//                    nbRed++;
-//                    countRed += p.getNumber();
-//                }
-//            }
-//            // change row & col to set them at the correct value for the next iteration
-//            if ((j == 0) || (j == 2)) {
-//                row++;
-//                col--;
-//            } else if (j == 1) {
-//                col += 2;
-//            }
-//
-//        }
-//
-//        // decide whose winning
-//        if (nbBlue < nbRed) {
-//            idWinner = 0;
-//        } else if (nbBlue > nbRed) {
-//            idWinner = 1;
-//        } else {
-            if (model.getIdPlayer() == 0) {
-                idWinner = 0;
-            } else {
-                idWinner = 1;
-            }
+        int blueScore = 0, redScore = 0;
+        getBoard().removeElement(crownPawn);
 
-        System.out.println("nb blue: " + nbBlue + ", nb red: " + nbRed + ", count blue: " + countBlue + ", count red: " + countRed + ", winner is player " + idWinner);
-        // set the winner
+        boolean[][] visited = new boolean[9][9];
+
+        for (int n = 0; n < 9; n++) {
+            for (int m = 0; m < 9; m++) {
+                if (getBoard().isElementAt(n, m) && !visited[n][m]) {
+                    RosesPawn p = (RosesPawn) (getBoard().getElement(n, m));
+                    if (p.getColor() == RosesPawn.PAWN_BLUE) {
+                        int size = countZoneSize(n, m, RosesPawn.PAWN_BLUE, visited);
+                        blueScore += size * size;
+                        nbBlue += size;
+                    } else if (p.getColor() == RosesPawn.PAWN_RED) {
+                        int size = countZoneSize(n, m, RosesPawn.PAWN_RED, visited);
+                        redScore += size * size;
+                        nbRed += size;
+
+                    }
+                }
+            }
+        }
+
+        if (blueScore > redScore) {
+            idWinner = 0;
+        } else if (redScore > blueScore) {
+            idWinner = 1;
+        } else {
+            if (nbBlue > nbRed) {
+                idWinner = 0;
+            } else if (nbRed > nbBlue) {
+                idWinner = 1;
+            } else {
+                idWinner = -1;  // Partie nulle
+            }
+        }
+
+        System.out.println(ConsoleColor.BLUE + "[Player 1]" + ConsoleColor.RESET + " Blue pawns on the field : " + nbBlue);
+        System.out.println(ConsoleColor.RED + "[Player 2]" + ConsoleColor.RESET + " Red pawns on the field : " + nbRed);
+        System.out.println(ConsoleColor.BLUE + "[Player 1]" + ConsoleColor.RESET + " Blue score : " + blueScore);
+        System.out.println(ConsoleColor.RED + "[Player 2]" + ConsoleColor.RESET + " Blue score : " + redScore);
         model.setIdWinner(idWinner);
-        // stop de the game
         model.stopStage();
     }
+
+    private int countZoneSize(int n, int m, int color, boolean[][] visited) {
+        int size = 0;
+        Stack<int[]> stack = new Stack<>();
+        stack.push(new int[]{n, m});
+        visited[n][m] = true;
+
+        while (!stack.isEmpty()) {
+            int[] pos = stack.pop();
+            size++;
+            for (int[] dir : new int[][]{{0, 1}, {1, 0}, {0, -1}, {-1, 0}}) {
+                int row = pos[0] + dir[0];
+                int col = pos[1] + dir[1];
+                if (row >= 0 && row < 9 && col >= 0 && col < 9 && !visited[row][col] && getBoard().getElement(row, col) != null) {
+                    RosesPawn q = (RosesPawn) (getBoard().getElement(row, col));
+                    if (q.getColor() == color) {
+                        stack.push(new int[]{row, col});
+                        visited[row][col] = true;
+                    }
+                }
+            }
+        }
+
+        return size;
+    }
+
 
     @Override
     public StageElementsFactory getDefaultElementFactory() {

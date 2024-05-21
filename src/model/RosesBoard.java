@@ -38,8 +38,6 @@ public class RosesBoard extends ContainerElement {
         if (isEmpty() && string.equals("H")) {
             return lst;
         }
-        // check for each cell if there is a pawn of the right color
-        // if there is, add it to the valid list
         if (string.equals("H")) {
             for (int i = 0; i < 9; i++) {
                 for (int j = 0; j < 9; j++) {
