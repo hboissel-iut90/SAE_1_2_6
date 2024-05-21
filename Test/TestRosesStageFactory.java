@@ -4,4 +4,5 @@ public class TestRosesStageFactory {
 
     @Test
     public void testSetUp() {
+    }
 }
