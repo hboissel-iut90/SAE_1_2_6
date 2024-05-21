@@ -264,7 +264,7 @@ public class RosesController extends Controller {
         }
         GameElement pawn = pot.getElement(pawnIndex, 0);
         GameElement crownPawn = gameStage.getCrownPawn();
-        gameStage.getBoard().moveElement(crownPawn, row, col);
+
 
         // compute valid cells for the chosen pawn
         if (cardType.equals("M")) {
@@ -350,6 +350,7 @@ public class RosesController extends Controller {
             gameStage.getPlayer2MovementCards()[choice] = null;
         }
         nbMovements++;
+        gameStage.getBoard().moveElement(crownPawn, row, col);
         return true;
     }
 
