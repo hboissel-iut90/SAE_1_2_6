@@ -1,0 +1,76 @@
+
+n	java:S117·"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(­óÓÉ8³Ê¼ƒú1
+m
+java:S37768"RRefactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.(ˆÓŒÅùÿÿÿÿ
+T
+java:S1854O">Remove this useless assignment to local variable "stageModel".(¼…€Ù
+E	java:S106<"+Replace this use of System.out by a logger.(²ÊÈşÿÿÿÿ
+E	java:S106C"+Replace this use of System.out by a logger.(İÃøÿÿÿÿ
+@	java:S106G"+Replace this use of System.out by a logger.(‹Á²ğ
+@	java:S106N"+Replace this use of System.out by a logger.(¹ö‘Ô
+E
+java:S1481O"/Remove this unused "stageModel" local variable.(¼…€Ù
+>	java:S108S")Either remove or fill this block of code.(ï­£Ä
+U
+java:S1161Y":Add the "@Override" annotation above this method signature(–Ñ•ûÿÿÿÿ
+n
+java:S3776b"RRefactor this method to reduce its Cognitive Complexity from 94 to the 15 allowed.(µè8“Ï¼ƒú1
+Z
+java:S1854p"=Remove this useless assignment to local variable "viewStage".(§º¦—8ˆºƒú1
+T
+java:S1854ğ"7Remove this useless assignment to local variable "row".(èË„[8–Ï¼ƒú1
+U
+java:S1854ï"7Remove this useless assignment to local variable "col".(½Õê8–Ï¼ƒú1
+T
+java:S1854õ"7Remove this useless assignment to local variable "row".(èË„[8–Ï¼ƒú1
+U
+java:S1854ô"7Remove this useless assignment to local variable "col".(½Õê8—Ï¼ƒú1
+T
+java:S1854†"7Remove this useless assignment to local variable "row".(èË„[8—Ï¼ƒú1
+U
+java:S1854…"7Remove this useless assignment to local variable "col".(½Õê8—Ï¼ƒú1
+T
+java:S1854“"7Remove this useless assignment to local variable "row".(èË„[8—Ï¼ƒú1
+U
+java:S1854’"7Remove this useless assignment to local variable "col".(½Õê8—Ï¼ƒú1
+>
+java:S1659e"!Declare "col" on a separate line.(ãÜòœ8‰ºƒú1
+K
+java:S1481p".Remove this unused "viewStage" local variable.(§º¦—8Šºƒú1
+M	java:S106’"+Replace this use of System.out by a logger.(Û®„ıÿÿÿÿ8Šºƒú1
+M	java:S106³"+Replace this use of System.out by a logger.(Ñ†ı³øÿÿÿÿ8ºƒú1
+H	java:S106»"+Replace this use of System.out by a logger.(šÙ¥­8ºƒú1
+I
+java:S1905½"&Remove this unnecessary cast to "int".( ÀŒİıÿÿÿÿ8¨Ï¼ƒú1
+k
+java:S1871Ç"MThis branch's code block is the same as the block for the branch on line 193.(Íß†ç8¨Ï¼ƒú1
+j
+java:S1871Ä"MThis branch's code block is the same as the block for the branch on line 190.(ÙÄµ\8©Ï¼ƒú1
+H	java:S106Ë"+Replace this use of System.out by a logger.(ˆ¸Ş€8³Ï¼ƒú1
+M	java:S106ú"+Replace this use of System.out by a logger.(Ãâ¸‚üÿÿÿÿ8¶Ï¼ƒú1
+H	java:S106©"+Replace this use of System.out by a logger.(Û›ÿÏ8ÀÏ¼ƒú1
+H	java:S106¬"+Replace this use of System.out by a logger.(¸Àî¸8ÁÏ¼ƒú1
+H	java:S106¸"+Replace this use of System.out by a logger.(Û›ÿÏ8ÄÏ¼ƒú1
+H	java:S106»"+Replace this use of System.out by a logger.(¸Àî¸8ÅÏ¼ƒú1
+M	java:S106¿"+Replace this use of System.out by a logger.(ÒáíÜùÿÿÿÿ8ÆÏ¼ƒú1
+n
+java:S3776æ"RRefactor this method to reduce its Cognitive Complexity from 36 to the 15 allowed.(ç´Ã¸ıÿÿÿÿ
+[
+java:S1854ñ"=Remove this useless assignment to local variable "viewStage".(§º¦—8ÒÏ¼ƒú1
+?
+java:S1659ç"!Declare "col" on a separate line.(ãÜòœ8ÓÏ¼ƒú1
+L
+java:S1481ñ".Remove this unused "viewStage" local variable.(§º¦—8ÕÏ¼ƒú1
+H	java:S106ò"+Replace this use of System.out by a logger.(ØË¼˜8ÕÏ¼ƒú1
+i
+java:S1871ƒ"MThis branch's code block is the same as the block for the branch on line 383.(­ÕÛ¨üÿÿÿÿ
+d
+java:S1871¿"MThis branch's code block is the same as the block for the branch on line 442.(±üƒ“
+G	java:S106¼"+Replace this use of System.out by a logger.(‹¿n8ßÏ¼ƒú1
+G	java:S106Á"+Replace this use of System.out by a logger.(‹¿n8áÏ¼ƒú1
+J
+java:S1128"/Remove this unused import 'java.sql.SQLOutput'.(ê¤òÃùÿÿÿÿ
+ã
+java:S6541b"ÆA "Brain Method" was detected. Refactor it to reduce at least one of the following metrics: LOC from 234 to 64, Complexity from 72 to 14, Nesting Level from 5 to 2, Number of Variables from 34 to 6.(µè8ğÏ¼ƒú1
+á
+java:S6541æ"ÄA "Brain Method" was detected. Refactor it to reduce at least one of the following metrics: LOC from 96 to 64, Complexity from 33 to 14, Nesting Level from 4 to 2, Number of Variables from 9 to 6.(ç´Ã¸ıÿÿÿÿ

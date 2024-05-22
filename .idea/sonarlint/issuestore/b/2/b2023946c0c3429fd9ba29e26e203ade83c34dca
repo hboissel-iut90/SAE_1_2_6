@@ -1,0 +1,19 @@
+
+^
+java:S1192T"HDefine a constant instead of duplicating this literal " called" 3 times.(³ƒ°
+r	java:S127]"XRefactor the code in order to not assign to this loop counter from within the loop body.(ãŠŒüÿÿÿÿ
+r	java:S127c"XRefactor the code in order to not assign to this loop counter from within the loop body.(ãŠŒüÿÿÿÿ
+r	java:S127i"XRefactor the code in order to not assign to this loop counter from within the loop body.(ãŠŒüÿÿÿÿ
+s	java:S127‰"XRefactor the code in order to not assign to this loop counter from within the loop body.(ãŠŒüÿÿÿÿ
+s	java:S127"XRefactor the code in order to not assign to this loop counter from within the loop body.(ãŠŒüÿÿÿÿ
+s	java:S127‘"XRefactor the code in order to not assign to this loop counter from within the loop body.(ãŠŒüÿÿÿÿ
+s	java:S127•"XRefactor the code in order to not assign to this loop counter from within the loop body.(ãŠŒüÿÿÿÿ
+T
+java:S5993"9Change the visibility of this constructor to "protected".(ğ“êúÿÿÿÿ
+G
+java:S1602x",Remove useless curly braces around statement(Ô¨â¶ÿÿÿÿÿ
+W	java:S125¯"<This block of commented-out lines of code should be removed.(Ğ§”ºÿÿÿÿÿ
+F	java:S106±"+Replace this use of System.out by a logger.(ïÚµ€ÿÿÿÿÿ
+F	java:S106³"+Replace this use of System.out by a logger.(†¥á±øÿÿÿÿ
+K
+java:S1068"5Remove this unused "stopProcessEvents" private field.(¼á¬ï

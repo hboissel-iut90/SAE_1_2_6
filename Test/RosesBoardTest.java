@@ -1,14 +1,12 @@
 import boardifier.model.GameStageModel;
+import control.RosesController;
 import model.RosesBoard;
-import model.RosesCard;
 import model.RosesPawn;
-import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -17,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class RosesBoardTest {
 
     @Test
-    public void testComputeValidCells_EmptyGridHString() {
+    public void testComputeValidCells_EmptyGridHPawn() {
         RosesBoard rosesBoard = Mockito.mock(RosesBoard.class);
         Mockito.when(rosesBoard.isEmpty()).thenReturn(true);
 
@@ -27,22 +25,18 @@ public class RosesBoardTest {
     }
 
     @Test
-    public void testComputeValidCells_hPawnFirstCell() {
+    public void testComputeValidCells_FullHPawn() {
+        //RosesController rosesController = Mockito.mock(RosesController.class);
         RosesBoard rosesBoard = Mockito.mock(RosesBoard.class);
-        // Create a player with id 0
-        RosesPawn pawn = new RosesPawn(0, Mockito.mock(GameStageModel.class));
-        // Create a list of pawns
-        Mockito.when(rosesBoard.getElement(0, 0)).thenReturn(pawn);
-        Mockito.when(rosesBoard.isElementAt(0, 0)).thenReturn(true);
-        Mockito.when(rosesBoard.isEmpty()).thenReturn(false);
-        System.out.println(pawn.getX());
 
+        // Create a player with id 0
+        // Create a list of pawns
         // use computeValidCells method to get the valid cells
         // here a hero has been played
-        List<Point> result = rosesBoard.computeValidCells("H", 1);
-        result.add(new Point(0,0));
 
-        assertEquals(1, result.size(), "Expected a list with one element when a hero is played and there is a pawn in the first cell.");
+        assertEquals(0.0, rosesBoard.computeValidCells("H", 1));
+
+
     }
 
 

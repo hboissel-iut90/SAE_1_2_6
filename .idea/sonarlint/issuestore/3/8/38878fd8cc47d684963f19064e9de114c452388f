@@ -1,0 +1,21 @@
+
+p
+java:S1104"UMake CARD_BLUE a static final constant or non-public and provide accessors if needed.(¶µ›Ëşÿÿÿÿ
+j
+java:S1104"TMake CARD_RED a static final constant or non-public and provide accessors if needed.(Ñµ
+l
+java:S1104"VMake CARD_WHITE a static final constant or non-public and provide accessors if needed.(Î°«
+J
+java:S1444"/Make this "public static CARD_BLUE" field final(¶µ›Ëşÿÿÿÿ
+D
+java:S1444".Make this "public static CARD_RED" field final(Ñµ
+F
+java:S1444"0Make this "public static CARD_WHITE" field final(Î°«
+o
+java:S3008"TRename this field "CARD_BLUE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¶µ›Ëşÿÿÿÿ
+i
+java:S3008"SRename this field "CARD_RED" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ñµ
+k
+java:S3008"URename this field "CARD_WHITE" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Î°«
+Q
+java:S1128";Remove this unused import 'javax.lang.model.type.NullType'.(÷³’Ò
