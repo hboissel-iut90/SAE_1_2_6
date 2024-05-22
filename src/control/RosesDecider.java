@@ -69,11 +69,12 @@ public class RosesDecider extends Decider {
                             redPositions[redIndex][0] = i;
                             redPositions[redIndex][1] = j;
                             redIndex++;
-                        } else if (tempPawn.getColor() == RosesPawn.PAWN_YELLOW) {
+                        }
+                    } if (board.getElement(i, j, 1) != null) { // prend la position du pion couronne car parfois il n'est pas detecté a cause du pion bleu au dessus
                             row = i;
                             col = j;
                             System.out.println("neuille");
-                        }
+
                     }
                 }
             }
@@ -154,9 +155,11 @@ public class RosesDecider extends Decider {
                         stage.getPlayer2MovementCards()[i].flip();
                         stage.getMoovRedPot().addElement(stage.getPlayer2MovementCards()[i], i, 0);
                         setTempPickCards(stage);
-
+                        actions.setDoEndOfTurn(true);
+                        return actions;
                     }
                 }
+
         }
         return null;
     }
