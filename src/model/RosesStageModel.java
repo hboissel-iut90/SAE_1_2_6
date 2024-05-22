@@ -74,6 +74,8 @@ public class RosesStageModel extends GameStageModel {
     private TextElement instructions2;
     private TextElement instructions3;
 
+    private int nbMovements = 0;
+
     private String[] movementLists = new String[]{"N-W", "N-E", "S-E", "W", "S", "S-W", "N", "E"};
     private int[] numberList = new int[]{3, 1, 2};
 
@@ -110,6 +112,14 @@ public class RosesStageModel extends GameStageModel {
     public void setBoard(RosesBoard board) {
         this.board = board;
         addContainer(board);
+    }
+
+    public void setNbMovements(int nbMovements) {
+        this.nbMovements = nbMovements;
+    }
+
+    public int getNbMovements() {
+        return this.nbMovements;
     }
 
     public String[] getMovementsList() {
@@ -499,7 +509,7 @@ public class RosesStageModel extends GameStageModel {
         System.out.println(ConsoleColor.BLUE + "[Player 1]" + ConsoleColor.RESET + " Blue pawns on the field : " + nbBlue);
         System.out.println(ConsoleColor.RED + "[Player 2]" + ConsoleColor.RESET + " Red pawns on the field : " + nbRed);
         System.out.println(ConsoleColor.BLUE + "[Player 1]" + ConsoleColor.RESET + " Blue score : " + blueScore);
-        System.out.println(ConsoleColor.RED + "[Player 2]" + ConsoleColor.RESET + " Blue score : " + redScore);
+        System.out.println(ConsoleColor.RED + "[Player 2]" + ConsoleColor.RESET + " Red score : " + redScore);
         model.setIdWinner(idWinner);
         model.stopStage();
     }

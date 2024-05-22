@@ -46,7 +46,7 @@ public class RosesDecider extends Decider {
         ActionList actions = new ActionList();
         int[][] redPositions = new int[26][2];
         int redIndex = 0;
-        int nbMovements = 0;
+        int nbMovements = stage.getNbMovements();
         RosesPawn tempPawn = null;
         if (model.getIdPlayer() == RosesPawn.PAWN_BLUE) {
             pawnPot = stage.getBluePot();
@@ -164,11 +164,11 @@ public class RosesDecider extends Decider {
         return null;
     }
 
-
+// A FAIRE = SI BOARD EMPTY, CARTE HEROS, REMETTRE LA PIOCHE PLEINE SI YA PLUS R PDNT LE TOUR DE LORDI
 
     private static ActionList doAction(int nbMovements, Model model, GameElement pawn, String name, int rowDest, int colDest, int choice) {
         RosesStageModel stage = (RosesStageModel) model.getGameStage();
-        pawn = stage.getRedPot().getElement(0, 0, nbMovements);
+        pawn = stage.getRedPot().getElement(0, 0);
         ActionList actions = ActionFactory.generatePutInContainer(model, pawn, name, rowDest, colDest);
         stage.removeElement(stage.getPlayer2MovementCards()[choice]);
         stage.getDiscardCards()[nbMovements] = stage.getPlayer2MovementCards()[choice];
@@ -177,6 +177,7 @@ public class RosesDecider extends Decider {
         stage.getPlayer2MovementCards()[choice] = null;
         stage.getBoard().moveElement(stage.getCrownPawn(), rowDest, colDest);
         nbMovements++;
+        stage.setNbMovements(nbMovements);
         actions.setDoEndOfTurn(true);
         return actions;
     }
