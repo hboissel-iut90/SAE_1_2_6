@@ -30,6 +30,8 @@ public class RosesController extends Controller {
     int lastRow = 0;
     int lastCol = 0;
 
+    boolean isTheEndOfTheStage = false;
+
 
     int nbMovements = 0;
 
@@ -62,8 +64,10 @@ public class RosesController extends Controller {
             ActionPlayer play = new ActionPlayer(model, this, decider, null);
             play.start();
         } else {
+            checkIfPlayerPlay();
+
             boolean ok = false;
-            while (!ok) {
+            while (!ok && !isTheEndOfTheStage) {
                 System.out.println("Player playing");
                 System.out.print(p.getName() + " > ");
                 try {
@@ -119,9 +123,8 @@ public class RosesController extends Controller {
         String cardType = "";
         int number = 0;
         cardType = String.valueOf(line.charAt(0));
-        checkIfPlayerPlay(cardType, row, col);
-        if (cardType.equals("P")){
-            if (model.getIdPlayer() == 0){
+        if (cardType.equals("P")) {
+            if (model.getIdPlayer() == 0) {
                 for (int i = 0; i < gameStage.getPlayer1MovementCards().length; i++) {
                     if (gameStage.getPlayer1MovementCards()[i] == null && gameStage.getPickCards().length > 0) {
                         gameStage.getPlayer1MovementCards()[i] = gameStage.getPickCards()[gameStage.getPickCards().length - 1];
@@ -166,6 +169,9 @@ public class RosesController extends Controller {
                         index++;
                     }
                 }
+
+
+
 
                 // Réinitialiser la défausse à zéro
                 RosesCard[] newEmptyDiscard = new RosesCard[26];
@@ -293,7 +299,7 @@ public class RosesController extends Controller {
                 ActionList actions = new ActionList(true);
                 ActionPlayer play = new ActionPlayer(model, this, actions);
                 RosesPawn pawnToSwap = (RosesPawn) gameStage.getBoard().getElement(row, col);
-                if (pawnToSwap != null && pawnToSwap.getColor() == PAWN_BLUE){
+                if (pawnToSwap != null && pawnToSwap.getColor() == PAWN_BLUE) {
                     pawnToSwap.setColor(PAWN_RED);
                     isTheFirstTime = false;
                     System.out.println(pawnToSwap.getColor());
@@ -343,26 +349,32 @@ public class RosesController extends Controller {
     }
 
 
-    private void checkIfPlayerPlay(String cardType, int row, int col) {
+    private void checkIfPlayerPlay() {
+        int row = 0, col = 0;
 
         RosesStageModel gameStage = (RosesStageModel) model.getGameStage();
         RosesStageView viewStage = (RosesStageView) view.getGameStageView();
-        System.out.println("entre boucle, tempcheck : " + gameStage.getChecked());
 
         boolean tempCheck = false;
 
         for (int i = 0; i < gameStage.getPlayer1MovementCards().length; i++) {
+            for (int p = 0; p < gameStage.getBoard().getNbCols(); p++) {
+                for (int j = 0; j < gameStage.getBoard().getNbRows(); j++) {
+                    if (gameStage.getBoard().getElement(p, j, 1) != null) { // prend la position du pion couronne car parfois il n'est pas detecté a cause du pion bleu au dessus
+                        row = p;
+                        col = j;
+                    }
+                }
+            }
 
-            if (model.getIdPlayer() == 0 && gameStage.getPlayer2MovementCards()[i] == null) {
+            if (model.getIdPlayer() == 0 && gameStage.getPlayer1MovementCards()[i] == null) {
                 tempCheck = true; // il peut piocher donc jouer
                 gameStage.setChecked(tempCheck);
                 return;
-            } else if (model.getIdPlayer() == 1 && gameStage.getPlayer1MovementCards()[i] == null) {
+            } else if (model.getIdPlayer() == 1 && gameStage.getPlayer2MovementCards()[i] == null) {
                 tempCheck = true;
                 gameStage.setChecked(tempCheck);
                 return;
-            } else if (model.getIdPlayer() == 0 && gameStage.getPlayer1HeroCards() != null) {
-                tempCheck = false;
             }
 
             if (!tempCheck) {
@@ -370,11 +382,11 @@ public class RosesController extends Controller {
                 int checkCardValue;
 
                 if (model.getIdPlayer() == 0) {
-                    checkDirection = gameStage.getPlayer2MovementCards()[i].getDirection();
-                    checkCardValue = gameStage.getPlayer2MovementCards()[i].getValue();
-                } else {
                     checkDirection = gameStage.getPlayer1MovementCards()[i].getDirection();
                     checkCardValue = gameStage.getPlayer1MovementCards()[i].getValue();
+                } else {
+                    checkDirection = gameStage.getPlayer2MovementCards()[i].getDirection();
+                    checkCardValue = gameStage.getPlayer2MovementCards()[i].getValue();
                 }
 
                 switch (checkDirection) {
@@ -407,29 +419,29 @@ public class RosesController extends Controller {
                         col = col - checkCardValue;
                 }
 
-                if (row >= 0 && col >= 0 && gameStage.getBoard().canReachCell(row, col)) {
+                if (row >= 0 && col >= 0 && gameStage.getBoard().canReachCell(row, col) && !gameStage.getBoard().isElementAt(row, col)) {
                     tempCheck = true;
                     gameStage.setChecked(tempCheck);
                     return;
-                } else if (row >= 0 && col >= 0 && row <= 8 && col <= 8 && i > 0 && gameStage.getBoard().isElementAt(row, col) && cardType.equals("H")) {
-                    if (model.getIdPlayer() == 0 && gameStage.getPlayer2HeroCards()[i - 1] != null) {
+                } else if (row >= 0 && col >= 0 && row <= 8 && col <= 8 && i > 0 && gameStage.getBoard().isElementAt(row, col)) {
+                    RosesPawn tempPawn = (RosesPawn) gameStage.getBoard().getElement(row, col);
+                    if (model.getIdPlayer() == 0 && gameStage.getPlayer1HeroCards()[i - 1] != null && tempPawn.getColor() == PAWN_RED) {
                         tempCheck = true;
                         System.out.println("can play hero cards");
                         gameStage.setChecked(tempCheck);
                         return;
-                    } else if (model.getIdPlayer() == 1 && gameStage.getPlayer1HeroCards()[i - 1] != null) {
+                    } else if (model.getIdPlayer() == 1 && gameStage.getPlayer2HeroCards()[i - 1] != null && tempPawn.getColor() == PAWN_BLUE) {
                         tempCheck = true;
                         System.out.println("can play hero cards");
                         gameStage.setChecked(tempCheck);
                         return;
                     }
-                } else {
-                    tempCheck = false;
                 }
             }
-            gameStage.setChecked(tempCheck);
-        }
 
+        }
+        isTheEndOfTheStage = true;
+        gameStage.computePartyResult();
     }
 
     public void setTempPickCards(RosesStageModel stageModel) {
