@@ -37,3 +37,9 @@ O
 Test/RosesStageFactoryTest.java,e/c/ec31295bff1653b9f8ee2ec0bf6a613049d9abd4
 O
 Test/TestRosesStageFactory.java,6/5/6568aaad52bb01d400817489aec9e6dab03343f0
+N
+src/model/RosesStageModel.java,d/2/d2f9ca97928122d813477b0da958cce6c311625a
+I
+Test/RosesController.java,8/9/89513807292a809e8ef6ce41099d0f2adaaa95dc
+M
+Test/RosesControllerTest.java,d/3/d3d13e0de86fa09e56265e108aaf5d826e052506
