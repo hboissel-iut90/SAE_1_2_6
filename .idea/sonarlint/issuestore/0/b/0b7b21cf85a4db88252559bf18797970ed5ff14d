@@ -1,49 +1,31 @@
 
 m
-java:S1192€"JDefine a constant instead of duplicating this literal "RoseBoard" 5 times.(½ê¾şÿÿÿÿ8çºËƒú1
+java:S1192"JDefine a constant instead of duplicating this literal "RoseBoard" 5 times.(½ê¾şÿÿÿÿ8‹®¿¨ú1
 d
-java:S1226¨"AIntroduce a new variable instead of reusing the parameter "pawn".(®îÈåùÿÿÿÿ8íºËƒú1
+java:S1226«"AIntroduce a new variable instead of reusing the parameter "pawn".(ßÖ°¡ÿÿÿÿÿ8“®¿¨ú1
 t
-java:S3776#"RRefactor this method to reduce its Cognitive Complexity from 70 to the 15 allowed.(¥†íõøÿÿÿÿ8ß¼Ëƒú1
-X
-java:S1854.";Remove this useless assignment to local variable "actions".(…°•8à¼Ëƒú1
+java:S3776#"RRefactor this method to reduce its Cognitive Complexity from 73 to the 15 allowed.(¥†íõøÿÿÿÿ8ß¼Ëƒú1
 `
 java:S1854(">Remove this useless assignment to local variable "yellowPawn".(Ôœ­‰şÿÿÿÿ8à¼Ëƒú1
 X
-java:S18544";Remove this useless assignment to local variable "pawnPot".(­ÉÊë8à¼Ëƒú1
+java:S18544";Remove this useless assignment to local variable "pawnPot".(­ÉÊë8¦®¿¨ú1
 ]
-java:S18546";Remove this useless assignment to local variable "pawnPot".(ƒ¼Ë¢úÿÿÿÿ8à¼Ëƒú1
+java:S18546";Remove this useless assignment to local variable "pawnPot".(ƒ¼Ë¢úÿÿÿÿ8§®¿¨ú1
 N
 java:S1481&",Remove this unused "pawnPot" local variable.(°ãì•øÿÿÿÿ8â¼Ëƒú1
 Q
 java:S1481("/Remove this unused "yellowPawn" local variable.(Ôœ­‰şÿÿÿÿ8â¼Ëƒú1
-L	java:S106K"+Replace this use of System.out by a logger.(€¸üüÿÿÿÿ8å¼Ëƒú1
-G	java:S106z"+Replace this use of System.out by a logger.(‘˜ˆ€8æ¼Ëƒú1
-G	java:S106{"+Replace this use of System.out by a logger.(ÒòÍ‹8æ¼Ëƒú1
-G	java:S106|"+Replace this use of System.out by a logger.(ÜÁü8ç¼Ëƒú1
+L	java:S106L"+Replace this use of System.out by a logger.(€¸üüÿÿÿÿ8®®¿¨ú1
+G	java:S106{"+Replace this use of System.out by a logger.(‘˜ˆ€8±®¿¨ú1
+G	java:S106|"+Replace this use of System.out by a logger.(ÒòÍ‹8±®¿¨ú1
+G	java:S106}"+Replace this use of System.out by a logger.(ÜÁü8²®¿¨ú1
 k
-java:S1871‚"MThis branch's code block is the same as the block for the branch on line 127.(ÖøÕ8ç¼Ëƒú1
+java:S1871ƒ"MThis branch's code block is the same as the block for the branch on line 128.(ÖøÕ8³®¿¨ú1
 k
-java:S1871Š"MThis branch's code block is the same as the block for the branch on line 135.(ÆŸ´8è¼Ëƒú1
-]
-java:S1854°"?Remove this useless assignment to local variable "nbMovements".(ÈÀ‰ë8ë¼Ëƒú1
-^
-java:S1128"<Remove this unused import 'boardifier.model.GameStageModel'.(§´¥Êüÿÿÿÿ8î¼Ëƒú1
-R
-java:S1128"0Remove this unused import 'view.RosesStageView'.(„ÖØ¸úÿÿÿÿ8î¼Ëƒú1
-J
-java:S1128"(Remove this unused import 'javax.swing'.(Ìí¿Üüÿÿÿÿ8î¼Ëƒú1
-B
-java:S1128"%Remove this unused import 'java.awt'.(ï´µ©8î¼Ëƒú1
-Q
-java:S1128"/Remove this unused import 'java.sql.SQLOutput'.(ê¤òÃùÿÿÿÿ8î¼Ëƒú1
-M
-java:S1128"0Remove this unused import 'java.util.ArrayList'.(÷‰îƒ8î¼Ëƒú1
-M
-java:S1128"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8ï¼Ëƒú1
+java:S1871‹"MThis branch's code block is the same as the block for the branch on line 136.(ÆŸ´8µ®¿¨ú1
 J
 java:S1068"(Remove this unused "loto" private field.(Ô’¡şÿÿÿÿ8ï¼Ëƒú1
 Q
 java:S1068"/Remove this unused "typeOfMoves" private field.(æ‰Å¥şÿÿÿÿ8ï¼Ëƒú1
 é
-java:S6541#"ÆA "Brain Method" was detected. Refactor it to reduce at least one of the following metrics: LOC from 124 to 64, Complexity from 34 to 14, Nesting Level from 6 to 2, Number of Variables from 21 to 6.(¥†íõøÿÿÿÿ8ï¼Ëƒú1
+java:S6541#"ÆA "Brain Method" was detected. Refactor it to reduce at least one of the following metrics: LOC from 126 to 64, Complexity from 34 to 14, Nesting Level from 6 to 2, Number of Variables from 21 to 6.(¥†íõøÿÿÿÿ8ï¼Ëƒú1

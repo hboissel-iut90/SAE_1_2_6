@@ -17,11 +17,23 @@ P
  src/control/RosesController.java,5/f/5f3edae7afc7899a44de26843650a9b28d353891
 M
 src/control/RosesDecider.java,0/b/0b7b21cf85a4db88252559bf18797970ed5ff14d
-U
-%Test/control/RosesControllerTest.java,e/4/e4db6c881ed00f8122676cfb8c285d1ad5f76717
-M
-Test/RosesControllerTest.java,d/3/d3d13e0de86fa09e56265e108aaf5d826e052506
 X
 (src/boardifier/control/ActionPlayer.java,f/c/fce8a4e22633828919dd9275ee1b81ef6e09bc5c
 V
 &src/boardifier/control/Controller.java,b/2/b2023946c0c3429fd9ba29e26e203ade83c34dca
+J
+Test/TestSurRosesCard.java,6/d/6db743aeb2dd436ed4e48a82e6bf9a19ad0affd2
+J
+Test/TestSurRosesPawn.java,c/8/c8eb2044a8945b5c18cd654ef560b3ae8be271d6
+K
+src/model/RosesPawnPot.java,b/7/b7a7b6260cfac595213c76b1bc31188bdc881115
+K
+src/model/RosesCardPot.java,3/2/32c14545e7314103d07b3dc26823e2de0255e4cf
+P
+ src/model/RosesStageFactory.java,f/d/fd959d1afd15e8921146a06d135d581d8d4fb876
+T
+$src/model/RosesStageFactoryTest.java,d/6/d6c3b8cf433d4451a3eb560dc66aefe781cf6c74
+O
+Test/RosesStageFactoryTest.java,e/c/ec31295bff1653b9f8ee2ec0bf6a613049d9abd4
+O
+Test/TestRosesStageFactory.java,6/5/6568aaad52bb01d400817489aec9e6dab03343f0
