@@ -425,12 +425,12 @@ public class RosesController extends Controller {
                     return;
                 } else if (row >= 0 && col >= 0 && row <= 8 && col <= 8 && i > 0 && gameStage.getBoard().isElementAt(row, col)) {
                     RosesPawn tempPawn = (RosesPawn) gameStage.getBoard().getElement(row, col);
-                    if (model.getIdPlayer() == 0 && gameStage.getPlayer1HeroCards()[i - 1] != null && tempPawn.getColor() == PAWN_RED) {
+                    if (model.getIdPlayer() == 0 && gameStage.getPlayer1HeroCards().length > 0 && gameStage.getPlayer1HeroCards()[i - 1] != null && tempPawn.getColor() == PAWN_RED) {
                         tempCheck = true;
                         System.out.println("can play hero cards");
                         gameStage.setChecked(tempCheck);
                         return;
-                    } else if (model.getIdPlayer() == 1 && gameStage.getPlayer2HeroCards()[i - 1] != null && tempPawn.getColor() == PAWN_BLUE) {
+                    } else if (model.getIdPlayer() == 1 && gameStage.getPlayer2HeroCards().length > 0 && gameStage.getPlayer2HeroCards()[i - 1] != null && tempPawn.getColor() == PAWN_BLUE) {
                         tempCheck = true;
                         System.out.println("can play hero cards");
                         gameStage.setChecked(tempCheck);

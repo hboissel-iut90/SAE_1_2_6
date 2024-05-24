@@ -8,10 +8,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.awt.*;
-<<<<<<< HEAD
-=======
 import java.lang.reflect.Array;
->>>>>>> a3ddf8e (Test Board carte H fini)
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +27,6 @@ public class RosesBoardTest {
     }
 
     @Test
-<<<<<<< HEAD
     public void testComputeValidCells_hPawnFirstCell() {
         RosesBoard rosesBoard = Mockito.mock(RosesBoard.class);
         // Create a player with id 0
@@ -47,7 +43,7 @@ public class RosesBoardTest {
         result.add(new Point(0,0));
 
         assertEquals(1, result.size(), "Expected a list with one element when a hero is played and there is a pawn in the first cell.");
-=======
+
     public void testComputeValidCells_FullHPawn() {
         GameStageModel gameStageModel = Mockito.mock(GameStageModel.class);
         RosesBoard rosesBoard = new RosesBoard(0,0,gameStageModel);
