@@ -80,8 +80,4 @@ public class RosesCard extends GameElement {
         return "Card: " + value + " " + direction + " " + cardType;
 
     }
-
-
-
-
 }

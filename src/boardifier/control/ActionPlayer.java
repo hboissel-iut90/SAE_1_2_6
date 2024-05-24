@@ -39,7 +39,14 @@ public class ActionPlayer {
         }
         // if there is a decider, decide what to do
         if (decider != null) {
+            long startTime = System.nanoTime();
+            long memoryBefore = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
             actions = decider.decide();
+            long endTime = System.nanoTime();
+            long memoryAfter = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+            long duration = (endTime - startTime);
+            long memoryUsed = memoryAfter - memoryBefore;
+            System.out.println("AI took " + duration + "ns and used " + memoryUsed + " bytes");
         }
 
         playActions(actions);

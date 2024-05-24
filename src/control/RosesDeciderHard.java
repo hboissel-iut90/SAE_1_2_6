@@ -428,8 +428,4 @@ public class RosesDeciderHard extends Decider {// La classe RosesDeciderHard hé
             }
         }
     }
-
-
-
-
 }
