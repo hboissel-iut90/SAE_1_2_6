@@ -23,6 +23,7 @@ import java.util.List;
 import static model.RosesPawn.PAWN_BLUE;
 import static model.RosesPawn.PAWN_RED;
 
+// Refactoring of class RosesController for test
 public class RosesControllerTool extends Controller {
 
     public BufferedReader consoleIn;
