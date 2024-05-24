@@ -1,9 +1,8 @@
 import boardifier.model.GameStageModel;
 import model.RosesBoard;
-import model.RosesCard;
 import model.RosesPawn;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
@@ -13,65 +12,57 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 
-public class RosesBoardTest {
-
-    @Test
-    public void testComputeValidCells_EmptyGridHString() {
-        RosesBoard rosesBoard = Mockito.mock(RosesBoard.class);
-        Mockito.when(rosesBoard.isEmpty()).thenReturn(true);
-
-        List<Point> result = rosesBoard.computeValidCells("H", 0);
-
-        assertTrue(result.isEmpty(), "Expected an empty list when the grid is empty and string is 'H'.");
+class RosesBoardTest {
+    GameStageModel gameStageModel;
+    RosesBoard rosesBoard;
+    RosesPawn rosesPawn1, rosesPawn2, rosesPawn3, rosesPawn4, rosesPawn5, rosesPawn6, rosesPawn7, rosesPawn8, rosesPawn9, rosesPawn10,rosesPawn11,rosesPawn12,rosesPawn13,rosesPawn14,rosesPawn15,rosesPawn16,rosesPawn17,rosesPawn18,rosesPawn19,rosesPawn20,rosesPawn21,rosesPawn22,rosesPawn23,rosesPawn24;
+    @BeforeEach
+    public void setUp(){
+        gameStageModel = Mockito.mock(GameStageModel.class);
+        rosesBoard = new RosesBoard(0,0,gameStageModel);
+        rosesPawn1 = new RosesPawn(0, gameStageModel);
+        rosesPawn2 =  new RosesPawn(0, gameStageModel);
+        rosesPawn3 =  new RosesPawn(0, gameStageModel);
+        rosesPawn4 =  new RosesPawn(0, gameStageModel);
+        rosesPawn5 =  new RosesPawn(0, gameStageModel);
+        rosesPawn6 =  new RosesPawn(0, gameStageModel);
+        rosesPawn7 =  new RosesPawn(0, gameStageModel);
+        rosesPawn8 =  new RosesPawn(0, gameStageModel);
+        rosesPawn9 =  new RosesPawn(0, gameStageModel);
+        rosesPawn10 =  new RosesPawn(0, gameStageModel);
+        rosesPawn11 =  new RosesPawn(0, gameStageModel);
+        rosesPawn12 =  new RosesPawn(0, gameStageModel);
+        rosesPawn13 =  new RosesPawn(0, gameStageModel);
+        rosesPawn14 =  new RosesPawn(0, gameStageModel);
+        rosesPawn15 =  new RosesPawn(0, gameStageModel);
+        rosesPawn16 =  new RosesPawn(0, gameStageModel);
+        rosesPawn17 =  new RosesPawn(0, gameStageModel);
+        rosesPawn18 =  new RosesPawn(0, gameStageModel);
+        rosesPawn19 =  new RosesPawn(0, gameStageModel);
+        rosesPawn20 =  new RosesPawn(0, gameStageModel);
+        rosesPawn21 =  new RosesPawn(0, gameStageModel);
+        rosesPawn22 =  new RosesPawn(0, gameStageModel);
+        rosesPawn23 =  new RosesPawn(0, gameStageModel);
+        rosesPawn24 =  new RosesPawn(0, gameStageModel);
     }
 
+    // In this test, we verify when no pawn is on the board
     @Test
-    public void testComputeValidCells_hPawnFirstCell() {
-        RosesBoard rosesBoard = Mockito.mock(RosesBoard.class);
-        // Create a player with id 0
-        RosesPawn pawn = new RosesPawn(0, Mockito.mock(GameStageModel.class));
-        // Create a list of pawns
-        Mockito.when(rosesBoard.getElement(0, 0)).thenReturn(pawn);
-        Mockito.when(rosesBoard.isElementAt(0, 0)).thenReturn(true);
-        Mockito.when(rosesBoard.isEmpty()).thenReturn(false);
-        System.out.println(pawn.getX());
+    void testComputeValidCells_EmptyGridString() {
+        List<Point> result = rosesBoard.computeValidCells("H", 0);
+        List<Point> result2 = rosesBoard.computeValidCells("M", 0);
 
-        // use computeValidCells method to get the valid cells
-        // here a hero has been played
-        List<Point> result = rosesBoard.computeValidCells("H", 1);
-        result.add(new Point(0,0));
+        assertTrue(result.isEmpty(), "Expected an empty list when the grid is empty and string is 'H'.");
+        assertFalse(result2.isEmpty(),"Expected at least one element in list when the grid is empty and string is 'M'.");
+    }
 
-        assertEquals(1, result.size(), "Expected a list with one element when a hero is played and there is a pawn in the first cell.");
 
-    public void testComputeValidCells_FullHPawn() {
-        GameStageModel gameStageModel = Mockito.mock(GameStageModel.class);
-        RosesBoard rosesBoard = new RosesBoard(0,0,gameStageModel);
-        RosesPawn rosesPawn1 = new RosesPawn(0, gameStageModel);
-        RosesPawn rosesPawn2 =  new RosesPawn(0, gameStageModel);
-        RosesPawn rosesPawn3 =  new RosesPawn(0, gameStageModel);
-        RosesPawn rosesPawn4 =  new RosesPawn(0, gameStageModel);
-        RosesPawn rosesPawn5 =  new RosesPawn(0, gameStageModel);
-        RosesPawn rosesPawn6 =  new RosesPawn(0, gameStageModel);
-        RosesPawn rosesPawn7 =  new RosesPawn(0, gameStageModel);
-        RosesPawn rosesPawn8 =  new RosesPawn(0, gameStageModel);
-        RosesPawn rosesPawn9 =  new RosesPawn(0, gameStageModel);
-        RosesPawn rosesPawn10 =  new RosesPawn(0, gameStageModel);
-        RosesPawn rosesPawn11 =  new RosesPawn(0, gameStageModel);
-        RosesPawn rosesPawn12 =  new RosesPawn(0, gameStageModel);
-        RosesPawn rosesPawn13 =  new RosesPawn(0, gameStageModel);
-        RosesPawn rosesPawn14 =  new RosesPawn(0, gameStageModel);
-        RosesPawn rosesPawn15 =  new RosesPawn(0, gameStageModel);
-        RosesPawn rosesPawn16 =  new RosesPawn(0, gameStageModel);
-        RosesPawn rosesPawn17 =  new RosesPawn(0, gameStageModel);
-        RosesPawn rosesPawn18 =  new RosesPawn(0, gameStageModel);
-        RosesPawn rosesPawn19 =  new RosesPawn(0, gameStageModel);
-        RosesPawn rosesPawn20 =  new RosesPawn(0, gameStageModel);
-        RosesPawn rosesPawn21 =  new RosesPawn(0, gameStageModel);
-        RosesPawn rosesPawn22 =  new RosesPawn(0, gameStageModel);
-        RosesPawn rosesPawn23 =  new RosesPawn(0, gameStageModel);
-        RosesPawn rosesPawn24 =  new RosesPawn(0, gameStageModel);
-
+    // In this test, we verify if the crown pawn can use Hero card in any move
+    // (crown pawn don't matter because computeValidCells doesn't considerate crown pawn)
+    @Test
+    void testComputeValidCells_FullPossibleMoveHPawnWithCPawnInMiddle() {
         rosesBoard.addElement(rosesPawn1,1,1);
         rosesBoard.addElement(rosesPawn2,2,2);
         rosesBoard.addElement(rosesPawn3,3,3);
@@ -127,6 +118,42 @@ public class RosesBoardTest {
         assertEquals(listVerif, rosesBoard.computeValidCells("H", 1));
     }
 
+    @Test
+    void testComputeValidCells_FullPossibleMoveHPawnWithCPawnInCornerLeftUp() {
+        rosesBoard.addElement(rosesPawn1,-1,-1);
+        rosesBoard.addElement(rosesPawn2,0,-1);
+        rosesBoard.addElement(rosesPawn3,1,-1);
+        rosesBoard.addElement(rosesPawn4,-1,0);
+        rosesBoard.addElement(rosesPawn5,1,0);
+        rosesBoard.addElement(rosesPawn6,2,0);
+        rosesBoard.addElement(rosesPawn7,3,0);
+        rosesBoard.addElement(rosesPawn8,-1,1);
+        rosesBoard.addElement(rosesPawn9,0,1);
+        rosesBoard.addElement(rosesPawn10,1,1);
+        rosesBoard.addElement(rosesPawn11,0,2);
+        rosesBoard.addElement(rosesPawn12,2,2);
+        rosesBoard.addElement(rosesPawn13,0,3);
+        rosesBoard.addElement(rosesPawn14,3,3);
 
+        ArrayList<Point> listVerif = new ArrayList<>();
+        listVerif.add(new Point(1,0));
+        listVerif.add(new Point(2, 0));
+        listVerif.add(new Point(3, 0));
+        listVerif.add(new Point(0, 1));
+        listVerif.add(new Point(1, 1));
+        listVerif.add(new Point(0, 2));
+        listVerif.add(new Point(2, 2));
+        listVerif.add(new Point(0, 3));
+        listVerif.add(new Point(3, 3));
+
+
+        assertEquals(listVerif, rosesBoard.computeValidCells("H", 1));
+
+    }
+
+    @Test
+    void testComputeValidCells_FullPossibleMoveHPawnWithCPawnInCornerRightDown() {
+
+    }
 
 }

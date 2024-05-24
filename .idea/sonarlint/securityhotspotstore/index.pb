@@ -43,3 +43,7 @@ I
 Test/RosesController.java,8/9/89513807292a809e8ef6ce41099d0f2adaaa95dc
 M
 Test/RosesControllerTest.java,d/3/d3d13e0de86fa09e56265e108aaf5d826e052506
+]
+-src/boardifier/model/ContainerOpCallback.java,c/0/c0c2a2f1324d42e9f5dd32015c311883bb42cec9
+Q
+!src/control/RosesDeciderEasy.java,b/8/b817edd11ef6a314a95b63c6a83821dc37caca53

@@ -76,8 +76,7 @@ public class RosesCard extends GameElement {
         return isFlipped;
     }
 
-    @Override
-    public String toString() {
-        return "Carte de type " + cardType + " de valeur " + value + " et de direction " + direction;
-    }
+
+
+
 }
