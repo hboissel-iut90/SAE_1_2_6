@@ -215,31 +215,30 @@ class RosesBoardTest {
         }
         System.out.println(listVerif);
 
-        listVerif.removeAll()
         listVerif.remove(10);
-        listVerif.remove(13);
-        listVerif.remove(16);
-        listVerif.remove(20);
-        listVerif.remove(22);
+        listVerif.remove(12);
+        listVerif.remove(14);
+        listVerif.remove(17);
+        listVerif.remove(18);
+        listVerif.remove(19);
         listVerif.remove(24);
-        listVerif.remove(30);
-        listVerif.remove(31);
-        listVerif.remove(32);
-        listVerif.remove(37);
+        listVerif.remove(24);
+        listVerif.remove(24);
+        listVerif.remove(28);
+        listVerif.remove(28);
+        listVerif.remove(28);
+        listVerif.remove(29);
+        listVerif.remove(29);
+        listVerif.remove(29);
+        listVerif.remove(33);
+        listVerif.remove(33);
+        listVerif.remove(33);
         listVerif.remove(38);
         listVerif.remove(39);
-        listVerif.remove(41);
-        listVerif.remove(42);
+        listVerif.remove(40);
         listVerif.remove(43);
-        listVerif.remove(48);
-        listVerif.remove(49);
-        listVerif.remove(50);
-        listVerif.remove(56);
-        listVerif.remove(58);
-        listVerif.remove(60);
-        listVerif.remove(64);
-        listVerif.remove(67);
-        listVerif.remove(70);
+        listVerif.remove(44);
+        listVerif.remove(46);
 
 
 
