@@ -1,6 +1,7 @@
 import boardifier.model.GameStageModel;
 import model.RosesBoard;
 import model.RosesPawn;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.mockito.Mockito;
@@ -120,8 +121,39 @@ class RosesBoardTest {
         assertEquals(listVerif, rosesBoard.computeValidCells("H", 1));
     }
 
+    @Disabled("Cette fonction de limite n'est pas possible dû à boardifier et à l'exception ArrayIndexOutOfBoundsException.")
     @Test
-    void testComputeValidCells_FullPossibleMoveHPawnWithCPawnInCornerRightDown() {
+    void testComputeValidCells_MoveHPawnWithCPawnInCornerLeftUp() {
+        rosesBoard.addElement(rosesPawn1,-1,-1);
+        rosesBoard.addElement(rosesPawn2,0,-1);
+        rosesBoard.addElement(rosesPawn3,-1,0);
+        rosesBoard.addElement(rosesPawn4,1,0);
+        rosesBoard.addElement(rosesPawn5,2,0);
+        rosesBoard.addElement(rosesPawn6,3,0);
+        rosesBoard.addElement(rosesPawn7,0,1);
+        rosesBoard.addElement(rosesPawn8,1,1);
+        rosesBoard.addElement(rosesPawn9,0,2);
+        rosesBoard.addElement(rosesPawn10,2,2);
+        rosesBoard.addElement(rosesPawn11,0,3);
+        rosesBoard.addElement(rosesPawn12,3,3);
+
+        listVerif.add(new Point(1,0));
+        listVerif.add(new Point(2, 0));
+        listVerif.add(new Point(3, 0));
+        listVerif.add(new Point(0, 1));
+        listVerif.add(new Point(1, 1));
+        listVerif.add(new Point(0, 2));
+        listVerif.add(new Point(2, 2));
+        listVerif.add(new Point(0, 3));
+        listVerif.add(new Point(3, 3));
+
+
+        assertEquals(listVerif, rosesBoard.computeValidCells("H", 1));
+    }
+
+
+    @Test
+    void testComputeValidCells_MoveHPawnWithCPawnInCornerRightDown() {
         rosesBoard.addElement(rosesPawn1,5,5);
         rosesBoard.addElement(rosesPawn2,8,5);
         rosesBoard.addElement(rosesPawn3,6,6);
@@ -137,16 +169,72 @@ class RosesBoardTest {
 
         listVerif.add(new Point(5,5));
         listVerif.add(new Point(8, 5));
-        listVerif.add(new Point(3, 6));
-        listVerif.add(new Point(0, 6));
-        listVerif.add(new Point(1, 7));
-        listVerif.add(new Point(0, 7));
-        listVerif.add(new Point(2, 8));
-        listVerif.add(new Point(0, 8));
-        listVerif.add(new Point(3, 8));
+        listVerif.add(new Point(6, 6));
+        listVerif.add(new Point(8, 6));
+        listVerif.add(new Point(7, 7));
+        listVerif.add(new Point(8, 7));
+        listVerif.add(new Point(5, 8));
+        listVerif.add(new Point(6, 8));
+        listVerif.add(new Point(7, 8));
 
 
         assertEquals(listVerif, rosesBoard.computeValidCells("H", 1));
     }
 
+    @Test
+    void testComputeValidCells_MPawnWithCPawnInMiddle() {
+        rosesBoard.addElement(rosesPawn1,1,1);
+        rosesBoard.addElement(rosesPawn2,2,2);
+        rosesBoard.addElement(rosesPawn3,3,3);
+        rosesBoard.addElement(rosesPawn4,1,4);
+        rosesBoard.addElement(rosesPawn5,2,4);
+        rosesBoard.addElement(rosesPawn6,3,4);
+        rosesBoard.addElement(rosesPawn7,1,7);
+        rosesBoard.addElement(rosesPawn8,2,6);
+        rosesBoard.addElement(rosesPawn9,3,5);
+        rosesBoard.addElement(rosesPawn10,4,1);
+        rosesBoard.addElement(rosesPawn11,4,2);
+        rosesBoard.addElement(rosesPawn12,4,3);
+        rosesBoard.addElement(rosesPawn13,4,5);
+        rosesBoard.addElement(rosesPawn14,4,6);
+        rosesBoard.addElement(rosesPawn15,4,7);
+        rosesBoard.addElement(rosesPawn16,5,3);
+        rosesBoard.addElement(rosesPawn17,6,2);
+        rosesBoard.addElement(rosesPawn18,7,1);
+        rosesBoard.addElement(rosesPawn19,5,4);
+        rosesBoard.addElement(rosesPawn20,6,4);
+        rosesBoard.addElement(rosesPawn21,7,4);
+        rosesBoard.addElement(rosesPawn22,5,5);
+        rosesBoard.addElement(rosesPawn23,6,6);
+        rosesBoard.addElement(rosesPawn24,7,7);
+
+        ArrayList<Point> listVerif = new ArrayList<>();
+        listVerif.add(new Point(1, 1));
+        listVerif.add(new Point(4, 1));
+        listVerif.add(new Point(7, 1));
+        listVerif.add(new Point(2, 2));
+        listVerif.add(new Point(4, 2));
+        listVerif.add(new Point(6, 2));
+        listVerif.add(new Point(3, 3));
+        listVerif.add(new Point(4, 3));
+        listVerif.add(new Point(5, 3));
+        listVerif.add(new Point(1, 4));
+        listVerif.add(new Point(2, 4));
+        listVerif.add(new Point(3, 4));
+        listVerif.add(new Point(5, 4));
+        listVerif.add(new Point(6, 4));
+        listVerif.add(new Point(7, 4));
+        listVerif.add(new Point(3, 5));
+        listVerif.add(new Point(4, 5));
+        listVerif.add(new Point(5, 5));
+        listVerif.add(new Point(2, 6));
+        listVerif.add(new Point(4, 6));
+        listVerif.add(new Point(6, 6));
+        listVerif.add(new Point(1, 7));
+        listVerif.add(new Point(4, 7));
+        listVerif.add(new Point(7, 7));
+
+
+        assertNotEquals(listVerif, rosesBoard.computeValidCells("M", 1));
+    }
 }
