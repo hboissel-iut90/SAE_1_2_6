@@ -15,8 +15,6 @@ L
 src/view/RosesStageView.java,9/1/918aefc299dad0df0db85e011cd2e6de893d78e8
 P
  src/control/RosesController.java,5/f/5f3edae7afc7899a44de26843650a9b28d353891
-M
-src/control/RosesDecider.java,0/b/0b7b21cf85a4db88252559bf18797970ed5ff14d
 X
 (src/boardifier/control/ActionPlayer.java,f/c/fce8a4e22633828919dd9275ee1b81ef6e09bc5c
 V
@@ -31,16 +29,10 @@ K
 src/model/RosesCardPot.java,3/2/32c14545e7314103d07b3dc26823e2de0255e4cf
 P
  src/model/RosesStageFactory.java,f/d/fd959d1afd15e8921146a06d135d581d8d4fb876
-T
-$src/model/RosesStageFactoryTest.java,d/6/d6c3b8cf433d4451a3eb560dc66aefe781cf6c74
-O
-Test/RosesStageFactoryTest.java,e/c/ec31295bff1653b9f8ee2ec0bf6a613049d9abd4
 O
 Test/TestRosesStageFactory.java,6/5/6568aaad52bb01d400817489aec9e6dab03343f0
 N
 src/model/RosesStageModel.java,d/2/d2f9ca97928122d813477b0da958cce6c311625a
-I
-Test/RosesController.java,8/9/89513807292a809e8ef6ce41099d0f2adaaa95dc
 M
 Test/RosesControllerTest.java,d/3/d3d13e0de86fa09e56265e108aaf5d826e052506
 ]
