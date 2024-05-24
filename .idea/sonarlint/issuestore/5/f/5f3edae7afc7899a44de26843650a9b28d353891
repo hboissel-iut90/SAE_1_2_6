@@ -29,10 +29,10 @@ M	java:S106È"+Replace this use of System.out by a logger.(Ñ†ı³øÿÿÿÿ8ùäÕÜú1
 H	java:S106Ğ"+Replace this use of System.out by a logger.(šÙ¥­8ûäÕÜú1
 I
 java:S1905Ò"&Remove this unnecessary cast to "int".( ÀŒİıÿÿÿÿ8ıäÕÜú1
-j
-java:S1871Ù"MThis branch's code block is the same as the block for the branch on line 211.(ÙÄµ\8ÿäÕÜú1
 k
 java:S1871Ü"MThis branch's code block is the same as the block for the branch on line 214.(Íß†ç8ÿäÕÜú1
+j
+java:S1871Ù"MThis branch's code block is the same as the block for the branch on line 211.(ÙÄµ\8ÿäÕÜú1
 H	java:S106à"+Replace this use of System.out by a logger.(ˆ¸Ş€8ˆåÕÜú1
 M	java:S106‹"+Replace this use of System.out by a logger.(Ãâ¸‚üÿÿÿÿ8‹åÕÜú1
 H	java:S106²"+Replace this use of System.out by a logger.(Û›ÿÏ8’åÕÜú1
