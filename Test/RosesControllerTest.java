@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
-public class RosesControllerTest {
+class RosesControllerTest {
 
     Model model;
     View view;
@@ -26,7 +26,7 @@ public class RosesControllerTest {
     RosesStageModel rosesStageModel;
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         // Mocking the dependencies
         model = Mockito.mock(Model.class);
         view = Mockito.mock(View.class);
@@ -38,7 +38,7 @@ public class RosesControllerTest {
     }
 
     @Test
-    public void testStageLoop() throws Exception {
+    void testStageLoop() throws Exception {
         // Mocking the RosesController
         RosesController rosesController = Mockito.mock(RosesController.class);
 
@@ -60,7 +60,7 @@ public class RosesControllerTest {
     }
 
     @Test
-    public void testPlayTurn() throws Exception {
+    void testPlayTurn() throws Exception {
         // Mocking dependencies
         Player player = Mockito.mock(Player.class);
         when(model.getCurrentPlayer()).thenReturn(player);
@@ -90,7 +90,7 @@ public class RosesControllerTest {
     }
 
     @Test
-    public void testEndOfTurn() {
+    void testEndOfTurn() {
         Player player = Mockito.mock(Player.class);
         when(model.getCurrentPlayer()).thenReturn(player);
 
@@ -110,7 +110,7 @@ public class RosesControllerTest {
     }
 
     @Test
-    public void testAnalyseAndPlay() throws Exception {
+    void testAnalyseAndPlay() throws Exception {
         // Mocking dependencies
         RosesCard[] player1MovementCards = new RosesCard[1];
         player1MovementCards[0] = Mockito.mock(RosesCard.class); // Mocking the RosesCard instance
@@ -136,7 +136,7 @@ public class RosesControllerTest {
     }
 
     @Test
-    public void testCheckIfPlayerPlay() {
+    void testCheckIfPlayerPlay() {
         // Mocking the RosesCard array
         RosesCard[] player1MovementCards = new RosesCard[1];
         when(rosesStageModel.getPlayer1MovementCards()).thenReturn(player1MovementCards);

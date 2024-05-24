@@ -3,14 +3,16 @@ package control;
 import boardifier.control.ActionFactory;
 import boardifier.control.ActionPlayer;
 import boardifier.control.Controller;
-import boardifier.model.*;
+import boardifier.model.ContainerElement;
+import boardifier.model.GameElement;
+import boardifier.model.Model;
+import boardifier.model.Player;
 import boardifier.model.action.ActionList;
 import boardifier.view.View;
 import model.RosesCard;
 import model.RosesPawn;
 import model.RosesStageModel;
 import view.RosesStageView;
-import boardifier.model.ContainerElement;
 
 import java.awt.*;
 import java.io.BufferedReader;
@@ -21,7 +23,7 @@ import java.util.List;
 import static model.RosesPawn.PAWN_BLUE;
 import static model.RosesPawn.PAWN_RED;
 
-public class RosesController extends Controller {
+public class RosesControllerTool extends Controller {
 
     public BufferedReader consoleIn;
     boolean firstPlayer;
@@ -32,7 +34,7 @@ public class RosesController extends Controller {
     private String difficulty;
     int nbMovements = 0;
 
-    public RosesController(Model model, View view, String difficulty) {
+    public RosesControllerTool(Model model, View view, String difficulty) {
         super(model, view);
         firstPlayer = true;
         this.difficulty = difficulty;
@@ -53,7 +55,7 @@ public class RosesController extends Controller {
         endGame();
     }
 
-    private void playTurn() {
+    public void playTurn() {
         // get the new player
         Player p = model.getCurrentPlayer();
         if (p.getType() == Player.COMPUTER) {
@@ -108,8 +110,8 @@ public class RosesController extends Controller {
             }
         }
     }
-
-    private void endOfTurn() {
+    
+    public void endOfTurn() {
         model.setNextPlayer();
         // get the new player to display its name
         Player p = model.getCurrentPlayer();
@@ -118,7 +120,7 @@ public class RosesController extends Controller {
         stageModel.update();
     }
 
-    private boolean analyseAndPlay(String line) {
+    public boolean analyseAndPlay(String line) {
         RosesStageModel gameStage = (RosesStageModel) model.getGameStage();
         RosesStageView viewStage = (RosesStageView) view.getGameStageView();
         nbMovements = gameStage.getNbMovements();
@@ -363,7 +365,7 @@ public class RosesController extends Controller {
     }
 
 
-    private void checkIfPlayerPlay() {
+    public void checkIfPlayerPlay() {
         int row = 0, col = 0;
 
         RosesStageModel gameStage = (RosesStageModel) model.getGameStage();

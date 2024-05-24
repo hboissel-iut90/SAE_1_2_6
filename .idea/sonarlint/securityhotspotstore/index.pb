@@ -39,3 +39,5 @@ M
 -src/boardifier/model/ContainerOpCallback.java,c/0/c0c2a2f1324d42e9f5dd32015c311883bb42cec9
 Q
 !src/control/RosesDeciderEasy.java,b/8/b817edd11ef6a314a95b63c6a83821dc37caca53
+T
+$src/control/RosesControllerTool.java,e/e/ee3e05e37d4aac2e54790e110ff2bd3889a4cf38
