@@ -207,34 +207,42 @@ class RosesBoardTest {
         rosesBoard.addElement(rosesPawn22,5,5);
         rosesBoard.addElement(rosesPawn23,6,6);
         rosesBoard.addElement(rosesPawn24,7,7);
+        ArrayList<Point> listVerif = new ArrayList<>(81);
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                listVerif.add(new Point(j, i));
+            }
+        }
+        System.out.println(listVerif);
 
-        ArrayList<Point> listVerif = new ArrayList<>();
-        listVerif.add(new Point(1, 1));
-        listVerif.add(new Point(4, 1));
-        listVerif.add(new Point(7, 1));
-        listVerif.add(new Point(2, 2));
-        listVerif.add(new Point(4, 2));
-        listVerif.add(new Point(6, 2));
-        listVerif.add(new Point(3, 3));
-        listVerif.add(new Point(4, 3));
-        listVerif.add(new Point(5, 3));
-        listVerif.add(new Point(1, 4));
-        listVerif.add(new Point(2, 4));
-        listVerif.add(new Point(3, 4));
-        listVerif.add(new Point(5, 4));
-        listVerif.add(new Point(6, 4));
-        listVerif.add(new Point(7, 4));
-        listVerif.add(new Point(3, 5));
-        listVerif.add(new Point(4, 5));
-        listVerif.add(new Point(5, 5));
-        listVerif.add(new Point(2, 6));
-        listVerif.add(new Point(4, 6));
-        listVerif.add(new Point(6, 6));
-        listVerif.add(new Point(1, 7));
-        listVerif.add(new Point(4, 7));
-        listVerif.add(new Point(7, 7));
+        listVerif.removeAll()
+        listVerif.remove(10);
+        listVerif.remove(13);
+        listVerif.remove(16);
+        listVerif.remove(20);
+        listVerif.remove(22);
+        listVerif.remove(24);
+        listVerif.remove(30);
+        listVerif.remove(31);
+        listVerif.remove(32);
+        listVerif.remove(37);
+        listVerif.remove(38);
+        listVerif.remove(39);
+        listVerif.remove(41);
+        listVerif.remove(42);
+        listVerif.remove(43);
+        listVerif.remove(48);
+        listVerif.remove(49);
+        listVerif.remove(50);
+        listVerif.remove(56);
+        listVerif.remove(58);
+        listVerif.remove(60);
+        listVerif.remove(64);
+        listVerif.remove(67);
+        listVerif.remove(70);
 
 
-        assertNotEquals(listVerif, rosesBoard.computeValidCells("M", 1));
+
+        assertEquals(listVerif, rosesBoard.computeValidCells("M", 1));
     }
 }
