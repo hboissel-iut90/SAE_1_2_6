@@ -1,20 +1,14 @@
 package control;
 
 import boardifier.control.ActionFactory;
-import boardifier.control.ActionPlayer;
 import boardifier.control.Controller;
 import boardifier.control.Decider;
 import boardifier.model.GameElement;
-import boardifier.model.GameStageModel;
 import boardifier.model.Model;
 import boardifier.model.action.ActionList;
 import model.*;
-import view.RosesStageView;
 
-import javax.swing.*;
 import java.awt.*;
-import java.sql.SQLOutput;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
@@ -22,7 +16,7 @@ import java.util.Random;
 import static model.RosesPawn.PAWN_BLUE;
 import static model.RosesPawn.PAWN_RED;
 
-public class RosesDecider extends Decider {
+public class RosesDeciderEasy extends Decider {
 
     private static final Random loto = new Random(Calendar.getInstance().getTimeInMillis());
 
@@ -33,7 +27,7 @@ public class RosesDecider extends Decider {
     List<Point> ValidCells = null;
 
 
-    public RosesDecider(Model model, Controller control) {
+    public RosesDeciderEasy(Model model, Controller control) {
         super(model, control);
     }
 

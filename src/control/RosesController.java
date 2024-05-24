@@ -16,7 +16,6 @@ import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.sql.SQLOutput;
 import java.util.List;
 
 import static model.RosesPawn.PAWN_BLUE;
@@ -60,7 +59,7 @@ public class RosesController extends Controller {
         Player p = model.getCurrentPlayer();
         if (p.getType() == Player.COMPUTER) {
             System.out.println("COMPUTER PLAYS");
-            RosesDecider decider = new RosesDecider(model, this);
+            RosesDeciderHard decider = new RosesDeciderHard(model, this);
             ActionPlayer play = new ActionPlayer(model, this, decider, null);
             play.start();
         } else {
@@ -451,5 +450,6 @@ public class RosesController extends Controller {
         tempPickCard = copyOfPickPotCards;
         stageModel.setPickCards(tempPickCard);
     }
+
 
 }
