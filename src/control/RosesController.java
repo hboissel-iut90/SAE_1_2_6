@@ -59,17 +59,11 @@ public class RosesController extends Controller {
         if (p.getType() == Player.COMPUTER) {
             ActionPlayer play = null;
             System.out.println("COMPUTER PLAYS");
-            if (difficulty.equals("EE")) {
+            if (difficulty.equals("EE")|| difficulty.equals("E")) {
                 RosesDeciderEasy decider = new RosesDeciderEasy(model, this);
                 play = new ActionPlayer(model, this, decider, null);
-            } else if (difficulty.equals("HH")) {
+            } else if (difficulty.equals("HH") || difficulty.equals("H")) {
                 RosesDeciderHard decider = new RosesDeciderHard(model, this);
-                play = new ActionPlayer(model, this, decider, null);
-            } else if (difficulty.equals("H")) {
-                RosesDeciderHard decider = new RosesDeciderHard(model, this);
-                play = new ActionPlayer(model, this, decider, null);
-            } else if (difficulty.equals("E")) {
-                RosesDeciderEasy decider = new RosesDeciderEasy(model, this);
                 play = new ActionPlayer(model, this, decider, null);
             } else {
                 if (model.getIdPlayer() == 0) {
