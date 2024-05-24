@@ -14,5 +14,5 @@ public class RosesControllerTest {
     RosesController rosesController = new RosesController(model, view);
 
     @Test
-    public void checkIfPlayerPlay(String cardType, int row, int col){}
+    public void testCheckIfPlayerPlay(String cardType, int row, int col){}
 }

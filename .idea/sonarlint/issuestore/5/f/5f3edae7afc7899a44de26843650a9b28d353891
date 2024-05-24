@@ -1,58 +1,64 @@
 
-n	java:S117½"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(­óÓÉ8ªëÙÎú1
+n	java:S117Ò"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(­óÓÉ8•÷¥Üú1
+U
+java:S2589b"8Remove this expression which always evaluates to "false"(€°­‚8ş¥Üú1
 t
-java:S37769"RRefactor this method to reduce its Cognitive Complexity from 19 to the 15 allowed.(ˆÓŒÅùÿÿÿÿ8úîÙÎú1
+java:S37768"RRefactor this method to reduce its Cognitive Complexity from 32 to the 15 allowed.(ˆÓŒÅùÿÿÿÿ8›ş¥Üú1
 [
-java:S1854S">Remove this useless assignment to local variable "stageModel".(¼…€Ù8ûîÙÎú1
-L	java:S106="+Replace this use of System.out by a logger.(²ÊÈşÿÿÿÿ8ûîÙÎú1
-G	java:S106F"+Replace this use of System.out by a logger.(¯Íç¨8ıîÙÎú1
-L	java:S106G"+Replace this use of System.out by a logger.(İÃøÿÿÿÿ8ıîÙÎú1
-G	java:S106K"+Replace this use of System.out by a logger.(‹Á²ğ8şîÙÎú1
-G	java:S106R"+Replace this use of System.out by a logger.(¹ö‘Ô8ÿîÙÎú1
+java:S1854k">Remove this useless assignment to local variable "stageModel".(¼…€Ù8œş¥Üú1
+L	java:S106="+Replace this use of System.out by a logger.(²ÊÈşÿÿÿÿ8§ïÙÎú1
+n
+java:S1871G"LThis branch's code block is the same as the block for the branch on line 62.(’­é§ùÿÿÿÿ8ş¥Üú1
+n
+java:S1871D"LThis branch's code block is the same as the block for the branch on line 65.(¶–˜Æÿÿÿÿÿ8ş¥Üú1
+G	java:S106Y"+Replace this use of System.out by a logger.(¯Íç¨8¦ş¥Üú1
+L	java:S106Z"+Replace this use of System.out by a logger.(İÃøÿÿÿÿ8¦ş¥Üú1
+G	java:S106c"+Replace this use of System.out by a logger.(‹Á²ğ8¨ş¥Üú1
+G	java:S106j"+Replace this use of System.out by a logger.(¹ö‘Ô8ªş¥Üú1
 L
-java:S1481S"/Remove this unused "stageModel" local variable.(¼…€Ù8ÿîÙÎú1
-E	java:S108W")Either remove or fill this block of code.(ï­£Ä8ÿîÙÎú1
+java:S1481k"/Remove this unused "stageModel" local variable.(¼…€Ù8«ş¥Üú1
+E	java:S108p")Either remove or fill this block of code.(ï­£Ä8«ş¥Üú1
 \
-java:S1161]":Add the "@Override" annotation above this method signature(–Ñ•ûÿÿÿÿ8ïÙÎú1
+java:S1161v":Add the "@Override" annotation above this method signature(–Ñ•ûÿÿÿÿ8­ş¥Üú1
 o
-java:S3776f"SRefactor this method to reduce its Cognitive Complexity from 103 to the 15 allowed.(µè8ƒïÙÎú1
-Z
-java:S1854h"=Remove this useless assignment to local variable "viewStage".(§º¦—8…ïÙÎú1
-C
-java:S1659j"!Declare "col" on a separate line.(Ï¤šıÿÿÿÿ8†ïÙÎú1
-K
-java:S1481h".Remove this unused "viewStage" local variable.(§º¦—8†ïÙÎú1
-M	java:S106˜"+Replace this use of System.out by a logger.(Û®„ıÿÿÿÿ8‹ïÙÎú1
-M	java:S106¹"+Replace this use of System.out by a logger.(Ñ†ı³øÿÿÿÿ8ŒïÙÎú1
-H	java:S106Á"+Replace this use of System.out by a logger.(šÙ¥­8ïÙÎú1
-I
-java:S1905Ã"&Remove this unnecessary cast to "int".( ÀŒİıÿÿÿÿ8ïÙÎú1
-k
-java:S1871Í"MThis branch's code block is the same as the block for the branch on line 199.(Íß†ç8ïÙÎú1
-j
-java:S1871Ê"MThis branch's code block is the same as the block for the branch on line 196.(ÙÄµ\8ïÙÎú1
-H	java:S106Ñ"+Replace this use of System.out by a logger.(ˆ¸Ş€8’ïÙÎú1
-M	java:S106ü"+Replace this use of System.out by a logger.(Ãâ¸‚üÿÿÿÿ8“ïÙÎú1
-H	java:S106£"+Replace this use of System.out by a logger.(Û›ÿÏ8—ïÙÎú1
-H	java:S106¦"+Replace this use of System.out by a logger.(¸Àî¸8—ïÙÎú1
-H	java:S106°"+Replace this use of System.out by a logger.(Û›ÿÏ8™ïÙÎú1
-H	java:S106³"+Replace this use of System.out by a logger.(¸Àî¸8™ïÙÎú1
-M	java:S106·"+Replace this use of System.out by a logger.(ÒáíÜùÿÿÿÿ8™ïÙÎú1
-o
-java:S3776ß"RRefactor this method to reduce its Cognitive Complexity from 37 to the 15 allowed.(ƒ‰èo8ŸïÙÎú1
+java:S3776"SRefactor this method to reduce its Cognitive Complexity from 103 to the 15 allowed.(µè8°ş¥Üú1
 [
-java:S1854ã"=Remove this useless assignment to local variable "viewStage".(§º¦—8 ïÙÎú1
+java:S1854"=Remove this useless assignment to local variable "viewStage".(§º¦—8²ş¥Üú1
 D
-java:S1659à"!Declare "col" on a separate line.(Ï¤šıÿÿÿÿ8 ïÙÎú1
+java:S1659ƒ"!Declare "col" on a separate line.(Ï¤šıÿÿÿÿ8´ş¥Üú1
 L
-java:S1481ã".Remove this unused "viewStage" local variable.(§º¦—8¡ïÙÎú1
-p
-java:S1871õ"MThis branch's code block is the same as the block for the branch on line 369.(’ïİÓıÿÿÿÿ8¢ïÙÎú1
+java:S1481".Remove this unused "viewStage" local variable.(§º¦—8µş¥Üú1
+M	java:S106±"+Replace this use of System.out by a logger.(Û®„ıÿÿÿÿ8¿ş¥Üú1
+M	java:S106Î"+Replace this use of System.out by a logger.(Ñ†ı³øÿÿÿÿ8Ãş¥Üú1
+H	java:S106Ö"+Replace this use of System.out by a logger.(šÙ¥­8Åş¥Üú1
+I
+java:S1905Ø"&Remove this unnecessary cast to "int".( ÀŒİıÿÿÿÿ8Æş¥Üú1
 k
-java:S1871°"MThis branch's code block is the same as the block for the branch on line 427.(ä«ëà8¦ïÙÎú1
-G	java:S106­"+Replace this use of System.out by a logger.(‹¿n8¦ïÙÎú1
-G	java:S106²"+Replace this use of System.out by a logger.(‹¿n8§ïÙÎú1
+java:S1871â"MThis branch's code block is the same as the block for the branch on line 220.(Íß†ç8Çş¥Üú1
+j
+java:S1871ß"MThis branch's code block is the same as the block for the branch on line 217.(ÙÄµ\8Çş¥Üú1
+H	java:S106æ"+Replace this use of System.out by a logger.(ˆ¸Ş€8Ñş¥Üú1
+M	java:S106‘"+Replace this use of System.out by a logger.(Ãâ¸‚üÿÿÿÿ8Õş¥Üú1
+H	java:S106¸"+Replace this use of System.out by a logger.(Û›ÿÏ8Şş¥Üú1
+H	java:S106»"+Replace this use of System.out by a logger.(¸Àî¸8ßş¥Üú1
+H	java:S106Å"+Replace this use of System.out by a logger.(Û›ÿÏ8âş¥Üú1
+H	java:S106È"+Replace this use of System.out by a logger.(¸Àî¸8ãş¥Üú1
+M	java:S106Ì"+Replace this use of System.out by a logger.(ÒáíÜùÿÿÿÿ8äş¥Üú1
+o
+java:S3776ô"RRefactor this method to reduce its Cognitive Complexity from 37 to the 15 allowed.(ƒ‰èo8ïş¥Üú1
+[
+java:S1854ø"=Remove this useless assignment to local variable "viewStage".(§º¦—8ñş¥Üú1
+D
+java:S1659õ"!Declare "col" on a separate line.(Ï¤šıÿÿÿÿ8òş¥Üú1
+L
+java:S1481ø".Remove this unused "viewStage" local variable.(§º¦—8óş¥Üú1
+p
+java:S1871Š"MThis branch's code block is the same as the block for the branch on line 390.(’ïİÓıÿÿÿÿ8öş¥Üú1
+k
+java:S1871Å"MThis branch's code block is the same as the block for the branch on line 448.(¿Œ¢±8¦ïÙÎú1
+G	java:S106Â"+Replace this use of System.out by a logger.(‹¿n8üş¥Üú1
+G	java:S106Ç"+Replace this use of System.out by a logger.(‹¿n8şş¥Üú1
 ã
-java:S6541f"ÆA "Brain Method" was detected. Refactor it to reduce at least one of the following metrics: LOC from 227 to 64, Complexity from 75 to 14, Nesting Level from 5 to 2, Number of Variables from 36 to 6.(µè8¨ïÙÎú1
+java:S6541"ÆA "Brain Method" was detected. Refactor it to reduce at least one of the following metrics: LOC from 228 to 64, Complexity from 75 to 14, Nesting Level from 5 to 2, Number of Variables from 36 to 6.(µè8ÿ¥Üú1
 ã
-java:S6541ß"ÅA "Brain Method" was detected. Refactor it to reduce at least one of the following metrics: LOC from 85 to 64, Complexity from 36 to 14, Nesting Level from 4 to 2, Number of Variables from 11 to 6.(ƒ‰èo8©ïÙÎú1
+java:S6541ô"ÅA "Brain Method" was detected. Refactor it to reduce at least one of the following metrics: LOC from 85 to 64, Complexity from 36 to 14, Nesting Level from 4 to 2, Number of Variables from 11 to 6.(ƒ‰èo8ÿ¥Üú1
