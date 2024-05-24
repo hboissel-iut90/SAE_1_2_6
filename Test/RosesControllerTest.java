@@ -14,5 +14,17 @@ public class RosesControllerTest {
     RosesController rosesController = new RosesController(model, view);
 
     @Test
+    public void testStageLoop(String cardType, int row, int col){   }
+
+    @Test
+    public void testPlayTurn(String cardType, int row, int col){}
+
+    @Test
+    public void testEndOfTurn(String cardType, int row, int col){}
+
+    @Test
+    public void testAnalyseAndPlay(String cardType, int row, int col){}
+
+    @Test
     public void testCheckIfPlayerPlay(String cardType, int row, int col){}
 }
