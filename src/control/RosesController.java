@@ -23,7 +23,7 @@ import static model.RosesPawn.PAWN_RED;
 
 public class RosesController extends Controller {
 
-    BufferedReader consoleIn;
+    public BufferedReader consoleIn;
     boolean firstPlayer;
     boolean isTheFirstTime = true;
 
@@ -53,7 +53,7 @@ public class RosesController extends Controller {
         endGame();
     }
 
-    private void playTurn() {
+    public void playTurn() {
         // get the new player
         Player p = model.getCurrentPlayer();
         if (p.getType() == Player.COMPUTER) {
@@ -118,7 +118,7 @@ public class RosesController extends Controller {
         stageModel.update();
     }
 
-    private boolean analyseAndPlay(String line) {
+    public boolean analyseAndPlay(String line) {
         RosesStageModel gameStage = (RosesStageModel) model.getGameStage();
         RosesStageView viewStage = (RosesStageView) view.getGameStageView();
         nbMovements = gameStage.getNbMovements();
@@ -363,7 +363,7 @@ public class RosesController extends Controller {
     }
 
 
-    private void checkIfPlayerPlay() {
+    public void checkIfPlayerPlay() {
         int row = 0, col = 0;
 
         RosesStageModel gameStage = (RosesStageModel) model.getGameStage();
