@@ -199,9 +199,9 @@ public class RosesStageFactory extends StageElementsFactory {
         TextElement cardPickCounter = new TextElement("Cards left : " + ConsoleColor.GREY_BACKGROUND + pickPotCards.length + ConsoleColor.RESET, stageModel);
         cardPickCounter.setLocation(26, 2);
         stageModel.setCardPickCounter(cardPickCounter);
-        TextElement instructions1 = new TextElement("Entrez P pour piocher une carte.", stageModel);
-        TextElement instructions2 = new TextElement("Entrez M + numéro de la carte pour jouer une carte mouvement. ex: M1. Le numéro des cartes se fait de haut en bas (1 en haut, 5 en bas)", stageModel);
-        TextElement instructions3 = new TextElement("Entrez H + numéro de la carte pour jouer une carte héros + mouvement. ex: H1.", stageModel);
+        TextElement instructions1 = new TextElement("Enter P to pick a movement card.", stageModel);
+        TextElement instructions2 = new TextElement("Enter M + card number to play a move card. The number of cards is done from top to bottom (1 at the top, 5 at the bottom). Ex : M1", stageModel);
+        TextElement instructions3 = new TextElement("Enter H + card number to play a hero card + number of card movement. Ex : H1", stageModel);
         TextElement numberOfBlueHeroCards = new TextElement(ConsoleColor.BLUE + heroBlueCards.length + ConsoleColor.RESET, stageModel);
         TextElement numberOfRedHeroCards = new TextElement(ConsoleColor.RED + heroRedCards.length + ConsoleColor.RESET, stageModel);
         numberOfBlueHeroCards.setLocation(47, 25);
