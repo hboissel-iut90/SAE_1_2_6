@@ -26,17 +26,16 @@ public class RosesController extends Controller {
     BufferedReader consoleIn;
     boolean firstPlayer;
     boolean isTheFirstTime = true;
-    int lastRow = 0;
-    int lastCol = 0;
 
     boolean isTheEndOfTheStage = false;
 
-
+    private String difficulty;
     int nbMovements = 0;
 
-    public RosesController(Model model, View view) {
+    public RosesController(Model model, View view, String difficulty) {
         super(model, view);
         firstPlayer = true;
+        this.difficulty = difficulty;
     }
 
     /**
@@ -58,9 +57,29 @@ public class RosesController extends Controller {
         // get the new player
         Player p = model.getCurrentPlayer();
         if (p.getType() == Player.COMPUTER) {
+            ActionPlayer play = null;
             System.out.println("COMPUTER PLAYS");
-            RosesDeciderEasy decider = new RosesDeciderEasy(model, this);
-            ActionPlayer play = new ActionPlayer(model, this, decider, null);
+            if (difficulty.equals("EE")) {
+                RosesDeciderEasy decider = new RosesDeciderEasy(model, this);
+                play = new ActionPlayer(model, this, decider, null);
+            } else if (difficulty.equals("HH")) {
+                RosesDeciderHard decider = new RosesDeciderHard(model, this);
+                play = new ActionPlayer(model, this, decider, null);
+            } else if (difficulty.equals("H")) {
+                RosesDeciderHard decider = new RosesDeciderHard(model, this);
+                play = new ActionPlayer(model, this, decider, null);
+            } else if (difficulty.equals("E")) {
+                RosesDeciderEasy decider = new RosesDeciderEasy(model, this);
+                play = new ActionPlayer(model, this, decider, null);
+            } else {
+                if (model.getIdPlayer() == 0) {
+                    RosesDeciderEasy decider = new RosesDeciderEasy(model, this);
+                    play = new ActionPlayer(model, this, decider, null);
+                } else {
+                    RosesDeciderHard decider = new RosesDeciderHard(model, this);
+                    play = new ActionPlayer(model, this, decider, null);
+                }
+            }
             play.start();
         } else {
             checkIfPlayerPlay();
@@ -167,7 +186,7 @@ public class RosesController extends Controller {
                         tempPickCard[index] = gameStage.getDiscardCards()[p];
                         index++;
                     }
-                        gameStage.getDiscardPot().removeElement(gameStage.getDiscardCards()[p]);
+                    gameStage.getDiscardPot().removeElement(gameStage.getDiscardCards()[p]);
                 }
 
                 // Réinitialiser la défausse à zéro
@@ -420,12 +439,12 @@ public class RosesController extends Controller {
                     return;
                 } else if (row >= 0 && col >= 0 && row <= 8 && col <= 8 && i > 0 && gameStage.getBoard().isElementAt(row, col)) {
                     RosesPawn tempPawn = (RosesPawn) gameStage.getBoard().getElement(row, col);
-                    if (model.getIdPlayer() == 0 && gameStage.getPlayer1HeroCards().length > 0 && gameStage.getPlayer1HeroCards()[i - 1] != null && tempPawn.getColor() == PAWN_RED) {
+                    if (model.getIdPlayer() == 0 && i < gameStage.getPlayer1HeroCards().length && gameStage.getPlayer1HeroCards()[i - 1] != null && tempPawn.getColor() == PAWN_RED) {
                         tempCheck = true;
                         System.out.println("can play hero cards");
                         gameStage.setChecked(tempCheck);
                         return;
-                    } else if (model.getIdPlayer() == 1 && gameStage.getPlayer2HeroCards().length > 0 && gameStage.getPlayer2HeroCards()[i - 1] != null && tempPawn.getColor() == PAWN_BLUE) {
+                    } else if (model.getIdPlayer() == 1 && i < gameStage.getPlayer2HeroCards().length && gameStage.getPlayer2HeroCards()[i - 1] != null && tempPawn.getColor() == PAWN_BLUE) {
                         tempCheck = true;
                         System.out.println("can play hero cards");
                         gameStage.setChecked(tempCheck);

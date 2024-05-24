@@ -51,13 +51,17 @@ public class RosesDeciderEasy extends Decider {
         int choice = 0;
 
         ActionList actions = new ActionList();
-        int[][] redPositions = new int[26][2];
-        int[][] bluePositions = new int[26][2];
+        int[][] redPositions = new int[30][2];
+        int[][] bluePositions = new int[30][2];
         int redIndex = 0;
         int blueIndex = 0;
         int nbMovements = stage.getNbMovements();
         RosesPawn tempPawn = null;
         if (model.getIdPlayer() == RosesPawn.PAWN_BLUE) {
+            if (stage.getBluePawnsToPlay() == 0) { // if the AI has no pawns left
+                stage.computePartyResult();
+                return actions;
+            }
             pawnPot = stage.getBluePot();
             for (int k = 0; k < stage.getPlayer1MovementCards().length; k++) {
                 if (stage.getPlayer1MovementCards()[k] != null) {
@@ -80,7 +84,7 @@ public class RosesDeciderEasy extends Decider {
                         }
                     }
                     if (board.getElement(i, j, 1) != null) { // Take the position of the actual row and col cause sometimes the crown pawn is not detected due to
-                                                                   // the fact that there is two pawns on the same col/row, if there is two elements on the same cell, so the crown pawn must be here
+                        // the fact that there is two pawns on the same col/row, if there is two elements on the same cell, so the crown pawn must be here
                         row = i;
                         col = j;
                     }
@@ -94,21 +98,40 @@ public class RosesDeciderEasy extends Decider {
                 // Get the destination of where we will go
                 switch (possibleMovements[i]) {
                     case "W":
-                        colDest = col - possibleValues[i]; choice = i; break;
+                        colDest = col - possibleValues[i];
+                        choice = i;
+                        break;
                     case "N-E":
-                        colDest = col + possibleValues[i]; rowDest = row - possibleValues[i]; choice = i; break;
+                        colDest = col + possibleValues[i];
+                        rowDest = row - possibleValues[i];
+                        choice = i;
+                        break;
                     case "E":
-                        colDest = col + possibleValues[i]; choice = i; break;
+                        colDest = col + possibleValues[i];
+                        choice = i;
+                        break;
                     case "S-E":
-                        colDest = col + possibleValues[i]; rowDest = row + possibleValues[i]; choice = i; break;
+                        colDest = col + possibleValues[i];
+                        rowDest = row + possibleValues[i];
+                        choice = i;
+                        break;
                     case "S":
-                        rowDest = row + possibleValues[i]; choice = i; break;
+                        rowDest = row + possibleValues[i];
+                        choice = i;
+                        break;
                     case "S-W":
-                        rowDest = row + possibleValues[i]; colDest = col - possibleValues[i]; choice = i; break;
+                        rowDest = row + possibleValues[i];
+                        colDest = col - possibleValues[i];
+                        choice = i;
+                        break;
                     case "N":
-                        rowDest = row - possibleValues[i]; choice = i; break;
+                        rowDest = row - possibleValues[i];
+                        choice = i;
+                        break;
                     default:
-                        rowDest = row - possibleValues[i]; colDest = col - possibleValues[i]; choice = i;
+                        rowDest = row - possibleValues[i];
+                        colDest = col - possibleValues[i];
+                        choice = i;
                 }
                 if (board.canReachCell(rowDest, colDest)) { // Check if we can put our pawn adjacent to a pawn of the colour of the IA
                     for (int m = 0; m < blueIndex; m++) {
@@ -166,6 +189,10 @@ public class RosesDeciderEasy extends Decider {
         } else { // basically, this is the same logic if the player has the red pawns
             pawnPot = stage.getRedPot();
             if (model.getIdPlayer() == RosesPawn.PAWN_RED) {
+                if (stage.getRedPawnsToPlay() == 0) {
+                    stage.computePartyResult();
+                    return actions;
+                }
                 for (int k = 0; k < stage.getPlayer2MovementCards().length; k++) {
                     if (stage.getPlayer2MovementCards()[k] != null) {
                         possibleMovements[k] = stage.getPlayer2MovementCards()[k].getDirection();
@@ -197,21 +224,40 @@ public class RosesDeciderEasy extends Decider {
                     colDest = col;
                     switch (possibleMovements[i]) {
                         case "W":
-                            colDest = col - possibleValues[i]; choice = i; break;
+                            colDest = col - possibleValues[i];
+                            choice = i;
+                            break;
                         case "N-E":
-                            colDest = col + possibleValues[i]; rowDest = row - possibleValues[i]; choice = i; break;
+                            colDest = col + possibleValues[i];
+                            rowDest = row - possibleValues[i];
+                            choice = i;
+                            break;
                         case "E":
-                            colDest = col + possibleValues[i]; choice = i; break;
+                            colDest = col + possibleValues[i];
+                            choice = i;
+                            break;
                         case "S-E":
-                            colDest = col + possibleValues[i]; rowDest = row + possibleValues[i]; choice = i; break;
+                            colDest = col + possibleValues[i];
+                            rowDest = row + possibleValues[i];
+                            choice = i;
+                            break;
                         case "S":
-                            rowDest = row + possibleValues[i]; choice = i; break;
+                            rowDest = row + possibleValues[i];
+                            choice = i;
+                            break;
                         case "S-W":
-                            rowDest = row + possibleValues[i]; colDest = col - possibleValues[i]; choice = i; break;
+                            rowDest = row + possibleValues[i];
+                            colDest = col - possibleValues[i];
+                            choice = i;
+                            break;
                         case "N":
-                            rowDest = row - possibleValues[i]; choice = i; break;
+                            rowDest = row - possibleValues[i];
+                            choice = i;
+                            break;
                         default:
-                            rowDest = row - possibleValues[i]; colDest = col - possibleValues[i]; choice = i;
+                            rowDest = row - possibleValues[i];
+                            colDest = col - possibleValues[i];
+                            choice = i;
                     }
                     if (board.canReachCell(rowDest, colDest)) {
                         for (int m = 0; m < redIndex; m++) {
@@ -341,78 +387,97 @@ public class RosesDeciderEasy extends Decider {
         if (possibleMovements[i] == null) return null;
         switch (possibleMovements[i]) { // get the destination of the possible hero card
             case "W":
-                col = col - possibleValues[i]; choice = i; break;
+                col = col - possibleValues[i];
+                choice = i;
+                break;
             case "N-E":
-                col = col + possibleValues[i]; row = row - possibleValues[i]; choice = i; break;
+                col = col + possibleValues[i];
+                row = row - possibleValues[i];
+                choice = i;
+                break;
             case "E":
-                col = col + possibleValues[i]; choice = i; break;
+                col = col + possibleValues[i];
+                choice = i;
+                break;
             case "S-E":
-                col = col + possibleValues[i]; row = row + possibleValues[i]; choice = i; break;
+                col = col + possibleValues[i];
+                row = row + possibleValues[i];
+                choice = i;
+                break;
             case "S":
-                row = row + possibleValues[i]; choice = i; break;
+                row = row + possibleValues[i];
+                choice = i;
+                break;
             case "S-W":
-                row = row + possibleValues[i]; col = col - possibleValues[i]; choice = i; break;
+                row = row + possibleValues[i];
+                col = col - possibleValues[i];
+                choice = i;
+                break;
             case "N":
-                row = row - possibleValues[i]; choice = i; break;
+                row = row - possibleValues[i];
+                choice = i;
+                break;
             default:
-                row = row - possibleValues[i]; col = col - possibleValues[i]; choice = i;
+                row = row - possibleValues[i];
+                col = col - possibleValues[i];
+                choice = i;
         }
-            ActionList actions = new ActionList(true);
-            ValidCells = gameStage.getBoard().computeValidCells("H", model.getIdPlayer());
-            gameStage.getBoard().setValidCells(ValidCells); // valid cells for the hero cards
-            System.out.println("Valid cells : " + ValidCells);
-            if (row > 8 || col > 8 || row < 0 || col < 0) { // verifications
+        ActionList actions = new ActionList(true);
+        ValidCells = gameStage.getBoard().computeValidCells("H", model.getIdPlayer());
+        gameStage.getBoard().setValidCells(ValidCells); // valid cells for the hero cards
+        System.out.println("Valid cells : " + ValidCells);
+        if (row > 8 || col > 8 || row < 0 || col < 0) { // verifications
+            return null;
+        }
+        if (model.getIdPlayer() == 0 && gameStage.getPlayer1HeroCards().length > 0) {
+            actions = new ActionList(true);
+            RosesPawn pawnToSwap = (RosesPawn) gameStage.getBoard().getElement(row, col);
+            if (pawnToSwap != null && pawnToSwap.getColor() == PAWN_RED) {
+                pawnToSwap.setColor(PAWN_BLUE);
+                System.out.println(pawnToSwap.getColor());
+            } else {
+                System.out.println("Invalid move. No pawn at the specified location or the pawn is already of your color.");
                 return null;
             }
-            if (model.getIdPlayer() == 0 && gameStage.getPlayer1HeroCards().length > 0) {
-                actions = new ActionList(true);
-                RosesPawn pawnToSwap = (RosesPawn) gameStage.getBoard().getElement(row, col);
-                if (pawnToSwap != null && pawnToSwap.getColor() == PAWN_RED) {
-                    pawnToSwap.setColor(PAWN_BLUE);
-                    System.out.println(pawnToSwap.getColor());
-                } else {
-                    System.out.println("Invalid move. No pawn at the specified location or the pawn is already of your color.");
-                    return null;
-                }
-            } else if (model.getIdPlayer() == 1 && gameStage.getPlayer2HeroCards().length > 0) {
-                actions = new ActionList(true);
-                RosesPawn pawnToSwap = (RosesPawn) gameStage.getBoard().getElement(row, col);
-                if (pawnToSwap != null && pawnToSwap.getColor() == PAWN_BLUE) {
-                    pawnToSwap.setColor(PAWN_RED);
-                    System.out.println(pawnToSwap.getColor());
-                } else {
-                    System.out.println("Invalid move. No pawn at the specified location or the pawn is already of your color.");
-                    return null;
-                }
+        } else if (model.getIdPlayer() == 1 && gameStage.getPlayer2HeroCards().length > 0) {
+            actions = new ActionList(true);
+            RosesPawn pawnToSwap = (RosesPawn) gameStage.getBoard().getElement(row, col);
+            if (pawnToSwap != null && pawnToSwap.getColor() == PAWN_BLUE) {
+                pawnToSwap.setColor(PAWN_RED);
+                System.out.println(pawnToSwap.getColor());
             } else {
-                System.out.println("Invalid choice. No hero cards available. Retry!");
+                System.out.println("Invalid move. No pawn at the specified location or the pawn is already of your color.");
                 return null;
             }
-            if (model.getIdPlayer() == 0) { // if the verifications has been done and the function did not return, then place the hero card
-                gameStage.removeElement(gameStage.getPlayer1MovementCards()[choice]);
-                gameStage.removeElement(gameStage.getPlayer1HeroCards()[gameStage.getPlayer1HeroCards().length - 1]);
-                RosesCard[] tempHeroCards = gameStage.getPlayer1HeroCards();
-                RosesCard[] copyOfPickPotCards = new RosesCard[tempHeroCards.length - 1];
-                System.arraycopy(tempHeroCards, 0, copyOfPickPotCards, 0, copyOfPickPotCards.length);
-                tempHeroCards = copyOfPickPotCards;
-                gameStage.setPlayer1HeroCards(tempHeroCards);
-                gameStage.getDiscardCards()[nbMovements] = gameStage.getPlayer1MovementCards()[choice];
-                gameStage.getPlayer1MovementCards()[choice].flip();
-                gameStage.getDiscardPot().addElement(gameStage.getPlayer1MovementCards()[choice], 0, 0);
-                gameStage.getPlayer1MovementCards()[choice] = null;
-            } else {
-                gameStage.removeElement(gameStage.getPlayer2MovementCards()[choice]);
-                gameStage.removeElement(gameStage.getPlayer2HeroCards()[gameStage.getPlayer2HeroCards().length - 1]);
-                RosesCard[] tempHeroCards = gameStage.getPlayer2HeroCards();
-                RosesCard[] copyOfPickPotCards = new RosesCard[tempHeroCards.length - 1];
-                System.arraycopy(tempHeroCards, 0, copyOfPickPotCards, 0, copyOfPickPotCards.length);
-                tempHeroCards = copyOfPickPotCards;
-                gameStage.setPlayer2HeroCards(tempHeroCards);
-                gameStage.getDiscardCards()[nbMovements] = gameStage.getPlayer2MovementCards()[choice];
-                gameStage.getPlayer2MovementCards()[choice].flip();
-                gameStage.getDiscardPot().addElement(gameStage.getPlayer2MovementCards()[choice], 0, 0);
-                gameStage.getPlayer2MovementCards()[choice] = null;
-            }
+        } else {
+            System.out.println("Invalid choice. No hero cards available. Retry!");
+            return null;
+        }
+        if (model.getIdPlayer() == 0) { // if the verifications has been done and the function did not return, then place the hero card
+            gameStage.removeElement(gameStage.getPlayer1MovementCards()[choice]);
+            gameStage.removeElement(gameStage.getPlayer1HeroCards()[gameStage.getPlayer1HeroCards().length - 1]);
+            RosesCard[] tempHeroCards = gameStage.getPlayer1HeroCards();
+            RosesCard[] copyOfPickPotCards = new RosesCard[tempHeroCards.length - 1];
+            System.arraycopy(tempHeroCards, 0, copyOfPickPotCards, 0, copyOfPickPotCards.length);
+            tempHeroCards = copyOfPickPotCards;
+            gameStage.setPlayer1HeroCards(tempHeroCards);
+            gameStage.getDiscardCards()[nbMovements] = gameStage.getPlayer1MovementCards()[choice];
+            gameStage.getPlayer1MovementCards()[choice].flip();
+            gameStage.getDiscardPot().addElement(gameStage.getPlayer1MovementCards()[choice], 0, 0);
+            gameStage.getPlayer1MovementCards()[choice] = null;
+        } else {
+            gameStage.removeElement(gameStage.getPlayer2MovementCards()[choice]);
+            gameStage.removeElement(gameStage.getPlayer2HeroCards()[gameStage.getPlayer2HeroCards().length - 1]);
+            RosesCard[] tempHeroCards = gameStage.getPlayer2HeroCards();
+            RosesCard[] copyOfPickPotCards = new RosesCard[tempHeroCards.length - 1];
+            System.arraycopy(tempHeroCards, 0, copyOfPickPotCards, 0, copyOfPickPotCards.length);
+            tempHeroCards = copyOfPickPotCards;
+            gameStage.setPlayer2HeroCards(tempHeroCards);
+            gameStage.getDiscardCards()[nbMovements] = gameStage.getPlayer2MovementCards()[choice];
+            gameStage.getPlayer2MovementCards()[choice].flip();
+            gameStage.getDiscardPot().addElement(gameStage.getPlayer2MovementCards()[choice], 0, 0);
+            gameStage.getPlayer2MovementCards()[choice] = null;
+        }
 
         nbMovements++;
         gameStage.setNbMovements(nbMovements);
