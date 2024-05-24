@@ -50,58 +50,14 @@ class RosesBoardTest {
 
     // In this test, we verify when no pawn is on the board
     @Test
-<<<<<<< HEAD
     void testComputeValidCells_EmptyGridString() {
         List<Point> result = rosesBoard.computeValidCells("H", 0);
         List<Point> result2 = rosesBoard.computeValidCells("M", 0);
-=======
-    public void testComputeValidCells_hPawnFirstCell() {
-        RosesBoard rosesBoard = Mockito.mock(RosesBoard.class);
-        // Create a player with id 0
-        RosesPawn pawn = new RosesPawn(0, Mockito.mock(GameStageModel.class));
-        // Create a list of pawns
-        Mockito.when(rosesBoard.getElement(0, 0)).thenReturn(pawn);
-        Mockito.when(rosesBoard.isElementAt(0, 0)).thenReturn(true);
-        Mockito.when(rosesBoard.isEmpty()).thenReturn(false);
-        System.out.println(pawn.getX());
->>>>>>> 926737e8692555a7e32eddd9848f031272dd99c9
 
         assertTrue(result.isEmpty(), "Expected an empty list when the grid is empty and string is 'H'.");
         assertFalse(result2.isEmpty(),"Expected at least one element in list when the grid is empty and string is 'M'.");
     }
 
-<<<<<<< HEAD
-=======
-        assertEquals(1, result.size(), "Expected a list with one element when a hero is played and there is a pawn in the first cell.");
-
-    public void testComputeValidCells_FullHPawn() {
-        GameStageModel gameStageModel = Mockito.mock(GameStageModel.class);
-        RosesBoard rosesBoard = new RosesBoard(0,0,gameStageModel);
-        RosesPawn rosesPawn1 = new RosesPawn(0, gameStageModel);
-        RosesPawn rosesPawn2 =  new RosesPawn(0, gameStageModel);
-        RosesPawn rosesPawn3 =  new RosesPawn(0, gameStageModel);
-        RosesPawn rosesPawn4 =  new RosesPawn(0, gameStageModel);
-        RosesPawn rosesPawn5 =  new RosesPawn(0, gameStageModel);
-        RosesPawn rosesPawn6 =  new RosesPawn(0, gameStageModel);
-        RosesPawn rosesPawn7 =  new RosesPawn(0, gameStageModel);
-        RosesPawn rosesPawn8 =  new RosesPawn(0, gameStageModel);
-        RosesPawn rosesPawn9 =  new RosesPawn(0, gameStageModel);
-        RosesPawn rosesPawn10 =  new RosesPawn(0, gameStageModel);
-        RosesPawn rosesPawn11 =  new RosesPawn(0, gameStageModel);
-        RosesPawn rosesPawn12 =  new RosesPawn(0, gameStageModel);
-        RosesPawn rosesPawn13 =  new RosesPawn(0, gameStageModel);
-        RosesPawn rosesPawn14 =  new RosesPawn(0, gameStageModel);
-        RosesPawn rosesPawn15 =  new RosesPawn(0, gameStageModel);
-        RosesPawn rosesPawn16 =  new RosesPawn(0, gameStageModel);
-        RosesPawn rosesPawn17 =  new RosesPawn(0, gameStageModel);
-        RosesPawn rosesPawn18 =  new RosesPawn(0, gameStageModel);
-        RosesPawn rosesPawn19 =  new RosesPawn(0, gameStageModel);
-        RosesPawn rosesPawn20 =  new RosesPawn(0, gameStageModel);
-        RosesPawn rosesPawn21 =  new RosesPawn(0, gameStageModel);
-        RosesPawn rosesPawn22 =  new RosesPawn(0, gameStageModel);
-        RosesPawn rosesPawn23 =  new RosesPawn(0, gameStageModel);
-        RosesPawn rosesPawn24 =  new RosesPawn(0, gameStageModel);
->>>>>>> 926737e8692555a7e32eddd9848f031272dd99c9
 
     // In this test, we verify if the crown pawn can use Hero card in any move
     // (crown pawn don't matter because computeValidCells doesn't considerate crown pawn)
