@@ -175,9 +175,9 @@ public class RosesDeciderHard extends Decider {// La classe RosesDeciderHard hé
         if (typeOfMove.equals("H")) {
             RosesPawn pawnToSwap = (RosesPawn) board.getElement(nextDestination.x, nextDestination.y);
             if (model.getIdPlayer() == RosesPawn.PAWN_BLUE) {
-                pawnToSwap.setColor(RosesPawn.PAWN_RED);
-            } else {
                 pawnToSwap.setColor(RosesPawn.PAWN_BLUE);
+            } else {
+                pawnToSwap.setColor(RosesPawn.PAWN_RED);
             }
         }
 
@@ -407,7 +407,7 @@ public class RosesDeciderHard extends Decider {// La classe RosesDeciderHard hé
                     tempPickCard[index] = stageModel.getDiscardCards()[p];
                     index++;
                 }
-
+                stageModel.getDiscardPot().removeElement(stageModel.getDiscardCards()[p]);
             }
 
             RosesCard[] newEmptyDiscard = new RosesCard[26];

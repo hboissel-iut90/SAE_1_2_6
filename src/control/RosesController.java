@@ -90,16 +90,22 @@ public class RosesController extends Controller {
                 System.out.print(p.getName() + " > ");
                 try {
                     String line = consoleIn.readLine();
-                    if (line == null || line.trim().isEmpty()) {
-                        System.out.println("wrong instructions");
-                        continue;
+                    if (line.equals("stop")) {
+                        RosesStageModel stageModel = (RosesStageModel) model.getGameStage();
+                        stageModel.computePartyResult();
+                        return;
                     }
+                        if (line == null || line.trim().isEmpty()) {
+                            System.out.println("wrong instructions");
+                            continue;
+                        }
                     if (line.length() == 2 || String.valueOf(line.charAt(0)).equals("P")) {
                         ok = analyseAndPlay(line);
                     }
                     if (!ok) {
                         System.out.println("incorrect instruction. retry !");
                         RosesStageModel stageModel = (RosesStageModel) model.getGameStage();
+
 
 
                     }

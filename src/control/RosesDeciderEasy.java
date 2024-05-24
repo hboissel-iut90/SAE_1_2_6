@@ -374,6 +374,7 @@ public class RosesDeciderEasy extends Decider {
                     tempPickCard[index] = stageModel.getDiscardCards()[p];
                     index++;
                 }
+                stageModel.getDiscardPot().removeElement(stageModel.getDiscardCards()[p]);
             }
             RosesCard[] newEmptyDiscard = new RosesCard[26];
             stageModel.setPickCards(tempPickCard);
