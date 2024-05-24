@@ -213,7 +213,6 @@ class RosesBoardTest {
                 listVerif.add(new Point(j, i));
             }
         }
-        System.out.println(listVerif);
 
         listVerif.remove(10);
         listVerif.remove(12);
@@ -237,8 +236,8 @@ class RosesBoardTest {
         listVerif.remove(39);
         listVerif.remove(40);
         listVerif.remove(43);
-        listVerif.remove(44);
-        listVerif.remove(46);
+        listVerif.remove(45);
+        listVerif.remove(47);
 
 
 
