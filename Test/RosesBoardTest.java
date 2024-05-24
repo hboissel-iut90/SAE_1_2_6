@@ -3,11 +3,9 @@ import model.RosesBoard;
 import model.RosesPawn;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.awt.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,11 +15,15 @@ import static org.mockito.Mockito.when;
 class RosesBoardTest {
     GameStageModel gameStageModel;
     RosesBoard rosesBoard;
+    ArrayList<Point> listVerif;
     RosesPawn rosesPawn1, rosesPawn2, rosesPawn3, rosesPawn4, rosesPawn5, rosesPawn6, rosesPawn7, rosesPawn8, rosesPawn9, rosesPawn10,rosesPawn11,rosesPawn12,rosesPawn13,rosesPawn14,rosesPawn15,rosesPawn16,rosesPawn17,rosesPawn18,rosesPawn19,rosesPawn20,rosesPawn21,rosesPawn22,rosesPawn23,rosesPawn24;
     @BeforeEach
     public void setUp(){
         gameStageModel = Mockito.mock(GameStageModel.class);
         rosesBoard = new RosesBoard(0,0,gameStageModel);
+
+        listVerif = new ArrayList<>();
+
         rosesPawn1 = new RosesPawn(0, gameStageModel);
         rosesPawn2 =  new RosesPawn(0, gameStageModel);
         rosesPawn3 =  new RosesPawn(0, gameStageModel);
@@ -119,41 +121,32 @@ class RosesBoardTest {
     }
 
     @Test
-    void testComputeValidCells_FullPossibleMoveHPawnWithCPawnInCornerLeftUp() {
-        rosesBoard.addElement(rosesPawn1,-1,-1);
-        rosesBoard.addElement(rosesPawn2,0,-1);
-        rosesBoard.addElement(rosesPawn3,1,-1);
-        rosesBoard.addElement(rosesPawn4,-1,0);
-        rosesBoard.addElement(rosesPawn5,1,0);
-        rosesBoard.addElement(rosesPawn6,2,0);
-        rosesBoard.addElement(rosesPawn7,3,0);
-        rosesBoard.addElement(rosesPawn8,-1,1);
-        rosesBoard.addElement(rosesPawn9,0,1);
-        rosesBoard.addElement(rosesPawn10,1,1);
-        rosesBoard.addElement(rosesPawn11,0,2);
-        rosesBoard.addElement(rosesPawn12,2,2);
-        rosesBoard.addElement(rosesPawn13,0,3);
-        rosesBoard.addElement(rosesPawn14,3,3);
+    void testComputeValidCells_FullPossibleMoveHPawnWithCPawnInCornerRightDown() {
+        rosesBoard.addElement(rosesPawn1,5,5);
+        rosesBoard.addElement(rosesPawn2,8,5);
+        rosesBoard.addElement(rosesPawn3,6,6);
+        rosesBoard.addElement(rosesPawn4,8,6);
+        rosesBoard.addElement(rosesPawn5,7,7);
+        rosesBoard.addElement(rosesPawn6,8,7);
+        rosesBoard.addElement(rosesPawn7,5,8);
+        rosesBoard.addElement(rosesPawn8,6,8);
+        rosesBoard.addElement(rosesPawn9,7,8);
+        rosesBoard.addElement(rosesPawn10,9,8);
+        rosesBoard.addElement(rosesPawn11,8,9);
+        rosesBoard.addElement(rosesPawn12,9,9);
 
-        ArrayList<Point> listVerif = new ArrayList<>();
-        listVerif.add(new Point(1,0));
-        listVerif.add(new Point(2, 0));
-        listVerif.add(new Point(3, 0));
-        listVerif.add(new Point(0, 1));
-        listVerif.add(new Point(1, 1));
-        listVerif.add(new Point(0, 2));
-        listVerif.add(new Point(2, 2));
-        listVerif.add(new Point(0, 3));
-        listVerif.add(new Point(3, 3));
+        listVerif.add(new Point(5,5));
+        listVerif.add(new Point(8, 5));
+        listVerif.add(new Point(3, 6));
+        listVerif.add(new Point(0, 6));
+        listVerif.add(new Point(1, 7));
+        listVerif.add(new Point(0, 7));
+        listVerif.add(new Point(2, 8));
+        listVerif.add(new Point(0, 8));
+        listVerif.add(new Point(3, 8));
 
 
         assertEquals(listVerif, rosesBoard.computeValidCells("H", 1));
-
-    }
-
-    @Test
-    void testComputeValidCells_FullPossibleMoveHPawnWithCPawnInCornerRightDown() {
-
     }
 
 }
