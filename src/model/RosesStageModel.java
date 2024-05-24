@@ -261,7 +261,6 @@ public class RosesStageModel extends GameStageModel {
     public void setPickCards(RosesCard[] pickCards) {
         this.pickCards = pickCards;
         for (int i = 0; i < pickCards.length; i++) {
-            this.pickCards[i] = pickCards[i];
             addElement(pickCards[i]);
         }
     }
@@ -315,7 +314,6 @@ public class RosesStageModel extends GameStageModel {
     public void setPlayer1HeroCards(RosesCard[] player1HeroCards) {
         this.player1HeroCards = player1HeroCards;
         for (int i = 0; i < player1HeroCards.length; i++) {
-            this.player1HeroCards[i] = player1HeroCards[i];
             addElement(player1HeroCards[i]);
         }
     }
@@ -327,7 +325,6 @@ public class RosesStageModel extends GameStageModel {
     public void setPlayer2HeroCards(RosesCard[] player2HeroCards) {
         this.player2HeroCards = player2HeroCards;
         for (int i = 0; i < player2HeroCards.length; i++) {
-            this.player2HeroCards[i] = player2HeroCards[i];
             addElement(player2HeroCards[i]);
         }
     }
@@ -401,10 +398,8 @@ public class RosesStageModel extends GameStageModel {
 
     public void setDiscardCards(RosesCard[] discardCards) {
         this.discardCards = discardCards;
-        for (int i = 0; i < discardCards.length; i++) {
-            this.discardCards[i] = discardCards[i];
+        for (int i = 0; i < discardCards.length; i++)
             addElement(discardCards[i]);
-        }
     }
 
     public RosesCard[] getDiscardCards() {
@@ -444,10 +439,6 @@ public class RosesStageModel extends GameStageModel {
         redHeroCardsCounter.setText(ConsoleColor.RED + this.player2HeroCards.length + ConsoleColor.RESET);
         this.setBlueHeroCardsCounter(blueHeroCardsCounter);
         this.setRedHeroCardsCounter(redHeroCardsCounter);
-        this.setPickCards(this.getPickCards());
-        this.setDiscardCards(this.getDiscardCards());
-        this.setPlayer1MovementCards(this.getPlayer1MovementCards());
-        this.setPlayer2MovementCards(this.getPlayer2MovementCards());
     }
 
     private void setupCallbacks() {

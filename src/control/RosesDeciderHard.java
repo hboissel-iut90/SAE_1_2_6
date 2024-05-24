@@ -272,28 +272,28 @@ public class RosesDeciderHard extends Decider {// La classe RosesDeciderHard hé
         if (destination.x < 0 || destination.x > 8 || destination.y < 0 || destination.y > 8) {
             return -1;
         }
-       if (typeOfMove.equals("H") && typeOfPlay.equals("block")) {
-           for (Point opponentPawn : opponentPawns) {
-               board[opponentPawn.x][opponentPawn.y] = new Point(opponentPawn.x, opponentPawn.y);
-           }
-           ArrayList<Point> adjacents = adjacentsPawns(board, destination);
-           if (adjacents.size() < 4) {
-               score = -1;
-           } else {
-               score = adjacents.size();
-           }
-       }
-       if (typeOfMove.equals("H") && typeOfPlay.equals("expend")) {
-           for (Point Pawns : Pawns) {
-               board[Pawns.x][Pawns.y] = new Point(Pawns.x, Pawns.y);
-           }
-           ArrayList<Point> adjacents = adjacentsPawns(board, destination);
-           if (adjacents.size() < 4) {
-               score = -1;
-           } else {
-               score = adjacents.size() * 1.25;
-           }
-       }
+        if (typeOfMove.equals("H") && typeOfPlay.equals("block")) {
+            for (Point opponentPawn : opponentPawns) {
+                board[opponentPawn.x][opponentPawn.y] = new Point(opponentPawn.x, opponentPawn.y);
+            }
+            ArrayList<Point> adjacents = adjacentsPawns(board, destination);
+            if (adjacents.size() < 4) {
+                score = -1;
+            } else {
+                score = adjacents.size();
+            }
+        }
+        if (typeOfMove.equals("H") && typeOfPlay.equals("expend")) {
+            for (Point Pawns : Pawns) {
+                board[Pawns.x][Pawns.y] = new Point(Pawns.x, Pawns.y);
+            }
+            ArrayList<Point> adjacents = adjacentsPawns(board, destination);
+            if (adjacents.size() < 4) {
+                score = -1;
+            } else {
+                score = adjacents.size() * 1.25;
+            }
+        }
         if (typeOfMove.equals("M") && typeOfPlay.equals("block")) {
             for (Point opponentPawn : opponentPawns) {
                 board[opponentPawn.x][opponentPawn.y] = new Point(opponentPawn.x, opponentPawn.y);
@@ -310,7 +310,7 @@ public class RosesDeciderHard extends Decider {// La classe RosesDeciderHard hé
             adjacents.remove(0);
             score = adjacents.size() * 1.754;
         }
-       return score;
+        return score;
     }
     // La méthode getDestination() est utilisée pour déterminer la destination d'un mouvement. Elle prend en entrée la position actuelle du pion et l'index de la carte, et renvoie la destination du mouvement.
     private Point getDestination (Point crownPawn, int card){

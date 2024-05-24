@@ -126,7 +126,6 @@ public class RosesStageFactory extends StageElementsFactory {
             RosesCard[] copyOfPickPotCards = new RosesCard[pickPotCards.length - 1];
             System.arraycopy(pickPotCards, 0, copyOfPickPotCards, 0, copyOfPickPotCards.length);
             pickPotCards = copyOfPickPotCards;
-
         }
 
         for (int i = 0; i < 5; i++) {

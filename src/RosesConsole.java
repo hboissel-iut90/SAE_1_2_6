@@ -8,9 +8,6 @@ import control.RosesController;
 public class RosesConsole {
 
     public static void main(String[] args) {
-
-//        Logger.setLevel(Logger.LOGGER_TRACE);
-//        Logger.setVerbosity(Logger.VERBOSE_HIGH);
         int mode = 0;
         if (args.length == 1) {
             try {
@@ -35,10 +32,10 @@ public class RosesConsole {
             model.addComputerPlayer("computer2");
         }
 
-        StageFactory.registerModelAndView("King of roses", "model.RosesStageModel", "view.RosesStageView");
-        View RosesView = new View(model);
-        RosesController control = new RosesController(model,RosesView);
-        control.setFirstStageName("King of roses");
+        StageFactory.registerModelAndView("RoseBoard", "model.RosesStageModel", "view.RosesStageView");
+        View rosesStageView = new View(model);
+        RosesController control = new RosesController(model,rosesStageView);
+        control.setFirstStageName("RoseBoard");
         try {
             control.startGame();
             control.stageLoop();
