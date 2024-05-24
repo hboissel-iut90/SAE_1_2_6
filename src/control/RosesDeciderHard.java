@@ -43,6 +43,7 @@ public class RosesDeciderHard extends Decider {// La classe RosesDeciderHard hé
     public ActionList decide() {
         // Le code dans cette méthode est principalement utilisé pour initialiser les variables et les structures de données nécessaires pour le jeu.
         // Il contient également la logique pour déterminer le meilleur mouvement possible pour le joueur.
+        model.getPlayers().get(model.getIdPlayer()).setName("Hard computer");
         possibleMoves = new TreeMap<String, Double>(comparator);
         RosesStageModel stage = (RosesStageModel) model.getGameStage();
         Cards = new RosesCard[5];

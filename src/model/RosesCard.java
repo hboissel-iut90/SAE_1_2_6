@@ -76,6 +76,11 @@ public class RosesCard extends GameElement {
         return isFlipped;
     }
 
+    public String toString(){
+        return "Card: " + value + " " + direction + " " + cardType;
+
+    }
+
 
 
 

@@ -39,6 +39,7 @@ public class RosesDeciderEasy extends Decider {
 
     @Override
     public ActionList decide() {
+        model.getPlayers().get(model.getIdPlayer()).setName("Easy computer");
         RosesStageModel stage = (RosesStageModel) model.getGameStage();
         RosesBoard board = stage.getBoard();
         RosesPawnPot pawnPot = null;
