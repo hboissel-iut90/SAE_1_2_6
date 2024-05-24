@@ -48,14 +48,14 @@ public class RosesControllerTool extends Controller {
         consoleIn = new BufferedReader(new InputStreamReader(System.in));
         update();
         while (!model.isEndStage()) {
-            playTurn();
-            endOfTurn();
+            playTurnTool();
+            endOfTurnTool();
             update();
         }
         endGame();
     }
 
-    public void playTurn() {
+    public void playTurnTool() {
         // get the new player
         Player p = model.getCurrentPlayer();
         if (p.getType() == Player.COMPUTER) {
@@ -78,7 +78,7 @@ public class RosesControllerTool extends Controller {
             }
             play.start();
         } else {
-            checkIfPlayerPlay();
+            checkIfPlayerPlayTool();
 
             boolean ok = false;
             while (!ok && !isTheEndOfTheStage) {
@@ -96,7 +96,7 @@ public class RosesControllerTool extends Controller {
                             continue;
                         }
                     if (line.length() == 2 || String.valueOf(line.charAt(0)).equals("P")) {
-                        ok = analyseAndPlay(line);
+                        ok = analyseAndPlayTool(line);
                     }
                     if (!ok) {
                         System.out.println("incorrect instruction. retry !");
@@ -111,7 +111,7 @@ public class RosesControllerTool extends Controller {
         }
     }
     
-    public void endOfTurn() {
+    public void endOfTurnTool() {
         model.setNextPlayer();
         // get the new player to display its name
         Player p = model.getCurrentPlayer();
@@ -120,7 +120,7 @@ public class RosesControllerTool extends Controller {
         stageModel.update();
     }
 
-    public boolean analyseAndPlay(String line) {
+    public boolean analyseAndPlayTool(String line) {
         RosesStageModel gameStage = (RosesStageModel) model.getGameStage();
         RosesStageView viewStage = (RosesStageView) view.getGameStageView();
         nbMovements = gameStage.getNbMovements();
@@ -365,7 +365,7 @@ public class RosesControllerTool extends Controller {
     }
 
 
-    public void checkIfPlayerPlay() {
+    public void checkIfPlayerPlayTool() {
         int row = 0, col = 0;
 
         RosesStageModel gameStage = (RosesStageModel) model.getGameStage();

@@ -2,7 +2,7 @@ import boardifier.model.Model;
 import boardifier.model.Player;
 import boardifier.model.TextElement;
 import boardifier.view.View;
-import control.RosesController;
+import control.RosesControllerTool;
 import model.RosesBoard;
 import model.RosesCard;
 import model.RosesStageModel;
@@ -18,11 +18,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
-class RosesControllerTest {
+class RosesControllerToolTest {
 
     Model model;
     View view;
-    RosesController rosesController;
+    RosesControllerTool rosesControllerTool;
     RosesStageModel rosesStageModel;
 
     @BeforeEach
@@ -34,29 +34,29 @@ class RosesControllerTest {
         when(model.getGameStage()).thenReturn(rosesStageModel);
 
         // Creating the instance of the class under test
-        rosesController = new RosesController(model, view, "E");
+        rosesControllerTool = new RosesControllerTool(model, view, "E");
     }
 
     @Test
     void testStageLoop() throws Exception {
-        // Mocking the RosesController
-        RosesController rosesController = Mockito.mock(RosesController.class);
+        // Mocking the RosesControllerTool
+        RosesControllerTool rosesControllerTool = Mockito.mock(RosesControllerTool.class);
 
         // Stubbing method calls
         when(model.isEndStage()).thenReturn(false, true);
-        doNothing().when(rosesController).playTurn();
-        doNothing().when(rosesController).endOfTurn();
-        doNothing().when(rosesController).update();
-        doNothing().when(rosesController).endGame();
+        doNothing().when(rosesControllerTool).playTurnTool();
+        doNothing().when(rosesControllerTool).endOfTurnTool();
+        doNothing().when(rosesControllerTool).update();
+        doNothing().when(rosesControllerTool).endGame();
 
         // Invoking the method under test
-        rosesController.stageLoop();
+        rosesControllerTool.stageLoop();
 
         // Verifying method invocations
-        verify(rosesController, times(1)).playTurn();
-        verify(rosesController, times(1)).endOfTurn();
-        verify(rosesController, times(2)).update();
-        verify(rosesController, times(1)).endGame();
+        verify(rosesControllerTool, times(1)).playTurnTool();
+        verify(rosesControllerTool, times(1)).endOfTurnTool();
+        verify(rosesControllerTool, times(2)).update();
+        verify(rosesControllerTool, times(1)).endGame();
     }
 
     @Test
@@ -79,11 +79,11 @@ class RosesControllerTest {
         ByteArrayInputStream inputStream = new ByteArrayInputStream("stop\n".getBytes());
         BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
 
-        // Setting the consoleIn field in the RosesController
-        rosesController.consoleIn = br;
+        // Setting the consoleIn field in the RosesControllerTool
+        rosesControllerTool.consoleIn = br;
 
         // Invoking the method under test
-        rosesController.playTurn();
+        rosesControllerTool.playTurnTool();
 
         // Verifying method invocations
         verify(rosesStageModel, times(1)).computePartyResult();
@@ -101,7 +101,7 @@ class RosesControllerTest {
         when(model.getGameStage()).thenReturn(rosesStageModel);
 
         // Invoking the method under test
-        rosesController.endOfTurn();
+        rosesControllerTool.endOfTurnTool();
 
         // Verifying method invocations
         verify(model, times(1)).setNextPlayer();
@@ -129,7 +129,7 @@ class RosesControllerTest {
         when(rosesStageModel.getPickCards()).thenReturn(pickCards);
 
         // Invoking the method under test
-        boolean result = rosesController.analyseAndPlay("P");
+        boolean result = rosesControllerTool.analyseAndPlayTool("P");
 
         // Verifying the result
         assertFalse(result);
@@ -151,7 +151,7 @@ class RosesControllerTest {
         when(rosesBoard.getElement(anyInt(), anyInt(), anyInt())).thenReturn(null);
 
         // Invoking the method under test
-        rosesController.checkIfPlayerPlay();
+        rosesControllerTool.checkIfPlayerPlayTool();
 
         // Verify that setChecked() is called
         verify(rosesStageModel, times(1)).setChecked(anyBoolean());

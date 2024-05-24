@@ -47,7 +47,7 @@ public class RosesController extends Controller {
         update();
         while (!model.isEndStage()) {
             playTurn();
-            endOfTurn();
+            endOfTheTurn();
             update();
         }
         endGame();
@@ -109,7 +109,7 @@ public class RosesController extends Controller {
         }
     }
 
-    private void endOfTurn() {
+    private void endOfTheTurn() {
         model.setNextPlayer();
         // get the new player to display its name
         Player p = model.getCurrentPlayer();
