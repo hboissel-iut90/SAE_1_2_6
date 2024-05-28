@@ -46,6 +46,7 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="JavaFx 17" level="application" />
   </component>
   <component name="SonarLintModuleSettings">
     <option name="uniqueId" value="c9e112d3-c9db-47d7-b9bd-9d75e37fe0c5" />
