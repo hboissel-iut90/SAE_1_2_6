@@ -32,11 +32,18 @@ public class RosesController extends Controller {
     private String difficulty;
     int nbMovements = 0;
 
-    public RosesController(Model model, View view, String difficulty) {
+    public RosesController(Model model, View view) {
         super(model, view);
         firstPlayer = true;
+        //setControlKey(new ControllerRosesKey(model, view, this));
+        //setControlMouse(new ControllerRosesMouse(model, view, this));
+    }
+
+    public void setDifficulty(String difficulty) {
         this.difficulty = difficulty;
     }
+
+
 
     /**
      * Defines what to do within the single stage of the single party
@@ -59,7 +66,7 @@ public class RosesController extends Controller {
         if (p.getType() == Player.COMPUTER) {
             ActionPlayer play = null;
             System.out.println("COMPUTER PLAYS");
-            if (difficulty.equals("EE")|| difficulty.equals("E")) {
+            if (difficulty.equals("EE") || difficulty.equals("E")) {
                 RosesDeciderEasy decider = new RosesDeciderEasy(model, this);
                 play = new ActionPlayer(model, this, decider, null);
             } else if (difficulty.equals("HH") || difficulty.equals("H")) {
@@ -289,11 +296,11 @@ public class RosesController extends Controller {
             return false;
         }
         if (cardType.equals("M")) {
-            ActionList actions = ActionFactory.generatePutInContainer(model, pawn, "RoseBoard", row, col);
-            actions.setDoEndOfTurn(true); // after playing this action list, it will be the end of turn for current player.
-            ActionPlayer play = new ActionPlayer(model, this, actions);
+            //ActionList actions = ActionFactory.generatePutInContainer(model, pawn, "RoseBoard", row, col);
+            //actions.setDoEndOfTurn(true); // after playing this action list, it will be the end of turn for current player.
+            //ActionPlayer play = new ActionPlayer(model, this, actions);
             isTheFirstTime = false;
-            play.start();
+            //play.start();
         }
         if (cardType.equals("H")) {
             if (model.getIdPlayer() == 0 && gameStage.getPlayer1HeroCards().length > 0) {

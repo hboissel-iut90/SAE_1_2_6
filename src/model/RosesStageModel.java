@@ -1,7 +1,7 @@
 package model;
 
 import boardifier.model.*;
-import boardifier.view.ConsoleColor;
+import javafx.scene.paint.Color;
 
 import java.util.Stack;
 
@@ -48,6 +48,9 @@ public class RosesStageModel extends GameStageModel {
     private RosesCardPot moovRedPot;
     private RosesCardPot moovBluePot;
 
+    public final static int STATE_SELECTPAWN = 1; // the player must select a pawn
+    public final static int STATE_SELECTDEST = 2; // the player must select a destination
+
     private RosesPawn[] bluePawns;
     private RosesPawn[] redPawns;
     private RosesPawn crownPawn;
@@ -89,6 +92,7 @@ public class RosesStageModel extends GameStageModel {
         super(name, model);
         bluePawnsToPlay = 26;
         redPawnsToPlay = 26;
+        state = STATE_SELECTPAWN;
         setupCallbacks();
     }
 
@@ -426,17 +430,17 @@ public class RosesStageModel extends GameStageModel {
 
 
     public void update() {
-        bluePawnsCounter.setText("Blue pawns left : " + ConsoleColor.BLUE + this.getBluePawnsToPlay() + ConsoleColor.RESET);
+        bluePawnsCounter.setText("Blue pawns left : " + Color.BLUE + this.getBluePawnsToPlay());
         bluePawnsCounter.setLocation(60, 9);
         this.setBluePawnsCounter(bluePawnsCounter);
-        redPawnsCounter.setText("Red pawns left : " + ConsoleColor.RED + this.getRedPawnsToPlay() + ConsoleColor.RESET);
+        redPawnsCounter.setText("Red pawns left : " + Color.RED + this.getRedPawnsToPlay());
         redPawnsCounter.setLocation(60, 21);
         this.setRedPawnsCounter(redPawnsCounter);
-        cardPickCounter.setText("Cards left : " + ConsoleColor.GREY_BACKGROUND + this.pickCards.length + ConsoleColor.RESET);
+        cardPickCounter.setText("Cards left : " + Color.GRAY + this.pickCards.length);
         cardPickCounter.setLocation(16, 0);
         this.setCardPickCounter(cardPickCounter);
-        blueHeroCardsCounter.setText(ConsoleColor.BLUE + this.player1HeroCards.length + ConsoleColor.RESET);
-        redHeroCardsCounter.setText(ConsoleColor.RED + this.player2HeroCards.length + ConsoleColor.RESET);
+        blueHeroCardsCounter.setText("" + Color.BLUE + this.player1HeroCards.length);
+        redHeroCardsCounter.setText("" + Color.RED + this.player2HeroCards.length);
         this.setBlueHeroCardsCounter(blueHeroCardsCounter);
         this.setRedHeroCardsCounter(redHeroCardsCounter);
     }
@@ -506,10 +510,10 @@ public class RosesStageModel extends GameStageModel {
             }
         }
 
-        System.out.println(ConsoleColor.BLUE + "[Player 1]" + ConsoleColor.RESET + " Blue pawns on the field : " + nbBlue);
-        System.out.println(ConsoleColor.RED + "[Player 2]" + ConsoleColor.RESET + " Red pawns on the field : " + nbRed);
-        System.out.println(ConsoleColor.BLUE + "[Player 1]" + ConsoleColor.RESET + " Blue score : " + blueScore);
-        System.out.println(ConsoleColor.RED + "[Player 2]" + ConsoleColor.RESET + " Red score : " + redScore);
+        System.out.println(Color.BLUE + "[Player 1]" + Color.BLACK + " Blue pawns on the field : " + nbBlue);
+        System.out.println(Color.RED + "[Player 2]" + Color.BLACK + " Red pawns on the field : " + nbRed);
+        System.out.println(Color.BLUE + "[Player 1]" + Color.BLACK + " Blue score : " + blueScore);
+        System.out.println(Color.RED + "[Player 2]" + Color.BLACK + " Red score : " + redScore);
         model.setIdWinner(idWinner);
         model.stopStage();
     }
