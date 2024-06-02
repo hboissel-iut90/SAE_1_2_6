@@ -4,10 +4,10 @@
     <exclude-output />
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/Test" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/SAE_desktopFX/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/.idea/copilot/chatSessions" />
     </content>
-    <orderEntry type="jdk" jdkName="17" jdkType="JavaSDK" />
+    <orderEntry type="jdk" jdkName="openjdk-20" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library" exported="" scope="TEST">
       <library name="JUnit4">
@@ -47,6 +47,7 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="JavaFx 17" level="application" />
+    <orderEntry type="library" name="lib" level="application" />
   </component>
   <component name="SonarLintModuleSettings">
     <option name="uniqueId" value="c9e112d3-c9db-47d7-b9bd-9d75e37fe0c5" />

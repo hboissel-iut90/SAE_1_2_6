@@ -11,7 +11,6 @@ public class RosesStageView extends GameStageView {
         width = (int) Screen.getPrimary().getBounds().getWidth(); // get the resolution of the user and set it to the stage
         height = (int) Screen.getPrimary().getBounds().getHeight();
 
-
     }
 
     @Override
