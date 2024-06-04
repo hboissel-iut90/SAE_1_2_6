@@ -11,6 +11,7 @@ public class RosesStageView extends GameStageView {
         width = (int) Screen.getPrimary().getBounds().getWidth(); // get the resolution of the user and set it to the stage
         height = (int) Screen.getPrimary().getBounds().getHeight();
 
+
     }
 
     @Override
@@ -18,12 +19,12 @@ public class RosesStageView extends GameStageView {
         RosesStageModel model = (RosesStageModel)gameStageModel;
 
         addLook(new RosesBoardLook(150, model.getBoard()));
-        addLook(new RosesBluePawnPotLook(model.getBluePot()));
-        addLook(new RosesRedPawnPotLook(model.getRedPot()));
+        addLook(new BluePawnPotLook(model.getBluePot()));
+        addLook(new RedPawnPotLook(model.getRedPot()));
 
         for(int i=0;i<26;i++) {
-            addLook(new RosesPawnLook(17,model.getBluePawns()[i]));
-            addLook(new RosesPawnLook(17, model.getRedPawns()[i]));
+            addLook(new PawnLook(17,model.getBluePawns()[i]));
+            addLook(new PawnLook(17, model.getRedPawns()[i]));
         }
 
         addLook(new TextLook(24, "0x000000", model.getPlayerName()));
@@ -33,6 +34,16 @@ public class RosesStageView extends GameStageView {
         addLook(new RosesCardPotLook(80, 65, model.getRedHeroPot()));
         addLook(new RosesCardPotLook(80, 40, model.getDiscardPot()));
         addLook(new RosesCardPotLook(80, 40, model.getPickPot()));
+
+        for (int i = 0; i < 5; i++) {
+            addLook(new RosesCardLook(80, 40, model.getPlayer1MovementCards()[i]));
+            addLook(new RosesCardLook(80, 40, model.getPlayer2MovementCards()[i]));
+        }
+
+        for (int i = 0; i < 4; i++) {
+            addLook(new RosesCardLook(80, 40, model.getPlayer1HeroCards()[i]));
+            addLook(new RosesCardLook(80, 40, model.getPlayer2HeroCards()[i]));
+        }
 
         /* Example to show how to set a global container to layout all looks in the root pane
            Must also uncomment lines in HoleStageFactory and HoleStageModel

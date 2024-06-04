@@ -9,8 +9,9 @@ public class RosesCardPot extends ContainerElement {
 
     public RosesCardPot(int x, int y, GameStageModel gameStageModel) {
         // call the super-constructor to create a 4x1 grid, named "cardpot", and in x,y in space
-        super("cardpot", x, y, 1, 1, gameStageModel);
+        super("cardpot", x, y, 5, 1, gameStageModel);
     }
+
 
     public RosesCardPot(int x, int y, int width, int height, GameStageModel gameStageModel) {
         // call the super-constructor to create a grid with specified width and height,

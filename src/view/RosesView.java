@@ -10,11 +10,36 @@ import javafx.stage.Stage;
 
 public class RosesView extends View {
 
+    private MenuItem menuStart;
+    private MenuItem menuIntro;
+    private MenuItem menuQuit;
+
     public RosesView(Model model, Stage stage, RootPane rootPane) {
         super(model, stage, rootPane);
     }
 
-    public void setRootPane(RootPane rootPane) {
-        this.rootPane = rootPane;
+    @Override
+    protected void createMenuBar() {
+        menuBar = new MenuBar();
+        Menu menu1 = new Menu("Game");
+        menuStart = new MenuItem("New game");
+        menuIntro = new MenuItem("Intro");
+        menuQuit = new MenuItem("Quit");
+        menu1.getItems().add(menuStart);
+        menu1.getItems().add(menuIntro);
+        menu1.getItems().add(menuQuit);
+        menuBar.getMenus().add(menu1);
+    }
+
+    public MenuItem getMenuStart() {
+        return menuStart;
+    }
+
+    public MenuItem getMenuIntro() {
+        return menuIntro;
+    }
+
+    public MenuItem getMenuQuit() {
+        return menuQuit;
     }
 }
