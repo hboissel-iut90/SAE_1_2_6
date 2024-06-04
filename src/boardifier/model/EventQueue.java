@@ -1,7 +1,5 @@
 package boardifier.model;
 
-import java.util.Queue;
-
 public class EventQueue {
 
     private Event[] queue;

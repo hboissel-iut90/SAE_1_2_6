@@ -1,75 +1,31 @@
 package view;
 
 import boardifier.model.GameElement;
+import boardifier.view.ConsoleColor;
 import boardifier.view.ElementLook;
-import javafx.geometry.Bounds;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.StrokeType;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import model.RosesPawn;
 
+import static boardifier.view.ContainerLook.ALIGN_MIDDLE;
+
+/**
+ * The look of the Pawn is fixed, with a single characters representing the value of the pawn
+ * and a black or red background.
+ */
 public class RosesPawnLook extends ElementLook {
-    private Circle circle;
-    private int radius;
 
-    public RosesPawnLook(int radius, GameElement element) {
-        super(element);
-
-        this.radius = radius;
-        render();
-    }
-
-    @Override
-    public void onSelectionChange() {
-        RosesPawn pawn = (RosesPawn)getElement();
-        if (pawn.isSelected()) {
-            circle.setStrokeWidth(4);
-            circle.setStrokeMiterLimit(10);
-            circle.setStrokeType(StrokeType.CENTERED);
-            circle.setStroke(Color.valueOf("0x333333"));
-        }
-        else {
-            circle.setStrokeWidth(2);
-        }
-    }
-
-    @Override
-    public void onFaceChange() {
+    public RosesPawnLook(GameElement element) {
+        super(element, 1, 1);
     }
 
     protected void render() {
-        RosesPawn pawn = (RosesPawn)element;
-        circle = new Circle();
-        circle.setRadius(radius);
-        circle.setStrokeWidth(2);
-        circle.setStrokeType(StrokeType.CENTERED);
-        circle.setStroke(Color.valueOf("0x333333"));
-        if (pawn.getColor() == RosesPawn.PAWN_BLUE) {
-            circle.setFill(Color.BLUE);
-        }
-        else {
-            circle.setFill(Color.RED);
-        }
 
-        addShape(circle);
-        // NB: text won't change so no need to put it as an attribute
-        if (String.valueOf(pawn.getNumber()).equals("0") || String.valueOf(pawn.getNumber()).equals("null")) {
-            return;
-        }
-        Text text = new Text(String.valueOf(pawn.getNumber()));
-        text.setFont(new Font(24));
+        RosesPawn pawn = (RosesPawn) element;
         if (pawn.getColor() == RosesPawn.PAWN_BLUE) {
-            text.setFill(Color.valueOf("0xFFFFFF"));
+            shape[0][0] = ConsoleColor.BLACK + ConsoleColor.BLUE_BACKGROUND + pawn.getNumber() + ConsoleColor.RESET;
+        } else if (pawn.getColor() == RosesPawn.PAWN_YELLOW) {
+            shape[0][0] = ConsoleColor.BLACK + ConsoleColor.YELLOW_BACKGROUND + pawn.getCaracter() + ConsoleColor.RESET;
+        } else {
+            shape[0][0] = ConsoleColor.BLACK + ConsoleColor.RED_BACKGROUND + pawn.getNumber() + ConsoleColor.RESET;
         }
-        else {
-            text.setFill(Color.valueOf("0x000000"));
-        }
-        Bounds bt = text.getBoundsInLocal();
-        text.setX(-bt.getWidth()/2);
-        // since numbers are always above the baseline, relocate just using the part above baseline
-        text.setY(text.getBaselineOffset()/2-4);
-        addShape(text);
     }
 }
