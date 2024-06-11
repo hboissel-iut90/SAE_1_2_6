@@ -96,6 +96,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                 }
 
             case RosesStageModel.STATE_SELECTHERO :
+                break;
         }
 
 
