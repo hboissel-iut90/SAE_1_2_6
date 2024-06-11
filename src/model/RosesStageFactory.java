@@ -44,6 +44,7 @@ public class RosesStageFactory extends StageElementsFactory {
             redPot.addElement(redPawns[i], 0,0);
         }
 
+
         RosesCardPot moovBluePot = new RosesCardPot(115, 210, stageModel);
         stageModel.setMoovBluePot(moovBluePot);
         RosesCardPot moovRedPot = new RosesCardPot(870, 210, stageModel);

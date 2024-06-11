@@ -48,9 +48,14 @@ public class PawnLook extends ElementLook {
         circle.setStroke(Color.valueOf("0x333333"));
         if (pawn.getColor() == RosesPawn.PAWN_BLUE) {
             circle.setFill(Color.BLUE);
-        }
-        else {
+        } else if (pawn.getColor() == RosesPawn.PAWN_RED) {
             circle.setFill(Color.RED);
+        } else {
+            circle.setFill(Color.YELLOW);
+            Text text = new Text("♔");
+            text.setFont(new Font(25));
+            text.setFill(Color.WHITE);
+            getGroup().getChildren().addAll(circle, text);
         }
 
         addShape(circle);

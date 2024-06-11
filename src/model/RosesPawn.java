@@ -13,6 +13,7 @@ public class RosesPawn extends GameElement {
     private int color;
     public static int PAWN_BLUE = 0;
     public static int PAWN_RED = 1;
+    public static int PAWN_YELLOW = 2;
 
     public RosesPawn(int number, int color, GameStageModel gameStageModel) {
         super(gameStageModel);
