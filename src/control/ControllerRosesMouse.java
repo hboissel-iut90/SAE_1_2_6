@@ -81,7 +81,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
             // get the board, pot,  and the selected pawn to simplify code in the following
             RosesBoard board = stageModel.getBoard();
 
-            // by default get black pot
+            // by default get blue pot
             RosesPawnPot pot = stageModel.getBluePot();
 
             // but if it's player2 that plays, get red pot
