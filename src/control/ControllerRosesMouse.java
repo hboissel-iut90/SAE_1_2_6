@@ -31,8 +31,10 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
 
         // get the clic x,y in the whole scene (this includes the menu bar if it exists)
         Coord2D clic = new Coord2D(event.getSceneX(),event.getSceneY());
+
         // get elements at that position
         List<GameElement> list = control.elementsAt(clic);
+
         // for debug, uncomment next instructions to display x,y and elements at that postion
         /*
         Logger.debug("click in "+event.getSceneX()+","+event.getSceneY());
@@ -40,6 +42,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
             Logger.debug(element);
         }
          */
+
         RosesStageModel stageModel = (RosesStageModel) model.getGameStage();
 
         if (stageModel.getState() == RosesStageModel.STATE_SELECTPAWN) {
@@ -55,6 +58,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                 }
             }
         }
+
         else if (stageModel.getState() == RosesStageModel.STATE_SELECTDEST) {
             // first check if the click is on the current selected pawn. In this case, unselect it
             for (GameElement element : list) {
@@ -64,6 +68,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                     return;
                 }
             }
+
             // secondly, search if the board has been clicked. If not just return
             boolean boardClicked = false;
             for (GameElement element : list) {
@@ -72,10 +77,13 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                 }
             }
             if (!boardClicked) return;
+
             // get the board, pot,  and the selected pawn to simplify code in the following
             RosesBoard board = stageModel.getBoard();
+
             // by default get black pot
             RosesPawnPot pot = stageModel.getBluePot();
+
             // but if it's player2 that plays, get red pot
             if (model.getIdPlayer() == 1) {
                 pot = stageModel.getRedPot();
@@ -85,12 +93,13 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
             // thirdly, get the clicked cell in the 3x3 board
             GridLook lookBoard = (GridLook) control.getElementLook(board);
             int[] dest = lookBoard.getCellFromSceneLocation(clic);
+
             // get the cell in the pot that owns the selected pawn
             int[] from = pot.getElementCell(pawn);
             Logger.debug("try to move pawn from pot "+from[0]+","+from[1]+ " to board "+ dest[0]+","+dest[1]);
+
             // if the destination cell is valid for for the selected pawn
             if (board.canReachCell(dest[0], dest[1])) {
-
                 ActionList actions = ActionFactory.generatePutInContainer(control, model, pawn, "RoseBoard", dest[0], dest[1], AnimationTypes.MOVE_LINEARPROP, 10);
                 actions.setDoEndOfTurn(true); // after playing this action list, it will be the end of turn for current player.
                 stageModel.unselectAll();
