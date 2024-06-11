@@ -18,13 +18,13 @@ public class RosesStageView extends GameStageView {
     public void createLooks() {
         RosesStageModel model = (RosesStageModel)gameStageModel;
 
-        addLook(new RosesBoardLook(150, model.getBoard()));
+        addLook(new RosesBoardLook(200, model.getBoard()));
         addLook(new BluePawnPotLook(model.getBluePot()));
         addLook(new RedPawnPotLook(model.getRedPot()));
 
         for(int i=0;i<26;i++) {
-            addLook(new PawnLook(17,model.getBluePawns()[i]));
-            addLook(new PawnLook(17, model.getRedPawns()[i]));
+            addLook(new PawnLook(25, model.getBluePawns()[i]));
+            addLook(new PawnLook(25, model.getRedPawns()[i]));
         }
 
         addLook(new TextLook(24, "0x000000", model.getPlayerName()));
@@ -32,8 +32,8 @@ public class RosesStageView extends GameStageView {
         addLook(new RosesCardPotLook(110, 210, model.getMoovRedPot()));
         addLook(new RosesCardPotLook(110, 210, model.getBlueHeroPot()));
         addLook(new RosesCardPotLook(110, 210, model.getRedHeroPot()));
-        addLook(new RosesCardPotLook(210, 110, model.getDiscardPot()));
-        addLook(new RosesCardPotLook(210, 110, model.getPickPot()));
+        addLook(new RosesCardPotLook(110, 210, model.getDiscardPot()));
+        addLook(new RosesCardPotLook(110, 210, model.getPickPot()));
 
         for (int i = 0; i < 5; i++) {
             addLook(new RosesCardLook(80, 40, model.getPlayer1MovementCards()[i]));
