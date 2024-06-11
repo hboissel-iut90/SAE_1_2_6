@@ -17,12 +17,12 @@ public class RosesStageFactory extends StageElementsFactory {
 //        instructions.setLocation(800, 290);
 //        stageModel.setInstructions1(instructions);
         // create the board
-        RosesBoard board = new RosesBoard(130, 150, stageModel);
+        RosesBoard board = new RosesBoard(370, 250, stageModel);
         stageModel.setBoard(board);
         //create the pots
-        RosesPawnPot bluePot = new RosesPawnPot(720,210, stageModel);
+        RosesPawnPot bluePot = new RosesPawnPot(1120,310, stageModel);
         stageModel.setBluePot(bluePot);
-        RosesPawnPot redPot = new RosesPawnPot(720, 520, stageModel);
+        RosesPawnPot redPot = new RosesPawnPot(1120, 620, stageModel);
         stageModel.setRedPot(redPot);
 
 
@@ -44,14 +44,14 @@ public class RosesStageFactory extends StageElementsFactory {
             redPot.addElement(redPawns[i], 0,0);
         }
 
-        RosesCardPot moovBluePot = new RosesCardPot(50, 210, stageModel);
+        RosesCardPot moovBluePot = new RosesCardPot(115, 210, stageModel);
         stageModel.setMoovBluePot(moovBluePot);
-        RosesCardPot moovRedPot = new RosesCardPot(610, 210, stageModel);
+        RosesCardPot moovRedPot = new RosesCardPot(870, 210, stageModel);
         stageModel.setMoovRedPot(moovRedPot);
-        RosesCardPot heroBluePot = new RosesCardPot(608, 40, 1, 1, stageModel);
-        RosesCardPot heroRedPot = new RosesCardPot(45, 640, 1, 1, stageModel);
-        RosesCardPot discardPot = new RosesCardPot(338, 40, 1, 1, stageModel);
-        RosesCardPot pickPot = new RosesCardPot(338, 640, 1, 1, stageModel);
+        RosesCardPot heroBluePot = new RosesCardPot(758, 20, 1, 1, stageModel);
+        RosesCardPot heroRedPot = new RosesCardPot(238, 840, 1, 1, stageModel);
+        RosesCardPot discardPot = new RosesCardPot(550, 20, 1, 1, stageModel);
+        RosesCardPot pickPot = new RosesCardPot(550, 740, 1, 1, stageModel);
         stageModel.setBlueHeroPot(heroBluePot);
         stageModel.setRedHeroPot(heroRedPot);
         stageModel.setDiscardPot(discardPot);

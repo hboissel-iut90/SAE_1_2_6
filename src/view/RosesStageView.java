@@ -28,12 +28,12 @@ public class RosesStageView extends GameStageView {
         }
 
         addLook(new TextLook(24, "0x000000", model.getPlayerName()));
-        addLook(new RosesCardPotLook(70, 55, model.getMoovBluePot()));
-        addLook(new RosesCardPotLook(70, 55, model.getMoovRedPot()));
-        addLook(new RosesCardPotLook(80, 65, model.getBlueHeroPot()));
-        addLook(new RosesCardPotLook(80, 65, model.getRedHeroPot()));
-        addLook(new RosesCardPotLook(80, 40, model.getDiscardPot()));
-        addLook(new RosesCardPotLook(80, 40, model.getPickPot()));
+        addLook(new RosesCardPotLook(110, 210, model.getMoovBluePot()));
+        addLook(new RosesCardPotLook(110, 210, model.getMoovRedPot()));
+        addLook(new RosesCardPotLook(110, 210, model.getBlueHeroPot()));
+        addLook(new RosesCardPotLook(110, 210, model.getRedHeroPot()));
+        addLook(new RosesCardPotLook(210, 110, model.getDiscardPot()));
+        addLook(new RosesCardPotLook(210, 110, model.getPickPot()));
 
         for (int i = 0; i < 5; i++) {
             addLook(new RosesCardLook(80, 40, model.getPlayer1MovementCards()[i]));

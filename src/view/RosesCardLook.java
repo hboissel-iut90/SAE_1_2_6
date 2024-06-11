@@ -71,7 +71,7 @@ public class RosesCardLook extends ElementLook {
                         case 1:
                             Image imageN1 = new Image("file:src/images/N_1_card.png");
                             ImageView imageViewN1 = new ImageView();
-                            imageViewN1.setX(1000);
+                            imageViewN1.setX(1250);
                             imageViewN1.setY(50);
                             imageViewN1.setFitHeight(200);
                             imageViewN1.setFitWidth(100);
@@ -81,7 +81,7 @@ public class RosesCardLook extends ElementLook {
                         case 2:
                             Image imageN2 = new Image("file:src/images/N_2_card.png");
                             ImageView imageViewN2 = new ImageView();
-                            imageViewN2.setX(1150);
+                            imageViewN2.setX(1350);
                             imageViewN2.setY(50);
                             imageViewN2.setFitHeight(200);
                             imageViewN2.setFitWidth(100);
@@ -91,7 +91,7 @@ public class RosesCardLook extends ElementLook {
                         case 3:
                             Image imageN3 = new Image("file:src/images/N_3_card.png");
                             ImageView imageViewN3 = new ImageView();
-                            imageViewN3.setX(1300);
+                            imageViewN3.setX(1450);
                             imageViewN3.setY(50);
                             imageViewN3.setFitHeight(200);
                             imageViewN3.setFitWidth(100);
@@ -104,7 +104,7 @@ public class RosesCardLook extends ElementLook {
                         case 1:
                             Image imageNE1 = new Image("file:src/images/N-E_1_card.png");
                             ImageView imageViewNE1 = new ImageView();
-                            imageViewNE1.setX(1000);
+                            imageViewNE1.setX(1250);
                             imageViewNE1.setY(250);
                             imageViewNE1.setFitHeight(200);
                             imageViewNE1.setFitWidth(100);
@@ -114,7 +114,7 @@ public class RosesCardLook extends ElementLook {
                         case 2:
                             Image imageNE2 = new Image("file:src/images/N-E_2_card.png");
                             ImageView imageViewNE2 = new ImageView();
-                            imageViewNE2.setX(1150);
+                            imageViewNE2.setX(1350);
                             imageViewNE2.setY(250);
                             imageViewNE2.setFitHeight(200);
                             imageViewNE2.setFitWidth(100);
@@ -124,7 +124,7 @@ public class RosesCardLook extends ElementLook {
                         case 3:
                             Image imageNE3 = new Image("file:src/images/N-E_3_card.png");
                             ImageView imageViewNE3 = new ImageView();
-                            imageViewNE3.setX(1300);
+                            imageViewNE3.setX(1450);
                             imageViewNE3.setY(250);
                             imageViewNE3.setFitHeight(200);
                             imageViewNE3.setFitWidth(100);
@@ -137,7 +137,7 @@ public class RosesCardLook extends ElementLook {
                         case 1:
                             Image imageE1 = new Image("file:src/images/E_1_card.png");
                             ImageView imageViewE1 = new ImageView();
-                            imageViewE1.setX(1000);
+                            imageViewE1.setX(1250);
                             imageViewE1.setY(450);
                             imageViewE1.setFitHeight(200);
                             imageViewE1.setFitWidth(100);
@@ -147,7 +147,7 @@ public class RosesCardLook extends ElementLook {
                         case 2:
                             Image imageE2 = new Image("file:src/images/E_2_card.png");
                             ImageView imageViewE2 = new ImageView();
-                            imageViewE2.setX(1150);
+                            imageViewE2.setX(1350);
                             imageViewE2.setY(450);
                             imageViewE2.setFitHeight(200);
                             imageViewE2.setFitWidth(100);
@@ -157,7 +157,7 @@ public class RosesCardLook extends ElementLook {
                         case 3:
                             Image imageE3 = new Image("file:src/images/E_3_card.png");
                             ImageView imageViewE3 = new ImageView();
-                            imageViewE3.setX(1300);
+                            imageViewE3.setX(1450);
                             imageViewE3.setY(450);
                             imageViewE3.setFitHeight(200);
                             imageViewE3.setFitWidth(100);
@@ -170,7 +170,7 @@ public class RosesCardLook extends ElementLook {
                         case 1:
                             Image imageSE1 = new Image("file:src/images/S-E_1_card.png");
                             ImageView imageViewSE1 = new ImageView();
-                            imageViewSE1.setX(1000);
+                            imageViewSE1.setX(1250);
                             imageViewSE1.setY(650);
                             imageViewSE1.setFitHeight(200);
                             imageViewSE1.setFitWidth(100);
@@ -180,7 +180,7 @@ public class RosesCardLook extends ElementLook {
                         case 2:
                             Image imageSE2 = new Image("file:src/images/S-E_2_card.png");
                             ImageView imageViewSE2 = new ImageView();
-                            imageViewSE2.setX(1150);
+                            imageViewSE2.setX(1350);
                             imageViewSE2.setY(650);
                             imageViewSE2.setFitHeight(200);
                             imageViewSE2.setFitWidth(100);
@@ -190,7 +190,7 @@ public class RosesCardLook extends ElementLook {
                         case 3:
                             Image imageSE3 = new Image("file:src/images/S-E_3_card.png");
                             ImageView imageViewSE3 = new ImageView();
-                            imageViewSE3.setX(1300);
+                            imageViewSE3.setX(1450);
                             imageViewSE3.setY(650);
                             imageViewSE3.setFitHeight(200);
                             imageViewSE3.setFitWidth(100);
@@ -203,7 +203,7 @@ public class RosesCardLook extends ElementLook {
                         case 1:
                             Image imageS1 = new Image("file:src/images/S_1_card.png");
                             ImageView imageViewS1 = new ImageView();
-                            imageViewS1.setX(1450);
+                            imageViewS1.setX(1550);
                             imageViewS1.setY(50);
                             imageViewS1.setFitHeight(200);
                             imageViewS1.setFitWidth(100);
@@ -213,7 +213,7 @@ public class RosesCardLook extends ElementLook {
                         case 2:
                             Image imageS2 = new Image("file:src/images/S_2_card.png");
                             ImageView imageViewS2 = new ImageView();
-                            imageViewS2.setX(1600);
+                            imageViewS2.setX(1650);
                             imageViewS2.setY(50);
                             imageViewS2.setFitHeight(200);
                             imageViewS2.setFitWidth(100);
@@ -236,7 +236,7 @@ public class RosesCardLook extends ElementLook {
                         case 1:
                             Image imageSW1 = new Image("file:src/images/S-W_1_card.png");
                             ImageView imageViewSW1 = new ImageView();
-                            imageViewSW1.setX(1450);
+                            imageViewSW1.setX(1550);
                             imageViewSW1.setY(250);
                             imageViewSW1.setFitHeight(200);
                             imageViewSW1.setFitWidth(100);
@@ -246,7 +246,7 @@ public class RosesCardLook extends ElementLook {
                         case 2:
                             Image imageSW2 = new Image("file:src/images/S-W_2_card.png");
                             ImageView imageViewSW2 = new ImageView();
-                            imageViewSW2.setX(1600);
+                            imageViewSW2.setX(1650);
                             imageViewSW2.setY(250);
                             imageViewSW2.setFitHeight(200);
                             imageViewSW2.setFitWidth(100);
@@ -269,7 +269,7 @@ public class RosesCardLook extends ElementLook {
                         case 1:
                             Image imageW1 = new Image("file:src/images/W_1_card.png");
                             ImageView imageViewW1 = new ImageView();
-                            imageViewW1.setX(1450);
+                            imageViewW1.setX(1550);
                             imageViewW1.setY(450);
                             imageViewW1.setFitHeight(200);
                             imageViewW1.setFitWidth(100);
@@ -279,7 +279,7 @@ public class RosesCardLook extends ElementLook {
                         case 2:
                             Image imageW2 = new Image("file:src/images/W_2_card.png");
                             ImageView imageViewW2 = new ImageView();
-                            imageViewW2.setX(1600);
+                            imageViewW2.setX(1650);
                             imageViewW2.setY(450);
                             imageViewW2.setFitHeight(200);
                             imageViewW2.setFitWidth(100);
@@ -302,7 +302,7 @@ public class RosesCardLook extends ElementLook {
                         case 1:
                             Image imageNW1 = new Image("file:src/images/N-W_1_card.png");
                             ImageView imageViewNW1 = new ImageView();
-                            imageViewNW1.setX(1450);
+                            imageViewNW1.setX(1550);
                             imageViewNW1.setY(650);
                             imageViewNW1.setFitHeight(200);
                             imageViewNW1.setFitWidth(100);
@@ -312,7 +312,7 @@ public class RosesCardLook extends ElementLook {
                         case 2:
                             Image imageNW2 = new Image("file:src/images/N-W_2_card.png");
                             ImageView imageViewNW2 = new ImageView();
-                            imageViewNW2.setX(1600);
+                            imageViewNW2.setX(1650);
                             imageViewNW2.setY(650);
                             imageViewNW2.setFitHeight(200);
                             imageViewNW2.setFitWidth(100);
@@ -343,23 +343,22 @@ public class RosesCardLook extends ElementLook {
             if (card.getColor() == RosesCard.CARD_BLUE) {
                 Rectangle blueHeroCard = new Rectangle();
                 Text text = new Text("HERO");
-                blueHeroCard.setX(-25);
-                blueHeroCard.setY(-30);
-                blueHeroCard.setWidth(50);
-                blueHeroCard.setHeight(60);
+                blueHeroCard.setX(-100);
+                blueHeroCard.setY(-50);
+                blueHeroCard.setWidth(200);
+                blueHeroCard.setHeight(100);
                 blueHeroCard.setArcHeight(25);
                 blueHeroCard.setArcWidth(25);
                 blueHeroCard.setFill(Color.BLUE);
-                text.setRotate(90);
-                text.setFont(new Font(18));
-                text.setX(-25);
-                text.setY(5);
+                text.setFont(new Font(50));
+                text.setX(-72);
+                text.setY(17);
                 text.setFill(Color.WHITE);
                 getGroup().getChildren().addAll(blueHeroCard, text);
                 if (card.isFlipped()) {
                     Rectangle blueHeroCardFlipped = new Rectangle();
-                    blueHeroCardFlipped.setWidth(100);
-                    blueHeroCardFlipped.setHeight(200);
+                    blueHeroCardFlipped.setWidth(200);
+                    blueHeroCardFlipped.setHeight(100);
                     blueHeroCardFlipped.setArcHeight(25);
                     blueHeroCardFlipped.setArcWidth(25);
                     blueHeroCardFlipped.setFill(Color.BLUE);
@@ -367,23 +366,22 @@ public class RosesCardLook extends ElementLook {
             } else if (card.getColor() == RosesCard.CARD_RED) {
                 Rectangle redHeroCard = new Rectangle();
                 Text text = new Text("HERO");
-                redHeroCard.setX(-25);
-                redHeroCard.setY(-30);
-                redHeroCard.setWidth(50);
-                redHeroCard.setHeight(60);
+                redHeroCard.setX(-100);
+                redHeroCard.setY(-50);
+                redHeroCard.setWidth(200);
+                redHeroCard.setHeight(100);
                 redHeroCard.setArcHeight(25);
                 redHeroCard.setArcWidth(25);
                 redHeroCard.setFill(Color.RED);
-                text.setRotate(90);
-                text.setFont(new Font(18));
-                text.setX(-25);
-                text.setY(5);
+                text.setFont(new Font(50));
+                text.setX(-72);
+                text.setY(17);
                 text.setFill(Color.WHITE);
                 getGroup().getChildren().addAll(redHeroCard, text);
                 if (card.isFlipped()) {
                     Rectangle redHeroCardFlipped = new Rectangle();
-                    redHeroCardFlipped.setWidth(100);
-                    redHeroCardFlipped.setHeight(200);
+                    redHeroCardFlipped.setWidth(200);
+                    redHeroCardFlipped.setHeight(100);
                     redHeroCardFlipped.setArcHeight(25);
                     redHeroCardFlipped.setArcWidth(25);
                     redHeroCardFlipped.setFill(Color.RED);
