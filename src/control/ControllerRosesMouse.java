@@ -45,26 +45,9 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
 
         RosesStageModel stageModel = (RosesStageModel) model.getGameStage();
 
-        switch (stageModel.getState()) {
-            case RosesStageModel.STATE_SELECTDEST :
-                // first check if the click is on the current selected pawn. In this case, unselect it
-                for (GameElement element : list) {
-                    if (element.isSelected()) {
-                        element.toggleSelected();
-                        stageModel.setState(RosesStageModel.STATE_SELECTDEST);
-                        return;
-                    }
-                }
-
-                // secondly, search if the board has been clicked. If not just return
-                boolean boardClicked = false;
-                for (GameElement element : list) {
-                    if (element == stageModel.getBoard()) {
-                        boardClicked = true; break;
-                    }
-                }
-                if (!boardClicked) return;
-
+        try {
+            if (list.get(list.size() - 1).getType() == ElementTypes.getType("card")) {
+                System.out.println("OK");
                 // get the board, pot,  and the selected pawn to simplify code in the following
                 RosesBoard board = stageModel.getBoard();
 
@@ -83,7 +66,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
 
                 // get the cell in the pot that owns the selected pawn
                 int[] from = pot.getElementCell(pawn);
-                Logger.debug("try to move pawn from pot "+from[0]+","+from[1]+ " to board "+ dest[0]+","+dest[1]);
+                Logger.debug("try to move pawn from pot " + from[0] + "," + from[1] + " to board " + dest[0] + "," + dest[1]);
 
                 // if the destination cell is valid for for the selected pawn
                 if (board.canReachCell(dest[0], dest[1])) {
@@ -94,16 +77,12 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                     ActionPlayer play = new ActionPlayer(model, control, actions);
                     play.start();
                 }
-
-            case RosesStageModel.STATE_SELECTHERO :
-                break;
+            }
         }
-
-
-
+        catch (Exception e) {return;}
         /*
         if (stageModel.getState() == RosesStageModel.STATE_SELECTPAWN) {
-            for (GameElement element : list) {
+            for (GameElement element : list) {;
                 if (element.getType() == ElementTypes.getType("pawn")) {
                     RosesPawn pawn = (RosesPawn)element;
                     // check if color of the pawn corresponds to the current player id
