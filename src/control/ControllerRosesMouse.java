@@ -47,7 +47,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
 
         try {
             if (list.get(list.size() - 1).getType() == ElementTypes.getType("card")) {
-                System.out.println("OK");
+                System.out.println("Clique sur carte OK");
                 // get the board, pot,  and the selected pawn to simplify code in the following
                 RosesBoard board = stageModel.getBoard();
 
