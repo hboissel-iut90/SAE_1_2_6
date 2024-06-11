@@ -89,7 +89,7 @@ public class RosesStageFactory extends StageElementsFactory {
             }
 
             if (player2MovementCards[i] == null) {
-                player2MovementCards[i] = new RosesCard(pickPotCards[pickPotCards.length - i - 4]);
+                player2MovementCards[i] = new RosesCard(pickPotCards[pickPotCards.length - i - 6]);
                 player2MovementCards[i].flip();
             }
         }
