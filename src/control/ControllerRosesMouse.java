@@ -41,7 +41,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
         for(GameElement element : list) {
             Logger.debug(element);
         }
-         */
+        */
 
         RosesStageModel stageModel = (RosesStageModel) model.getGameStage();
 
@@ -51,7 +51,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                 for (GameElement element : list) {
                     if (element.isSelected()) {
                         element.toggleSelected();
-                        stageModel.setState(RosesStageModel.STATE_SELECTPAWN);
+                        stageModel.setState(RosesStageModel.STATE_SELECTDEST);
                         return;
                     }
                 }
@@ -90,7 +90,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                     ActionList actions = ActionFactory.generatePutInContainer(control, model, pawn, "RoseBoard", dest[0], dest[1], AnimationTypes.MOVE_LINEARPROP, 10);
                     actions.setDoEndOfTurn(true); // after playing this action list, it will be the end of turn for current player.
                     stageModel.unselectAll();
-                    stageModel.setState(RosesStageModel.STATE_SELECTPAWN);
+                    stageModel.setState(RosesStageModel.STATE_SELECTDEST);
                     ActionPlayer play = new ActionPlayer(model, control, actions);
                     play.start();
                 }
@@ -164,8 +164,6 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                 play.start();
             }
         }
-
-         */
+        */
     }
 }
-
