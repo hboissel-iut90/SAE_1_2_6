@@ -93,7 +93,7 @@ public class RosesStageModel extends GameStageModel {
         super(name, model);
         bluePawnsToPlay = 26;
         redPawnsToPlay = 26;
-        state = STATE_SELECTPAWN;
+        state = STATE_SELECTDEST;
         setupCallbacks();
     }
 
