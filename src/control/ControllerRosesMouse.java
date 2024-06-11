@@ -45,6 +45,62 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
 
         RosesStageModel stageModel = (RosesStageModel) model.getGameStage();
 
+        switch (stageModel.getState()) {
+            case RosesStageModel.STATE_SELECTDEST :
+                // first check if the click is on the current selected pawn. In this case, unselect it
+                for (GameElement element : list) {
+                    if (element.isSelected()) {
+                        element.toggleSelected();
+                        stageModel.setState(RosesStageModel.STATE_SELECTPAWN);
+                        return;
+                    }
+                }
+
+                // secondly, search if the board has been clicked. If not just return
+                boolean boardClicked = false;
+                for (GameElement element : list) {
+                    if (element == stageModel.getBoard()) {
+                        boardClicked = true; break;
+                    }
+                }
+                if (!boardClicked) return;
+
+                // get the board, pot,  and the selected pawn to simplify code in the following
+                RosesBoard board = stageModel.getBoard();
+
+                // by default get blue pot
+                RosesPawnPot pot = stageModel.getBluePot();
+
+                // but if it's player2 that plays, get red pot
+                if (model.getIdPlayer() == 1) {
+                    pot = stageModel.getRedPot();
+                }
+                GameElement pawn = model.getSelected().get(0);
+
+                // thirdly, get the clicked cell in the 3x3 board
+                GridLook lookBoard = (GridLook) control.getElementLook(board);
+                int[] dest = lookBoard.getCellFromSceneLocation(clic);
+
+                // get the cell in the pot that owns the selected pawn
+                int[] from = pot.getElementCell(pawn);
+                Logger.debug("try to move pawn from pot "+from[0]+","+from[1]+ " to board "+ dest[0]+","+dest[1]);
+
+                // if the destination cell is valid for for the selected pawn
+                if (board.canReachCell(dest[0], dest[1])) {
+                    ActionList actions = ActionFactory.generatePutInContainer(control, model, pawn, "RoseBoard", dest[0], dest[1], AnimationTypes.MOVE_LINEARPROP, 10);
+                    actions.setDoEndOfTurn(true); // after playing this action list, it will be the end of turn for current player.
+                    stageModel.unselectAll();
+                    stageModel.setState(RosesStageModel.STATE_SELECTPAWN);
+                    ActionPlayer play = new ActionPlayer(model, control, actions);
+                    play.start();
+                }
+
+            case RosesStageModel.STATE_SELECTHERO :
+        }
+
+
+
+        /*
         if (stageModel.getState() == RosesStageModel.STATE_SELECTPAWN) {
             for (GameElement element : list) {
                 if (element.getType() == ElementTypes.getType("pawn")) {
@@ -108,6 +164,8 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                 play.start();
             }
         }
+
+         */
     }
 }
 

@@ -50,6 +50,7 @@ public class RosesStageModel extends GameStageModel {
 
     public final static int STATE_SELECTPAWN = 1; // the player must select a pawn
     public final static int STATE_SELECTDEST = 2; // the player must select a destination
+    public final static int STATE_SELECTHERO = 3; // the player must select a hero
 
     private RosesPawn[] bluePawns;
     private RosesPawn[] redPawns;
