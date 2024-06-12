@@ -38,6 +38,10 @@ public class RosesStageFactory extends StageElementsFactory {
         }
         stageModel.setRedPawns(redPawns);
 
+        RosesPawn crownPawn = new RosesPawn(RosesPawn.PAWN_YELLOW, stageModel);
+        stageModel.setCrownPawn(crownPawn);
+        board.addElement(crownPawn, 4, 4);
+
         // assign pawns to their pot
         for (int i=0;i<26;i++) {
             bluePot.addElement(bluePawns[i], 0,0);

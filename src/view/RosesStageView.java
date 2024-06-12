@@ -35,6 +35,7 @@ public class RosesStageView extends GameStageView {
         addLook(new RosesCardPotLook(130, 90, model.getRedHeroPot()));
         addLook(new RosesCardPotLook(110, 80, model.getDiscardPot()));
         addLook(new RosesCardPotLook(110, 80, model.getPickPot()));
+        addLook(new PawnLook(17, model.getCrownPawn()));
 
         for (int i = 0; i < 5; i++) {
             addLook(new RosesCardLook(80, 110, model.getPlayer1MovementCards()[i]));

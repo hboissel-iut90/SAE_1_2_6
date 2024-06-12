@@ -52,10 +52,10 @@ public class PawnLook extends ElementLook {
             circle.setFill(Color.RED);
         } else {
             circle.setFill(Color.YELLOW);
-            Text text = new Text("♔");
-            text.setFont(new Font(25));
-            text.setFill(Color.WHITE);
-            getGroup().getChildren().addAll(circle, text);
+//            Text text = new Text("♔");
+//            text.setFont(new Font(25));
+//            text.setFill(Color.WHITE);
+//            getGroup().getChildren().addAll(circle, text);
         }
 
         addShape(circle);
