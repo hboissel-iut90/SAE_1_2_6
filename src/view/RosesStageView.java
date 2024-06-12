@@ -18,31 +18,35 @@ public class RosesStageView extends GameStageView {
     public void createLooks() {
         RosesStageModel model = (RosesStageModel)gameStageModel;
 
-        addLook(new RosesBoardLook(200, model.getBoard()));
+        addLook(new RosesBoardLook(150, model.getBoard()));
         addLook(new BluePawnPotLook(model.getBluePot()));
         addLook(new RedPawnPotLook(model.getRedPot()));
 
         for(int i=0;i<26;i++) {
-            addLook(new PawnLook(25, model.getBluePawns()[i]));
-            addLook(new PawnLook(25, model.getRedPawns()[i]));
+            addLook(new PawnLook(17,model.getBluePawns()[i]));
+            addLook(new PawnLook(17, model.getRedPawns()[i]));
         }
 
         addLook(new TextLook(24, "0x000000", model.getPlayerName()));
-        addLook(new RosesCardPotLook(110, 210, model.getMoovBluePot()));
-        addLook(new RosesCardPotLook(110, 210, model.getMoovRedPot()));
-        addLook(new RosesCardPotLook(110, 210, model.getBlueHeroPot()));
-        addLook(new RosesCardPotLook(110, 210, model.getRedHeroPot()));
-        addLook(new RosesCardPotLook(110, 210, model.getDiscardPot()));
-        addLook(new RosesCardPotLook(110, 210, model.getPickPot()));
+        addLook(new RosesCardPotLook(110, 80, model.getMoovBluePot()));
+        addLook(new RosesCardPotLook(110, 80, model.getMoovRedPot()));
+        addLook(new RosesCardPotLook(130, 90, model.getBlueHeroPot()));
+        addLook(new RosesCardPotLook(130, 90, model.getRedHeroPot()));
+        addLook(new RosesCardPotLook(110, 80, model.getDiscardPot()));
+        addLook(new RosesCardPotLook(110, 80, model.getPickPot()));
 
         for (int i = 0; i < 5; i++) {
-            addLook(new RosesCardLook(80, 40, model.getPlayer1MovementCards()[i]));
-            addLook(new RosesCardLook(80, 40, model.getPlayer2MovementCards()[i]));
+            addLook(new RosesCardLook(80, 110, model.getPlayer1MovementCards()[i]));
+            addLook(new RosesCardLook(80, 110, model.getPlayer2MovementCards()[i]));
+        }
+
+        for (int i = 0; i < model.getPickCards().length; i++) {
+            addLook(new RosesCardLook(80, 110, model.getPickCards()[i]));
         }
 
         for (int i = 0; i < 4; i++) {
-            addLook(new RosesCardLook(80, 40, model.getPlayer1HeroCards()[i]));
-            addLook(new RosesCardLook(80, 40, model.getPlayer2HeroCards()[i]));
+            addLook(new RosesCardLook(80, 110, model.getPlayer1HeroCards()[i]));
+            addLook(new RosesCardLook(80, 110, model.getPlayer2HeroCards()[i]));
         }
 
         /* Example to show how to set a global container to layout all looks in the root pane

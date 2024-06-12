@@ -8,10 +8,7 @@ import boardifier.view.GridLook;
 import boardifier.view.View;
 import javafx.event.*;
 import javafx.scene.input.*;
-import model.RosesBoard;
-import model.RosesPawnPot;
-import model.RosesStageModel;
-import model.RosesPawn;
+import model.*;
 
 import java.util.List;
 
@@ -45,6 +42,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
 
         RosesStageModel stageModel = (RosesStageModel) model.getGameStage();
 
+<<<<<<< Updated upstream
         try {
             if (list.get(list.size() - 1).getType() == ElementTypes.getType("card")) {
                 System.out.println("Clique sur carte OK");
@@ -82,6 +80,24 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
         /*
         if (stageModel.getState() == RosesStageModel.STATE_SELECTPAWN) {
             for (GameElement element : list) {;
+=======
+        if (stageModel.getState() == RosesStageModel.STATE_SELECTCARD) {
+            for (GameElement element : list) {
+                if (element.getType() == ElementTypes.getType("card")) {
+                    RosesCard card = (RosesCard) element;
+                    if (model.getIdPlayer() == 0 && card.getContainer() == stageModel.getMoovBluePot()) {
+                        System.out.println("carte appuyé");
+                        card.toggleSelected();
+                        return; // do not allow another element to be selected
+
+                    }
+                }
+            }
+        }
+
+        if (stageModel.getState() == RosesStageModel.STATE_SELECTCARD) {
+            for (GameElement element : list) {
+>>>>>>> Stashed changes
                 if (element.getType() == ElementTypes.getType("pawn")) {
                     RosesPawn pawn = (RosesPawn)element;
                     // check if color of the pawn corresponds to the current player id
@@ -99,7 +115,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
             for (GameElement element : list) {
                 if (element.isSelected()) {
                     element.toggleSelected();
-                    stageModel.setState(RosesStageModel.STATE_SELECTPAWN);
+                    stageModel.setState(RosesStageModel.STATE_SELECTCARD);
                     return;
                 }
             }
@@ -138,11 +154,14 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                 ActionList actions = ActionFactory.generatePutInContainer(control, model, pawn, "RoseBoard", dest[0], dest[1], AnimationTypes.MOVE_LINEARPROP, 10);
                 actions.setDoEndOfTurn(true); // after playing this action list, it will be the end of turn for current player.
                 stageModel.unselectAll();
-                stageModel.setState(RosesStageModel.STATE_SELECTPAWN);
+                stageModel.setState(RosesStageModel.STATE_SELECTCARD);
                 ActionPlayer play = new ActionPlayer(model, control, actions);
                 play.start();
             }
         }
+<<<<<<< Updated upstream
         */
+=======
+>>>>>>> Stashed changes
     }
 }

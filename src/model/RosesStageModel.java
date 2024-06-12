@@ -48,9 +48,8 @@ public class RosesStageModel extends GameStageModel {
     private RosesCardPot moovRedPot;
     private RosesCardPot moovBluePot;
 
-    public final static int STATE_SELECTPAWN = 1; // the player must select a pawn
+    public final static int STATE_SELECTCARD = 1; // the player must select a pawn
     public final static int STATE_SELECTDEST = 2; // the player must select a destination
-    public final static int STATE_SELECTHERO = 3; // the player must select a hero
 
     private RosesPawn[] bluePawns;
     private RosesPawn[] redPawns;
@@ -93,7 +92,11 @@ public class RosesStageModel extends GameStageModel {
         super(name, model);
         bluePawnsToPlay = 26;
         redPawnsToPlay = 26;
+<<<<<<< Updated upstream
         state = STATE_SELECTDEST;
+=======
+        state = STATE_SELECTCARD;
+>>>>>>> Stashed changes
         setupCallbacks();
     }
 
@@ -117,6 +120,14 @@ public class RosesStageModel extends GameStageModel {
     public void setBoard(RosesBoard board) {
         this.board = board;
         addContainer(board);
+    }
+
+    public Coord2D getBluePotLocation() {
+        return bluePot.getLocation();
+    }
+
+    public Coord2D getRedPotLocation() {
+        return redPot.getLocation();
     }
 
     public void setNbMovements(int nbMovements) {
