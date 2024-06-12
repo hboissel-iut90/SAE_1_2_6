@@ -64,6 +64,8 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                     for (int index = 0; index < stageModel.getPlayer1MovementCards().length; index++) {
                         if (element == stageModel.getPlayer1MovementCards()[index]) {
                             System.out.println("Carte mouvement P1 appuyé");
+                            element.toggleSelected();
+
                             RosesCard move = (RosesCard) element;
                             System.out.println(move.getColor());
 
@@ -96,6 +98,8 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
 
                         if (element == stageModel.getPlayer2MovementCards()[index]) {
                             System.out.println("Carte mouvement P2 appuyé");
+                            element.toggleSelected();
+
                             RosesCard move = (RosesCard) element;
                             System.out.println(move.getColor());
 
