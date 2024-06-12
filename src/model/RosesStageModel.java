@@ -277,6 +277,11 @@ public class RosesStageModel extends GameStageModel {
         }
     }
 
+    public void setPickCards(int index, RosesCard pickCard) {
+        this.pickCards[index] = pickCard;
+        addElement(pickCards[index]);
+    }
+
     public void setMoovBluePot(RosesCardPot moovBluePot) {
         this.moovBluePot = moovBluePot;
         addContainer(moovBluePot);
@@ -348,11 +353,21 @@ public class RosesStageModel extends GameStageModel {
         }
     }
 
+    public void setPlayer1MovementCards(int index, RosesCard player2MovementCard) {
+        this.player2MovementCards[index] = player2MovementCard;
+        addElement(player2MovementCards[index]);
+    }
+
     public void setPlayer2MovementCards(RosesCard[] player2MovementCards) {
         this.player2MovementCards = player2MovementCards;
         for (int i = 0; i < player2MovementCards.length; i++) {
             addElement(player2MovementCards[i]);
         }
+    }
+
+    public void setPlayer2MovementCards(int index, RosesCard player2MovementCard) {
+        this.player2MovementCards[index] = player2MovementCard;
+        addElement(player2MovementCards[index]);
     }
 
     public RosesCard[] getPlayer1MovementCards() {
@@ -412,6 +427,11 @@ public class RosesStageModel extends GameStageModel {
         this.discardCards = discardCards;
         for (int i = 0; i < discardCards.length; i++)
             addElement(discardCards[i]);
+    }
+
+    public void setDiscardCards(int index, RosesCard discardCard) {
+        this.discardCards[index] = discardCard;
+        addElement(discardCards[index]);
     }
 
     public RosesCard[] getDiscardCards() {
