@@ -23,11 +23,13 @@ public class RosesCardLook extends ElementLook {
     private int width;
     private int height;
     private Rectangle border;
+    private RosesStageModel stageModel;
 
-    public RosesCardLook(int width, int height, GameElement element) {
+    public RosesCardLook(int width, int height, GameElement element, RosesStageModel stageModel) {
         super(element, 1);
         this.width = width;
         this.height = height;
+        this.stageModel = stageModel;
         render();
     }
 
@@ -49,13 +51,14 @@ public class RosesCardLook extends ElementLook {
         // Implement if needed
     }
 
-    private void loadImageAndPlace(String imagePath, double x, double y) {
+    private void loadImageAndPlace(String imagePath, double x, double y, boolean isReturned) {
         Image image = new Image(imagePath);
         ImageView imageView = new ImageView(image);
         imageView.setX(x - width / 2);
         imageView.setY(y - height / 2);
         imageView.setFitHeight(110);
         imageView.setFitWidth(80);
+        if (isReturned) imageView.setRotate(180);
         getGroup().getChildren().add(imageView);
 
         // Add border rectangle
@@ -95,7 +98,11 @@ public class RosesCardLook extends ElementLook {
             default -> throw new IllegalStateException("Unexpected value: " + direction);
         };
 
-        loadImageAndPlace(imagePath, card.getX(), card.getY());
+        if (card.getContainer() == stageModel.getMoovBluePot()) {
+            loadImageAndPlace(imagePath, card.getX(), card.getY(), false);
+        } else {
+            loadImageAndPlace(imagePath, card.getX(), card.getY(), true);
+        }
     }
 
     private void handleHeroCard(RosesCard card, Color color, String text) {

@@ -175,11 +175,11 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
             if (tmp[j] == null) {
                 if (numberOfThePlayer == 0) {
                     stageModel.setPlayer1MovementCards(j, card);
-                    stageView.addLook(new RosesCardLook(80, 110, stageModel.getPlayer1HeroCards()[j]));
+                    stageView.addLook(new RosesCardLook(80, 110, stageModel.getPlayer1HeroCards()[j], stageModel));
                 }
                 if (numberOfThePlayer == 1) {
                     stageModel.setPlayer2MovementCards(j, card);
-                    stageView.addLook(new RosesCardLook(80, 110, stageModel.getPlayer2HeroCards()[j]));
+                    stageView.addLook(new RosesCardLook(80, 110, stageModel.getPlayer2HeroCards()[j], stageModel));
                 }
 
 

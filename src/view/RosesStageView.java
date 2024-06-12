@@ -43,17 +43,17 @@ public class RosesStageView extends GameStageView {
         addLook(new PawnLook(17, model.getCrownPawn()));
 
         for (int i = 0; i < 5; i++) {
-            addLook(new RosesCardLook(80, 110, model.getPlayer1MovementCards()[i]));
-            addLook(new RosesCardLook(80, 110, model.getPlayer2MovementCards()[i]));
+            addLook(new RosesCardLook(80, 110, model.getPlayer1MovementCards()[i], model));
+            addLook(new RosesCardLook(80, 110, model.getPlayer2MovementCards()[i], model));
         }
 
         for (int i = 0; i < model.getPickCards().length; i++) {
-            addLook(new RosesCardLook(80, 110, model.getPickCards()[i]));
+            addLook(new RosesCardLook(80, 110, model.getPickCards()[i], model));
         }
 
         for (int i = 0; i < 4; i++) {
-            addLook(new RosesCardLook(80, 110, model.getPlayer1HeroCards()[i]));
-            addLook(new RosesCardLook(80, 110, model.getPlayer2HeroCards()[i]));
+            addLook(new RosesCardLook(80, 110, model.getPlayer1HeroCards()[i], model));
+            addLook(new RosesCardLook(80, 110, model.getPlayer2HeroCards()[i], model));
         }
 
         /* Example to show how to set a global container to layout all looks in the root pane
