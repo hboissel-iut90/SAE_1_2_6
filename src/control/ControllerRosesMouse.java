@@ -154,7 +154,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
     }
 
     private void pickACard(RosesStageModel stageModel, int numberOfThePlayer, GameElement element, int lengthOfPickPot){
-        RosesCard[] tmp;
+        RosesCard[] tmp = new RosesCard[stageModel.getPlayer1MovementCards().length];
 
         if (numberOfThePlayer == 0) {
             tmp = stageModel.getPlayer1MovementCards().clone();
