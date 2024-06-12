@@ -9,6 +9,8 @@ import boardifier.view.View;
 import javafx.event.*;
 import javafx.scene.input.*;
 import model.*;
+import view.RosesCardLook;
+import view.RosesStageView;
 
 import java.util.List;
 
@@ -41,6 +43,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
          */
 
         RosesStageModel stageModel = (RosesStageModel) model.getGameStage();
+        RosesStageView stageView = (RosesStageView) view.getGameStageView();
 
         int play1Move = stageModel.getPlayer1MovementCards().length;
 
@@ -59,7 +62,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                         System.out.println("Carte piochée");
                         for (int i = stageModel.getPickCards().length-1; i > -1; i--) {
                             if (stageModel.getPickCards()[i] != null) {
-                                this.pickACard(stageModel, model.getIdPlayer(), element, i);
+                                this.pickACard(stageModel, stageView, model.getIdPlayer(), element, i);
                                 return;
                             }
                         }
@@ -152,7 +155,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
         catch (Exception e) {return;}
     }
 
-    private void pickACard(RosesStageModel stageModel, int numberOfThePlayer, GameElement element, int lengthOfPickPot){
+    private void pickACard(RosesStageModel stageModel, RosesStageView stageView, int numberOfThePlayer, GameElement element, int lengthOfPickPot){
         RosesCard[] tmp = new RosesCard[stageModel.getPlayer1MovementCards().length];
 
         if (numberOfThePlayer == 0) {
@@ -166,8 +169,15 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
         card.isFlipped();
         for (int j = 0; j < tmp.length; j++) {
             if (tmp[j] == null) {
-                if (numberOfThePlayer == 0) stageModel.setPlayer1MovementCards(j, card);
-                if (numberOfThePlayer == 1) stageModel.setPlayer2MovementCards(j, card);
+                if (numberOfThePlayer == 0) {
+                    stageModel.setPlayer1MovementCards(j, card);
+                    stageView.addLook(new RosesCardLook(80, 110, stageModel.getPlayer1HeroCards()[j]));
+                }
+                if (numberOfThePlayer == 1) {
+                    stageModel.setPlayer2MovementCards(j, card);
+                    stageView.addLook(new RosesCardLook(80, 110, stageModel.getPlayer2HeroCards()[j]));
+                }
+
 
 
                 stageModel.setPickCards(lengthOfPickPot, null);
