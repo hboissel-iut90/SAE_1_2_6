@@ -459,10 +459,10 @@ public class RosesStageModel extends GameStageModel {
 
     public void update() {
         bluePawnsCounter.setText("Blue pawns left : " + Color.BLUE + this.getBluePawnsToPlay());
-        bluePawnsCounter.setLocation(60, 9);
+        bluePawnsCounter.setLocation(1000, 654);
         this.setBluePawnsCounter(bluePawnsCounter);
         redPawnsCounter.setText("Red pawns left : " + Color.RED + this.getRedPawnsToPlay());
-        redPawnsCounter.setLocation(60, 21);
+        redPawnsCounter.setLocation(1000, 319);
         this.setRedPawnsCounter(redPawnsCounter);
         cardPickCounter.setText("Cards left : " + Color.GRAY + this.pickCards.length);
         cardPickCounter.setLocation(16, 0);
