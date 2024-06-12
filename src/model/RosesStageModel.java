@@ -92,11 +92,7 @@ public class RosesStageModel extends GameStageModel {
         super(name, model);
         bluePawnsToPlay = 26;
         redPawnsToPlay = 26;
-<<<<<<< Updated upstream
-        state = STATE_SELECTDEST;
-=======
         state = STATE_SELECTCARD;
->>>>>>> Stashed changes
         setupCallbacks();
     }
 

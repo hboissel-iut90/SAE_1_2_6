@@ -84,14 +84,23 @@ public class RosesStageFactory extends StageElementsFactory {
 
         for (int i = 0; i < 5; i++) {
             if (player1MovementCards[i] == null) {
-                player1MovementCards[i] = new RosesCard(pickPotCards[pickPotCards.length - i - 1]);
+                player1MovementCards[i] = new RosesCard(pickPotCards[pickPotCards.length - 1]);
                 player1MovementCards[i].flip();
             }
+            RosesCard[] copyOfPickPotCards = new RosesCard[pickPotCards.length - 1];
+            System.arraycopy(pickPotCards, 0, copyOfPickPotCards, 0, copyOfPickPotCards.length);
+            pickPotCards = copyOfPickPotCards;
+        }
 
+        for (int i = 0; i < 5; i++) {
             if (player2MovementCards[i] == null) {
-                player2MovementCards[i] = new RosesCard(pickPotCards[pickPotCards.length - i - 6]);
+                player2MovementCards[i] = new RosesCard(pickPotCards[pickPotCards.length - 1]);
                 player2MovementCards[i].flip();
             }
+            RosesCard[] copyOfPickPotCards = new RosesCard[pickPotCards.length - 1];
+            System.arraycopy(pickPotCards, 0, copyOfPickPotCards, 0, copyOfPickPotCards.length);
+            pickPotCards = copyOfPickPotCards;
+
         }
 
         stageModel.setPlayer1MovementCards(player1MovementCards);

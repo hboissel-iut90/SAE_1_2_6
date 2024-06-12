@@ -38,49 +38,10 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
         for(GameElement element : list) {
             Logger.debug(element);
         }
-        */
+         */
 
         RosesStageModel stageModel = (RosesStageModel) model.getGameStage();
 
-<<<<<<< Updated upstream
-        try {
-            if (list.get(list.size() - 1).getType() == ElementTypes.getType("card")) {
-                System.out.println("Clique sur carte OK");
-                // get the board, pot,  and the selected pawn to simplify code in the following
-                RosesBoard board = stageModel.getBoard();
-
-                // by default get blue pot
-                RosesPawnPot pot = stageModel.getBluePot();
-
-                // but if it's player2 that plays, get red pot
-                if (model.getIdPlayer() == 1) {
-                    pot = stageModel.getRedPot();
-                }
-                GameElement pawn = model.getSelected().get(0);
-
-                // thirdly, get the clicked cell in the 3x3 board
-                GridLook lookBoard = (GridLook) control.getElementLook(board);
-                int[] dest = lookBoard.getCellFromSceneLocation(clic);
-
-                // get the cell in the pot that owns the selected pawn
-                int[] from = pot.getElementCell(pawn);
-                Logger.debug("try to move pawn from pot " + from[0] + "," + from[1] + " to board " + dest[0] + "," + dest[1]);
-
-                // if the destination cell is valid for for the selected pawn
-                if (board.canReachCell(dest[0], dest[1])) {
-                    ActionList actions = ActionFactory.generatePutInContainer(control, model, pawn, "RoseBoard", dest[0], dest[1], AnimationTypes.MOVE_LINEARPROP, 10);
-                    actions.setDoEndOfTurn(true); // after playing this action list, it will be the end of turn for current player.
-                    stageModel.unselectAll();
-                    ActionPlayer play = new ActionPlayer(model, control, actions);
-                    play.start();
-                }
-            }
-        }
-        catch (Exception e) {return;}
-        /*
-        if (stageModel.getState() == RosesStageModel.STATE_SELECTPAWN) {
-            for (GameElement element : list) {;
-=======
         if (stageModel.getState() == RosesStageModel.STATE_SELECTCARD) {
             for (GameElement element : list) {
                 if (element.getType() == ElementTypes.getType("card")) {
@@ -97,7 +58,6 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
 
         if (stageModel.getState() == RosesStageModel.STATE_SELECTCARD) {
             for (GameElement element : list) {
->>>>>>> Stashed changes
                 if (element.getType() == ElementTypes.getType("pawn")) {
                     RosesPawn pawn = (RosesPawn)element;
                     // check if color of the pawn corresponds to the current player id
@@ -159,9 +119,6 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                 play.start();
             }
         }
-<<<<<<< Updated upstream
-        */
-=======
->>>>>>> Stashed changes
     }
 }
+
