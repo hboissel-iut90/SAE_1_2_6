@@ -42,27 +42,44 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
 
         RosesStageModel stageModel = (RosesStageModel) model.getGameStage();
 
+        int play1Move = stageModel.getPlayer1MovementCards().length;
+
         try {
-            for (GameElement element : list) {
-                if (element.getType() == ElementTypes.getType("card")) {
+            for (GameElement element : list) {  // Take elements clicked
+                if (element.getType() == ElementTypes.getType("card")) { // Watch if the element is a card
+
                     System.out.println("Clique sur carte OK");
-                    if (element == stageModel.getPickCards()[0]) {
+
+                    /**
+                     * Controller to the pick pot
+                     * Take the last card in list
+                     * and add to the movement list of the player in alphabet order
+                     */
+                    if (element == stageModel.getPickCards()[0]) { // Watch if the card is in the pick pot
                         System.out.println("Carte piochée");
+                        for (int i = stageModel.getPickCards().length-1; i > -1; i--) {
+                            if (stageModel.getPickCards()[i] != null) {
+                                this.pickACard(stageModel, model.getIdPlayer(), element,stageModel.getPickCards().length-1);
+                                return;
+                            }
+                        }
+
                         return;
                     }
 
-                    if (element == stageModel.getPlayer1HeroCards()[0]) {
+                    if (element == stageModel.getPlayer1HeroCards()[0]) { // Watch if the card is a hero card of the player 1
                         System.out.println("Carte héros P1 appuyé");
                         return;
                     }
 
-                    if (element == stageModel.getPlayer2HeroCards()[0]) {
+                    if (element == stageModel.getPlayer2HeroCards()[0]) {  // Watch if the card is a hero card of the player 2
                         System.out.println("Carte héros P2 appuyé");
                         return;
                     }
 
-                    for (int index = 0; index < stageModel.getPlayer1MovementCards().length; index++) {
-                        if (element == stageModel.getPlayer1MovementCards()[index]) {
+                    for (int index = 0; index < play1Move; index++) {
+
+                        if (element == stageModel.getPlayer1MovementCards()[index]) { // Watch if the card is a movement card of the player 1
                             System.out.println("Carte mouvement P1 appuyé");
                             element.toggleSelected();
 
@@ -96,7 +113,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                             }
                         }
 
-                        if (element == stageModel.getPlayer2MovementCards()[index]) {
+                        if (element == stageModel.getPlayer2MovementCards()[index]) { // Watch if the card is a movement card of the player 2
                             System.out.println("Carte mouvement P2 appuyé");
                             element.toggleSelected();
 
@@ -134,6 +151,30 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
             }
         }
         catch (Exception e) {return;}
+    }
+
+    private void pickACard(RosesStageModel stageModel, int numberOfThePlayer, GameElement element, int lengthOfPickPot){
+        RosesCard[] tmp;
+
+        if (numberOfThePlayer == 0) {
+            tmp = stageModel.getPlayer1MovementCards().clone();
+        }
+        if (numberOfThePlayer == 1) {
+            tmp = stageModel.getPlayer2MovementCards().clone();
+        }
+
+        RosesCard card = (RosesCard) element;
+        for (int j = 0; j < tmp.length; j++) {
+            if (tmp[j] == null) {
+                if (numberOfThePlayer == 0) stageModel.setPlayer1MovementCards(j, card);
+                if (numberOfThePlayer == 1) stageModel.setPlayer2MovementCards(j, card);
+
+                tmp = stageModel.getPickCards().clone();
+                tmp[lengthOfPickPot] == null;
+                stageModel.setPickCards(tmp);
+                break;
+            }
+        }
     }
 }
 
