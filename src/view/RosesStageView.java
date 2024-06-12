@@ -12,6 +12,8 @@ public class RosesStageView extends GameStageView {
         height = (int) Screen.getPrimary().getBounds().getHeight();
 
 
+
+
     }
 
     @Override

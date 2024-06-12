@@ -15,7 +15,7 @@ public class RosesRootPane extends RootPane {
 
     @Override
     public void createDefaultGroup() {
-        Rectangle frame = new Rectangle(1920, 1080, Color.LIGHTGREY);
+        Rectangle frame = new Rectangle(500, 500, Color.LIGHTGREY);
         Text text = new Text("Playing to The Rose King");
         text.setFont(new Font(15));
         text.setFill(Color.BLACK);

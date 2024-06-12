@@ -8,13 +8,13 @@ import boardifier.model.Player;
 import boardifier.view.View;
 import model.RosesStageModel;
 
-public class ControllerRoses extends Controller {
+public class RosesController extends Controller {
 
-    public ControllerRoses(Model model, View view) {
+    public RosesController(Model model, View view) {
         super(model, view);
         setControlKey(new ControllerRosesKey(model, view, this));
         setControlMouse(new ControllerRosesMouse(model, view, this));
-        setControlAction (new ControllerRosesAction(model, view, this));
+
     }
 
     public void endOfTurn() {
