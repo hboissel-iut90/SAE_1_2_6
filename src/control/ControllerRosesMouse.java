@@ -86,8 +86,9 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                             element.toggleSelected();
 
                             RosesCard move = (RosesCard) element;
-                            System.out.println(move.getColor());
+                            stageModel.setPlayer1MovementCards(index, null);
 
+                            /*
                             // Get the board, pot, and the selected pawn to simplify code in the following
                             RosesBoard board = stageModel.getBoard();
 
@@ -113,6 +114,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                                 ActionPlayer play = new ActionPlayer(model, control, actions);
                                 play.start();
                             }
+                            */
                         }
 
                         if (element == stageModel.getPlayer2MovementCards()[index]) { // Watch if the card is a movement card of the player 2
@@ -120,8 +122,8 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                             element.toggleSelected();
 
                             RosesCard move = (RosesCard) element;
-                            System.out.println(move.getColor());
 
+                            /*
                             // Get the board, pot, and the selected pawn to simplify code in the following
                             RosesBoard board = stageModel.getBoard();
 
@@ -147,6 +149,8 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                                 ActionPlayer play = new ActionPlayer(model, control, actions);
                                 play.start();
                             }
+
+                             */
                         }
                     }
                 }
@@ -166,7 +170,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
         }
 
         RosesCard card = (RosesCard) element;
-        card.isFlipped();
+        card.flip();
         for (int j = 0; j < tmp.length; j++) {
             if (tmp[j] == null) {
                 if (numberOfThePlayer == 0) {
