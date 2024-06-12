@@ -11,16 +11,17 @@ public class RosesPawn extends GameElement {
 
     private int number;
     private int color;
+    private String text;
     public static int PAWN_BLUE = 0;
     public static int PAWN_RED = 1;
     public static int PAWN_YELLOW = 2;
 
-    public RosesPawn(int number, int color, GameStageModel gameStageModel) {
+    public RosesPawn(String text, int color, GameStageModel gameStageModel) {
         super(gameStageModel);
         // registering element types defined especially for this game
         ElementTypes.register("pawn",50);
         type = ElementTypes.getType("pawn");
-        this.number = number;
+        this.text = text;
         this.color = color;
     }
 
@@ -33,7 +34,11 @@ public class RosesPawn extends GameElement {
     }
 
     public int getNumber() {
-        return number;
+        return this.number;
+    }
+
+    public String getText() {
+        return this.text;
     }
 
     public int getColor() {

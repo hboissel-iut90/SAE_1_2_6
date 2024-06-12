@@ -38,7 +38,7 @@ public class RosesStageFactory extends StageElementsFactory {
         }
         stageModel.setRedPawns(redPawns);
 
-        RosesPawn crownPawn = new RosesPawn(RosesPawn.PAWN_YELLOW, stageModel);
+        RosesPawn crownPawn = new RosesPawn("♔",RosesPawn.PAWN_YELLOW, stageModel);
         stageModel.setCrownPawn(crownPawn);
         board.addElement(crownPawn, 4, 4);
 

@@ -42,6 +42,8 @@ public class PawnLook extends ElementLook {
     protected void render() {
         RosesPawn pawn = (RosesPawn)element;
         circle = new Circle();
+        Text crown = new Text(pawn.getText());
+        crown.setFont(new Font(25));
         circle.setRadius(radius);
         circle.setStrokeWidth(2);
         circle.setStrokeType(StrokeType.CENTERED);
@@ -52,13 +54,15 @@ public class PawnLook extends ElementLook {
             circle.setFill(Color.RED);
         } else {
             circle.setFill(Color.YELLOW);
-//            Text text = new Text("♔");
-//            text.setFont(new Font(25));
-//            text.setFill(Color.WHITE);
-//            getGroup().getChildren().addAll(circle, text);
+            crown.setFill(Color.BLACK);
+
         }
 
         addShape(circle);
+        Bounds btCrown = crown.getBoundsInLocal();
+        crown.setX(-btCrown.getWidth()/2.1);
+        crown.setY(crown.getBaselineOffset()/2.5);
+        addShape(crown);
         // NB: text won't change so no need to put it as an attribute
         if (String.valueOf(pawn.getNumber()).equals("0") || String.valueOf(pawn.getNumber()).equals("null")) {
             return;
