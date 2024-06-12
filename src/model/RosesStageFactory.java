@@ -20,9 +20,9 @@ public class RosesStageFactory extends StageElementsFactory {
         RosesBoard board = new RosesBoard(370, 250, stageModel);
         stageModel.setBoard(board);
         //create the pots
-        RosesPawnPot bluePot = new RosesPawnPot(1000,310, stageModel);
+        RosesPawnPot bluePot = new RosesPawnPot(900,620, stageModel);
         stageModel.setBluePot(bluePot);
-        RosesPawnPot redPot = new RosesPawnPot(1000, 620, stageModel);
+        RosesPawnPot redPot = new RosesPawnPot(900, 280, stageModel);
         stageModel.setRedPot(redPot);
 
 
@@ -45,22 +45,27 @@ public class RosesStageFactory extends StageElementsFactory {
         }
 
 
-        RosesCardPot moovBluePot = new RosesCardPot(870, 210, stageModel);
+        RosesCardPot moovBluePot = new RosesCardPot(350, 750, stageModel);
         stageModel.setMoovBluePot(moovBluePot);
-        RosesCardPot moovRedPot = new RosesCardPot(250, 210, stageModel);
+        RosesCardPot moovRedPot = new RosesCardPot(450, 100, stageModel);
         stageModel.setMoovRedPot(moovRedPot);
-        RosesCardPot heroBluePot = new RosesCardPot(758, 20, 1, 1, stageModel);
-        RosesCardPot heroRedPot = new RosesCardPot(362, 840, 1, 1, stageModel);
-        RosesCardPot discardPot = new RosesCardPot(560, 105, 1, 1, stageModel);
-        RosesCardPot pickPot = new RosesCardPot(560, 740, 1, 1, stageModel);
+        RosesCardPot heroBluePot = new RosesCardPot(780, 750, 1, 1, stageModel);
+        RosesCardPot heroRedPot = new RosesCardPot(330, 80, 1, 1, stageModel);
+        RosesCardPot discardPot = new RosesCardPot(250, 500, 1, 1, stageModel);
+        RosesCardPot pickPot = new RosesCardPot(250, 350, 1, 1, stageModel);
         stageModel.setBlueHeroPot(heroBluePot);
         stageModel.setRedHeroPot(heroRedPot);
         stageModel.setDiscardPot(discardPot);
         stageModel.setPickPot(pickPot);
+
         // create the text
         TextElement text = new TextElement(stageModel.getCurrentPlayerName(), stageModel);
         text.setLocation(10,20);
         stageModel.setPlayerName(text);
+
+        TextElement pick = new TextElement("Pioche", stageModel);
+        pick.setLocation(130, 410);
+        stageModel.setPick(pick);
 
         RosesCard[] pickPotCards = new RosesCard[24];
         int index = 0;
@@ -107,8 +112,8 @@ public class RosesStageFactory extends StageElementsFactory {
         stageModel.setPlayer2MovementCards(player2MovementCards);
 
         for (int i = 0; i < 5; i++) {
-            moovBluePot.addElement(player1MovementCards[i], i,0);
-            moovRedPot.addElement(player2MovementCards[i], i,0);
+            moovBluePot.addElement(player1MovementCards[i], 0,i);
+            moovRedPot.addElement(player2MovementCards[i], 0,i);
         }
 
         RosesCard[] heroRedCards = new RosesCard[4];

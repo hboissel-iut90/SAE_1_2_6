@@ -371,7 +371,7 @@ public class RosesStageModel extends GameStageModel {
         return this.redPawnsCounter;
     }
 
-    public TextElement getPick() {
+   public TextElement getPick() {
         return pick;
     }
 
