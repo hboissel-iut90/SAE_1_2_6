@@ -42,83 +42,94 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
 
         RosesStageModel stageModel = (RosesStageModel) model.getGameStage();
 
-        if (stageModel.getState() == RosesStageModel.STATE_SELECTCARD) {
+        try {
             for (GameElement element : list) {
                 if (element.getType() == ElementTypes.getType("card")) {
-                    RosesCard card = (RosesCard) element;
-                    if (model.getIdPlayer() == 0 && card.getContainer() == stageModel.getMoovBluePot()) {
-                        System.out.println("carte appuyé");
-                        card.toggleSelected();
-                        return; // do not allow another element to be selected
+                    System.out.println("Clique sur carte OK");
+                    if (element == stageModel.getPickCards()[0]) {
+                        System.out.println("Carte piochée");
+                        return;
+                    }
 
+                    if (element == stageModel.getPlayer1HeroCards()[0]) {
+                        System.out.println("Carte héros P1 appuyé");
+                        return;
+                    }
+
+                    if (element == stageModel.getPlayer2HeroCards()[0]) {
+                        System.out.println("Carte héros P2 appuyé");
+                        return;
+                    }
+
+                    for (int index = 0; index < stageModel.getPlayer1MovementCards().length; index++) {
+                        if (element == stageModel.getPlayer1MovementCards()[index]) {
+                            System.out.println("Carte mouvement P1 appuyé");
+                            RosesCard move = (RosesCard) element;
+                            System.out.println(move.getColor());
+
+                            // Get the board, pot, and the selected pawn to simplify code in the following
+                            RosesBoard board = stageModel.getBoard();
+
+                            // Get blue pot
+                            RosesPawnPot pot = stageModel.getBluePot();
+
+
+                            GameElement pawn = model.getSelected().get(0);
+
+                            // thirdly, get the clicked cell in the 3x3 board
+                            GridLook lookBoard = (GridLook) control.getElementLook(board);
+                            int[] dest = lookBoard.getCellFromSceneLocation(clic);
+
+                            // get the cell in the pot that owns the selected pawn
+                            int[] from = pot.getElementCell(pawn);
+                            Logger.debug("try to move pawn from pot " + from[0] + "," + from[1] + " to board " + dest[0] + "," + dest[1]);
+
+                            // if the destination cell is valid for for the selected pawn
+                            if (board.canReachCell(dest[0], dest[1])) {
+                                ActionList actions = ActionFactory.generatePutInContainer(control, model, pawn, "RoseBoard", dest[0], dest[1], AnimationTypes.MOVE_LINEARPROP, 10);
+                                actions.setDoEndOfTurn(true); // after playing this action list, it will be the end of turn for current player.
+                                stageModel.unselectAll();
+                                ActionPlayer play = new ActionPlayer(model, control, actions);
+                                play.start();
+                            }
+                        }
+
+                        if (element == stageModel.getPlayer2MovementCards()[index]) {
+                            System.out.println("Carte mouvement P2 appuyé");
+                            RosesCard move = (RosesCard) element;
+                            System.out.println(move.getColor());
+
+                            // Get the board, pot, and the selected pawn to simplify code in the following
+                            RosesBoard board = stageModel.getBoard();
+
+                            // Get blue pot
+                            RosesPawnPot pot = stageModel.getBluePot();
+
+
+                            GameElement pawn = model.getSelected().get(0);
+
+                            // thirdly, get the clicked cell in the 3x3 board
+                            GridLook lookBoard = (GridLook) control.getElementLook(board);
+                            int[] dest = lookBoard.getCellFromSceneLocation(clic);
+
+                            // get the cell in the pot that owns the selected pawn
+                            int[] from = pot.getElementCell(pawn);
+                            Logger.debug("try to move pawn from pot " + from[0] + "," + from[1] + " to board " + dest[0] + "," + dest[1]);
+
+                            // if the destination cell is valid for for the selected pawn
+                            if (board.canReachCell(dest[0], dest[1])) {
+                                ActionList actions = ActionFactory.generatePutInContainer(control, model, pawn, "RoseBoard", dest[0], dest[1], AnimationTypes.MOVE_LINEARPROP, 10);
+                                actions.setDoEndOfTurn(true); // after playing this action list, it will be the end of turn for current player.
+                                stageModel.unselectAll();
+                                ActionPlayer play = new ActionPlayer(model, control, actions);
+                                play.start();
+                            }
+                        }
                     }
                 }
             }
         }
-
-        if (stageModel.getState() == RosesStageModel.STATE_SELECTCARD) {
-            for (GameElement element : list) {
-                if (element.getType() == ElementTypes.getType("pawn")) {
-                    RosesPawn pawn = (RosesPawn)element;
-                    // check if color of the pawn corresponds to the current player id
-                    if (pawn.getColor() == model.getIdPlayer()) {
-                        element.toggleSelected();
-                        stageModel.setState(RosesStageModel.STATE_SELECTDEST);
-                        return; // do not allow another element to be selected
-                    }
-                }
-            }
-        }
-
-        else if (stageModel.getState() == RosesStageModel.STATE_SELECTDEST) {
-            // first check if the click is on the current selected pawn. In this case, unselect it
-            for (GameElement element : list) {
-                if (element.isSelected()) {
-                    element.toggleSelected();
-                    stageModel.setState(RosesStageModel.STATE_SELECTCARD);
-                    return;
-                }
-            }
-
-            // secondly, search if the board has been clicked. If not just return
-            boolean boardClicked = false;
-            for (GameElement element : list) {
-                if (element == stageModel.getBoard()) {
-                    boardClicked = true; break;
-                }
-            }
-            if (!boardClicked) return;
-
-            // get the board, pot,  and the selected pawn to simplify code in the following
-            RosesBoard board = stageModel.getBoard();
-
-            // by default get blue pot
-            RosesPawnPot pot = stageModel.getBluePot();
-
-            // but if it's player2 that plays, get red pot
-            if (model.getIdPlayer() == 1) {
-                pot = stageModel.getRedPot();
-            }
-            GameElement pawn = model.getSelected().get(0);
-
-            // thirdly, get the clicked cell in the 3x3 board
-            GridLook lookBoard = (GridLook) control.getElementLook(board);
-            int[] dest = lookBoard.getCellFromSceneLocation(clic);
-
-            // get the cell in the pot that owns the selected pawn
-            int[] from = pot.getElementCell(pawn);
-            Logger.debug("try to move pawn from pot "+from[0]+","+from[1]+ " to board "+ dest[0]+","+dest[1]);
-
-            // if the destination cell is valid for for the selected pawn
-            if (board.canReachCell(dest[0], dest[1])) {
-                ActionList actions = ActionFactory.generatePutInContainer(control, model, pawn, "RoseBoard", dest[0], dest[1], AnimationTypes.MOVE_LINEARPROP, 10);
-                actions.setDoEndOfTurn(true); // after playing this action list, it will be the end of turn for current player.
-                stageModel.unselectAll();
-                stageModel.setState(RosesStageModel.STATE_SELECTCARD);
-                ActionPlayer play = new ActionPlayer(model, control, actions);
-                play.start();
-            }
-        }
+        catch (Exception e) {return;}
     }
 }
 
