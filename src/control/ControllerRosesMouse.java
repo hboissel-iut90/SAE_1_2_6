@@ -59,11 +59,10 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                         System.out.println("Carte piochée");
                         for (int i = stageModel.getPickCards().length-1; i > -1; i--) {
                             if (stageModel.getPickCards()[i] != null) {
-                                this.pickACard(stageModel, model.getIdPlayer(), element,i);
+                                this.pickACard(stageModel, model.getIdPlayer(), element, i);
                                 return;
                             }
                         }
-
                         return;
                     }
 
@@ -164,10 +163,12 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
         }
 
         RosesCard card = (RosesCard) element;
+        card.isFlipped();
         for (int j = 0; j < tmp.length; j++) {
             if (tmp[j] == null) {
                 if (numberOfThePlayer == 0) stageModel.setPlayer1MovementCards(j, card);
                 if (numberOfThePlayer == 1) stageModel.setPlayer2MovementCards(j, card);
+
 
                 stageModel.setPickCards(lengthOfPickPot, null);
                 break;
