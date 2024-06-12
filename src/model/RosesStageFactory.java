@@ -2,6 +2,8 @@ package model;
 
 import boardifier.model.*;
 
+import java.awt.*;
+
 public class RosesStageFactory extends StageElementsFactory {
     private RosesStageModel stageModel;
 
@@ -68,8 +70,16 @@ public class RosesStageFactory extends StageElementsFactory {
         stageModel.setPlayerName(text);
 
         TextElement pick = new TextElement("Pioche", stageModel);
-        pick.setLocation(130, 410);
+        pick.setLocation(130, 380);
         stageModel.setPick(pick);
+
+        TextElement redPawnsCounter = new TextElement("Pion restant : " + stageModel.getRedPawnsToPlay(), stageModel);
+        redPawnsCounter.setLocation(1000, 320);
+        stageModel.setRedPawnsCounter(redPawnsCounter);
+
+        TextElement bluePawnsCounter = new TextElement("Pion restant : " + stageModel.getBluePawnsToPlay(), stageModel);
+        bluePawnsCounter.setLocation(1000, 655);
+        stageModel.setBluePawnsCounter(bluePawnsCounter);
 
         RosesCard[] pickPotCards = new RosesCard[24];
         int index = 0;
@@ -87,6 +97,10 @@ public class RosesStageFactory extends StageElementsFactory {
         for (int i = 0; i < 24; i++) {
             pickPot.addElement(pickPotCards[i], 0, 0);
         }
+
+        TextElement cardPickCounter = new TextElement("Carte restante : " + pickPotCards.length, stageModel);
+        cardPickCounter.setLocation(10, 450);
+        stageModel.setCardPickCounter(cardPickCounter);
 
         RosesCard[] player1MovementCards = new RosesCard[5];
         RosesCard[] player2MovementCards = new RosesCard[5];
@@ -133,8 +147,16 @@ public class RosesStageFactory extends StageElementsFactory {
             heroRedPot.addElement(heroRedCards[i], 0,0);
         }
 
-        stageModel.setPlayer2HeroCards(heroRedCards);
+        TextElement numberOfBlueHeroCards = new TextElement("Carte héros restante : " + heroBlueCards.length, stageModel);
+        numberOfBlueHeroCards.setLocation(680, 920);
+        stageModel.setBlueHeroCardsCounter(numberOfBlueHeroCards);
         stageModel.setPlayer1HeroCards(heroBlueCards);
+
+        TextElement numberOfRedHeroCards = new TextElement("Carte héros restante : " + heroRedCards.length, stageModel);
+        numberOfRedHeroCards.setLocation(230, 50);
+        stageModel.setRedHeroCardsCounter(numberOfRedHeroCards);
+        stageModel.setPlayer2HeroCards(heroRedCards);
+
         stageModel.setPickCards(pickPotCards);
 
 
