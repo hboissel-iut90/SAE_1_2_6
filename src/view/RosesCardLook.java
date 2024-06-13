@@ -116,11 +116,16 @@ public class RosesCardLook extends ElementLook {
         Text heroText = new Text(text);
         heroText.setFont(new Font(35));
         heroText.setFill(Color.WHITE);
-        if (color == Color.BLUE)
-        heroText.setRotate(90);
-        else heroText.setRotate(270);
-        heroText.setX(card.getX() - 50);
-        heroText.setY(card.getY() + 13);
+        if (color == Color.BLUE) {
+            heroText.setRotate(90);
+            heroText.setX(card.getX() - 35);
+            heroText.setY(card.getY() + 13);
+        }
+        else  {
+            heroText.setRotate(270);
+            heroText.setX(card.getX() - 45);
+            heroText.setY(card.getY() + 13);
+        }
 
         getGroup().getChildren().addAll(heroCard, heroText);
 
@@ -143,9 +148,9 @@ public class RosesCardLook extends ElementLook {
             handleMovementCard(card);
         } else {
             if (card.getColor() == CARD_BLUE) {
-                handleHeroCard(card, Color.BLUE, "Héros");
+                handleHeroCard(card, Color.BLUE, "Hero");
             } else if (card.getColor() == CARD_RED) {
-                handleHeroCard(card, Color.RED, "Héros");
+                handleHeroCard(card, Color.RED, "Hero");
             }
         }
     }

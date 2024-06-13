@@ -69,16 +69,16 @@ public class RosesStageFactory extends StageElementsFactory {
         text.setLocation(10,20);
         stageModel.setPlayerName(text);
 
-        TextElement pick = new TextElement("Pioche", stageModel);
-        pick.setLocation(130, 380);
+        TextElement pick = new TextElement("Pick pot", stageModel);
+        pick.setLocation(130, 395);
         stageModel.setPick(pick);
 
-        TextElement redPawnsCounter = new TextElement("Pion restant : " + stageModel.getRedPawnsToPlay(), stageModel);
-        redPawnsCounter.setLocation(1000, 320);
+        TextElement redPawnsCounter = new TextElement("" + stageModel.getRedPawnsToPlay(), stageModel);
+        redPawnsCounter.setLocation(980, 315);
         stageModel.setRedPawnsCounter(redPawnsCounter);
 
-        TextElement bluePawnsCounter = new TextElement("Pion restant : " + stageModel.getBluePawnsToPlay(), stageModel);
-        bluePawnsCounter.setLocation(1000, 655);
+        TextElement bluePawnsCounter = new TextElement("" + stageModel.getBluePawnsToPlay(), stageModel);
+        bluePawnsCounter.setLocation(980, 655);
         stageModel.setBluePawnsCounter(bluePawnsCounter);
 
         RosesCard[] pickPotCards = new RosesCard[24];
@@ -98,9 +98,8 @@ public class RosesStageFactory extends StageElementsFactory {
             pickPot.addElement(pickPotCards[i], 0, 0);
         }
 
-        TextElement cardPickCounter = new TextElement("Carte restante : " + pickPotCards.length, stageModel);
-        cardPickCounter.setLocation(10, 450);
-        stageModel.setCardPickCounter(cardPickCounter);
+
+
 
         RosesCard[] player1MovementCards = new RosesCard[5];
         RosesCard[] player2MovementCards = new RosesCard[5];
@@ -147,17 +146,20 @@ public class RosesStageFactory extends StageElementsFactory {
             heroRedPot.addElement(heroRedCards[i], 0,0);
         }
 
-        TextElement numberOfBlueHeroCards = new TextElement("Carte héros restante : " + heroBlueCards.length, stageModel);
-        numberOfBlueHeroCards.setLocation(680, 920);
+        TextElement numberOfBlueHeroCards = new TextElement("" + heroBlueCards.length, stageModel);
+        numberOfBlueHeroCards.setLocation(816, 920);
         stageModel.setBlueHeroCardsCounter(numberOfBlueHeroCards);
         stageModel.setPlayer1HeroCards(heroBlueCards);
 
-        TextElement numberOfRedHeroCards = new TextElement("Carte héros restante : " + heroRedCards.length, stageModel);
-        numberOfRedHeroCards.setLocation(230, 50);
+        TextElement numberOfRedHeroCards = new TextElement("" + heroRedCards.length, stageModel);
+        numberOfRedHeroCards.setLocation(365, 50);
         stageModel.setRedHeroCardsCounter(numberOfRedHeroCards);
         stageModel.setPlayer2HeroCards(heroRedCards);
 
         stageModel.setPickCards(pickPotCards);
+        TextElement cardPickCounter = new TextElement("" + pickPotCards.length, stageModel);
+        cardPickCounter.setLocation(275, 335);
+        stageModel.setCardPickCounter(cardPickCounter);
 
 
         /*

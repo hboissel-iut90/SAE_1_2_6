@@ -6,13 +6,19 @@ import boardifier.model.action.ActionList;
 import boardifier.model.animation.AnimationTypes;
 import boardifier.view.GridLook;
 import boardifier.view.View;
+import javafx.application.Platform;
 import javafx.event.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.input.*;
+import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 import model.*;
 import view.RosesCardLook;
 import view.RosesStageView;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * A basic mouse controller that just grabs the mouse clicks and prints out some informations.
@@ -44,6 +50,13 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
 
         RosesStageModel stageModel = (RosesStageModel) model.getGameStage();
         RosesStageView stageView = (RosesStageView) view.getGameStageView();
+        String direction;
+        int number;
+        int row = stageModel.getBoard().getElementCell(stageModel.getCrownPawn())[0];
+        int col = stageModel.getBoard().getElementCell(stageModel.getCrownPawn())[1];
+        System.out.println("row : " + row);
+        Rectangle discardPotBounds = stageModel.getDiscardPotBounds();
+        System.out.println("col : " + col);
 
         int play1Move = stageModel.getPlayer1MovementCards().length;
 
@@ -79,14 +92,64 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                         return;
                     }
 
+
+
                     for (int index = 0; index < play1Move; index++) {
 
-                        if (element == stageModel.getPlayer1MovementCards()[index]) { // Watch if the card is a movement card of the player 1
-                            System.out.println("Carte mouvement P1 appuyé");
-                            element.toggleSelected();
-
-                            RosesCard move = (RosesCard) element;
-                            stageModel.setPlayer1MovementCards(index, null);
+                        if (model.getIdPlayer() == 0 && element == stageModel.getPlayer1MovementCards()[index]) { // Watch if the card is a movement card of the player 1
+                            System.out.println("Carte mouvement P1 neuille");
+                            direction = stageModel.getPlayer1MovementCards()[index].getDirection();
+                            number = stageModel.getPlayer1MovementCards()[index].getValue();
+                            switch (direction) {
+                                case "W":
+                                    col = col - number;
+                                    break;
+                                case "N-E":
+                                    col = col + number;
+                                    row = row - number;
+                                    break;
+                                case "E":
+                                    col = col + number;
+                                    break;
+                                case "S-E":
+                                    col = col + number;
+                                    row = row + number;
+                                    break;
+                                case "S":
+                                    row = row + number;
+                                    break;
+                                case "S-W":
+                                    row = row + number;
+                                    col = col - number;
+                                    break;
+                                case "N":
+                                    row = row - number;
+                                    break;
+                                default:
+                                    row = row - number;
+                                    col = col - number;
+                            }
+                            if (col >= 0 && col <= 8 && row >= 0 && row <= 8) {
+                                element.toggleSelected();
+                                RosesCard move = (RosesCard) element;
+                                Alert confirmPlay = new Alert(Alert.AlertType.CONFIRMATION);
+                                System.out.println("apayian");
+                                confirmPlay.setTitle("Confirmation");
+                                confirmPlay.setContentText("Are u sure to play the card that will make the crown move to the cell " + row + "," + col + " ?");
+                                confirmPlay.showAndWait();
+                                if (confirmPlay.getResult() == ButtonType.OK && !stageModel.getBoard().isElementAt(row, col)) {
+                                    ActionList actions = ActionFactory.generatePutInContainer(control, model, stageModel.getRedPawns()[stageModel.getBluePawns().length - 1], "RoseBoard", row, col, AnimationTypes.MOVE_LINEARPROP, 8);
+                                    stageModel.unselectAll();
+                                    ActionPlayer play = new ActionPlayer(model, control, actions);
+                                    play.start();
+                                    actions = ActionFactory.generatePutInContainer(control, model, stageModel.getCrownPawn(), "RoseBoard", row, col, AnimationTypes.MOVE_LINEARPROP, 1); // je le fais apres avec des facteurs différent pour qu'il soit au dessus de l'autre pion ce neuille
+                                    play = new ActionPlayer(model, control, actions);
+                                    play.start();
+                                    actions.setDoEndOfTurn(true); // after playing this action list, it will be the end of turn for current player.
+                                } else {
+                                    stageModel.unselectAll();
+                                }
+                            }
 
                             /*
                             // Get the board, pot, and the selected pawn to simplify code in the following

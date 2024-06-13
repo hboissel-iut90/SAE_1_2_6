@@ -2,6 +2,7 @@ package model;
 
 import boardifier.model.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 import java.util.Stack;
 
@@ -116,6 +117,10 @@ public class RosesStageModel extends GameStageModel {
     public void setBoard(RosesBoard board) {
         this.board = board;
         addContainer(board);
+    }
+
+    public Rectangle getDiscardPotBounds() {
+        return new Rectangle(discardPot.getX(), discardPot.getY(), 80, 110);
     }
 
     public Coord2D getBluePotLocation() {
@@ -458,19 +463,11 @@ public class RosesStageModel extends GameStageModel {
 
 
     public void update() {
-        bluePawnsCounter.setText("Blue pawns left : " + Color.BLUE + this.getBluePawnsToPlay());
-        bluePawnsCounter.setLocation(1000, 654);
-        this.setBluePawnsCounter(bluePawnsCounter);
-        redPawnsCounter.setText("Red pawns left : " + Color.RED + this.getRedPawnsToPlay());
-        redPawnsCounter.setLocation(1000, 319);
-        this.setRedPawnsCounter(redPawnsCounter);
-        cardPickCounter.setText("Cards left : " + Color.GRAY + this.pickCards.length);
-        cardPickCounter.setLocation(16, 0);
-        this.setCardPickCounter(cardPickCounter);
-        blueHeroCardsCounter.setText("" + Color.BLUE + this.player1HeroCards.length);
-        redHeroCardsCounter.setText("" + Color.RED + this.player2HeroCards.length);
-        this.setBlueHeroCardsCounter(blueHeroCardsCounter);
-        this.setRedHeroCardsCounter(redHeroCardsCounter);
+        bluePawnsCounter.setText("" + this.getBluePawnsToPlay());
+        redPawnsCounter.setText("" + this.getRedPawnsToPlay());
+        cardPickCounter.setText("" + this.pickCards.length);
+        blueHeroCardsCounter.setText("" + this.player1HeroCards.length);
+        redHeroCardsCounter.setText("" + this.player2HeroCards.length);
     }
 
     private void setupCallbacks() {
