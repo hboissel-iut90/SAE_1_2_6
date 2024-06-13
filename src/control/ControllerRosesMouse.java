@@ -240,10 +240,14 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                 if (numberOfThePlayer == 0) {
                     stageModel.getPlayer1MovementCards()[j] = stageModel.getPickCards()[lengthOfPickPot];
                     stageModel.getPlayer1MovementCards()[j].flip();
+                    stageView.addLook(new RosesCardLook(80, 110, stageModel.getPlayer1MovementCards()[j], stageModel));
+                    System.out.println(stageModel.getPlayer1MovementCards()[j]);
                 }
                 if (numberOfThePlayer == 1) {
                     stageModel.getPlayer2MovementCards()[j] = stageModel.getPickCards()[lengthOfPickPot];
                     stageModel.getPlayer2MovementCards()[j].flip();
+                    stageView.addLook(new RosesCardLook(80, 110, stageModel.getPlayer2MovementCards()[j], stageModel));
+                    System.out.println(stageModel.getPlayer2MovementCards()[j]);
                 }
 
                 stageModel.removeElement(stageModel.getPickCards()[lengthOfPickPot]);
@@ -272,15 +276,18 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
     }
 
     private void discardACard(RosesStageModel stageModel, RosesStageView stageView, int numberOfThePlayer, int index, int lengthOfDiscard){
-        stageModel.setDiscardCards(lengthOfDiscard, stageModel.getPlayer1MovementCards()[index]);
-        stageModel.getDiscardCards()[lengthOfDiscard].flip();
-        stageView.addLook(new RosesCardLook(80, 110, stageModel.getDiscardCards()[lengthOfDiscard], stageModel));
-
-
         if (numberOfThePlayer == 0) {
+            stageModel.getDiscardCards()[lengthOfDiscard] = stageModel.getPlayer1MovementCards()[index];
+            System.out.println(stageModel.getDiscardCards()[lengthOfDiscard]);
+            stageModel.getDiscardCards()[lengthOfDiscard].flip();
+            stageView.addLook(new RosesCardLook(80, 110, stageModel.getDiscardCards()[lengthOfDiscard], stageModel));
             stageModel.removeElement(stageModel.getPlayer1MovementCards()[index]);
         }
         if (numberOfThePlayer == 1) {
+            stageModel.getDiscardCards()[lengthOfDiscard] = stageModel.getPlayer2MovementCards()[index];
+            System.out.println(stageModel.getDiscardCards()[lengthOfDiscard]);
+            stageModel.getDiscardCards()[lengthOfDiscard].flip();
+            stageView.addLook(new RosesCardLook(80, 110, stageModel.getDiscardCards()[lengthOfDiscard], stageModel));
             stageModel.removeElement(stageModel.getPlayer2MovementCards()[index]);
         }
     }
