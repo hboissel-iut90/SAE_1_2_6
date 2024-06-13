@@ -67,7 +67,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                     System.out.println("Clique sur carte OK");
 
                     /**
-                     * Controller to the pick pot
+                     * Controller of the pick pot
                      * Take the last card in list
                      * and add to the movement list of the player in alphabet order
                      */
@@ -75,18 +75,29 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                         System.out.println("Carte piochée");
                         for (int i = stageModel.getPickCards().length-1; i > -1; i--) {
                             if (stageModel.getPickCards()[i] != null) {
-                                this.pickACard(stageModel, stageView, model.getIdPlayer(), element, i);
+                                this.pickACard(stageModel, stageView, model.getIdPlayer(), i);
                                 return;
                             }
                         }
                         return;
                     }
 
+
+                    /**
+                     * Controller of the player 1 hero pot
+                     *
+                     *
+                     */
                     if (element == stageModel.getPlayer1HeroCards()[0]) { // Watch if the card is a hero card of the player 1
                         System.out.println("Carte héros P1 appuyé");
                         return;
                     }
 
+                    /**
+                     * Controller of the player 2 hero pot
+                     *
+                     *
+                     */
                     if (element == stageModel.getPlayer2HeroCards()[0]) {  // Watch if the card is a hero card of the player 2
                         System.out.println("Carte héros P2 appuyé");
                         return;
@@ -94,8 +105,13 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
 
 
 
-                    for (int index = 0; index < playMove; index++) {
+                    for (int index = 0; index < playMove; index++) { // For each card in movementPot
 
+                        /**
+                         * Controller of the player 1 movement pot
+                         *
+                         *
+                         */
                         if (model.getIdPlayer() == 0 && element == stageModel.getPlayer1MovementCards()[index]) { // Watch if the card is a movement card of the player 1
                             System.out.println("Carte mouvement P1 neuille");
                             direction = stageModel.getPlayer1MovementCards()[index].getDirection();
@@ -134,21 +150,23 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                                 confirmMove(element, confirmPlay, row, col);
                                 if (confirmPlay.getResult() == ButtonType.OK && !stageModel.getBoard().isElementAt(row, col)) {
                                     movePawn(stageModel, stageModel.getBluePawns(), stageModel.getBluePawnsToPlay(), row, col);
-
                                     for (int i = 0; i < stageModel.getDiscardCards().length - 1; i++) {
                                         if (stageModel.getDiscardCards()[i] == null) {
                                             this.discardACard(stageModel, stageView, model.getIdPlayer(), index, i);
                                             return;
                                         }
                                     }
-
-
                                 } else {
                                     stageModel.unselectAll();
                                 }
                             }
                         }
 
+                        /**
+                         * Controller of the player 2 movement pot
+                         *
+                         *
+                         */
                         if (model.getIdPlayer() == 1 && element == stageModel.getPlayer2MovementCards()[index]) { // Watch if the card is a movement card of the player 2
                             System.out.println("Carte mouvement P2 nouille");
                             direction = stageModel.getPlayer2MovementCards()[index].getDirection();
@@ -187,15 +205,13 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                                 this.confirmMove(element, confirmPlay, row, col);
                                 if (confirmPlay.getResult() == ButtonType.OK && !stageModel.getBoard().isElementAt(row, col)) {
                                     this.movePawn(stageModel, stageModel.getRedPawns(), stageModel.getRedPawnsToPlay(), row, col);
-                                    /*
+
                                     for (int i = 0; i < stageModel.getDiscardCards().length - 1; i++) {
                                         if (stageModel.getDiscardCards()[i] == null) {
-                                            this.discardACard(stageModel, stageView, model.getIdPlayer(), index, element, i);
+                                            this.discardACard(stageModel, stageView, model.getIdPlayer(), index, i);
                                             return;
                                         }
                                     }
-
-                                     */
                                 } else {
                                     stageModel.unselectAll();
                                 }
@@ -208,7 +224,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
         catch (Exception e) {return;}
     }
 
-    private void pickACard(RosesStageModel stageModel, RosesStageView stageView, int numberOfThePlayer, GameElement element, int lengthOfPickPot){
+    private void pickACard(RosesStageModel stageModel, RosesStageView stageView, int numberOfThePlayer, int lengthOfPickPot){
         RosesCard[] tmp = new RosesCard[stageModel.getPlayer1MovementCards().length];
 
         if (numberOfThePlayer == 0) {
@@ -218,20 +234,19 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
             tmp = stageModel.getPlayer2MovementCards().clone();
         }
 
-        RosesCard card = (RosesCard) element;
-        card.flip();
+        stageModel.getPickCards()[lengthOfPickPot].flip();
         for (int j = 0; j < tmp.length; j++) {
             if (tmp[j] == null) {
                 if (numberOfThePlayer == 0) {
-                    stageModel.setPlayer1MovementCards(j, card);
-                    stageView.addLook(new RosesCardLook(80, 110, stageModel.getPlayer1HeroCards()[j], stageModel));
+                    stageModel.getPlayer1MovementCards()[j] = stageModel.getPickCards()[lengthOfPickPot];
+                    stageModel.getPlayer1MovementCards()[j].flip();
                 }
                 if (numberOfThePlayer == 1) {
-                    stageModel.setPlayer2MovementCards(j, card);
-                    stageView.addLook(new RosesCardLook(80, 110, stageModel.getPlayer2HeroCards()[j], stageModel));
+                    stageModel.getPlayer2MovementCards()[j] = stageModel.getPickCards()[lengthOfPickPot];
+                    stageModel.getPlayer2MovementCards()[j].flip();
                 }
 
-                stageModel.setPickCards(lengthOfPickPot, null);
+                stageModel.removeElement(stageModel.getPickCards()[lengthOfPickPot]);
                 break;
             }
         }
@@ -263,10 +278,10 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
 
 
         if (numberOfThePlayer == 0) {
-            stageModel.setPlayer1MovementCards(index, null);
+            stageModel.removeElement(stageModel.getPlayer1MovementCards()[index]);
         }
         if (numberOfThePlayer == 1) {
-            stageModel.setPlayer2MovementCards(index, null);
+            stageModel.removeElement(stageModel.getPlayer2MovementCards()[index]);
         }
     }
 }
