@@ -19,12 +19,12 @@ public class RosesStageFactory extends StageElementsFactory {
 //        instructions.setLocation(800, 290);
 //        stageModel.setInstructions1(instructions);
         // create the board
-        RosesBoard board = new RosesBoard(370, 250, stageModel);
+        RosesBoard board = new RosesBoard(700, 270, stageModel);
         stageModel.setBoard(board);
         //create the pots
-        RosesPawnPot bluePot = new RosesPawnPot(900,620, stageModel);
+        RosesPawnPot bluePot = new RosesPawnPot(1300,720, stageModel);
         stageModel.setBluePot(bluePot);
-        RosesPawnPot redPot = new RosesPawnPot(900, 280, stageModel);
+        RosesPawnPot redPot = new RosesPawnPot(1300, 300, stageModel);
         stageModel.setRedPot(redPot);
 
 
@@ -51,34 +51,34 @@ public class RosesStageFactory extends StageElementsFactory {
         }
 
 
-        RosesCardPot moovBluePot = new RosesCardPot(350, 750, stageModel);
+        RosesCardPot moovBluePot = new RosesCardPot(660, 840, stageModel);
         stageModel.setMoovBluePot(moovBluePot);
-        RosesCardPot moovRedPot = new RosesCardPot(450, 100, stageModel);
+        RosesCardPot moovRedPot = new RosesCardPot(780, 100, stageModel);
         stageModel.setMoovRedPot(moovRedPot);
-        RosesCardPot heroBluePot = new RosesCardPot(780, 750, 1, 1, stageModel);
-        RosesCardPot heroRedPot = new RosesCardPot(330, 80, 1, 1, stageModel);
-        RosesCardPot discardPot = new RosesCardPot(250, 500, 1, 1, stageModel);
-        RosesCardPot pickPot = new RosesCardPot(250, 350, 1, 1, stageModel);
+        RosesCardPot heroBluePot = new RosesCardPot(1185, 840, 1, 1, stageModel);
+        RosesCardPot heroRedPot = new RosesCardPot(660, 100, 1, 1, stageModel);
+        RosesCardPot pickPot = new RosesCardPot(550, 350, 1, 1, stageModel);
+        RosesCardPot discardPot = new RosesCardPot(550, 590, 1, 1, stageModel);
         stageModel.setBlueHeroPot(heroBluePot);
         stageModel.setRedHeroPot(heroRedPot);
-        stageModel.setDiscardPot(discardPot);
         stageModel.setPickPot(pickPot);
+        stageModel.setDiscardPot(discardPot);
 
         // create the text
-        TextElement text = new TextElement(stageModel.getCurrentPlayerName(), stageModel);
-        text.setLocation(10,20);
+        TextElement text = new TextElement("Blue player", stageModel);
+        text.setLocation(1450,100);
         stageModel.setPlayerName(text);
 
         TextElement pick = new TextElement("Pick pot", stageModel);
-        pick.setLocation(130, 395);
+        pick.setLocation(410, 430);
         stageModel.setPick(pick);
 
         TextElement redPawnsCounter = new TextElement("" + stageModel.getRedPawnsToPlay(), stageModel);
-        redPawnsCounter.setLocation(980, 315);
+        redPawnsCounter.setLocation(1380, 340);
         stageModel.setRedPawnsCounter(redPawnsCounter);
 
         TextElement bluePawnsCounter = new TextElement("" + stageModel.getBluePawnsToPlay(), stageModel);
-        bluePawnsCounter.setLocation(980, 655);
+        bluePawnsCounter.setLocation(1380, 760);
         stageModel.setBluePawnsCounter(bluePawnsCounter);
 
         RosesCard[] pickPotCards = new RosesCard[24];
@@ -147,18 +147,18 @@ public class RosesStageFactory extends StageElementsFactory {
         }
 
         TextElement numberOfBlueHeroCards = new TextElement("" + heroBlueCards.length, stageModel);
-        numberOfBlueHeroCards.setLocation(816, 920);
+        numberOfBlueHeroCards.setLocation(1230, 1040);
         stageModel.setBlueHeroCardsCounter(numberOfBlueHeroCards);
         stageModel.setPlayer1HeroCards(heroBlueCards);
 
         TextElement numberOfRedHeroCards = new TextElement("" + heroRedCards.length, stageModel);
-        numberOfRedHeroCards.setLocation(365, 50);
+        numberOfRedHeroCards.setLocation(700, 70);
         stageModel.setRedHeroCardsCounter(numberOfRedHeroCards);
         stageModel.setPlayer2HeroCards(heroRedCards);
 
         stageModel.setPickCards(pickPotCards);
         TextElement cardPickCounter = new TextElement("" + pickPotCards.length, stageModel);
-        cardPickCounter.setLocation(275, 335);
+        cardPickCounter.setLocation(585, 335);
         stageModel.setCardPickCounter(cardPickCounter);
 
 

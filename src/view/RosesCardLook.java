@@ -54,15 +54,15 @@ public class RosesCardLook extends ElementLook {
     private void loadImageAndPlace(String imagePath, double x, double y, boolean isReturned) {
         Image image = new Image(imagePath);
         ImageView imageView = new ImageView(image);
-        imageView.setX(x - width / 2);
-        imageView.setY(y - height / 2);
-        imageView.setFitHeight(110);
-        imageView.setFitWidth(80);
+        imageView.setX(x - width / 1.55);
+        imageView.setY(y - height / 1.45);
+        imageView.setFitHeight(150);
+        imageView.setFitWidth(100);
         if (isReturned) imageView.setRotate(180);
         getGroup().getChildren().add(imageView);
 
         // Add border rectangle
-        border = new Rectangle(imageView.getX(), imageView.getY(), 80, 110);
+        border = new Rectangle(imageView.getX(), imageView.getY(), 100, 150);
         border.setStroke(Color.BLACK);
         border.setStrokeWidth(2);
         border.setFill(Color.TRANSPARENT);
@@ -71,10 +71,8 @@ public class RosesCardLook extends ElementLook {
 
     private void handleMovementCard(RosesCard card) {
         if (card.isFlipped()) {
-            Rectangle whiteMovementCard = new Rectangle(card.getX() - 55, card.getY() - 40, 110, 80);
+            Rectangle whiteMovementCard = new Rectangle(card.getX() - 75, card.getY() - 50, 150, 100);
             whiteMovementCard.setFill(Color.WHITE);
-            whiteMovementCard.setArcHeight(25);
-            whiteMovementCard.setArcWidth(25);
             whiteMovementCard.setStroke(Color.BLACK);
             whiteMovementCard.setStrokeWidth(2);
             whiteMovementCard.setRotate(90);
@@ -106,12 +104,12 @@ public class RosesCardLook extends ElementLook {
     }
 
     private void handleHeroCard(RosesCard card, Color color, String text) {
-        Rectangle heroCard = new Rectangle(90, 130, color);
+        Rectangle heroCard = new Rectangle(100, 150, color);
         heroCard.setArcHeight(15);
         heroCard.setArcWidth(15);
         heroCard.setStroke(Color.BLACK);
-        heroCard.setX(card.getX() - 45);
-        heroCard.setY(card.getY() - 65);
+        heroCard.setX(card.getX() - 50);
+        heroCard.setY(card.getY() - 75);
 
         Text heroText = new Text(text);
         heroText.setFont(new Font(35));
@@ -130,7 +128,7 @@ public class RosesCardLook extends ElementLook {
         getGroup().getChildren().addAll(heroCard, heroText);
 
         // Add border rectangle
-        Rectangle border = new Rectangle(heroCard.getX(), heroCard.getY(), 90, 130);
+        Rectangle border = new Rectangle(heroCard.getX(), heroCard.getY(), 100, 150);
         border.setStroke(Color.BLACK);
         border.setStrokeWidth(2);
         border.setFill(Color.TRANSPARENT);
