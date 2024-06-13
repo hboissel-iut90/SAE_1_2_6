@@ -1,12 +1,10 @@
 package view;
 
 import boardifier.view.RootPane;
-import javafx.beans.binding.Bindings;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundSize;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -47,7 +45,7 @@ public class RosesMenuPane extends RootPane {
         this.setBackground(new Background(backgroundImg));
         Text title = new Text("Welcome To King Of Roses");
         start = new Button("Start Game");
-        help = new Button("How to play");
+        help = new Button("Rules");
         quit = new Button("Quit");
         try{
             File fontFile = new File("src/menu_assets/RoyalKing-Free.ttf");
@@ -82,7 +80,7 @@ public class RosesMenuPane extends RootPane {
         return start;
     }
 
-    public Button getHelpButton() {
+    public Button getRulesButton() {
         return help;
     }
 

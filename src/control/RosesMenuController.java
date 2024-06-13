@@ -10,20 +10,21 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import view.RosesMenuPane;
 import view.RosesModePane;
+import view.RosesRulesPane;
 import view.RosesView;
 
 public class RosesMenuController extends ControllerAction implements EventHandler<ActionEvent> {
         private RosesView rosesView;
         private Stage stage;
-        public RosesMenuController(Model model, View view, Controller control, Stage stage){
+        public RosesMenuController(Model model, View view, Controller control){
             super(model, view, control);
-            rosesView = (RosesView) view;
-            this.stage = stage;
+            this.rosesView = (RosesView) view;
+            this.stage = rosesView.getStage();
 
             // Get the buttons from the view
             RosesMenuPane menuPane = (RosesMenuPane) rosesView.getRootPane();
             Button startButton = menuPane.getStartButton();
-            Button helpButton = menuPane.getHelpButton();
+            Button helpButton = menuPane.getRulesButton();
             Button quitButton = menuPane.getQuitButton();
 
 
@@ -40,10 +41,10 @@ public class RosesMenuController extends ControllerAction implements EventHandle
             double height = menuPane.Height();
             if (event.getSource() == menuPane.getStartButton()) {
                 rosesView = new RosesView(model, stage, new RosesModePane(width , height));
-                control.setControlAction(new RosesModeController(model, rosesView, control, stage));
-            } else if (event.getSource() == menuPane.getHelpButton()) {
-                // Handle help button click
-                System.out.println("Help button clicked");
+                control.setControlAction(new RosesModeController(model, rosesView, control));
+            } else if (event.getSource() == menuPane.getRulesButton()) {
+                rosesView = new RosesView(model, stage, new RosesRulesPane(width , height));
+                control.setControlAction(new RosesRulesController(model, rosesView, control));
             } else if (event.getSource() == menuPane.getQuitButton()) {
                 // Handle quit button click
                 System.exit(0);

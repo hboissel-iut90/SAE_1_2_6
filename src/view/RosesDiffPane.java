@@ -1,16 +1,18 @@
 package view;
 
+import boardifier.model.Model;
 import boardifier.view.RootPane;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 import java.io.File;
+import java.util.List;
 
 public class RosesDiffPane extends RootPane {
     private final double width;
@@ -23,6 +25,7 @@ public class RosesDiffPane extends RootPane {
     private Button HvH;
     private Button back;
     public int mode;
+    private List<String> players_names;
 
     public RosesDiffPane(int mode, double width, double height) {
         super();
@@ -38,6 +41,10 @@ public class RosesDiffPane extends RootPane {
 
     public double Height() {
         return height;
+    }
+
+    public List<String> getPlayers_names() {
+        return players_names;
     }
 
     @Override

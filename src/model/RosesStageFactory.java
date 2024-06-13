@@ -65,7 +65,7 @@ public class RosesStageFactory extends StageElementsFactory {
         stageModel.setDiscardPot(discardPot);
 
         // create the text
-        TextElement text = new TextElement("Blue player", stageModel);
+        TextElement text = new TextElement(stageModel.getCurrentPlayerName(), stageModel);
         text.setLocation(150,100);
         stageModel.setPlayerName(text);
 

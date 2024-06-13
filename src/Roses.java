@@ -25,7 +25,7 @@ public class Roses extends Application {
         RosesMenuPane rootPane = new RosesMenuPane(width, height);
         RosesView view = new RosesView(model, stage, rootPane);
         RosesController control = new RosesController(model, view);
-        control.setControlAction(new RosesMenuController(model, view, control, stage));
+        control.setControlAction(new RosesMenuController(model, view, control));
         control.setFirstStageName("roses");
         stage.setTitle("King of Roses");
         stage.show();

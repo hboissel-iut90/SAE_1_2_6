@@ -13,6 +13,7 @@ public class RosesView extends View {
     public RosesView(Model model, Stage stage, RootPane rootPane) {
         super(model, stage, rootPane);
         stage.setFullScreen(true);
+        stage.setFullScreenExitHint("");
     }
 
 }

@@ -8,10 +8,8 @@ import boardifier.view.View;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
-import javafx.scene.layout.BackgroundImage;
 import javafx.stage.Stage;
 import view.RosesDiffPane;
-import view.RosesMenuPane;
 import view.RosesModePane;
 import view.RosesView;
 
@@ -68,7 +66,7 @@ public class RosesDiffController extends ControllerAction implements EventHandle
             } else if (event.getSource() == modePane.getBackButton()) {
                 model = new Model();
                 rosesView = new RosesView(model, stage, new RosesModePane(width, height));
-                control.setControlAction(new RosesModeController(model, rosesView, control, stage));
+                control.setControlAction(new RosesModeController(model, rosesView, control));
                 return;
             }
         } else {
@@ -81,7 +79,7 @@ public class RosesDiffController extends ControllerAction implements EventHandle
             } else if (event.getSource() == modePane.getBackButton()) {
                 model = new Model();
                 rosesView = new RosesView(model, stage, new RosesModePane(width, height));
-                control.setControlAction(new RosesModeController(model, rosesView, control, stage));
+                control.setControlAction(new RosesModeController(model, rosesView, control));
                 return;
             }
         }
