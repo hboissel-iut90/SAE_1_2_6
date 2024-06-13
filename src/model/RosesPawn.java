@@ -45,6 +45,11 @@ public class RosesPawn extends GameElement {
         return color;
     }
 
+    public void setColor(int color) {
+        this.color = color;
+        update();
+    }
+
     public void update() {
         // if must be animated, move the pawn
         if (animation != null) {
@@ -61,4 +66,5 @@ public class RosesPawn extends GameElement {
             }
         }
     }
+
 }

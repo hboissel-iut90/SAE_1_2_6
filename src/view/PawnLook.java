@@ -81,4 +81,15 @@ public class PawnLook extends ElementLook {
         text.setY(text.getBaselineOffset()/2-4);
         addShape(text);
     }
+
+//    public void updateColor() {
+//        RosesPawn pawn = (RosesPawn)element;
+//        if (pawn.getColor() == RosesPawn.PAWN_BLUE) {
+//            circle.setFill(Color.BLUE);
+//        } else if (pawn.getColor() == RosesPawn.PAWN_RED) {
+//            circle.setFill(Color.RED);
+//        } else {
+//            circle.setFill(Color.YELLOW);
+//        }
+//    }
 }
