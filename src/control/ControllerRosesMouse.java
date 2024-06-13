@@ -131,10 +131,18 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                             }
                             if (col >= 0 && col <= 8 && row >= 0 && row <= 8) {
                                 Alert confirmPlay = new Alert(Alert.AlertType.CONFIRMATION);
-                                RosesCard move = (RosesCard) element;
                                 confirmMove(element, confirmPlay, row, col);
                                 if (confirmPlay.getResult() == ButtonType.OK && !stageModel.getBoard().isElementAt(row, col)) {
-                                    movePawn(stageModel, stageModel.getBluePawns(), stageModel.getRedPawnsToPlay(), row, col);
+                                    movePawn(stageModel, stageModel.getBluePawns(), stageModel.getBluePawnsToPlay(), row, col);
+                                    /*
+                                    for (int i = 0; i < stageModel.getDiscardCards().length - 1; i++) {
+                                        if (stageModel.getDiscardCards()[i] == null) {
+                                            this.discardACard(stageModel, stageView, model.getIdPlayer(), index, element, i);
+                                            return;
+                                        }
+                                    }
+
+                                     */
                                 } else {
                                     stageModel.unselectAll();
                                 }
@@ -176,10 +184,18 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                             }
                             if (col >= 0 && col <= 8 && row >= 0 && row <= 8) {
                                 Alert confirmPlay = new Alert(Alert.AlertType.CONFIRMATION);
-                                RosesCard move = (RosesCard) element;
-                                confirmMove(element, confirmPlay, row, col);
+                                this.confirmMove(element, confirmPlay, row, col);
                                 if (confirmPlay.getResult() == ButtonType.OK && !stageModel.getBoard().isElementAt(row, col)) {
-                                    movePawn(stageModel, stageModel.getRedPawns(), stageModel.getRedPawnsToPlay(), row, col);
+                                    this.movePawn(stageModel, stageModel.getRedPawns(), stageModel.getRedPawnsToPlay(), row, col);
+                                    /*
+                                    for (int i = 0; i < stageModel.getDiscardCards().length - 1; i++) {
+                                        if (stageModel.getDiscardCards()[i] == null) {
+                                            this.discardACard(stageModel, stageView, model.getIdPlayer(), index, element, i);
+                                            return;
+                                        }
+                                    }
+
+                                     */
                                 } else {
                                     stageModel.unselectAll();
                                 }
@@ -238,6 +254,21 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
         play = new ActionPlayer(model, control, actions);
         play.start();
         actions.setDoEndOfTurn(true); // after playing this action list, it will be the end of turn for current player.
+    }
+
+    private void discardACard(RosesStageModel stageModel, RosesStageView stageView, int numberOfThePlayer, int index, GameElement element, int lengthOfDiscard){
+        RosesCard card = (RosesCard) element;
+        card.flip();
+        stageModel.setDiscardCards(lengthOfDiscard, card);
+        stageView.addLook(new RosesCardLook(80, 110, stageModel.getDiscardCards()[lengthOfDiscard], stageModel));
+        if (numberOfThePlayer == 0) {
+            stageModel.setPlayer1MovementCards(index, null);
+        }
+        if (numberOfThePlayer == 1) {
+            stageModel.setPlayer2MovementCards(index, null);
+        }
+        System.out.println(stageModel.getPlayer1MovementCards()[index]);
+        System.out.println(stageModel.getPlayer2MovementCards()[index]);
     }
 }
 
