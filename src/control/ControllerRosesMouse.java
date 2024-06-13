@@ -247,7 +247,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                 }
 
                 stageModel.removeElement(stageModel.getPickCards()[lengthOfPickPot]);
-                break;
+                return;
             }
         }
     }
@@ -256,7 +256,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
         element.toggleSelected();
         System.out.println("apayian");
         confirmPlay.setTitle("Confirmation");
-        confirmPlay.setContentText("Are u sure to play the card that will make the crown move to the cell " + row + "," + col + " ?");
+        confirmPlay.setContentText("Are you sure to play the card that will make the crown move to the cell (" + row + "," + col + ") ?");
         confirmPlay.showAndWait();
     }
 
