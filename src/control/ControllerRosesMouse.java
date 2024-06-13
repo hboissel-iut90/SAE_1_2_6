@@ -130,54 +130,15 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                                     col = col - number;
                             }
                             if (col >= 0 && col <= 8 && row >= 0 && row <= 8) {
-                                element.toggleSelected();
-                                RosesCard move = (RosesCard) element;
                                 Alert confirmPlay = new Alert(Alert.AlertType.CONFIRMATION);
-                                System.out.println("apayian");
-                                confirmPlay.setTitle("Confirmation");
-                                confirmPlay.setContentText("Are u sure to play the card that will make the crown move to the cell " + row + "," + col + " ?");
-                                confirmPlay.showAndWait();
+                                RosesCard move = (RosesCard) element;
+                                confirmMove(element, confirmPlay, row, col);
                                 if (confirmPlay.getResult() == ButtonType.OK && !stageModel.getBoard().isElementAt(row, col)) {
-                                    ActionList actions = ActionFactory.generatePutInContainer(control, model, stageModel.getRedPawns()[stageModel.getBluePawns().length - 1], "RoseBoard", row, col, AnimationTypes.MOVE_LINEARPROP, 8);
-                                    stageModel.unselectAll();
-                                    ActionPlayer play = new ActionPlayer(model, control, actions);
-                                    play.start();
-                                    actions = ActionFactory.generatePutInContainer(control, model, stageModel.getCrownPawn(), "RoseBoard", row, col, AnimationTypes.MOVE_LINEARPROP, 1); // je le fais apres avec des facteurs différent pour qu'il soit au dessus de l'autre pion ce neuille
-                                    play = new ActionPlayer(model, control, actions);
-                                    play.start();
-                                    actions.setDoEndOfTurn(true); // after playing this action list, it will be the end of turn for current player.
+                                    movePawn(stageModel, stageModel.getBluePawns(), row, col);
                                 } else {
                                     stageModel.unselectAll();
                                 }
                             }
-
-                            /*
-                            // Get the board, pot, and the selected pawn to simplify code in the following
-                            RosesBoard board = stageModel.getBoard();
-
-                            // Get blue pot
-                            RosesPawnPot pot = stageModel.getBluePot();
-
-
-                            GameElement pawn = model.getSelected().get(0);
-
-                            // thirdly, get the clicked cell in the 3x3 board
-                            GridLook lookBoard = (GridLook) control.getElementLook(board);
-                            int[] dest = lookBoard.getCellFromSceneLocation(clic);
-
-                            // get the cell in the pot that owns the selected pawn
-                            int[] from = pot.getElementCell(pawn);
-                            Logger.debug("try to move pawn from pot " + from[0] + "," + from[1] + " to board " + dest[0] + "," + dest[1]);
-
-                            // if the destination cell is valid for for the selected pawn
-                            if (board.canReachCell(dest[0], dest[1])) {
-                                ActionList actions = ActionFactory.generatePutInContainer(control, model, pawn, "RoseBoard", dest[0], dest[1], AnimationTypes.MOVE_LINEARPROP, 10);
-                                actions.setDoEndOfTurn(true); // after playing this action list, it will be the end of turn for current player.
-                                stageModel.unselectAll();
-                                ActionPlayer play = new ActionPlayer(model, control, actions);
-                                play.start();
-                            }
-                            */
                         }
 
                         if (element == stageModel.getPlayer2MovementCards()[index]) { // Watch if the card is a movement card of the player 2
@@ -185,35 +146,6 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                             element.toggleSelected();
 
                             RosesCard move = (RosesCard) element;
-
-                            /*
-                            // Get the board, pot, and the selected pawn to simplify code in the following
-                            RosesBoard board = stageModel.getBoard();
-
-                            // Get blue pot
-                            RosesPawnPot pot = stageModel.getBluePot();
-
-
-                            GameElement pawn = model.getSelected().get(0);
-
-                            // thirdly, get the clicked cell in the 3x3 board
-                            GridLook lookBoard = (GridLook) control.getElementLook(board);
-                            int[] dest = lookBoard.getCellFromSceneLocation(clic);
-
-                            // get the cell in the pot that owns the selected pawn
-                            int[] from = pot.getElementCell(pawn);
-                            Logger.debug("try to move pawn from pot " + from[0] + "," + from[1] + " to board " + dest[0] + "," + dest[1]);
-
-                            // if the destination cell is valid for for the selected pawn
-                            if (board.canReachCell(dest[0], dest[1])) {
-                                ActionList actions = ActionFactory.generatePutInContainer(control, model, pawn, "RoseBoard", dest[0], dest[1], AnimationTypes.MOVE_LINEARPROP, 10);
-                                actions.setDoEndOfTurn(true); // after playing this action list, it will be the end of turn for current player.
-                                stageModel.unselectAll();
-                                ActionPlayer play = new ActionPlayer(model, control, actions);
-                                play.start();
-                            }
-
-                             */
                         }
                     }
                 }
@@ -245,12 +177,29 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                     stageView.addLook(new RosesCardLook(80, 110, stageModel.getPlayer2HeroCards()[j], stageModel));
                 }
 
-
-
                 stageModel.setPickCards(lengthOfPickPot, null);
                 break;
             }
         }
+    }
+
+    private void confirmMove(GameElement element, Alert confirmPlay, int row, int col){
+        element.toggleSelected();
+        System.out.println("apayian");
+        confirmPlay.setTitle("Confirmation");
+        confirmPlay.setContentText("Are u sure to play the card that will make the crown move to the cell " + row + "," + col + " ?");
+        confirmPlay.showAndWait();
+    }
+
+    private void movePawn(RosesStageModel stageModel, RosesPawn[] pawnPot, int row, int col) {
+        ActionList actions = ActionFactory.generatePutInContainer(control, model, pawnPot[pawnPot.length-1], "RoseBoard", row, col, AnimationTypes.MOVE_LINEARPROP, 8);
+        stageModel.unselectAll();
+        ActionPlayer play = new ActionPlayer(model, control, actions);
+        play.start();
+        actions = ActionFactory.generatePutInContainer(control, model, stageModel.getCrownPawn(), "RoseBoard", row, col, AnimationTypes.MOVE_LINEARPROP, 1); // je le fais apres avec des facteurs différent pour qu'il soit au dessus de l'autre pion ce neuille
+        play = new ActionPlayer(model, control, actions);
+        play.start();
+        actions.setDoEndOfTurn(true); // after playing this action list, it will be the end of turn for current player.
     }
 }
 
