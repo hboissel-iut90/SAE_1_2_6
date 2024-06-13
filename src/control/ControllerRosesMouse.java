@@ -141,11 +141,49 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                             }
                         }
 
-                        if (element == stageModel.getPlayer2MovementCards()[index]) { // Watch if the card is a movement card of the player 2
-                            System.out.println("Carte mouvement P2 appuyé");
-                            element.toggleSelected();
-
-                            RosesCard move = (RosesCard) element;
+                        if (model.getIdPlayer() == 1 && element == stageModel.getPlayer2MovementCards()[index]) { // Watch if the card is a movement card of the player 2
+                            System.out.println("Carte mouvement P2 nouille");
+                            direction = stageModel.getPlayer2MovementCards()[index].getDirection();
+                            number = stageModel.getPlayer2MovementCards()[index].getValue();
+                            switch (direction) {
+                                case "W":
+                                    col = col + number;
+                                    break;
+                                case "N-E":
+                                    col = col - number;
+                                    row = row + number;
+                                    break;
+                                case "E":
+                                    col = col - number;
+                                    break;
+                                case "S-E":
+                                    col = col - number;
+                                    row = row - number;
+                                    break;
+                                case "S":
+                                    row = row - number;
+                                    break;
+                                case "S-W":
+                                    row = row - number;
+                                    col = col + number;
+                                    break;
+                                case "N":
+                                    row = row + number;
+                                    break;
+                                default:
+                                    row = row + number;
+                                    col = col + number;
+                            }
+                            if (col >= 0 && col <= 8 && row >= 0 && row <= 8) {
+                                Alert confirmPlay = new Alert(Alert.AlertType.CONFIRMATION);
+                                RosesCard move = (RosesCard) element;
+                                confirmMove(element, confirmPlay, row, col);
+                                if (confirmPlay.getResult() == ButtonType.OK && !stageModel.getBoard().isElementAt(row, col)) {
+                                    movePawn(stageModel, stageModel.getRedPawns(), row, col);
+                                } else {
+                                    stageModel.unselectAll();
+                                }
+                            }
                         }
                     }
                 }
