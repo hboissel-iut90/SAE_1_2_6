@@ -25,11 +25,11 @@ public class RosesStageView extends GameStageView {
             addLook(new PawnLook(22, model.getRedPawns()[i]));
         }
 
-        addLook(new TextLook(50,"0x000000", model.getPlayerName()));
-        addLook(new TextLook(30,"0x000000", model.getPick()));
+        addLook(new TextLook(50,"#FFFFFF", model.getPlayerName()));
+        addLook(new TextLook(30,"#FFFFFF", model.getPick()));
         addLook(new TextLook(30,"#FF0000", model.getRedPawnsCounter()));
         addLook(new TextLook(30,"#0000FF", model.getBluePawnsCounter()));
-        addLook(new TextLook(30, "#303030", model.getCardPickCounter()));
+        addLook(new TextLook(30, "#FFFFFF", model.getCardPickCounter()));
         addLook(new TextLook(30, "#0000FF", model.getBlueHeroCardsCounter()));
         addLook(new TextLook(30, "#FF0000", model.getRedHeroCardsCounter()));
         addLook(new RosesCardPotLook(150, 100, model.getMoovBluePot()));
