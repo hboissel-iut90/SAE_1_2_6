@@ -134,7 +134,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                                 RosesCard move = (RosesCard) element;
                                 confirmMove(element, confirmPlay, row, col);
                                 if (confirmPlay.getResult() == ButtonType.OK && !stageModel.getBoard().isElementAt(row, col)) {
-                                    movePawn(stageModel, stageModel.getBluePawns(), row, col);
+                                    movePawn(stageModel, stageModel.getBluePawns(), stageModel.getRedPawnsToPlay(), row, col);
                                 } else {
                                     stageModel.unselectAll();
                                 }
@@ -179,7 +179,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                                 RosesCard move = (RosesCard) element;
                                 confirmMove(element, confirmPlay, row, col);
                                 if (confirmPlay.getResult() == ButtonType.OK && !stageModel.getBoard().isElementAt(row, col)) {
-                                    movePawn(stageModel, stageModel.getRedPawns(), row, col);
+                                    movePawn(stageModel, stageModel.getRedPawns(), stageModel.getRedPawnsToPlay(), row, col);
                                 } else {
                                     stageModel.unselectAll();
                                 }
@@ -229,8 +229,8 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
         confirmPlay.showAndWait();
     }
 
-    private void movePawn(RosesStageModel stageModel, RosesPawn[] pawnPot, int row, int col) {
-        ActionList actions = ActionFactory.generatePutInContainer(control, model, pawnPot[pawnPot.length-1], "RoseBoard", row, col, AnimationTypes.MOVE_LINEARPROP, 8);
+    private void movePawn(RosesStageModel stageModel, RosesPawn[] pawnPot, int nbPionRest, int row, int col) {
+        ActionList actions = ActionFactory.generatePutInContainer(control, model, pawnPot[nbPionRest-1], "RoseBoard", row, col, AnimationTypes.MOVE_LINEARPROP, 8);
         stageModel.unselectAll();
         ActionPlayer play = new ActionPlayer(model, control, actions);
         play.start();
