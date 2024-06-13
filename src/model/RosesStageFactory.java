@@ -66,19 +66,19 @@ public class RosesStageFactory extends StageElementsFactory {
 
         // create the text
         TextElement text = new TextElement("Blue player", stageModel);
-        text.setLocation(1450,100);
+        text.setLocation(150,100);
         stageModel.setPlayerName(text);
 
-        TextElement pick = new TextElement("Pick pot", stageModel);
-        pick.setLocation(410, 430);
+        TextElement pick = new TextElement("Pick", stageModel);
+        pick.setLocation(470, 430);
         stageModel.setPick(pick);
 
         TextElement redPawnsCounter = new TextElement("" + stageModel.getRedPawnsToPlay(), stageModel);
-        redPawnsCounter.setLocation(1380, 340);
+        redPawnsCounter.setLocation(1390, 345);
         stageModel.setRedPawnsCounter(redPawnsCounter);
 
         TextElement bluePawnsCounter = new TextElement("" + stageModel.getBluePawnsToPlay(), stageModel);
-        bluePawnsCounter.setLocation(1380, 760);
+        bluePawnsCounter.setLocation(1390, 765);
         stageModel.setBluePawnsCounter(bluePawnsCounter);
 
         RosesCard[] pickPotCards = new RosesCard[24];
