@@ -358,9 +358,9 @@ public class RosesStageModel extends GameStageModel {
         }
     }
 
-    public void setPlayer1MovementCards(int index, RosesCard player2MovementCard) {
-        this.player2MovementCards[index] = player2MovementCard;
-        addElement(player2MovementCards[index]);
+    public void setPlayer1MovementCards(int index, RosesCard player1MovementCard) {
+        this.player1MovementCards[index] = player1MovementCard;
+        addElement(player1MovementCards[index]);
     }
 
     public void setPlayer2MovementCards(RosesCard[] player2MovementCards) {
