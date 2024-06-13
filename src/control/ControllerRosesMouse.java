@@ -58,7 +58,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
         Rectangle discardPotBounds = stageModel.getDiscardPotBounds();
         System.out.println("col : " + col);
 
-        int play1Move = stageModel.getPlayer1MovementCards().length;
+        int playMove = stageModel.getPlayer1MovementCards().length;
 
         try {
             for (GameElement element : list) {  // Take elements clicked
@@ -94,7 +94,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
 
 
 
-                    for (int index = 0; index < play1Move; index++) {
+                    for (int index = 0; index < playMove; index++) {
 
                         if (model.getIdPlayer() == 0 && element == stageModel.getPlayer1MovementCards()[index]) { // Watch if the card is a movement card of the player 1
                             System.out.println("Carte mouvement P1 neuille");
