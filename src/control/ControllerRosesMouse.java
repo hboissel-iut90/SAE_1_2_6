@@ -395,7 +395,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
         confirmPlay.showAndWait();
     }
 
-    private void confirmMove(GameElement element, Alert confirmPlay, int row, int col, boolean isHeroCard) { // enfaite ca genere une erreur sur le selected de la carte hero car le look du selected de l'hero card n'est pas faites
+    private void confirmHero(GameElement element, Alert confirmPlay, int row, int col, boolean isHeroCard) { // enfaite ca genere une erreur sur le selected de la carte hero car le look du selected de l'hero card n'est pas faites
         System.out.println("apayian");
         confirmPlay.setTitle("Confirmation");
         confirmPlay.setContentText("Are you sure to play the card that will make the crown move to the cell (" + row + "," + col + ") ?");
