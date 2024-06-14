@@ -21,6 +21,22 @@ public class RosesCardPot extends ContainerElement {
         this.height = height;
     }
 
+    public RosesCardPot(int x, int y, int width, int height, GameStageModel gameStageModel, boolean isDiscardPot) {
+        // call the super-constructor to create a grid with specified width and height,
+        // named "cardpot", and at position x,y in space
+        super("discardpot", x, y, width, height, gameStageModel);
+        this.width = width;
+        this.height = height;
+    }
+
+    public RosesCardPot(int x, int y, int width, int height, GameStageModel gameStageModel, int isDiscardPot) {
+        // call the super-constructor to create a grid with specified width and height,
+        // named "cardpot", and at position x,y in space
+        super("pickpot", x, y, width, height, gameStageModel);
+        this.width = width;
+        this.height = height;
+    }
+
     public int getWidth() {
         return width;
     }

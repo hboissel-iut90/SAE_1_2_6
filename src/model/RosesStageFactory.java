@@ -58,7 +58,7 @@ public class RosesStageFactory extends StageElementsFactory {
         RosesCardPot heroBluePot = new RosesCardPot(1185, 840, 1, 1, stageModel);
         RosesCardPot heroRedPot = new RosesCardPot(660, 100, 1, 1, stageModel);
         RosesCardPot pickPot = new RosesCardPot(550, 350, 1, 1, stageModel);
-        RosesCardPot discardPot = new RosesCardPot(550, 590, 1, 1, stageModel);
+        RosesCardPot discardPot = new RosesCardPot(550, 590, 1, 1, stageModel, true);
         stageModel.setBlueHeroPot(heroBluePot);
         stageModel.setRedHeroPot(heroRedPot);
         stageModel.setPickPot(pickPot);

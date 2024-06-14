@@ -9,6 +9,7 @@ import boardifier.view.GridLook;
 import boardifier.view.View;
 import javafx.application.Platform;
 import javafx.event.*;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceDialog;
@@ -17,6 +18,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import model.*;
+import view.PawnLook;
 import view.RosesCardLook;
 import view.RosesStageView;
 
@@ -172,7 +174,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                         for (int i = 0; i < playMove; i++) {
                             if (stageModel.getPlayer2MovementCards()[i] != null)
                                 // Include the index in the string
-                                possibleMoves.add(i+1 + " " + stageModel.getPlayer2MovementCards()[i].getDirection() + " " + stageModel.getPlayer2MovementCards()[i].getValue());
+                                possibleMoves.add(i + " " + stageModel.getPlayer2MovementCards()[i].getDirection() + " " + stageModel.getPlayer2MovementCards()[i].getValue());
                         }
 
                         ChoiceDialog<String> dialog = new ChoiceDialog<>(null, possibleMoves);
@@ -224,7 +226,9 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                             if (stageModel.getPlayer2HeroCards()[0] != null && pawnToSwap.getColor() == PAWN_BLUE) {
                                 playHeroCard(stageModel, row, col, model.getIdPlayer(), pawnToSwap, index);
                                 for (int i = 0; i < stageModel.getDiscardCards().length - 1; i++) {
+                                    System.out.println("boucle for");
                                     if (stageModel.getDiscardCards()[i] == null) {
+                                        System.out.println("big ampayian");
                                         this.discardACard(stageModel, stageModel.getPlayer2MovementCards(), index);
                                         return;
                                     }
@@ -285,6 +289,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                                     movePawn(stageModel, stageModel.getBluePawns(), stageModel.getBluePawnsToPlay(), row, col);
                                     for (int i = 0; i < stageModel.getDiscardCards().length - 1; i++) {
                                         if (stageModel.getDiscardCards()[i] == null) {
+                                            System.out.println("Discard card");
                                             this.discardACard(stageModel, stageModel.getPlayer1MovementCards(), index);
                                             return;
                                         }
@@ -423,48 +428,40 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
 
     private void discardACard(RosesStageModel stageModel, /*GameStageView stageView,*/ RosesCard[] movePot, int index) {
         stageModel.unselectAll();
-        ActionList actions = ActionFactory.generatePutInContainer(control, model, movePot[index], stageModel.getDiscardPot().getName(), 0, 0, AnimationTypes.MOVE_LINEARPROP, 80);
+        movePot[index].flip();
+        System.out.println("is flipped : " + movePot[index].isFlipped());
+        ActionList actions = ActionFactory.generatePutInContainer(control, model, movePot[index], stageModel.getDiscardPot().getName(), 0, 0, AnimationTypes.LOOK_SIMPLE, 10);
         ActionPlayer play = new ActionPlayer(model, control, actions);
         play.start();
-        /*
-        stageModel.getDiscardCards()[lengthOfDiscard] = stageModel.getPlayer2MovementCards()[index];
-        System.out.println(stageModel.getDiscardCards()[lengthOfDiscard]);
-        stageModel.getDiscardCards()[lengthOfDiscard].flip();
-        stageView.addLook(new RosesCardLook(80, 110, stageModel.getDiscardCards()[lengthOfDiscard], stageModel));
-        stageModel.removeElement(stageModel.getPlayer2MovementCards()[index]);
-        stageModel.getPlayer2MovementCards()[index] = null;
-         */
+        movePot[index] = null;
     }
 
     public void playHeroCard(RosesStageModel stageModel, int row, int col, int idPlayer, RosesPawn pawnToSwap, int index) {
+
+        pawnToSwap.setColor(PAWN_RED);
+        ActionList actions = ActionFactory.generatePutInContainer(control, model, stageModel.getCrownPawn(), stageModel.getBoard().getName(), row, col, AnimationTypes.MOVE_LINEARPROP, 5);
+        ActionPlayer play = new ActionPlayer(model, control, actions);
+        play.start();
         if (idPlayer == 1) {
-            pawnToSwap.setColor(PAWN_RED);
-            pawnToSwap.update();
-            ActionList actions = new ActionList(true);
-            ActionPlayer play = new ActionPlayer(model, control, actions);
             stageModel.removeElement(stageModel.getPlayer2HeroCards()[stageModel.getPlayer2HeroCards().length - 1]);
             RosesCard[] tempHeroCards = stageModel.getPlayer2HeroCards();
             RosesCard[] copyOfPickPotCards = new RosesCard[tempHeroCards.length - 1];
             System.arraycopy(tempHeroCards, 0, copyOfPickPotCards, 0, copyOfPickPotCards.length);
-            tempHeroCards = copyOfPickPotCards;
-            stageModel.setPlayer2HeroCards(tempHeroCards);
-            stageModel.getBoard().moveElement(stageModel.getCrownPawn(), row, col);
-            play.start();
+            stageModel.setPlayer2HeroCards(copyOfPickPotCards);
         } else {
-            pawnToSwap.setColor(PAWN_BLUE);
-            pawnToSwap.update();
-            ActionList actions = new ActionList(true);
-            ActionPlayer play = new ActionPlayer(model, control, actions);
             stageModel.removeElement(stageModel.getPlayer1HeroCards()[stageModel.getPlayer1HeroCards().length - 1]);
             RosesCard[] tempHeroCards = stageModel.getPlayer1HeroCards();
             RosesCard[] copyOfPickPotCards = new RosesCard[tempHeroCards.length - 1];
             System.arraycopy(tempHeroCards, 0, copyOfPickPotCards, 0, copyOfPickPotCards.length);
-            tempHeroCards = copyOfPickPotCards;
-            stageModel.setPlayer1HeroCards(tempHeroCards);
-            stageModel.getBoard().moveElement(stageModel.getCrownPawn(), row, col);
-            play.start();
+            stageModel.setPlayer1HeroCards(copyOfPickPotCards);
         }
+
+        actions.setDoEndOfTurn(true);
+
     }
+
+
+
 
     public void displayError(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);

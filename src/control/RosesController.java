@@ -31,12 +31,10 @@ public class RosesController extends Controller {
             ActionPlayer play = new ActionPlayer(model, this, decider, null);
             play.start();
             stageModel.update();
-            this.update();
         }
         else {
             Logger.debug("PLAYER PLAYS");
             stageModel.update();
-            this.update();
         }
     }
 }
