@@ -4,6 +4,7 @@ import boardifier.control.*;
 import boardifier.model.*;
 import boardifier.model.action.ActionList;
 import boardifier.model.animation.AnimationTypes;
+import boardifier.view.GameStageView;
 import boardifier.view.GridLook;
 import boardifier.view.View;
 import javafx.application.Platform;
@@ -55,7 +56,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
          */
 
         RosesStageModel stageModel = (RosesStageModel) model.getGameStage();
-        RosesStageView stageView = (RosesStageView) view.getGameStageView();
+        GameStageView stageView = view.getGameStageView();
         String direction;
         int number;
         int row = stageModel.getBoard().getElementCell(stageModel.getCrownPawn())[0];
@@ -157,7 +158,15 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                             }
                         }
                         return;
-                    } else if (element == stageModel.getPlayer2HeroCards()[0] && model.getIdPlayer() == 1) { // Watch if the card is a hero card of the player 1
+                    }
+
+                    /**
+                     * Controller of the player 2 hero pot
+                     *
+                     *
+                     */
+
+                    if (element == stageModel.getPlayer2HeroCards()[0] && model.getIdPlayer() == 1) { // Watch if the card is a hero card of the player 2
                         System.out.println("Carte héros P2 appuyé");
                         List<String> possibleMoves = new ArrayList<>();
                         for (int i = 0; i < playMove; i++) {
@@ -227,12 +236,6 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                         return;
                     }
 
-
-                    /**
-                     * Controller of the player 2 hero pot
-                     *
-                     *
-                     */
 
 
                     for (int index = 0; index < playMove; index++) { // For each card in movementPot
@@ -355,7 +358,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
         }
     }
 
-    private void pickACard(RosesStageModel stageModel, RosesStageView stageView, int numberOfThePlayer, int lengthOfPickPot) {
+    private void pickACard(RosesStageModel stageModel, GameStageView stageView, int numberOfThePlayer, int lengthOfPickPot) {
         RosesCard[] tmp = new RosesCard[stageModel.getPlayer1MovementCards().length];
 
         if (numberOfThePlayer == 0) {
@@ -365,18 +368,23 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
             tmp = stageModel.getPlayer2MovementCards().clone();
         }
 
-        stageModel.getPickCards()[lengthOfPickPot].flip();
         for (int j = 0; j < tmp.length; j++) {
             if (tmp[j] == null) {
                 if (numberOfThePlayer == 0) {
-                    stageModel.getPlayer1MovementCards()[j] = stageModel.getPickCards()[lengthOfPickPot];
-                    stageModel.getPlayer1MovementCards()[j].flip();
+                    tmp[j] = stageModel.getPickCards()[lengthOfPickPot];
+                    tmp[j].flip();
+                    System.out.println(tmp[j]);
+                    stageModel.setPlayer1MovementCards(tmp);
+                    System.out.println("___________________");
+                    for (int k = 0; k < 5; k++) {
+                        System.out.println(stageModel.getPlayer1MovementCards()[k]);
+                    }
                     stageView.addLook(new RosesCardLook(80, 110, stageModel.getPlayer1MovementCards()[j], stageModel));
-                    System.out.println(stageModel.getPlayer1MovementCards()[j]);
                 }
                 if (numberOfThePlayer == 1) {
-                    stageModel.getPlayer2MovementCards()[j] = stageModel.getPickCards()[lengthOfPickPot];
-                    stageModel.getPlayer2MovementCards()[j].flip();
+                    tmp[j] = stageModel.getPickCards()[lengthOfPickPot];
+                    tmp[j].flip();
+                    stageModel.setPlayer2MovementCards(tmp);
                     stageView.addLook(new RosesCardLook(80, 110, stageModel.getPlayer2MovementCards()[j], stageModel));
                     System.out.println(stageModel.getPlayer2MovementCards()[j]);
                 }
@@ -413,7 +421,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
         actions.setDoEndOfTurn(true); // after playing this action list, it will be the end of turn for current player.
     }
 
-    private void discardACard(RosesStageModel stageModel, RosesStageView stageView, int numberOfThePlayer, int index, int lengthOfDiscard) {
+    private void discardACard(RosesStageModel stageModel, GameStageView stageView, int numberOfThePlayer, int index, int lengthOfDiscard) {
         if (numberOfThePlayer == 0) {
             stageModel.getDiscardCards()[lengthOfDiscard] = stageModel.getPlayer1MovementCards()[index];
             System.out.println(stageModel.getDiscardCards()[lengthOfDiscard]);
@@ -459,7 +467,6 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
             stageModel.setPlayer1HeroCards(tempHeroCards);
             stageModel.getBoard().moveElement(stageModel.getCrownPawn(), row, col);
             play.start();
-
         }
     }
 
