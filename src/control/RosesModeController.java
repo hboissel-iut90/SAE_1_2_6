@@ -75,7 +75,7 @@ public class RosesModeController extends ControllerAction implements EventHandle
 
             dialog.getDialogPane().setContent(grid);
 
-            dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+            dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
             dialog.setResultConverter(dialogButton -> {
                 if (dialogButton == ButtonType.OK) {
                     // Check if the text fields are not empty
@@ -87,8 +87,10 @@ public class RosesModeController extends ControllerAction implements EventHandle
                         alert.setHeaderText("Empty fields");
                         alert.setContentText("Please fill in the fields");
                         alert.showAndWait();
+                    }
+                } else if (dialogButton == ButtonType.CANCEL) {
+                    return new String[]{"cancel", "cancel"};
                 }
-            }
             return null;
             });
             stage.setFullScreen(false);
@@ -109,6 +111,10 @@ public class RosesModeController extends ControllerAction implements EventHandle
             model.addHumanPlayer("player1");
             model.addHumanPlayer("player2");
             playerNames = playersNames(model);
+            if (playerNames.get(0).equals("cancel") || playerNames.get(1).equals("cancel")) {
+                model = new Model();
+                return;
+            }
             model.getPlayers().get(0).setName(playerNames.get(0));
             model.getPlayers().get(1).setName(playerNames.get(1));
             try {
@@ -123,6 +129,10 @@ public class RosesModeController extends ControllerAction implements EventHandle
             model.addHumanPlayer("player");
             model.addComputerPlayer("computer");
             playerNames = playersNames(model);
+            if (playerNames.get(0).equals("cancel") || playerNames.get(1).equals("cancel")) {
+                model = new Model();
+                return;
+            }
             model.getPlayers().get(0).setName(playerNames.get(0));
             model.getPlayers().get(1).setName(playerNames.get(1));
             rosesView = new RosesView(model, stage, new RosesDiffPane(1, width, height));
@@ -131,6 +141,10 @@ public class RosesModeController extends ControllerAction implements EventHandle
             model.addComputerPlayer("computer1");
             model.addComputerPlayer("computer2");
             playerNames = playersNames(model);
+            if (playerNames.get(0).equals("cancel") || playerNames.get(1).equals("cancel")) {
+                model = new Model();
+                return;
+            }
             model.getPlayers().get(0).setName(playerNames.get(0));
             model.getPlayers().get(1).setName(playerNames.get(1));
             rosesView = new RosesView(model, stage, new RosesDiffPane(2, width, height));
