@@ -60,9 +60,7 @@ public class RosesDiffController extends ControllerAction implements EventHandle
         double height = modePane.Height();
         if (mode == 1) {
             if (event.getSource() == modePane.getEasyButton()) {
-                // control.setDifficulty("E");
             } else if (event.getSource() == modePane.getHardButton()) {
-                // control.setDifficulty("H");
             } else if (event.getSource() == modePane.getBackButton()) {
                 model = new Model();
                 rosesView = new RosesView(model, stage, new RosesModePane(width, height));
@@ -71,11 +69,8 @@ public class RosesDiffController extends ControllerAction implements EventHandle
             }
         } else {
             if (event.getSource() == modePane.getEvEButton()) {
-                // control.setDifficulty("EE");
             } else if (event.getSource() == modePane.getEvHButton()) {
-                // control.setDifficulty("EH");
             } else if (event.getSource() == modePane.getHvHButton()) {
-                // control.setDifficulty("HH");
             } else if (event.getSource() == modePane.getBackButton()) {
                 model = new Model();
                 rosesView = new RosesView(model, stage, new RosesModePane(width, height));

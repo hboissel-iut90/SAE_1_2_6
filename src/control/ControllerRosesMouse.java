@@ -246,7 +246,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                          *
                          */
                         if (model.getIdPlayer() == 0 && element == stageModel.getPlayer1MovementCards()[index]) { // Watch if the card is a movement card of the player 1
-                            System.out.println("Carte mouvement P1 neuille");
+                            System.out.println("Carte mouvement P1");
                             direction = stageModel.getPlayer1MovementCards()[index].getDirection();
                             number = stageModel.getPlayer1MovementCards()[index].getValue();
                             switch (direction) {
@@ -301,7 +301,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                          *
                          */
                         if (model.getIdPlayer() == 1 && element == stageModel.getPlayer2MovementCards()[index]) { // Watch if the card is a movement card of the player 2
-                            System.out.println("Carte mouvement P2 nouille");
+                            System.out.println("Carte mouvement P2");
                             direction = stageModel.getPlayer2MovementCards()[index].getDirection();
                             number = stageModel.getPlayer2MovementCards()[index].getValue();
                             switch (direction) {

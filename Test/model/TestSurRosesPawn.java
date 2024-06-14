@@ -1,5 +1,6 @@
+package model;
+
 import boardifier.model.GameStageModel;
-import model.RosesPawn;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -9,9 +10,9 @@ public class TestSurRosesPawn {
 
     @Test
     public void testGetColor() {
-        RosesPawn pawn1 = new RosesPawn(0, Mockito.mock(GameStageModel.class));
-        RosesPawn pawn2 = new RosesPawn(1, Mockito.mock(GameStageModel.class));
-        RosesPawn pawn3 = new RosesPawn("C", 2, Mockito.mock(GameStageModel.class));
+        RosesPawn pawn1 = new RosesPawn(RosesPawn.PAWN_BLUE, Mockito.mock(GameStageModel.class));
+        RosesPawn pawn2 = new RosesPawn(RosesPawn.PAWN_RED, Mockito.mock(GameStageModel.class));
+        RosesPawn pawn3 = new RosesPawn("C", RosesPawn.PAWN_YELLOW, Mockito.mock(GameStageModel.class));
 
         assertEquals(0, pawn1.getColor());
         assertEquals(1, pawn2.getColor());
@@ -20,7 +21,7 @@ public class TestSurRosesPawn {
 
     @Test
     public void testGetCaracter() {
-        RosesPawn pawn = new RosesPawn("C", 2, Mockito.mock(GameStageModel.class));
+        RosesPawn pawn = new RosesPawn("C", RosesPawn.PAWN_YELLOW, Mockito.mock(GameStageModel.class));
 
         assertEquals("C", pawn.getText());
     }

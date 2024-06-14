@@ -39,7 +39,7 @@ public class ControllerRosesKey extends ControllerKey implements EventHandler<Ke
                 pause.setTitle("Pause");
                 ButtonType resume = new ButtonType("Resume");
                 ButtonType restart = new ButtonType("Restart");
-                ButtonType stopGame = new ButtonType("Stop Game");
+                ButtonType stopGame = new ButtonType("Exit");
 
                 Button resumeButton = new Button(resume.getText());
                 resumeButton.setOnAction(event -> pause.setResult(resume));
@@ -61,7 +61,6 @@ public class ControllerRosesKey extends ControllerKey implements EventHandler<Ke
                     if (clickedButton == resume) {
                         model.setCaptureKeyEvent(true);
                     } else if (clickedButton == restart) {
-                        //control.restartGame();
                         model.setCaptureKeyEvent(true);
                     } else if (clickedButton == stopGame) {
                         //control.stopGame();

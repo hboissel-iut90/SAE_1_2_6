@@ -1,7 +1,7 @@
+package model;
+
 import boardifier.model.GameStageModel;
-import model.RosesCard;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.AfterAll;
 import org.mockito.Mockito;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -67,7 +67,6 @@ public class TestSurRosesCard {
     }
 
     @Test
-    @AfterAll
     public void testFlip() {
         RosesCard card = new RosesCard(1, Mockito.mock(GameStageModel.class));
         RosesCard card2 = new RosesCard(1, Mockito.mock(GameStageModel.class));
