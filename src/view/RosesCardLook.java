@@ -96,7 +96,7 @@ public class RosesCardLook extends ElementLook {
             default -> throw new IllegalStateException("Unexpected value: " + direction);
         };
 
-        if (card.getContainer() == stageModel.getMoovBluePot()) {
+        if (card.getContainer() == stageModel.getMoveBluePot()) {
             loadImageAndPlace(imagePath, card.getX(), card.getY(), false);
         } else {
             loadImageAndPlace(imagePath, card.getX(), card.getY(), true);
