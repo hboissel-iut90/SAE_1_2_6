@@ -2,8 +2,6 @@ package model;
 
 import boardifier.model.*;
 
-import java.awt.*;
-
 public class RosesStageFactory extends StageElementsFactory {
     private RosesStageModel stageModel;
 
@@ -51,14 +49,14 @@ public class RosesStageFactory extends StageElementsFactory {
         }
 
 
-        RosesCardPot moovBluePot = new RosesCardPot(660, 840, stageModel);
-        stageModel.setMoovBluePot(moovBluePot);
-        RosesCardPot moovRedPot = new RosesCardPot(780, 100, stageModel);
-        stageModel.setMoovRedPot(moovRedPot);
-        RosesCardPot heroBluePot = new RosesCardPot(1185, 840, 1, 1, stageModel);
-        RosesCardPot heroRedPot = new RosesCardPot(660, 100, 1, 1, stageModel);
-        RosesCardPot pickPot = new RosesCardPot(550, 350, 1, 1, stageModel);
-        RosesCardPot discardPot = new RosesCardPot(550, 590, 1, 1, stageModel, true);
+        RosesCardPot moveBluePot = new RosesCardPot("moveBluePot", 660, 840, stageModel);
+        stageModel.setMoveBluePot(moveBluePot);
+        RosesCardPot moveRedPot = new RosesCardPot("moveRedPot", 780, 100, stageModel);
+        stageModel.setMoveRedPot(moveRedPot);
+        RosesCardPot heroBluePot = new RosesCardPot("heroBlueCard", 1185, 840, 1, 1, stageModel);
+        RosesCardPot heroRedPot = new RosesCardPot("heroRedCard", 660, 100, 1, 1, stageModel);
+        RosesCardPot pickPot = new RosesCardPot("pickPot", 550, 350, 1, 1, stageModel);
+        RosesCardPot discardPot = new RosesCardPot("discardPot", 550, 590, 1, 1, stageModel);
         stageModel.setBlueHeroPot(heroBluePot);
         stageModel.setRedHeroPot(heroRedPot);
         stageModel.setPickPot(pickPot);
@@ -129,8 +127,8 @@ public class RosesStageFactory extends StageElementsFactory {
         stageModel.setPlayer2MovementCards(player2MovementCards);
 
         for (int i = 0; i < 5; i++) {
-            moovBluePot.addElement(player1MovementCards[i], 0,i);
-            moovRedPot.addElement(player2MovementCards[i], 0,i);
+            moveBluePot.addElement(player1MovementCards[i], 0,i);
+            moveRedPot.addElement(player2MovementCards[i], 0,i);
         }
 
         RosesCard[] heroRedCards = new RosesCard[4];

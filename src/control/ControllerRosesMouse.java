@@ -5,22 +5,14 @@ import boardifier.model.*;
 import boardifier.model.action.ActionList;
 import boardifier.model.animation.AnimationTypes;
 import boardifier.view.GameStageView;
-import boardifier.view.GridLook;
 import boardifier.view.View;
-import javafx.application.Platform;
 import javafx.event.*;
-import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceDialog;
 import javafx.scene.input.*;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
 import model.*;
-import view.PawnLook;
-import view.RosesCardLook;
-import view.RosesStageView;
 
 import static model.RosesPawn.PAWN_BLUE;
 import static model.RosesPawn.PAWN_RED;
@@ -84,7 +76,9 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                         System.out.println("Carte piochée");
                         for (int i = stageModel.getPickCards().length - 1; i > -1; i--) {
                             if (stageModel.getPickCards()[i] != null) {
+                                stageModel.getPickCards()[i].flip();
                                 this.pickACard(stageModel, stageView, model.getIdPlayer(), i);
+                                stageModel.getPickCards()[i] = null;
                                 return;
                             }
                         }
@@ -375,28 +369,17 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
         for (int j = 0; j < tmp.length; j++) {
             if (tmp[j] == null) {
                 if (numberOfThePlayer == 0) {
-                    ActionList actions = ActionFactory.generatePutInContainer(control, model, stageModel.getPickCards()[lengthOfPickPot], stageModel.getMoovBluePot().getName(), 0, j);
+                    ActionList actions = ActionFactory.generatePutInContainer(control, model, stageModel.getPickCards()[lengthOfPickPot], stageModel.getMoveBluePot().getName(), 0, j, AnimationTypes.LOOK_SIMPLE, 10);
                     ActionPlayer play = new ActionPlayer(model, control, actions);
-                    play.start();
                     actions.setDoEndOfTurn(true); // after playing this action list, it will be the end of turn for current player.
+                    play.start();
                 }
                 if (numberOfThePlayer == 1) {
-                    ActionList actions = ActionFactory.generatePutInContainer(control, model, stageModel.getPickCards()[lengthOfPickPot],stageModel.getMoovRedPot().getName(), 0, j);
+                    ActionList actions = ActionFactory.generatePutInContainer(control, model, stageModel.getPickCards()[lengthOfPickPot],stageModel.getMoveRedPot().getName(), 0, j, AnimationTypes.LOOK_SIMPLE, 10);
                     ActionPlayer play = new ActionPlayer(model, control, actions);
-                    play.start();
                     actions.setDoEndOfTurn(true); // after playing this action list, it will be the end of turn for current player.
-                    /*
-                    tmp[j] = stageModel.getPickCards()[lengthOfPickPot];
-                    tmp[j].flip();
-                    stageModel.setPlayer2MovementCards(tmp);
-                    stageView.addLook(new RosesCardLook(80, 110, stageModel.getPlayer2MovementCards()[j], stageModel));
-                    System.out.println(stageModel.getPlayer2MovementCards()[j]);
-
-                     */
+                    play.start();
                 }
-
-                stageModel.removeElement(stageModel.getPickCards()[lengthOfPickPot]);
-                return;
             }
         }
     }
@@ -459,9 +442,6 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
         actions.setDoEndOfTurn(true);
 
     }
-
-
-
 
     public void displayError(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);

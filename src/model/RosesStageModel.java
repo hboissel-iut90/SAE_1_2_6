@@ -46,8 +46,8 @@ public class RosesStageModel extends GameStageModel {
     private RosesCardPot discardPot;
     private RosesCardPot redHeroPot;
     private RosesCardPot blueHeroPot;
-    private RosesCardPot moovRedPot;
-    private RosesCardPot moovBluePot;
+    private RosesCardPot moveRedPot;
+    private RosesCardPot moveBluePot;
 
     public final static int STATE_SELECTCARD = 1; // the player must select a pawn
     public final static int STATE_SELECTDEST = 2; // the player must select a destination
@@ -258,17 +258,17 @@ public class RosesStageModel extends GameStageModel {
         addContainer(blueHeroPot);
     }
 
-    public RosesCardPot getMoovRedPot() {
-        return moovRedPot;
+    public RosesCardPot getMoveRedPot() {
+        return moveRedPot;
     }
 
-    public void setMoovRedPot(RosesCardPot moovRedPot) {
-        this.moovRedPot = moovRedPot;
-        addContainer(moovRedPot);
+    public void setMoveRedPot(RosesCardPot moveRedPot) {
+        this.moveRedPot = moveRedPot;
+        addContainer(moveRedPot);
     }
 
-    public RosesCardPot getMoovBluePot() {
-        return moovBluePot;
+    public RosesCardPot getMoveBluePot() {
+        return moveBluePot;
     }
 
     public RosesCard[] getPickCards() {
@@ -287,9 +287,9 @@ public class RosesStageModel extends GameStageModel {
         addElement(pickCards[index]);
     }
 
-    public void setMoovBluePot(RosesCardPot moovBluePot) {
-        this.moovBluePot = moovBluePot;
-        addContainer(moovBluePot);
+    public void setMoveBluePot(RosesCardPot moveBluePot) {
+        this.moveBluePot = moveBluePot;
+        addContainer(moveBluePot);
     }
 
     public void setDiscardPot(RosesCardPot discardPot) {
