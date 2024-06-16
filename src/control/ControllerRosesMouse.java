@@ -464,9 +464,6 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
         play.start();
         if (idPlayer == 1) {
             pawnToSwap.setColor(PAWN_RED);
-            PawnLook look = (PawnLook) stageView.getElementLook(pawnToSwap);
-            look.updatePawn(pawnToSwap, look);
-            stageView.addLook(look);
             stageModel.removeElement(stageModel.getPlayer2HeroCards()[stageModel.getPlayer2HeroCards().length - 1]);
             RosesCard[] tempHeroCards = stageModel.getPlayer2HeroCards();
             RosesCard[] copyOfPickPotCards = new RosesCard[tempHeroCards.length - 1];
@@ -474,15 +471,15 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
             stageModel.setPlayer2HeroCards(copyOfPickPotCards);
         } else {
             pawnToSwap.setColor(PAWN_BLUE);
-            PawnLook look = (PawnLook) stageView.getElementLook(pawnToSwap);
-            look.updatePawn(pawnToSwap, look);
-            stageView.addLook(look);
             stageModel.removeElement(stageModel.getPlayer1HeroCards()[stageModel.getPlayer1HeroCards().length - 1]);
             RosesCard[] tempHeroCards = stageModel.getPlayer1HeroCards();
             RosesCard[] copyOfPickPotCards = new RosesCard[tempHeroCards.length - 1];
             System.arraycopy(tempHeroCards, 0, copyOfPickPotCards, 0, copyOfPickPotCards.length);
             stageModel.setPlayer1HeroCards(copyOfPickPotCards);
         }
+        PawnLook look = (PawnLook) stageView.getElementLook(pawnToSwap);
+        look.updatePawn(pawnToSwap, look);
+        stageView.addLook(look);
         actions.setDoEndOfTurn(true);
     }
 
