@@ -2,6 +2,8 @@ package model;
 
 import boardifier.model.*;
 
+import java.util.Random;
+
 public class RosesStageFactory extends StageElementsFactory {
     private RosesStageModel stageModel;
 
@@ -91,13 +93,11 @@ public class RosesStageFactory extends StageElementsFactory {
                 break;
         }
 
+        shuffleCard(pickPotCards);
 
         for (int i = 0; i < 24; i++) {
             pickPot.addElement(pickPotCards[i], 0, 0);
         }
-
-
-
 
         RosesCard[] player1MovementCards = new RosesCard[5];
         RosesCard[] player2MovementCards = new RosesCard[5];
@@ -173,5 +173,16 @@ public class RosesStageFactory extends StageElementsFactory {
         mainContainer.addElement(redPot,0,2);
 
          */
+    }
+
+    private void shuffleCard(RosesCard[] pickPotCards) {
+        // The Fisher-Yates method allows shuffling all the cards in the pick so that players have random cards in their deck.
+        Random random = new Random();
+        for (int i = pickPotCards.length - 1; i > 0; i--) {
+            int j = random.nextInt(i +1);
+            RosesCard temp = pickPotCards[i];
+            pickPotCards[i] = pickPotCards[j];
+            pickPotCards[j] = temp;
+        }
     }
 }
