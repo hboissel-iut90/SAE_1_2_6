@@ -64,17 +64,14 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
         int playMove = stageModel.getPlayer1MovementCards().length;
 
         try {
-            /*
             boolean isNotEmpty = false;
-
             for (int i = 0; i < stageModel.getPickCards().length; i++ ) {
                 if (stageModel.getPickCards()[i] != null) {
                     isNotEmpty = true;
-                    System.out.println(i);
                 }
             }
             if (!isNotEmpty) moveDiscardCardsToPickPot(stageModel);
-            */
+
 
             for (GameElement element : list) {  // Take elements clicked
                 if (element.getType() == ElementTypes.getType("card")) { // Watch if the element is a card
@@ -123,7 +120,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                         if (result.isPresent()) {
                             String[] parts = result.get().split(" ");
                             // Parse the index from the selected string
-                            int index = Integer.parseInt(parts[0]);
+                            int index = Integer.parseInt(parts[0]) - 1;
                             direction = parts[1];
                             number = Integer.parseInt(parts[2]);
                             switch (direction) {
@@ -194,7 +191,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                         if (result.isPresent()) {
                             String[] parts = result.get().split(" ");
                             // Parse the index from the selected string
-                            int index = Integer.parseInt(parts[0]);
+                            int index = Integer.parseInt(parts[0]) - 1;
                             direction = parts[1];
                             number = Integer.parseInt(parts[2]);
                             switch (direction) {
@@ -448,7 +445,6 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
     }
 
     private void discardACard(RosesStageModel stageModel, /*GameStageView stageView,*/ RosesCard[] movePot, int index) {
-        stageModel.unselectAll();
         movePot[index].flip();
         System.out.println("is flipped : " + movePot[index].isFlipped());
         ActionList actions = ActionFactory.generatePutInContainer(control, model, movePot[index], stageModel.getDiscardPot().getName(), 0, 0, AnimationTypes.LOOK_SIMPLE, 10);
@@ -459,6 +455,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
 
     public void playHeroCard(RosesStageModel stageModel, int row, int col, int idPlayer, RosesPawn pawnToSwap, int index) {
         GameStageView stageView = view.getGameStageView();
+        RosesCard[] movePot;
         ActionList actions = ActionFactory.generatePutInContainer(control, model, stageModel.getCrownPawn(), stageModel.getBoard().getName(), row, col, AnimationTypes.MOVE_LINEARPROP, 5);
         ActionPlayer play = new ActionPlayer(model, control, actions);
         play.start();
@@ -480,7 +477,17 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
         PawnLook look = (PawnLook) stageView.getElementLook(pawnToSwap);
         look.updatePawn(pawnToSwap, look);
         stageView.addLook(look);
-        actions.setDoEndOfTurn(true);
+        if (idPlayer == 0) {
+            movePot = stageModel.getPlayer1MovementCards();
+        } else {
+            movePot = stageModel.getPlayer2MovementCards();
+        }
+        for (int i = 0; i < stageModel.getDiscardCards().length - 1; i++) {
+            if (stageModel.getDiscardCards()[i] == null) {
+                discardACard(stageModel, movePot, index);
+                actions.setDoEndOfTurn(true);
+            }
+        }
     }
 
     public void displayError(String message) {
