@@ -13,6 +13,7 @@ import javafx.scene.control.ChoiceDialog;
 import javafx.scene.input.*;
 import javafx.scene.shape.Rectangle;
 import model.*;
+import view.PawnLook;
 import view.RosesCardLook;
 
 import static model.RosesPawn.PAWN_BLUE;
@@ -110,7 +111,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                         for (int i = 0; i < playMove; i++) {
                             if (stageModel.getPlayer1MovementCards()[i] != null)
                                 // Include the index in the string
-                                possibleMoves.add(i+1 + " " + stageModel.getPlayer1MovementCards()[i].getDirection() + " " + stageModel.getPlayer1MovementCards()[i].getValue());
+                                possibleMoves.add(i + 1 + " " + stageModel.getPlayer1MovementCards()[i].getDirection() + " " + stageModel.getPlayer1MovementCards()[i].getValue());
                         }
 
                         ChoiceDialog<String> dialog = new ChoiceDialog<>(null, possibleMoves);
@@ -181,7 +182,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                         for (int i = 0; i < playMove; i++) {
                             if (stageModel.getPlayer2MovementCards()[i] != null)
                                 // Include the index in the string
-                                possibleMoves.add(i + " " + stageModel.getPlayer2MovementCards()[i].getDirection() + " " + stageModel.getPlayer2MovementCards()[i].getValue());
+                                possibleMoves.add(i+1 + " " + stageModel.getPlayer2MovementCards()[i].getDirection() + " " + stageModel.getPlayer2MovementCards()[i].getValue());
                         }
 
                         ChoiceDialog<String> dialog = new ChoiceDialog<>(null, possibleMoves);
@@ -246,7 +247,6 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                         }
                         return;
                     }
-
 
 
                     for (int index = 0; index < playMove; index++) { // For each card in movementPot
@@ -370,33 +370,47 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
     }
 
     private void pickACard(RosesStageModel stageModel, GameStageView stageView, int numberOfThePlayer, int lengthOfPickPot) {
-        RosesCardLook look = (RosesCardLook) stageView.getElementLook(stageModel.getPickCards()[lengthOfPickPot]);
-        RosesCard[] tmp = new RosesCard[stageModel.getPlayer1MovementCards().length];
+        RosesCard[] tmp;
 
         if (numberOfThePlayer == 0) {
             tmp = stageModel.getPlayer1MovementCards().clone();
-        }
-        if (numberOfThePlayer == 1) {
+        } else if (numberOfThePlayer == 1) {
             tmp = stageModel.getPlayer2MovementCards().clone();
+        } else {
+            return; // if the player number is invalid, exit the method (should be impossible but its good to clear this aspect)
         }
 
         for (int j = 0; j < tmp.length; j++) {
             if (tmp[j] == null) {
+                ActionList actions;
+                ActionPlayer play;
+
                 if (numberOfThePlayer == 0) {
-                    ActionList actions = ActionFactory.generatePutInContainer(control, model, stageModel.getPickCards()[lengthOfPickPot], stageModel.getMoveBluePot().getName(), 0, j, AnimationTypes.LOOK_SIMPLE, 10);
-                    ActionPlayer play = new ActionPlayer(model, control, actions);
-                    actions.setDoEndOfTurn(true); // after playing this action list, it will be the end of turn for current player.
-                    play.start();
+                    actions = ActionFactory.generatePutInContainer(control, model, stageModel.getPickCards()[lengthOfPickPot], stageModel.getMoveBluePot().getName(), 0, j, AnimationTypes.LOOK_SIMPLE, 10);
+                    play = new ActionPlayer(model, control, actions);
+                    stageModel.getPlayer1MovementCards()[j] = stageModel.getPickCards()[lengthOfPickPot];
+                    RosesCardLook look = (RosesCardLook) stageView.getElementLook(stageModel.getPickCards()[lengthOfPickPot]);
+                    RosesCard card = stageModel.getPlayer1MovementCards()[j];
+                    card.flip();
+                    look.update(card, look);
+                } else {
+                    actions = ActionFactory.generatePutInContainer(control, model, stageModel.getPickCards()[lengthOfPickPot], stageModel.getMoveRedPot().getName(), 0, j, AnimationTypes.LOOK_SIMPLE, 10
+                    );
+                    play = new ActionPlayer(model, control, actions);
+                    stageModel.getPlayer2MovementCards()[j] = stageModel.getPickCards()[lengthOfPickPot];
+                    RosesCardLook look = (RosesCardLook) stageView.getElementLook(stageModel.getPickCards()[lengthOfPickPot]);
+                    RosesCard card = stageModel.getPlayer2MovementCards()[j];
+                    card.flip();
+                    look.update(card, look);
                 }
-                if (numberOfThePlayer == 1) {
-                    ActionList actions = ActionFactory.generatePutInContainer(control, model, stageModel.getPickCards()[lengthOfPickPot], stageModel.getMoveRedPot().getName(), 0, j, AnimationTypes.LOOK_SIMPLE, 10);
-                    ActionPlayer play = new ActionPlayer(model, control, actions);
-                    actions.setDoEndOfTurn(true); // after playing this action list, it will be the end of turn for current player.
-                    play.start();
-                }
+
+                actions.setDoEndOfTurn(true); // after playing this action list, it will be the end of turn for current player.
+                play.start();
+                break; // once the card is placed, exit the loop to prevent placing the same card multiple times
             }
         }
     }
+
 
     private void moveDiscardCardsToPickPot(RosesStageModel stageModel) {
         stageModel.unselectAll();
@@ -444,24 +458,31 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
     }
 
     public void playHeroCard(RosesStageModel stageModel, int row, int col, int idPlayer, RosesPawn pawnToSwap, int index) {
-        pawnToSwap.setColor(PAWN_RED);
+        GameStageView stageView = view.getGameStageView();
         ActionList actions = ActionFactory.generatePutInContainer(control, model, stageModel.getCrownPawn(), stageModel.getBoard().getName(), row, col, AnimationTypes.MOVE_LINEARPROP, 5);
         ActionPlayer play = new ActionPlayer(model, control, actions);
         play.start();
         if (idPlayer == 1) {
+            pawnToSwap.setColor(PAWN_RED);
+            PawnLook look = (PawnLook) stageView.getElementLook(pawnToSwap);
+            look.updatePawn(pawnToSwap, look);
+            stageView.addLook(look);
             stageModel.removeElement(stageModel.getPlayer2HeroCards()[stageModel.getPlayer2HeroCards().length - 1]);
             RosesCard[] tempHeroCards = stageModel.getPlayer2HeroCards();
             RosesCard[] copyOfPickPotCards = new RosesCard[tempHeroCards.length - 1];
             System.arraycopy(tempHeroCards, 0, copyOfPickPotCards, 0, copyOfPickPotCards.length);
             stageModel.setPlayer2HeroCards(copyOfPickPotCards);
         } else {
+            pawnToSwap.setColor(PAWN_BLUE);
+            PawnLook look = (PawnLook) stageView.getElementLook(pawnToSwap);
+            look.updatePawn(pawnToSwap, look);
+            stageView.addLook(look);
             stageModel.removeElement(stageModel.getPlayer1HeroCards()[stageModel.getPlayer1HeroCards().length - 1]);
             RosesCard[] tempHeroCards = stageModel.getPlayer1HeroCards();
             RosesCard[] copyOfPickPotCards = new RosesCard[tempHeroCards.length - 1];
             System.arraycopy(tempHeroCards, 0, copyOfPickPotCards, 0, copyOfPickPotCards.length);
             stageModel.setPlayer1HeroCards(copyOfPickPotCards);
         }
-
         actions.setDoEndOfTurn(true);
     }
 

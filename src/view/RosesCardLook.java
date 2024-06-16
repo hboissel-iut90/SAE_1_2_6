@@ -24,6 +24,7 @@ public class RosesCardLook extends ElementLook {
     private int height;
     private Rectangle border;
     private RosesStageModel stageModel;
+    private ImageView imageView;
 
     public RosesCardLook(int width, int height, GameElement element, RosesStageModel stageModel) {
         super(element, 1);
@@ -53,7 +54,7 @@ public class RosesCardLook extends ElementLook {
 
     private void loadImageAndPlace(String imagePath, double x, double y, boolean isReturned) {
         Image image = new Image(imagePath);
-        ImageView imageView = new ImageView(image);
+        imageView = new ImageView(image);
         imageView.setX(x - width / 1.55);
         imageView.setY(y - height / 1.45);
         imageView.setFitHeight(150);
@@ -70,6 +71,16 @@ public class RosesCardLook extends ElementLook {
     }
 
     private void handleMovementCard(RosesCard card) {
+        if (card.isFlipped()) {
+            Rectangle whiteMovementCard = new Rectangle(card.getX() - 75, card.getY() - 50, 150, 100);
+            whiteMovementCard.setFill(Color.WHITE);
+            whiteMovementCard.setStroke(Color.BLACK);
+            whiteMovementCard.setStrokeWidth(2);
+            whiteMovementCard.setRotate(90);
+            getGroup().getChildren().add(whiteMovementCard);
+            return;
+        }
+
         String direction = card.getDirection();
         int value = card.getValue();
         String basePath = "file:src/images/";
@@ -86,11 +97,9 @@ public class RosesCardLook extends ElementLook {
             default -> throw new IllegalStateException("Unexpected value: " + direction);
         };
 
-        if (card.getContainer() == stageModel.getMoveBluePot()
-                || card.getContainer() == stageModel.getPickPot()
-                || card.getContainer() == stageModel.getDiscardPot()) {
+        if (card.getContainer() == stageModel.getMoveBluePot()) {
             loadImageAndPlace(imagePath, card.getX(), card.getY(), false);
-        } else if (card.getContainer() == stageModel.getMoveRedPot()) {
+        } else {
             loadImageAndPlace(imagePath, card.getX(), card.getY(), true);
         }
     }
@@ -127,10 +136,10 @@ public class RosesCardLook extends ElementLook {
         getGroup().getChildren().add(border);
     }
 
-    public void update(GameElement element) {
-        RosesCard card = (RosesCard) element;
+    public void update(RosesCard card, RosesCardLook cardLook) {
+        cardLook.getGroup().getChildren().clear();
         if (card.isFlipped()) {
-            Rectangle whiteMovementCard = new Rectangle(card.getX() - 75, card.getY() - 50, 150, 100);
+            Rectangle whiteMovementCard = new Rectangle(card.getX(), card.getY(), 150, 100);
             whiteMovementCard.setFill(Color.WHITE);
             whiteMovementCard.setStroke(Color.BLACK);
             whiteMovementCard.setStrokeWidth(2);
@@ -138,7 +147,23 @@ public class RosesCardLook extends ElementLook {
             getGroup().getChildren().add(whiteMovementCard);
             handleMovementCard(card);
         } else {
-            handleMovementCard(card);
+            String direction = card.getDirection();
+            int value = card.getValue();
+            String basePath = "file:src/images/";
+
+            String imagePath = switch (direction) {
+                case "N" -> basePath + "N_" + value + "_card.png";
+                case "N-E" -> basePath + "N-E_" + value + "_card.png";
+                case "E" -> basePath + "E_" + value + "_card.png";
+                case "S-E" -> basePath + "S-E_" + value + "_card.png";
+                case "S" -> basePath + "S_" + value + "_card.png";
+                case "S-W" -> basePath + "S-W_" + value + "_card.png";
+                case "W" -> basePath + "W_" + value + "_card.png";
+                case "N-W" -> basePath + "N-W_" + value + "_card.png";
+                default -> throw new IllegalStateException("Unexpected value: " + direction);
+            };
+
+            loadImageAndPlace(imagePath, card.getX() - 50, card.getY() - 75, stageModel.getModel().getIdPlayer() != 0);
         }
     }
 
@@ -158,5 +183,13 @@ public class RosesCardLook extends ElementLook {
                 handleHeroCard(card, Color.RED, "HERO");
             }
         }
+    }
+
+    public void rotateCard(RosesCardLook card) {
+        card.getImageView().setRotate(180);
+    }
+
+    public ImageView getImageView() {
+        return this.imageView;
     }
 }

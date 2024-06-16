@@ -463,9 +463,15 @@ public class RosesStageModel extends GameStageModel {
 
 
     public void update() {
+        int pickCardsLength = 0;
+        for (int i = 0; i < pickCards.length; i++) {
+            if (pickCards[i] != null) {
+                pickCardsLength++;
+            }
+        }
         bluePawnsCounter.setText("" + this.getBluePawnsToPlay());
         redPawnsCounter.setText("" + this.getRedPawnsToPlay());
-        cardPickCounter.setText("" + this.pickCards.length);
+        cardPickCounter.setText("" + pickCardsLength);
         blueHeroCardsCounter.setText("" + this.player1HeroCards.length);
         redHeroCardsCounter.setText("" + this.player2HeroCards.length);
     }

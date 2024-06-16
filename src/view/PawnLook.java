@@ -82,6 +82,12 @@ public class PawnLook extends ElementLook {
         addShape(text);
     }
 
+    public void updatePawn(RosesPawn pawn, PawnLook pawnLook) {
+        pawnLook.getGroup().getChildren().clear();
+        pawnLook = new PawnLook(22, pawn);
+
+    }
+
 //    public void updateColor() {
 //        RosesPawn pawn = (RosesPawn)element;
 //        if (pawn.getColor() == RosesPawn.PAWN_BLUE) {
