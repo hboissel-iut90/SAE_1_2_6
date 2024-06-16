@@ -34,7 +34,7 @@ public class RosesCardLookTest {
         when(rosesCardMock.getDirection()).thenReturn("N");
         when(rosesCardMock.getValue()).thenReturn(1);
         when(rosesCardMock.isFlipped()).thenReturn(false);
-        when(rosesCardMock.getContainer()).thenReturn(stageModelMock.getMoovBluePot());
+        when(rosesCardMock.getContainer()).thenReturn(stageModelMock.getMoveBluePot());
 
         rosesCardLook = new RosesCardLook(100, 150, rosesCardMock, stageModelMock);
 

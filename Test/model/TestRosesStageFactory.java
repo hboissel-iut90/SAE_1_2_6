@@ -36,8 +36,8 @@ class TestRosesStageFactory {
         Mockito.verify(stageModel.getBoard()).addElement(Mockito.any(RosesPawn.class), Mockito.eq(4), Mockito.eq(4));
 
         // Verify that the card pots are set
-        Mockito.verify(stageModel).setMoovBluePot(Mockito.any(RosesCardPot.class));
-        Mockito.verify(stageModel).setMoovRedPot(Mockito.any(RosesCardPot.class));
+        Mockito.verify(stageModel).setMoveBluePot(Mockito.any(RosesCardPot.class));
+        Mockito.verify(stageModel).setMoveRedPot(Mockito.any(RosesCardPot.class));
         Mockito.verify(stageModel).setBlueHeroPot(Mockito.any(RosesCardPot.class));
         Mockito.verify(stageModel).setRedHeroPot(Mockito.any(RosesCardPot.class));
         Mockito.verify(stageModel).setPickPot(Mockito.any(RosesCardPot.class));

@@ -70,16 +70,6 @@ public class RosesCardLook extends ElementLook {
     }
 
     private void handleMovementCard(RosesCard card) {
-        if (card.isFlipped()) {
-            Rectangle whiteMovementCard = new Rectangle(card.getX() - 75, card.getY() - 50, 150, 100);
-            whiteMovementCard.setFill(Color.WHITE);
-            whiteMovementCard.setStroke(Color.BLACK);
-            whiteMovementCard.setStrokeWidth(2);
-            whiteMovementCard.setRotate(90);
-            getGroup().getChildren().add(whiteMovementCard);
-            return;
-        }
-
         String direction = card.getDirection();
         int value = card.getValue();
         String basePath = "file:src/images/";
@@ -96,9 +86,11 @@ public class RosesCardLook extends ElementLook {
             default -> throw new IllegalStateException("Unexpected value: " + direction);
         };
 
-        if (card.getContainer() == stageModel.getMoveBluePot()) {
+        if (card.getContainer() == stageModel.getMoveBluePot()
+                || card.getContainer() == stageModel.getPickPot()
+                || card.getContainer() == stageModel.getDiscardPot()) {
             loadImageAndPlace(imagePath, card.getX(), card.getY(), false);
-        } else {
+        } else if (card.getContainer() == stageModel.getMoveRedPot()) {
             loadImageAndPlace(imagePath, card.getX(), card.getY(), true);
         }
     }
@@ -116,7 +108,7 @@ public class RosesCardLook extends ElementLook {
         heroText.setFill(Color.WHITE);
         if (color == Color.BLUE) {
             heroText.setRotate(90);
-            heroText.setX(card.getX() - 35);
+            heroText.setX(card.getX() - 45);
             heroText.setY(card.getY() + 13);
         }
         else  {
@@ -135,6 +127,21 @@ public class RosesCardLook extends ElementLook {
         getGroup().getChildren().add(border);
     }
 
+    public void update(GameElement element) {
+        RosesCard card = (RosesCard) element;
+        if (card.isFlipped()) {
+            Rectangle whiteMovementCard = new Rectangle(card.getX() - 75, card.getY() - 50, 150, 100);
+            whiteMovementCard.setFill(Color.WHITE);
+            whiteMovementCard.setStroke(Color.BLACK);
+            whiteMovementCard.setStrokeWidth(2);
+            whiteMovementCard.setRotate(90);
+            getGroup().getChildren().add(whiteMovementCard);
+            handleMovementCard(card);
+        } else {
+            handleMovementCard(card);
+        }
+    }
+
     protected void render() {
         RosesCard card = (RosesCard) element;
         rectangle = new Rectangle(width, height);
@@ -146,9 +153,9 @@ public class RosesCardLook extends ElementLook {
             handleMovementCard(card);
         } else {
             if (card.getColor() == CARD_BLUE) {
-                handleHeroCard(card, Color.BLUE, "Hero");
+                handleHeroCard(card, Color.BLUE, "HERO");
             } else if (card.getColor() == CARD_RED) {
-                handleHeroCard(card, Color.RED, "Hero");
+                handleHeroCard(card, Color.RED, "HERO");
             }
         }
     }

@@ -13,6 +13,7 @@ import javafx.scene.control.ChoiceDialog;
 import javafx.scene.input.*;
 import javafx.scene.shape.Rectangle;
 import model.*;
+import view.RosesCardLook;
 
 import static model.RosesPawn.PAWN_BLUE;
 import static model.RosesPawn.PAWN_RED;
@@ -88,7 +89,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                         System.out.println("Carte piochée");
                         for (int i = stageModel.getPickCards().length - 1; i > -1; i--) {
                             if (stageModel.getPickCards()[i] != null) {
-                                stageModel.getPickCards()[i].flip();
+                                // stageModel.getPickCards()[i].flip();
                                 this.pickACard(stageModel, stageView, model.getIdPlayer(), i);
                                 stageModel.getPickCards()[i] = null;
                                 return;
@@ -369,6 +370,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
     }
 
     private void pickACard(RosesStageModel stageModel, GameStageView stageView, int numberOfThePlayer, int lengthOfPickPot) {
+        RosesCardLook look = (RosesCardLook) stageView.getElementLook(stageModel.getPickCards()[lengthOfPickPot]);
         RosesCard[] tmp = new RosesCard[stageModel.getPlayer1MovementCards().length];
 
         if (numberOfThePlayer == 0) {

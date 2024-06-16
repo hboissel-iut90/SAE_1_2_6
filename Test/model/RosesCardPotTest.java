@@ -22,7 +22,7 @@ public class RosesCardPotTest {
 
     @Test
     void testConstructorWith3Parameters() {
-        RosesCardPot pot = new RosesCardPot(300, 400, Mockito.mock(GameStageModel.class));
+        RosesCardPot pot = new RosesCardPot("moovcardpot", 300, 400, Mockito.mock(GameStageModel.class));
 
         assertEquals("moovcardpot", pot.getName(), "Pot name should be 'moovcardpot'.");
         assertEquals(300, pot.getX(), "Pot X position should be 300.");

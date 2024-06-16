@@ -154,10 +154,10 @@ public class RosesStageFactory extends StageElementsFactory {
         stageModel.setRedHeroCardsCounter(numberOfRedHeroCards);
         stageModel.setPlayer2HeroCards(heroRedCards);
 
-        stageModel.setPickCards(pickPotCards);
         TextElement cardPickCounter = new TextElement("" + pickPotCards.length, stageModel);
         cardPickCounter.setLocation(585, 335);
         stageModel.setCardPickCounter(cardPickCounter);
+        stageModel.setPickCards(pickPotCards);
 
 
         /*
