@@ -2,6 +2,8 @@ package model;
 
 import boardifier.model.*;
 
+import java.util.Random;
+
 public class RosesStageFactory extends StageElementsFactory {
     private RosesStageModel stageModel;
 
@@ -12,57 +14,66 @@ public class RosesStageFactory extends StageElementsFactory {
 
     @Override
     public void setup() {
+        stageModel.playSound("gamestart.mp3");
 
 //        TextElement instructions = new TextElement("Enter P to pick a movement card. \n" + "Enter M + card number to play a move card. The number of cards is done from top to bottom (1 at the top, 5 at the bottom). Ex : M1. \n" + "Enter H + card number to play a hero card + number of card movement. Ex : H1", stageModel);
 //        instructions.setLocation(800, 290);
 //        stageModel.setInstructions1(instructions);
-        // create the board
+
+        // ============================== Create and set the board and pots ==============================
+
+
         RosesBoard board = new RosesBoard(700, 270, stageModel);
-        stageModel.setBoard(board);
-        //create the pots
+
         RosesPawnPot bluePot = new RosesPawnPot(1300,720, stageModel);
-        stageModel.setBluePot(bluePot);
         RosesPawnPot redPot = new RosesPawnPot(1300, 300, stageModel);
-        stageModel.setRedPot(redPot);
-
-
-        // create the pawns
-        RosesPawn[] bluePawns = new RosesPawn[26];
-        for(int i=0;i<26;i++) {
-            bluePawns[i] = new RosesPawn(RosesPawn.PAWN_BLUE, stageModel);
-        }
-        stageModel.setBluePawns(bluePawns);
-        RosesPawn[] redPawns = new RosesPawn[26];
-        for(int i=0;i<26;i++) {
-            redPawns[i] = new RosesPawn(RosesPawn.PAWN_RED, stageModel);
-        }
-        stageModel.setRedPawns(redPawns);
-
-        RosesPawn crownPawn = new RosesPawn("♔",RosesPawn.PAWN_YELLOW, stageModel);
-        stageModel.setCrownPawn(crownPawn);
-        board.addElement(crownPawn, 4, 4);
-
-        // assign pawns to their pot
-        for (int i=0;i<26;i++) {
-            bluePot.addElement(bluePawns[i], 0,0);
-            redPot.addElement(redPawns[i], 0,0);
-        }
-
 
         RosesCardPot moveBluePot = new RosesCardPot("moveBluePot", 660, 840, stageModel);
-        stageModel.setMoveBluePot(moveBluePot);
         RosesCardPot moveRedPot = new RosesCardPot("moveRedPot", 780, 100, stageModel);
-        stageModel.setMoveRedPot(moveRedPot);
         RosesCardPot heroBluePot = new RosesCardPot("heroBlueCard", 1185, 840, 1, 1, stageModel);
         RosesCardPot heroRedPot = new RosesCardPot("heroRedCard", 660, 100, 1, 1, stageModel);
         RosesCardPot pickPot = new RosesCardPot("pickPot", 550, 350, 1, 1, stageModel);
         RosesCardPot discardPot = new RosesCardPot("discardPot", 550, 590, 1, 1, stageModel);
+
+        stageModel.setBoard(board);
+
+        stageModel.setBluePot(bluePot);
+        stageModel.setRedPot(redPot);
+
+        stageModel.setMoveBluePot(moveBluePot);
+        stageModel.setMoveRedPot(moveRedPot);
         stageModel.setBlueHeroPot(heroBluePot);
         stageModel.setRedHeroPot(heroRedPot);
         stageModel.setPickPot(pickPot);
         stageModel.setDiscardPot(discardPot);
 
-        // create the text
+        // ======================= create, add and set the pawns and the crown =======================
+
+        RosesPawn[] bluePawns = new RosesPawn[26];
+        RosesPawn[] redPawns = new RosesPawn[26];
+        RosesPawn crownPawn = new RosesPawn("♔",RosesPawn.PAWN_YELLOW, stageModel);
+
+        for(int i=0;i<26;i++) {
+            bluePawns[i] = new RosesPawn(RosesPawn.PAWN_BLUE, stageModel);
+        }
+
+        for(int i=0;i<26;i++) {
+            redPawns[i] = new RosesPawn(RosesPawn.PAWN_RED, stageModel);
+        }
+
+        for (int i=0;i<26;i++) {
+            bluePot.addElement(bluePawns[i], 0,0);
+            redPot.addElement(redPawns[i], 0,0);
+        }
+
+        board.addElement(crownPawn, 4, 4);
+
+        stageModel.setBluePawns(bluePawns);
+        stageModel.setRedPawns(redPawns);
+        stageModel.setCrownPawn(crownPawn);
+
+        // ============================== Create the text elements ==============================
+
         TextElement text = new TextElement(stageModel.getCurrentPlayerName(), stageModel);
         text.setLocation(150,100);
         stageModel.setPlayerName(text);
@@ -71,16 +82,16 @@ public class RosesStageFactory extends StageElementsFactory {
         pick.setLocation(470, 430);
         stageModel.setPick(pick);
 
-        TextElement redPawnsCounter = new TextElement("" + stageModel.getRedPawnsToPlay(), stageModel);
-        redPawnsCounter.setLocation(1390, 345);
-        stageModel.setRedPawnsCounter(redPawnsCounter);
+        // ============================== Create the cards and shuffles them ==============================
 
-        TextElement bluePawnsCounter = new TextElement("" + stageModel.getBluePawnsToPlay(), stageModel);
-        bluePawnsCounter.setLocation(1390, 765);
-        stageModel.setBluePawnsCounter(bluePawnsCounter);
+        RosesCard[] pickPotCards = new RosesCard[24]; // Create an array of 24 cards
+        RosesCard[] player1MovementCards = new RosesCard[5];
+        RosesCard[] player2MovementCards = new RosesCard[5];
+        RosesCard[] heroRedCards = new RosesCard[4];
+        RosesCard[] heroBlueCards = new RosesCard[4];
 
-        RosesCard[] pickPotCards = new RosesCard[24];
         int index = 0;
+        // Create the 24 cards
         for (int i = 0; i < stageModel.getMovementsList().length; i++) {
             for (int j = 0; j < stageModel.getNumberList().length; j++) {
                 pickPotCards[index++] = new RosesCard(stageModel.getNumberList()[j], stageModel.getMovementsList()[i], stageModel);
@@ -91,17 +102,13 @@ public class RosesStageFactory extends StageElementsFactory {
                 break;
         }
 
+        shuffleCard(pickPotCards); // Shuffle the cards
 
-        for (int i = 0; i < 24; i++) {
+        for (int i = 0; i < 24; i++) { // Add the cards to the pick pot
             pickPot.addElement(pickPotCards[i], 0, 0);
         }
 
-
-
-
-        RosesCard[] player1MovementCards = new RosesCard[5];
-        RosesCard[] player2MovementCards = new RosesCard[5];
-
+        // Add the 5 cards to the player by using a card copying system. It copies 5 cards from the deck and then removes them, this copy is then added to the player's pot
         for (int i = 0; i < 5; i++) {
             if (player1MovementCards[i] == null) {
                 player1MovementCards[i] = new RosesCard(pickPotCards[pickPotCards.length - 1]);
@@ -123,16 +130,10 @@ public class RosesStageFactory extends StageElementsFactory {
 
         }
 
-        stageModel.setPlayer1MovementCards(player1MovementCards);
-        stageModel.setPlayer2MovementCards(player2MovementCards);
-
         for (int i = 0; i < 5; i++) {
             moveBluePot.addElement(player1MovementCards[i], 0,i);
             moveRedPot.addElement(player2MovementCards[i], 0,i);
         }
-
-        RosesCard[] heroRedCards = new RosesCard[4];
-        RosesCard[] heroBlueCards = new RosesCard[4];
 
         for (int i = 0; i < 4; i++) {
             heroRedCards[i] = new RosesCard(RosesCard.CARD_RED, stageModel);
@@ -144,18 +145,33 @@ public class RosesStageFactory extends StageElementsFactory {
             heroRedPot.addElement(heroRedCards[i], 0,0);
         }
 
+        stageModel.setPlayer1MovementCards(player1MovementCards);
+        stageModel.setPlayer2MovementCards(player2MovementCards);
+
+        // ============================== Counter of pawns and cards left ==============================
+
+        TextElement redPawnsCounter = new TextElement("" + stageModel.getRedPawnsToPlay(), stageModel);
+        redPawnsCounter.setLocation(1390, 345);
+        TextElement bluePawnsCounter = new TextElement("" + stageModel.getBluePawnsToPlay(), stageModel);
+        bluePawnsCounter.setLocation(1390, 765);
+
         TextElement numberOfBlueHeroCards = new TextElement("" + heroBlueCards.length, stageModel);
         numberOfBlueHeroCards.setLocation(1230, 1040);
-        stageModel.setBlueHeroCardsCounter(numberOfBlueHeroCards);
-        stageModel.setPlayer1HeroCards(heroBlueCards);
-
         TextElement numberOfRedHeroCards = new TextElement("" + heroRedCards.length, stageModel);
         numberOfRedHeroCards.setLocation(700, 70);
-        stageModel.setRedHeroCardsCounter(numberOfRedHeroCards);
-        stageModel.setPlayer2HeroCards(heroRedCards);
 
         TextElement cardPickCounter = new TextElement("" + pickPotCards.length, stageModel);
         cardPickCounter.setLocation(585, 335);
+
+
+        stageModel.setRedPawnsCounter(redPawnsCounter);
+        stageModel.setBluePawnsCounter(bluePawnsCounter);
+
+        stageModel.setBlueHeroCardsCounter(numberOfBlueHeroCards);
+        stageModel.setPlayer1HeroCards(heroBlueCards);
+        stageModel.setRedHeroCardsCounter(numberOfRedHeroCards);
+        stageModel.setPlayer2HeroCards(heroRedCards);
+
         stageModel.setCardPickCounter(cardPickCounter);
         stageModel.setPickCards(pickPotCards);
 
@@ -173,5 +189,16 @@ public class RosesStageFactory extends StageElementsFactory {
         mainContainer.addElement(redPot,0,2);
 
          */
+    }
+
+    // The Fisher-Yates method allows shuffling all the cards in the pick so that players have random cards in their deck.
+    private void shuffleCard(RosesCard[] pickPotCards) {
+        Random random = new Random();
+        for (int i = pickPotCards.length - 1; i > 0; i--) {
+            int j = random.nextInt(i +1);
+            RosesCard temp = pickPotCards[i];
+            pickPotCards[i] = pickPotCards[j];
+            pickPotCards[j] = temp;
+        }
     }
 }

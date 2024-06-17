@@ -136,16 +136,22 @@ public class RosesCardLook extends ElementLook {
         getGroup().getChildren().add(border);
     }
 
-    public void update(RosesCard card, RosesCardLook cardLook) {
+    public void updatePickCards(RosesCard card, RosesCardLook cardLook) {
         cardLook.getGroup().getChildren().clear();
+        Rectangle whiteMovementCard = new Rectangle(card.getX() - 125, card.getY() - 125, 150, 100);
+        whiteMovementCard.setFill(Color.WHITE);
+        whiteMovementCard.setStroke(Color.BLACK);
+        whiteMovementCard.setStrokeWidth(2);
+        whiteMovementCard.setRotate(90);
+
+        cardLook.getGroup().getChildren().add(whiteMovementCard);
+    }
+
+
+    public void update(RosesCard card, RosesCardLook cardLook) {
+        cardLook.getGroup().getChildren().clear(); // j'ai pas repris handlcemovementcards au cas ou on modifie l'aspect on verra
         if (card.isFlipped()) {
-            Rectangle whiteMovementCard = new Rectangle(card.getX(), card.getY(), 150, 100);
-            whiteMovementCard.setFill(Color.WHITE);
-            whiteMovementCard.setStroke(Color.BLACK);
-            whiteMovementCard.setStrokeWidth(2);
-            whiteMovementCard.setRotate(90);
-            getGroup().getChildren().add(whiteMovementCard);
-            handleMovementCard(card);
+            updatePickCards(card, cardLook);
         } else {
             String direction = card.getDirection();
             int value = card.getValue();
@@ -164,6 +170,7 @@ public class RosesCardLook extends ElementLook {
             };
 
             loadImageAndPlace(imagePath, card.getX() - 50, card.getY() - 75, stageModel.getModel().getIdPlayer() != 0);
+
         }
     }
 

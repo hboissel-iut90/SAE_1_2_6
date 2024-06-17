@@ -1,9 +1,12 @@
 package model;
 
 import boardifier.model.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
+import java.io.File;
 import java.util.Stack;
 
 /**
@@ -238,6 +241,13 @@ public class RosesStageModel extends GameStageModel {
 
     public RosesCardPot getDiscardPot() {
         return discardPot;
+    }
+
+    public void playSound(String soundFileName) {
+        String musicFile = "src/sounds/" + soundFileName; // For example
+        Media sound = new Media(new File(musicFile).toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer.play();
     }
 
     public RosesCardPot getRedHeroPot() {

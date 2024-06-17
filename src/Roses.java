@@ -6,6 +6,7 @@ import control.RosesMenuController;
 import javafx.application.Application;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import model.RosesStageModel;
 import view.RosesMenuPane;
 import view.RosesView;
 
