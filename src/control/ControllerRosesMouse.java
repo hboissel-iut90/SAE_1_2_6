@@ -496,7 +496,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
 
     }
 
-    private void confirmHero(GameElement element, Alert confirmPlay, int row, int col, boolean isHeroCard) { // enfaite ca genere une erreur sur le selected de la carte hero car le look du selected de l'hero card n'est pas faites
+    private void confirmHero(Alert confirmPlay, int row, int col) { // enfaite ca genere une erreur sur le selected de la carte hero car le look du selected de l'hero card n'est pas faites
         System.out.println("apayian");
         confirmPlay.setTitle("Confirmation");
         confirmPlay.setContentText("Are you sure to play the card that will make the crown move to the cell (" + row + "," + col + ") ?");
@@ -506,7 +506,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
     }
 
     private void movePawn(RosesStageModel stageModel, RosesPawn[] pawnPot, int nbPionRest, int row, int col) {
-        ActionList actions = ActionFactory.generatePutInContainer(control, model, pawnPot[nbPionRest - 1], stageModel.getBoard().getName(), row, col, AnimationTypes.MOVE_LINEARPROP, 25);
+        ActionList actions = ActionFactory.generatePutInContainer(control, model, pawnPot[nbPionRest - 1], stageModel.getBoard().getName(), row, col, AnimationTypes.MOVE_LINEARPROP, 40);
         ActionPlayer play = new ActionPlayer(model, control, actions);
         play.start();
         actions = ActionFactory.generatePutInContainer(control, model, stageModel.getCrownPawn(), stageModel.getBoard().getName(), row, col, AnimationTypes.MOVE_LINEARPROP, 5); // je le fais apres avec des facteurs différent pour qu'il soit au dessus de l'autre pion ce neuille
@@ -515,7 +515,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
         actions.setDoEndOfTurn(true); // after playing this action list, it will be the end of turn for current player.
     }
 
-    private void discardACard(RosesStageModel stageModel, /*GameStageView stageView,*/ RosesCard[] movePot, int index, int i) {
+    private void discardACard(RosesStageModel stageModel, RosesCard[] movePot, int index, int i) {
         movePot[index].flip();
         System.out.println("is flipped : " + movePot[index].isFlipped());
         ActionList actions = ActionFactory.generatePutInContainer(control, model, movePot[index], stageModel.getDiscardPot().getName(), 0, 0, AnimationTypes.LOOK_SIMPLE, 10);
