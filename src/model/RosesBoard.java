@@ -23,6 +23,15 @@ public class RosesBoard extends ContainerElement {
         }
         addChangeFaceEvent();
     }
+
+    public void setValidCells(List<Point> valid) {
+        Logger.debug("called", this);
+        resetReachableCells(true);
+        for (Point p : valid) {
+            reachableCells[p.y][p.x] = true;
+        }
+    }
+
     public List<Point> computeValidCells(int number) {
         List<Point> lst = new ArrayList<>();
         RosesPawn p = null;
@@ -116,4 +125,53 @@ public class RosesBoard extends ContainerElement {
         }
         return lst;
     }
+
+    public List<Point> computeValidCells(String string, int id) { // Ajout du paramètre ici
+        List<Point> lst = new ArrayList<>();
+        // if the grid is empty, all cells are valid
+        if (isEmpty() && string.equals("H")) {
+            return lst;
+        }
+        if (string.equals("H")) {
+            for (int i = 0; i < 9; i++) {
+                for (int j = 0; j < 9; j++) {
+                    if (isElementAt(j,i)){
+                        if (id == 0) {
+                            RosesPawn p = (RosesPawn)getElement(j,i);
+                            if (p.getColor() == 1) {
+                                lst.add(new Point(j, i));
+                            }
+                        }
+                        if (id == 1) {
+                            RosesPawn p = (RosesPawn)getElement(j,i);
+                            if (p.getColor() == 0) {
+                                lst.add(new Point(j, i));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        // else, take each empty cell and add it to the valid list
+        if (string.equals("M")) {
+            if (isEmpty()) {
+                for (int i = 0; i < 9; i++) {
+                    for (int j = 0; j < 9; j++) {
+                        lst.add(new Point(j, i));
+                    }
+                }
+                return lst;
+            }
+            for (int i = 0; i < 9; i++) {
+                for (int j = 0; j < 9; j++) {
+                    if (isEmptyAt(i, j)) {
+                        lst.add(new Point(j, i));
+                    }
+                }
+            }
+            return lst;
+        }
+        return lst;
+    }
+
 }

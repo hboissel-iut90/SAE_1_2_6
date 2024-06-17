@@ -3,11 +3,17 @@ package control;
 import boardifier.control.ActionPlayer;
 import boardifier.control.Controller;
 import boardifier.control.Logger;
+import boardifier.model.GameElement;
 import boardifier.model.Model;
 import boardifier.model.Player;
 import boardifier.view.View;
+import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import model.RosesPawn;
 import model.RosesStageModel;
+import view.RosesGameResultView;
 import view.RosesStageView;
 
 import static model.RosesPawn.PAWN_BLUE;
@@ -15,12 +21,15 @@ import static model.RosesPawn.PAWN_RED;
 
 public class RosesController extends Controller {
 
+    private RosesGameResultView resultView;
+
     public RosesController(Model model, View view) {
         super(model, view);
         setControlKey(new ControllerRosesKey(model, view, this));
         setControlMouse(new ControllerRosesMouse(model, view, this));
-
     }
+
+    Stage primaryStage;
 
     public void endOfTurn() {
         // use the default method to compute next player
@@ -32,7 +41,7 @@ public class RosesController extends Controller {
         stageModel.getPlayerName().setText(p.getName());
         if (p.getType() == Player.COMPUTER) {
             Logger.debug("COMPUTER PLAYS");
-            RosesDecider decider = new RosesDecider(model,this);
+            RosesDeciderEasy decider = new RosesDeciderEasy(model, view, this);
             ActionPlayer play = new ActionPlayer(model, this, decider, null);
             play.start();
             stageModel.update();
@@ -45,7 +54,6 @@ public class RosesController extends Controller {
     }
 
     private void checkIfPlayerCanPlay(RosesStageModel stageModel) {
-
         RosesStageModel gameStage = (RosesStageModel) model.getGameStage();
         RosesStageView viewStage = (RosesStageView) view.getGameStageView();
 
@@ -158,6 +166,15 @@ public class RosesController extends Controller {
 
         }
         System.out.println("c'est au tour de : " + model.getIdPlayer());
-        gameStage.computePartyResult();
+        stageModel.computePartyResult();
+    }
+
+    public void handleEndOfGame(int nbBlue, int nbRed, int blueScore, int redScore, int idWinner) {
+        // Afficher les résultats de la partie dans la nouvelle vue des résultats
+        System.out.println(Color.BLUE + "[Player 1]" + Color.BLACK + " Blue pawns on the field : " + nbBlue);
+        System.out.println(Color.RED + "[Player 2]" + Color.BLACK + " Red pawns on the field : " + nbRed);
+        System.out.println(Color.BLUE + "[Player 1]" + Color.BLACK + " Blue score : " + blueScore);
+        System.out.println(Color.RED + "[Player 2]" + Color.BLACK + " Red score : " + redScore);
+        resultView.show(nbBlue, nbRed, blueScore, redScore, idWinner);
     }
 }
