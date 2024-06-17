@@ -449,7 +449,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                 actions.setDoEndOfTurn(true); // after playing this action list, it will be the end of turn for current player.
                 play.start();
                 stageModel.getPickCards()[lengthOfPickPot] = null;
-                // stageModel.playSound("cardpick.mp3");
+                stageModel.playSound("cardpick.mp3");
                 break; // once the card is placed, exit the loop to prevent placing the same card multiple times
             }
         }
@@ -523,7 +523,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
         play.start();
         stageModel.getDiscardCards()[i] = movePot[index];
         movePot[index] = null;
-        // stageModel.playSound("cardpick.mp3");
+        stageModel.playSound("cardpick.mp3");
     }
 
     public void playHeroCard(RosesStageModel stageModel, int row, int col, int idPlayer, RosesPawn pawnToSwap, int index) {
@@ -561,7 +561,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                 actions.setDoEndOfTurn(true);
             }
         }
-        // stageModel.playSound("cardpick.mp3");
+        stageModel.playSound("cardpick.mp3");
     }
 
     public void displayError(String message) {

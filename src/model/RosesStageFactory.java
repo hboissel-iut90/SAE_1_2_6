@@ -14,11 +14,11 @@ public class RosesStageFactory extends StageElementsFactory {
 
     @Override
     public void setup() {
-        // stageModel.playSound("gamestart.mp3");
+         stageModel.playSound("gamestart.mp3");
 
-//        TextElement instructions = new TextElement("Enter P to pick a movement card. \n" + "Enter M + card number to play a move card. The number of cards is done from top to bottom (1 at the top, 5 at the bottom). Ex : M1. \n" + "Enter H + card number to play a hero card + number of card movement. Ex : H1", stageModel);
-//        instructions.setLocation(800, 290);
-//        stageModel.setInstructions1(instructions);
+        TextElement instructions = new TextElement("Enter P to pick a movement card. \n" + "Enter M + card number to play a move card. The number of cards is done from top to bottom (1 at the top, 5 at the bottom). Ex : M1. \n" + "Enter H + card number to play a hero card + number of card movement. Ex : H1", stageModel);
+        instructions.setLocation(800, 290);
+        stageModel.setInstructions1(instructions);
 
         // ============================== Create and set the board and pots ==============================
 

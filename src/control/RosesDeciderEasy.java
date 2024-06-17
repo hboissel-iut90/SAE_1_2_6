@@ -350,8 +350,8 @@ public class RosesDeciderEasy extends Decider {
             return actions;*/
 
         } else {
-            movePawn(stage, stage.getBluePawns(), stage.getBluePawnsToPlay(), rowDest, colDest);
-            discardACard(stage, stage.getPlayer1MovementCards(), choice, nbMovements);
+            movePawn(stage, stage.getRedPawns(), stage.getRedPawnsToPlay(), rowDest, colDest);
+            discardACard(stage, stage.getPlayer2MovementCards(), choice, nbMovements);
             /*pawn = stage.getRedPot().getElement(0, 0);
             ActionList actions = ActionFactory.generatePutInContainer(control, model, pawn, name, rowDest, colDest, AnimationTypes.MOVE_LINEARPROP, 35);
             ActionPlayer play = new ActionPlayer(model, control, actions);

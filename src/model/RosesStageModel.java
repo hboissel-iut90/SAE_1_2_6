@@ -1,6 +1,11 @@
 package model;
 
 import boardifier.model.*;
+import control.RosesController;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
@@ -34,6 +39,9 @@ import java.util.Stack;
  * This is the role of computePartyResult(), which is called by the callback function if there is no more pawn to play.
  */
 public class RosesStageModel extends GameStageModel {
+
+    private RosesController controller;
+
 
     // define stage state variables
     private int bluePawnsToPlay;
@@ -91,6 +99,12 @@ public class RosesStageModel extends GameStageModel {
 
     // Uncomment next line if the example with a main container is used. see end of RosesStageFactory and RosesStageView
     //private ContainerElement mainContainer;
+
+
+    public RosesStageModel(RosesController controller) {
+        this("RosesStage", null);
+        this.controller = controller;
+    }
 
     public RosesStageModel(String name, Model model) {
         super(name, model);
@@ -243,12 +257,12 @@ public class RosesStageModel extends GameStageModel {
         return discardPot;
     }
 
-    /*public void playSound(String soundFileName) {
+    public void playSound(String soundFileName) {
         String musicFile = "src/sounds/" + soundFileName; // For example
         Media sound = new Media(new File(musicFile).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.play();
-    }*/
+    }
 
     public RosesCardPot getRedHeroPot() {
         return redHeroPot;
@@ -509,12 +523,29 @@ public class RosesStageModel extends GameStageModel {
         });
     }
 
+    private int idWinner = -1;
+    private int nbBlue = 0;
+    private int nbRed = 0;
+    private int blueScore = 0, redScore = 0;
+
+    public int getNbBlue(){
+        return nbBlue;
+    }
+
+    public int getNbRed(){
+        return nbRed;
+    }
+
+    public int getBlueScore(){
+        return blueScore;
+    }
+
+    public int getRedScore(){
+        return redScore;
+    }
+
     public void computePartyResult() {
         System.out.println("La partie est terminée");
-        int idWinner = -1;
-        int nbBlue = 0;
-        int nbRed = 0;
-        int blueScore = 0, redScore = 0;
         getBoard().removeElement(crownPawn);
 
         boolean[][] visited = new boolean[9][9];
@@ -550,6 +581,9 @@ public class RosesStageModel extends GameStageModel {
                 idWinner = -1;  // Partie nulle
             }
         }
+
+
+        controller.handleEndOfGame(nbBlue, nbRed, blueScore, redScore, idWinner);
 
         System.out.println(Color.BLUE + "[Player 1]" + Color.BLACK + " Blue pawns on the field : " + nbBlue);
         System.out.println(Color.RED + "[Player 2]" + Color.BLACK + " Red pawns on the field : " + nbRed);
