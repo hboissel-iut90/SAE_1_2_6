@@ -7,11 +7,14 @@ import boardifier.model.animation.AnimationTypes;
 import boardifier.view.GameStageView;
 import boardifier.view.View;
 import javafx.event.*;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceDialog;
+import javafx.scene.image.Image;
 import javafx.scene.input.*;
+import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
@@ -47,6 +50,16 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
 
 
     public void handle(MouseEvent event) {
+        Image image = new Image("file:src/menu_assets/velours.jpg");
+        BackgroundImage backgroundImage = new BackgroundImage(
+                image,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.CENTER,
+                new BackgroundSize(1.0, 1.0, true, true, false, true));
+
+        // Création du fond avec l'image
+        Background background = new Background(backgroundImage);
         // if mouse event capture is disabled in the model, just return
         if (!model.isCaptureMouseEvent()) return;
 
@@ -133,7 +146,9 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                         dialog.setTitle("Choose a move");
                         dialog.setHeaderText("Choose a move for your hero card:");
                         dialog.setContentText("Move:");
+                        dialog.getDialogPane().setBackground(background);
                         dialog.initOwner(primaryStage);
+                        dialog.getDialogPane().getStylesheets().add(("file:src/css/style.css"));
 
                         Optional<String> result = dialog.showAndWait();
                         if (result.isPresent()) {
@@ -214,6 +229,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                         dialog.setHeaderText("Choose a move for your hero card:");
                         dialog.setContentText("Move:");
                         dialog.initOwner(primaryStage);
+                        dialog.getDialogPane().getStylesheets().add(("file:src/css/style.css"));
 
                         Optional<String> result = dialog.showAndWait();
                         if (result.isPresent()) {
@@ -475,6 +491,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
         confirmPlay.setTitle("Confirmation");
         confirmPlay.setContentText("Are you sure to play the card that will make the crown move to the cell (" + row + "," + col + ") ?");
         confirmPlay.initOwner(primaryStage);
+        confirmPlay.getDialogPane().getStylesheets().add(("file:src/css/style.css"));
         confirmPlay.showAndWait();
 
     }
@@ -484,6 +501,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
         confirmPlay.setTitle("Confirmation");
         confirmPlay.setContentText("Are you sure to play the card that will make the crown move to the cell (" + row + "," + col + ") ?");
         confirmPlay.initOwner(primaryStage);
+        confirmPlay.getDialogPane().getStylesheets().add(("file:src/css/style.css"));
         confirmPlay.showAndWait();
     }
 
@@ -552,6 +570,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
         alert.setHeaderText("Invalid move");
         alert.setContentText(message);
         alert.initOwner(primaryStage);
+        alert.getDialogPane().getStylesheets().add(("file:src/css/style.css"));
         alert.showAndWait();
     }
 }
