@@ -489,7 +489,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
         element.toggleSelected();
         System.out.println("apayian");
         confirmPlay.setTitle("Confirmation");
-        confirmPlay.setContentText("Are you sure to play the card that will make the crown move to the cell (" + row + "," + col + ") ?");
+        confirmPlay.setContentText("Are you sure to play the card that will make the crown move to the cell (" + (col+1) + "," + (row+1) + ") ?");
         confirmPlay.initOwner(primaryStage);
         confirmPlay.getDialogPane().getStylesheets().add(("file:src/css/style.css"));
         confirmPlay.showAndWait();
