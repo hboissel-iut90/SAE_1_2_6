@@ -243,12 +243,12 @@ public class RosesStageModel extends GameStageModel {
         return discardPot;
     }
 
-    public void playSound(String soundFileName) {
+    /*public void playSound(String soundFileName) {
         String musicFile = "src/sounds/" + soundFileName; // For example
         Media sound = new Media(new File(musicFile).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.play();
-    }
+    }*/
 
     public RosesCardPot getRedHeroPot() {
         return redHeroPot;

@@ -83,10 +83,10 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
         GameStageView stageView = view.getGameStageView();
         String direction;
         int number;
-        int row = stageModel.getBoard().getElementCell(stageModel.getCrownPawn())[0];
-        int col = stageModel.getBoard().getElementCell(stageModel.getCrownPawn())[1];
-//        System.out.println("row : " + row);
-//        Rectangle discardPotBounds = stageModel.getDiscardPotBounds();
+            int row = stageModel.getBoard().getElementCell(stageModel.getCrownPawn())[0];
+            int col = stageModel.getBoard().getElementCell(stageModel.getCrownPawn())[1];
+    //        System.out.println("row : " + row);
+    //        Rectangle discardPotBounds = stageModel.getDiscardPotBounds();
 //        System.out.println("col : " + col);
 
         int playMove = stageModel.getPlayer1MovementCards().length;
@@ -449,7 +449,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                 actions.setDoEndOfTurn(true); // after playing this action list, it will be the end of turn for current player.
                 play.start();
                 stageModel.getPickCards()[lengthOfPickPot] = null;
-                stageModel.playSound("cardpick.mp3");
+                // stageModel.playSound("cardpick.mp3");
                 break; // once the card is placed, exit the loop to prevent placing the same card multiple times
             }
         }
@@ -506,7 +506,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
     }
 
     private void movePawn(RosesStageModel stageModel, RosesPawn[] pawnPot, int nbPionRest, int row, int col) {
-        ActionList actions = ActionFactory.generatePutInContainer(control, model, pawnPot[nbPionRest - 1], stageModel.getBoard().getName(), row, col, AnimationTypes.MOVE_LINEARPROP, 80);
+        ActionList actions = ActionFactory.generatePutInContainer(control, model, pawnPot[nbPionRest - 1], stageModel.getBoard().getName(), row, col, AnimationTypes.MOVE_LINEARPROP, 25);
         ActionPlayer play = new ActionPlayer(model, control, actions);
         play.start();
         actions = ActionFactory.generatePutInContainer(control, model, stageModel.getCrownPawn(), stageModel.getBoard().getName(), row, col, AnimationTypes.MOVE_LINEARPROP, 5); // je le fais apres avec des facteurs différent pour qu'il soit au dessus de l'autre pion ce neuille
@@ -523,7 +523,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
         play.start();
         stageModel.getDiscardCards()[i] = movePot[index];
         movePot[index] = null;
-        stageModel.playSound("cardpick.mp3");
+        // stageModel.playSound("cardpick.mp3");
     }
 
     public void playHeroCard(RosesStageModel stageModel, int row, int col, int idPlayer, RosesPawn pawnToSwap, int index) {
@@ -561,7 +561,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                 actions.setDoEndOfTurn(true);
             }
         }
-        stageModel.playSound("cardpick.mp3");
+        // stageModel.playSound("cardpick.mp3");
     }
 
     public void displayError(String message) {
