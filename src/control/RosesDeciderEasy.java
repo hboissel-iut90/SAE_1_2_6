@@ -233,39 +233,39 @@ public class RosesDeciderEasy extends Decider {
                     colDest = col;
                     switch (possibleMovements[i]) {
                         case "W":
-                            colDest = col - possibleValues[i];
+                            colDest = col + possibleValues[i];
                             choice = i;
                             break;
                         case "N-E":
-                            colDest = col + possibleValues[i];
-                            rowDest = row - possibleValues[i];
+                            colDest = col - possibleValues[i];
+                            rowDest = row + possibleValues[i];
                             choice = i;
                             break;
                         case "E":
-                            colDest = col + possibleValues[i];
+                            colDest = col - possibleValues[i];
                             choice = i;
                             break;
                         case "S-E":
-                            colDest = col + possibleValues[i];
-                            rowDest = row + possibleValues[i];
+                            colDest = col - possibleValues[i];
+                            rowDest = row - possibleValues[i];
                             choice = i;
                             break;
                         case "S":
-                            rowDest = row + possibleValues[i];
+                            rowDest = row - possibleValues[i];
                             choice = i;
                             break;
                         case "S-W":
-                            rowDest = row + possibleValues[i];
-                            colDest = col - possibleValues[i];
+                            rowDest = row - possibleValues[i];
+                            colDest = col + possibleValues[i];
                             choice = i;
                             break;
                         case "N":
-                            rowDest = row - possibleValues[i];
+                            rowDest = row + possibleValues[i];
                             choice = i;
                             break;
                         default:
-                            rowDest = row - possibleValues[i];
-                            colDest = col - possibleValues[i];
+                            rowDest = row + possibleValues[i];
+                            colDest = col + possibleValues[i];
                             choice = i;
                     }
                     if (board.canReachCell(rowDest, colDest)) {
@@ -407,43 +407,84 @@ public class RosesDeciderEasy extends Decider {
     }
 
     public ActionList playHeroCards(Model model, RosesStageModel gameStage, int row, int col, int choice, int nbMovements, int i) {
-        if (possibleMovements[i] == null) return null;
-        switch (possibleMovements[i]) { // get the destination of the possible hero card
-            case "W":
-                col = col - possibleValues[i];
-                choice = i;
-                break;
-            case "N-E":
-                col = col + possibleValues[i];
-                row = row - possibleValues[i];
-                choice = i;
-                break;
-            case "E":
-                col = col + possibleValues[i];
-                choice = i;
-                break;
-            case "S-E":
-                col = col + possibleValues[i];
-                row = row + possibleValues[i];
-                choice = i;
-                break;
-            case "S":
-                row = row + possibleValues[i];
-                choice = i;
-                break;
-            case "S-W":
-                row = row + possibleValues[i];
-                col = col - possibleValues[i];
-                choice = i;
-                break;
-            case "N":
-                row = row - possibleValues[i];
-                choice = i;
-                break;
-            default:
-                row = row - possibleValues[i];
-                col = col - possibleValues[i];
-                choice = i;
+        if (model.getIdPlayer() == RosesPawn.PAWN_BLUE){
+            if (possibleMovements[i] == null) return null;
+            switch (possibleMovements[i]) { // get the destination of the possible hero card
+                case "W":
+                    col = col - possibleValues[i];
+                    choice = i;
+                    break;
+                case "N-E":
+                    col = col + possibleValues[i];
+                    row = row - possibleValues[i];
+                    choice = i;
+                    break;
+                case "E":
+                    col = col + possibleValues[i];
+                    choice = i;
+                    break;
+                case "S-E":
+                    col = col + possibleValues[i];
+                    row = row + possibleValues[i];
+                    choice = i;
+                    break;
+                case "S":
+                    row = row + possibleValues[i];
+                    choice = i;
+                    break;
+                case "S-W":
+                    row = row + possibleValues[i];
+                    col = col - possibleValues[i];
+                    choice = i;
+                    break;
+                case "N":
+                    row = row - possibleValues[i];
+                    choice = i;
+                    break;
+                default:
+                    row = row - possibleValues[i];
+                    col = col - possibleValues[i];
+                    choice = i;
+            }
+        }else {
+            if (possibleMovements[i] == null) return null;
+            switch (possibleMovements[i]) { // get the destination of the possible hero card
+                case "W":
+                    col = col + possibleValues[i];
+                    choice = i;
+                    break;
+                case "N-E":
+                    col = col - possibleValues[i];
+                    row = row + possibleValues[i];
+                    choice = i;
+                    break;
+                case "E":
+                    col = col - possibleValues[i];
+                    choice = i;
+                    break;
+                case "S-E":
+                    col = col - possibleValues[i];
+                    row = row - possibleValues[i];
+                    choice = i;
+                    break;
+                case "S":
+                    row = row - possibleValues[i];
+                    choice = i;
+                    break;
+                case "S-W":
+                    row = row - possibleValues[i];
+                    col = col + possibleValues[i];
+                    choice = i;
+                    break;
+                case "N":
+                    row = row + possibleValues[i];
+                    choice = i;
+                    break;
+                default:
+                    row = row + possibleValues[i];
+                    col = col + possibleValues[i];
+                    choice = i;
+            }
         }
         ActionList actions = new ActionList(true);
         ValidCells = gameStage.getBoard().computeValidCells("H", model.getIdPlayer());
@@ -526,7 +567,7 @@ public class RosesDeciderEasy extends Decider {
         play.start();
         stageModel.getDiscardCards()[i] = movePot[index];
         movePot[index] = null;
-        // stageModel.playSound("cardpick.mp3");
+        stageModel.playSound("cardpick.mp3");
     }
 
     public void playHeroCard(RosesStageModel stageModel, int row, int col, int idPlayer, RosesPawn pawnToSwap, int index) {
@@ -564,7 +605,7 @@ public class RosesDeciderEasy extends Decider {
                 actions.setDoEndOfTurn(true);
             }
         }
-        // stageModel.playSound("cardpick.mp3");
+        stageModel.playSound("cardpick.mp3");
     }
 
 }

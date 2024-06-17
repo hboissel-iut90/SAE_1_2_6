@@ -2,10 +2,6 @@ package model;
 
 import boardifier.model.*;
 import control.RosesController;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
@@ -259,7 +255,12 @@ public class RosesStageModel extends GameStageModel {
 
     public void playSound(String soundFileName) {
         String musicFile = "src/sounds/" + soundFileName; // For example
-        Media sound = new Media(new File(musicFile).toURI().toString());
+        File file = new File(musicFile);
+        if (!file.exists()) {
+            System.out.println("File does not exist: " + file.getAbsolutePath());
+            return;
+        }
+        Media sound = new Media(file.toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.play();
     }
