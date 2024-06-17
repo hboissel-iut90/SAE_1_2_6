@@ -503,7 +503,7 @@ public class RosesStageModel extends GameStageModel {
             } else if (p.getColor() == 1) {
                 redPawnsToPlay--;
             }
-            if ((bluePawnsToPlay == 0) && (redPawnsToPlay == 0)) {
+            if ((bluePawnsToPlay == 0) || (redPawnsToPlay == 0)) {
                 computePartyResult();
             }
         });
