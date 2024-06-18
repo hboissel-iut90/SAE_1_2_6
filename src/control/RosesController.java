@@ -127,12 +127,14 @@ public class RosesController extends Controller {
         Optional<ButtonType> option = end.showAndWait();
         if (option.get() == Restart) {
             try {
+                nb=0;
                 startGame();
                 stage.setFullScreen(true);
             } catch (GameException e) {
                 throw new RuntimeException(e);
             }
         } else {
+            nb=0;
             double width = Screen.getPrimary().getBounds().getWidth();
             double height = Screen.getPrimary().getBounds().getHeight();
             model.getPlayers().clear();
