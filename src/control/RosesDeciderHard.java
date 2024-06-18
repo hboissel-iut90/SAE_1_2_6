@@ -436,7 +436,7 @@ public class RosesDeciderHard extends Decider {// La classe RosesDeciderHard hé
     private ActionList movePawn(RosesStageModel stageModel, RosesPawn[] pawnPot, int nbPionRest, int row, int col) {
         ActionList actions = new ActionList();
         actions.addAll(ActionFactory.generatePutInContainer(control, model, pawnPot[nbPionRest - 1], stageModel.getBoard().getName(), row, col, AnimationTypes.MOVE_LINEARPROP, 40));
-        actions.addAll(ActionFactory.generatePutInContainer(control, model, stageModel.getCrownPawn(), stageModel.getBoard().getName(), row, col, AnimationTypes.MOVE_LINEARPROP, 5));// je le fais apres avec des facteurs différent pour qu'il soit au dessus de l'autre pion ce neuille
+        actions.addAll(ActionFactory.generatePutInContainer(control, model, stageModel.getCrownPawn(), stageModel.getBoard().getName(), row, col, AnimationTypes.MOVE_LINEARPROP, 4));// je le fais apres avec des facteurs différent pour qu'il soit au dessus de l'autre pion ce neuille
         return actions;
     }
 

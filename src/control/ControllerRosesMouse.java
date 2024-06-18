@@ -132,7 +132,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                      *
                      *
                      */
-                    if (element == stageModel.getPlayer1HeroCards()[0] && model.getIdPlayer() == 0) { // Watch if the card is a hero card of the player 1
+                    if (element == stageModel.getPlayer1HeroCards()[0] && model.getIdPlayer() == 0 && stageModel.getPlayer1HeroCards().length > 0) { // Watch if the card is a hero card of the player 1
                         System.out.println("Carte héros P1 appuyé");
                         List<String> possibleMoves = new ArrayList<>();
                         for (int i = 0; i < playMove; i++) {
@@ -191,7 +191,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                                 return;
                             }
                             RosesPawn pawnToSwap = (RosesPawn) stageModel.getBoard().getElement(row, col);
-                            if (stageModel.getPlayer1HeroCards()[0] != null && pawnToSwap.getColor() == PAWN_RED) {
+                            if (stageModel.getPlayer1HeroCards()[0] != null && pawnToSwap.getColor() == PAWN_RED && stageModel.getPlayer1HeroCards().length > 0) {
                                 playHeroCard(stageModel, row, col, model.getIdPlayer(), pawnToSwap, index);
                                 for (int i = 0; i < stageModel.getDiscardCards().length - 1; i++) {
                                     System.out.println("boucle for");
@@ -214,7 +214,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                      *
                      */
 
-                    if (element == stageModel.getPlayer2HeroCards()[0] && model.getIdPlayer() == 1) { // Watch if the card is a hero card of the player 2
+                    if (element == stageModel.getPlayer2HeroCards()[0] && model.getIdPlayer() == 1 && stageModel.getPlayer1HeroCards().length > 0) { // Watch if the card is a hero card of the player 2
                         System.out.println("Carte héros P2 appuyé");
                         List<String> possibleMoves = new ArrayList<>();
                         for (int i = 0; i < playMove; i++) {
@@ -271,7 +271,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                                 return;
                             }
                             RosesPawn pawnToSwap = (RosesPawn) stageModel.getBoard().getElement(row, col);
-                            if (stageModel.getPlayer2HeroCards()[0] != null && pawnToSwap.getColor() == PAWN_BLUE) {
+                            if (stageModel.getPlayer2HeroCards()[0] != null && pawnToSwap.getColor() == PAWN_BLUE && stageModel.getPlayer2HeroCards().length > 0) {
                                 playHeroCard(stageModel, row, col, model.getIdPlayer(), pawnToSwap, index);
                                 for (int i = 0; i < stageModel.getDiscardCards().length - 1; i++) {
                                     System.out.println("boucle for");
@@ -290,6 +290,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
 
 
                     for (int index = 0; index < playMove; index++) { // For each card in movementPot
+                        System.out.println("main pas vide");
 
                         /**
                          * Controller of the player 1 movement pot
@@ -528,7 +529,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
     public void playHeroCard(RosesStageModel stageModel, int row, int col, int idPlayer, RosesPawn pawnToSwap, int index) {
         GameStageView stageView = view.getGameStageView();
         RosesCard[] movePot;
-        ActionList actions = ActionFactory.generatePutInContainer(control, model, stageModel.getCrownPawn(), stageModel.getBoard().getName(), row, col, AnimationTypes.MOVE_LINEARPROP, 5);
+        ActionList actions = ActionFactory.generatePutInContainer(control, model, stageModel.getCrownPawn(), stageModel.getBoard().getName(), row, col, AnimationTypes.MOVE_LINEARPROP, 4);
         ActionPlayer play = new ActionPlayer(model, control, actions);
         play.start();
         if (idPlayer == 1) {
@@ -558,9 +559,10 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
             if (stageModel.getDiscardCards()[i] == null) {
                 discardACard(stageModel, movePot, index, i);
                 actions.setDoEndOfTurn(true);
+                stageModel.playSound("cardpick.mp3");
+                return;
             }
         }
-        stageModel.playSound("cardpick.mp3");
     }
 
     public void displayError(String message) {

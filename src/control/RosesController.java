@@ -53,10 +53,10 @@ public class RosesController extends Controller {
         stageModel.getPlayerName().setText(p.getName());
         if (p.getType() == Player.COMPUTER) {
             Logger.debug("COMPUTER PLAYS");
-            RosesDeciderHard decider = new RosesDeciderHard(model, this, view);
+            RosesDeciderEasy decider = new RosesDeciderEasy(model, view, this);
             ActionPlayer play = new ActionPlayer(model, this, decider, null);
             try {
-                Thread.sleep(1000);
+                Thread.sleep(50);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -130,19 +130,19 @@ public class RosesController extends Controller {
         stageModel.getPlayerName().setText(p.getName());
         if (p.getType() == Player.COMPUTER) {
             Logger.debug("COMPUTER PLAYS");
-            RosesDeciderHard decider = new RosesDeciderHard(model, this, view);
+            RosesDeciderEasy decider = new RosesDeciderEasy(model, view, this);
             ActionPlayer play = new ActionPlayer(model, this, decider, null);
             try {
-                Thread.sleep(1000);
+                Thread.sleep(50);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             play.start();
             stageModel.update();
         } else {
-            checkIfPlayerCanPlay(stageModel);
             Logger.debug("PLAYER PLAYS");
             stageModel.update();
+            checkIfPlayerCanPlay(stageModel);
         }
     }
 
@@ -241,22 +241,101 @@ public class RosesController extends Controller {
                 if (row >= 0 && col >= 0 && gameStage.getBoard().canReachCell(row, col) && !gameStage.getBoard().isElementAt(row, col)) {
                     tempCheck = true;
                     return;
-                } else if (row >= 0 && col >= 0 && row <= 8 && col <= 8 && i > 0 && gameStage.getBoard().isElementAt(row, col)) {
+                }
+            }
+
+        }
+
+        if (!tempCheck && model.getIdPlayer() == 0) {
+            for (int i = 0; i < gameStage.getPlayer1HeroCards().length; i++) {
+                int row = stageModel.getBoard().getElementCell(stageModel.getCrownPawn())[0];
+                int col = stageModel.getBoard().getElementCell(stageModel.getCrownPawn())[1];
+                String checkDirection = gameStage.getPlayer1MovementCards()[i].getDirection();
+                int checkCardValue = gameStage.getPlayer1MovementCards()[i].getValue();
+                switch (checkDirection) {
+                    case "W":
+                        col = col - checkCardValue;
+                        break;
+                    case "N-E":
+                        col = col + checkCardValue;
+                        row = row - checkCardValue;
+                        break;
+                    case "E":
+                        col = col + checkCardValue;
+                        break;
+                    case "S-E":
+                        col = col + checkCardValue;
+                        row = row + checkCardValue;
+                        break;
+                    case "S":
+                        row = row + checkCardValue;
+                        break;
+                    case "S-W":
+                        row = row + checkCardValue;
+                        col = col - checkCardValue;
+                        break;
+                    case "N":
+                        row = row - checkCardValue;
+                        break;
+                    default:
+                        row = row - checkCardValue;
+                        col = col - checkCardValue;
+                }
+                if (row >= 0 && col >= 0 && row <= 8 && col <= 8 && i > 0 && gameStage.getBoard().isElementAt(row, col)) {
                     RosesPawn tempPawn = (RosesPawn) gameStage.getBoard().getElement(row, col);
-                    if (model.getIdPlayer() == 0 && i < gameStage.getPlayer1HeroCards().length && gameStage.getPlayer1HeroCards()[i - 1] != null && tempPawn.getColor() == PAWN_RED) {
+                    if ((model.getIdPlayer() == 0 && stageModel.getPlayer1HeroCards().length > 0 && tempPawn.getColor() == PAWN_RED)) {
                         tempCheck = true;
-                        System.out.println("can play hero cards");
-                        gameStage.setChecked(tempCheck);
-                        return;
-                    } else if (model.getIdPlayer() == 1 && i < gameStage.getPlayer2HeroCards().length && gameStage.getPlayer2HeroCards()[i - 1] != null && tempPawn.getColor() == PAWN_BLUE) {
-                        tempCheck = true;
-                        System.out.println("can play hero cards");
+                        System.out.println("can play hero cards ID PLAYER 0");
                         gameStage.setChecked(tempCheck);
                         return;
                     }
                 }
             }
-
+        } else if (!tempCheck && model.getIdPlayer() == 1) {
+            for (int i = 0; i < gameStage.getPlayer2HeroCards().length; i++) {
+                int row = stageModel.getBoard().getElementCell(stageModel.getCrownPawn())[0];
+                int col = stageModel.getBoard().getElementCell(stageModel.getCrownPawn())[1];
+                String checkDirection = gameStage.getPlayer2MovementCards()[i].getDirection();
+                int checkCardValue = gameStage.getPlayer2MovementCards()[i].getValue();
+                switch (checkDirection) {
+                    case "W":
+                        col = col + checkCardValue;
+                        break;
+                    case "N-E":
+                        col = col - checkCardValue;
+                        row = row + checkCardValue;
+                        break;
+                    case "E":
+                        col = col - checkCardValue;
+                        break;
+                    case "S-E":
+                        col = col - checkCardValue;
+                        row = row - checkCardValue;
+                        break;
+                    case "S":
+                        row = row - checkCardValue;
+                        break;
+                    case "S-W":
+                        row = row - checkCardValue;
+                        col = col + checkCardValue;
+                        break;
+                    case "N":
+                        row = row + checkCardValue;
+                        break;
+                    default:
+                        row = row + checkCardValue;
+                        col = col + checkCardValue;
+                }
+                if (row >= 0 && col >= 0 && row <= 8 && col <= 8 && i > 0 && gameStage.getBoard().isElementAt(row, col)) {
+                    RosesPawn tempPawn = (RosesPawn) gameStage.getBoard().getElement(row, col);
+                    if (model.getIdPlayer() == 1 && stageModel.getPlayer2HeroCards().length > 0 && tempPawn.getColor() == PAWN_BLUE) {
+                        tempCheck = true;
+                        System.out.println("can play hero cards ID PLAYER 1");
+                        gameStage.setChecked(tempCheck);
+                        return;
+                    }
+                }
+            }
         }
         System.out.println("c'est au tour de : " + model.getIdPlayer());
         endGame();
