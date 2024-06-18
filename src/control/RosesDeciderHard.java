@@ -239,11 +239,21 @@ public class RosesDeciderHard extends Decider {// La classe RosesDeciderHard hé
             if (model.getIdPlayer() == 0) {
                 Platform.runLater(() -> {
                     actions.addAll(pickACard(stage, view.getGameStageView(), 0, finalPickCardsLength-1));
+                    try {
+                        Thread.sleep(60);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
                     latch.countDown();
                 });
             } else {
                 Platform.runLater(() -> {
                     actions.addAll(pickACard(stage, view.getGameStageView(), 1, finalPickCardsLength-1));
+                    try {
+                        Thread.sleep(60);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
                     latch.countDown();
                 });
 

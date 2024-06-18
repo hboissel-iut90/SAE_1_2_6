@@ -194,9 +194,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                             if (stageModel.getPlayer1HeroCards()[0] != null && pawnToSwap.getColor() == PAWN_RED && stageModel.getPlayer1HeroCards().length > 0) {
                                 playHeroCard(stageModel, row, col, model.getIdPlayer(), pawnToSwap, index);
                                 for (int i = 0; i < stageModel.getDiscardCards().length - 1; i++) {
-                                    System.out.println("boucle for");
                                     if (stageModel.getDiscardCards()[i] == null) {
-                                        System.out.println("big ampayian");
                                         this.discardACard(stageModel, stageModel.getPlayer1MovementCards(), index, i);
                                         return;
                                     }
@@ -274,9 +272,7 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                             if (stageModel.getPlayer2HeroCards()[0] != null && pawnToSwap.getColor() == PAWN_BLUE && stageModel.getPlayer2HeroCards().length > 0) {
                                 playHeroCard(stageModel, row, col, model.getIdPlayer(), pawnToSwap, index);
                                 for (int i = 0; i < stageModel.getDiscardCards().length - 1; i++) {
-                                    System.out.println("boucle for");
                                     if (stageModel.getDiscardCards()[i] == null) {
-                                        System.out.println("big ampayian");
                                         this.discardACard(stageModel, stageModel.getPlayer2MovementCards(), index, i);
                                         return;
                                     }
@@ -290,7 +286,6 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
 
 
                     for (int index = 0; index < playMove; index++) { // For each card in movementPot
-                        System.out.println("main pas vide");
 
                         /**
                          * Controller of the player 1 movement pot
@@ -487,7 +482,6 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
 
     private void confirmMove(GameElement element, Alert confirmPlay, int row, int col) {
         element.toggleSelected();
-        System.out.println("apayian");
         confirmPlay.setTitle("Confirmation");
         confirmPlay.setContentText("Are you sure to play the card that will make the crown move to the cell (" + (col+1) + "," + (row+1) + ") ?");
         confirmPlay.initOwner(primaryStage);
@@ -497,7 +491,6 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
     }
 
     private void confirmHero(Alert confirmPlay, int row, int col) { // enfaite ca genere une erreur sur le selected de la carte hero car le look du selected de l'hero card n'est pas faites
-        System.out.println("apayian");
         confirmPlay.setTitle("Confirmation");
         confirmPlay.setContentText("Are you sure to play the card that will make the crown move to the cell (" + row + "," + col + ") ?");
         confirmPlay.initOwner(primaryStage);

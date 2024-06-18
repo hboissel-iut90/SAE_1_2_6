@@ -178,6 +178,11 @@ public class RosesDeciderEasy extends Decider {
                 if (stage.getPickCards()[i] != null) {
                     // stageModel.getPickCards()[i].flip();
                     actions = this.pickACard(stage, stageView, model.getIdPlayer(), i);
+                    try {
+                        Thread.sleep(60);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
                     boolean isNotEmpty = false;
 
                     for (int k = 0; k < stage.getPickCards().length; k++) {
@@ -367,6 +372,11 @@ public class RosesDeciderEasy extends Decider {
                     if (stage.getPickCards()[i] != null) {
                         // stageModel.getPickCards()[i].flip();
                         actions = this.pickACard(stage, stageView, model.getIdPlayer(), i);
+                        try {
+                            Thread.sleep(60);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
                         boolean isNotEmpty = false;
 
                         for (int k = 0; k < stage.getPickCards().length; k++) {

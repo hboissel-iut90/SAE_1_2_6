@@ -31,6 +31,7 @@ import static model.RosesPawn.PAWN_RED;
 public class RosesController extends Controller {
 
     private String difficulty;
+    int nb = 0;
 
 
     public RosesController(Model model, View view) {
@@ -76,14 +77,13 @@ public class RosesController extends Controller {
                 }
             }
             try {
-                Thread.sleep(50);
+                Thread.sleep(150);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             play.start();
             stageModel.update();
         } else {
-            checkIfPlayerCanPlay(stageModel);
             Logger.debug("PLAYER PLAYS");
             stageModel.update();
         }
@@ -92,6 +92,10 @@ public class RosesController extends Controller {
 
     @Override
     public void endGame() {
+        if (nb > 0) {
+            return;
+        }
+        nb++;
         Stage stage = view.getStage();
         model.setCaptureEvents(false);
         RosesStageModel gameStage = (RosesStageModel) model.getGameStage();
@@ -174,9 +178,9 @@ public class RosesController extends Controller {
             play.start();
             stageModel.update();
         } else {
+            checkIfPlayerCanPlay(stageModel);
             Logger.debug("PLAYER PLAYS");
             stageModel.update();
-            checkIfPlayerCanPlay(stageModel);
         }
     }
 
