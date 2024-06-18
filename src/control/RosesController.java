@@ -43,18 +43,37 @@ public class RosesController extends Controller {
         this.model = model;
     }
 
+    public void setDifficulty(String difficulty) {
+        this.difficulty = difficulty;
+    }
+
     @Override
     public void startGame() throws GameException {
         super.startGame();
         // get the new player
+        // get the new player
         Player p = model.getCurrentPlayer();
+        ActionPlayer play = null;
         // change the text of the TextElement
         RosesStageModel stageModel = (RosesStageModel) model.getGameStage();
         stageModel.getPlayerName().setText(p.getName());
         if (p.getType() == Player.COMPUTER) {
             Logger.debug("COMPUTER PLAYS");
-            RosesDeciderEasy decider = new RosesDeciderEasy(model, view, this);
-            ActionPlayer play = new ActionPlayer(model, this, decider, null);
+            if (difficulty.equals("EE")|| difficulty.equals("E")) {
+                RosesDeciderEasy decider = new RosesDeciderEasy(model, view, this);
+                play = new ActionPlayer(model, this, decider, null);
+            } else if (difficulty.equals("HH") || difficulty.equals("H")) {
+                RosesDeciderHard decider = new RosesDeciderHard(model, this, view);
+                play = new ActionPlayer(model, this, decider, null);
+            } else {
+                if (model.getIdPlayer() == 0) {
+                    RosesDeciderEasy decider = new RosesDeciderEasy(model, view,this);
+                    play = new ActionPlayer(model, this, decider, null);
+                } else {
+                    RosesDeciderHard decider = new RosesDeciderHard(model, this,view);
+                    play = new ActionPlayer(model, this, decider, null);
+                }
+            }
             try {
                 Thread.sleep(50);
             } catch (InterruptedException e) {
@@ -125,13 +144,27 @@ public class RosesController extends Controller {
         model.setNextPlayer();
         // get the new player
         Player p = model.getCurrentPlayer();
+        ActionPlayer play = null;
         // change the text of the TextElement
         RosesStageModel stageModel = (RosesStageModel) model.getGameStage();
         stageModel.getPlayerName().setText(p.getName());
         if (p.getType() == Player.COMPUTER) {
             Logger.debug("COMPUTER PLAYS");
-            RosesDeciderEasy decider = new RosesDeciderEasy(model, view, this);
-            ActionPlayer play = new ActionPlayer(model, this, decider, null);
+            if (difficulty.equals("EE")|| difficulty.equals("E")) {
+                RosesDeciderEasy decider = new RosesDeciderEasy(model, view, this);
+                play = new ActionPlayer(model, this, decider, null);
+            } else if (difficulty.equals("HH") || difficulty.equals("H")) {
+                RosesDeciderHard decider = new RosesDeciderHard(model, this, view);
+                play = new ActionPlayer(model, this, decider, null);
+            } else {
+                if (model.getIdPlayer() == 0) {
+                    RosesDeciderEasy decider = new RosesDeciderEasy(model, view,this);
+                    play = new ActionPlayer(model, this, decider, null);
+                } else {
+                    RosesDeciderHard decider = new RosesDeciderHard(model, this, view);
+                    play = new ActionPlayer(model, this, decider, null);
+                }
+            }
             try {
                 Thread.sleep(50);
             } catch (InterruptedException e) {
