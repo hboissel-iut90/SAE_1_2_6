@@ -22,6 +22,7 @@ import java.awt.*;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.CountDownLatch;
 
 import static model.RosesPawn.PAWN_BLUE;
 import static model.RosesPawn.PAWN_RED;
@@ -51,8 +52,8 @@ public class RosesDeciderEasy extends Decider {
 
     @Override
     public ActionList decide() {
+        CountDownLatch latch = new CountDownLatch(1);
         RosesStageView stageView = (RosesStageView) view.getGameStageView();
-        model.getPlayers().get(model.getIdPlayer()).setName("Easy computer");
         RosesStageModel stage = (RosesStageModel) model.getGameStage();
         RosesBoard board = stage.getBoard();
         RosesPawnPot pawnPot = null;
@@ -73,7 +74,16 @@ public class RosesDeciderEasy extends Decider {
         RosesPawn tempPawn = null;
         if (model.getIdPlayer() == RosesPawn.PAWN_BLUE) {
             if (stage.getBluePawnsToPlay() == 0) { // if the AI has no pawns left
-                control.endGame();
+                Platform.runLater(() -> {
+                    control.endGame();
+                    latch.countDown();
+                });
+                try {
+                    latch.await(); // Attend que la tâche soit terminée
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+                System.out.println("Test1");
                 return actions;
             }
             pawnPot = stage.getBluePot();
@@ -238,7 +248,16 @@ public class RosesDeciderEasy extends Decider {
             }
             // if he cant play a hero card, action will be null so the game will be over, else, this will play a hero card
             if (actions == null) {
-                control.endGame();
+                Platform.runLater(() -> {
+                    control.endGame();
+                    latch.countDown();
+                });
+                try {
+                    latch.await(); // Attend que la tâche soit terminée
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+                System.out.println("test 2");
             }
             actions = new ActionList();
             return actions;
@@ -248,7 +267,16 @@ public class RosesDeciderEasy extends Decider {
             pawnPot = stage.getRedPot();
             if (model.getIdPlayer() == RosesPawn.PAWN_RED) {
                 if (stage.getRedPawnsToPlay() == 0) {
-                    control.endGame();
+                    Platform.runLater(() -> {
+                        control.endGame();
+                        latch.countDown();
+                    });
+                    try {
+                        latch.await(); // Attend que la tâche soit terminée
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                    }
+                    System.out.println("Test 3");
                     return actions;
                 }
                 for (int k = 0; k < stage.getPlayer2MovementCards().length; k++) {
@@ -408,7 +436,16 @@ public class RosesDeciderEasy extends Decider {
             }
         }
         if (actions == null) {
-            control.endGame();
+            Platform.runLater(() -> {
+                control.endGame();
+                latch.countDown();
+            });
+            try {
+                latch.await(); // Attend que la tâche soit terminée
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+            System.out.println("Test 4");
             actions = new ActionList(true);
             return actions;
         } else {

@@ -23,6 +23,7 @@ import view.RosesStageView;
 import view.RosesView;
 
 import java.util.Optional;
+import java.util.concurrent.CountDownLatch;
 
 import static model.RosesPawn.PAWN_BLUE;
 import static model.RosesPawn.PAWN_RED;

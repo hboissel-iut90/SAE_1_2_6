@@ -59,7 +59,6 @@ public class RosesDeciderHard extends Decider {// La classe RosesDeciderHard hé
     public ActionList decide() {
         // Le code dans cette méthode est principalement utilisé pour initialiser les variables et les structures de données nécessaires pour le jeu.
         // Il contient également la logique pour déterminer le meilleur mouvement possible pour le joueur.
-        model.getPlayers().get(model.getIdPlayer()).setName("Hard computer");
         possibleMoves = new TreeMap<String, Double>(comparator);
         RosesStageModel stage = (RosesStageModel) model.getGameStage();
         Cards = new RosesCard[5];
@@ -106,7 +105,15 @@ public class RosesDeciderHard extends Decider {// La classe RosesDeciderHard hé
             nbrPawns = stage.getRedPawnsToPlay();
         }
         if (pawnPot.getElement(0,0) == null) {
-            control.endGame();
+            Platform.runLater(() -> {
+                control.endGame();
+                latch.countDown();
+            });
+            try {
+                latch.await(); // Attend que la tâche soit terminée
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
             return actions;
         }
         System.out.println(opponentPawns);
@@ -159,8 +166,17 @@ public class RosesDeciderHard extends Decider {// La classe RosesDeciderHard hé
         System.out.println("Possible moves: " + possibleMoves);
         if (possibleMoves.isEmpty()) {
             System.out.println("No possible moves.");
-            control.endGame();
-            actions.setDoEndOfTurn(true);
+            System.out.println(model.getCurrentPlayerName());
+            System.out.println("Test 2");
+            Platform.runLater(() -> {
+                control.endGame();
+                latch.countDown();
+            });
+            try {
+                latch.await(); // Attend que la tâche soit terminée
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
             return actions;
         }
         double maxScore = Collections.max(possibleMoves.values());
