@@ -62,7 +62,7 @@ public class RosesDiffController extends ControllerAction implements EventHandle
             if (event.getSource() == modePane.getEasyButton()) {
             } else if (event.getSource() == modePane.getHardButton()) {
             } else if (event.getSource() == modePane.getBackButton()) {
-                model = new Model();
+                model.getPlayers().clear();
                 rosesView = new RosesView(model, stage, new RosesModePane(width, height));
                 control.setControlAction(new RosesModeController(model, rosesView, control));
                 return;
@@ -72,7 +72,7 @@ public class RosesDiffController extends ControllerAction implements EventHandle
             } else if (event.getSource() == modePane.getEvHButton()) {
             } else if (event.getSource() == modePane.getHvHButton()) {
             } else if (event.getSource() == modePane.getBackButton()) {
-                model = new Model();
+                model.getPlayers().clear();
                 rosesView = new RosesView(model, stage, new RosesModePane(width, height));
                 control.setControlAction(new RosesModeController(model, rosesView, control));
                 return;

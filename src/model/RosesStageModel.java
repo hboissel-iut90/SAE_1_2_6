@@ -122,7 +122,6 @@ public class RosesStageModel extends GameStageModel {
     }
      */
 
-
     public RosesBoard getBoard() {
         return board;
     }
@@ -416,7 +415,7 @@ public class RosesStageModel extends GameStageModel {
         return this.redPawnsCounter;
     }
 
-   public TextElement getPick() {
+    public TextElement getPick() {
         return pick;
     }
 
@@ -529,23 +528,26 @@ public class RosesStageModel extends GameStageModel {
     private int nbRed = 0;
     private int blueScore = 0, redScore = 0;
 
-    public int getNbBlue(){
+    public int getNbBlue() {
         return nbBlue;
     }
 
-    public int getNbRed(){
+    public int getNbRed() {
         return nbRed;
     }
 
-    public int getBlueScore(){
+    public int getBlueScore() {
         return blueScore;
     }
 
-    public int getRedScore(){
+    public int getRedScore() {
         return redScore;
     }
 
-    public void computePartyResult() {
+
+    public int[] computePartyResult() {
+
+        model.stopGame();
         System.out.println("La partie est terminée");
         getBoard().removeElement(crownPawn);
 
@@ -583,15 +585,12 @@ public class RosesStageModel extends GameStageModel {
             }
         }
 
-
-        controller.handleEndOfGame(nbBlue, nbRed, blueScore, redScore, idWinner);
-
         System.out.println(Color.BLUE + "[Player 1]" + Color.BLACK + " Blue pawns on the field : " + nbBlue);
         System.out.println(Color.RED + "[Player 2]" + Color.BLACK + " Red pawns on the field : " + nbRed);
         System.out.println(Color.BLUE + "[Player 1]" + Color.BLACK + " Blue score : " + blueScore);
         System.out.println(Color.RED + "[Player 2]" + Color.BLACK + " Red score : " + redScore);
         model.setIdWinner(idWinner);
-        model.stopStage();
+        return new int[]{nbBlue, nbRed, blueScore, redScore};
     }
 
     private int countZoneSize(int n, int m, int color, boolean[][] visited) {

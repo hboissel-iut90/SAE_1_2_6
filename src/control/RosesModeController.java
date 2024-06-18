@@ -13,6 +13,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.RosesStageModel;
 import view.RosesDiffPane;
 import view.RosesMenuPane;
 import view.RosesModePane;
@@ -27,11 +28,13 @@ import static javafx.beans.binding.Bindings.isEmpty;
 public class RosesModeController extends ControllerAction implements EventHandler<ActionEvent> {
     private RosesView rosesView;
     private Stage stage;
+    private RosesController control;
 
     public RosesModeController(Model model, View view, Controller control) {
         super(model, view, control);
         this.rosesView = (RosesView) view;
         this.stage = rosesView.getStage();
+        this.control = (RosesController) control;
 
         // Get the buttons from the view
         RosesModePane modePane = (RosesModePane) rosesView.getRootPane();
@@ -48,21 +51,19 @@ public class RosesModeController extends ControllerAction implements EventHandle
 
     }
 
-    public List<String> playersNames(Model model){
+    public List<String> playersNames(){
         List<Player> players = model.getPlayers();
         List<String> playersNames = new ArrayList<>();
         String[] result = null;
 
         do {
             Dialog<String[]> dialog = new Dialog<>();
-            dialog.initModality(Modality.APPLICATION_MODAL);
             dialog.setTitle("Players Names");
+            dialog.initOwner(stage);
+            dialog.initModality(Modality.APPLICATION_MODAL);
+            dialog.getDialogPane().getStylesheets().add("file:src/css/style.css");
 
             GridPane grid = new GridPane();
-            grid.setHgap(10);
-            grid.setVgap(10);
-            grid.setPadding(new Insets(20, 150, 10, 10));
-
             TextField player1 = new TextField();
             player1.setText(players.get(0).getName());
             TextField player2 = new TextField();
@@ -72,6 +73,8 @@ public class RosesModeController extends ControllerAction implements EventHandle
             grid.add(player1, 1, 0);
             grid.add(new Label("Player 2:"), 0, 1);
             grid.add(player2, 1, 1);
+            grid.setHgap(10);
+            grid.setVgap(10);
 
             dialog.getDialogPane().setContent(grid);
 
@@ -93,9 +96,7 @@ public class RosesModeController extends ControllerAction implements EventHandle
                 }
             return null;
             });
-            stage.setFullScreen(false);
             result = dialog.showAndWait().orElse(null);
-            stage.setFullScreen(true);
         } while (result == null || result.length != 2 || result[0].trim().isEmpty() || result[1].trim().isEmpty());
         playersNames = Arrays.asList(result);
         return playersNames;
@@ -110,9 +111,11 @@ public class RosesModeController extends ControllerAction implements EventHandle
         if (event.getSource() == modePane.getPvPButton()) {
             model.addHumanPlayer("player1");
             model.addHumanPlayer("player2");
-            playerNames = playersNames(model);
+            playerNames = playersNames();
             if (playerNames.get(0).equals("cancel") || playerNames.get(1).equals("cancel")) {
-                model = new Model();
+                model.getPlayers().clear();
+                rosesView = new RosesView(model, stage, new RosesModePane(width, height));
+                control.setControlAction(new RosesModeController(model, rosesView, control));
                 return;
             }
             model.getPlayers().get(0).setName(playerNames.get(0));
@@ -128,9 +131,11 @@ public class RosesModeController extends ControllerAction implements EventHandle
         } else if (event.getSource() == modePane.getPvCButton()) {
             model.addHumanPlayer("player");
             model.addComputerPlayer("computer");
-            playerNames = playersNames(model);
+            playerNames = playersNames();
             if (playerNames.get(0).equals("cancel") || playerNames.get(1).equals("cancel")) {
-                model = new Model();
+                model.getPlayers().clear();
+                rosesView = new RosesView(model, stage, new RosesModePane(width, height));
+                control.setControlAction(new RosesModeController(model, rosesView, control));
                 return;
             }
             model.getPlayers().get(0).setName(playerNames.get(0));
@@ -140,9 +145,11 @@ public class RosesModeController extends ControllerAction implements EventHandle
         } else if (event.getSource() == modePane.getCvCButton()) {
             model.addComputerPlayer("computer1");
             model.addComputerPlayer("computer2");
-            playerNames = playersNames(model);
+            playerNames = playersNames();
             if (playerNames.get(0).equals("cancel") || playerNames.get(1).equals("cancel")) {
-                model = new Model();
+                model.getPlayers().clear();
+                rosesView = new RosesView(model, stage, new RosesModePane(width, height));
+                control.setControlAction(new RosesModeController(model, rosesView, control));
                 return;
             }
             model.getPlayers().get(0).setName(playerNames.get(0));

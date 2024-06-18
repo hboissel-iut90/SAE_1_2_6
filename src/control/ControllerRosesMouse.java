@@ -119,7 +119,6 @@ public class ControllerRosesMouse extends ControllerMouse implements EventHandle
                                 }
                                 if (!isNotEmpty) {
                                     moveDiscardCardsToPickPot(stageModel);
-                                    System.out.println("IL EST PLUS EMPTY A");
                                 }
                                 return;
                             }

@@ -199,7 +199,7 @@ public abstract class Controller {
     /**
      * Execute actions when the current player just ended its turn
      * By default, this method does nothing because what to do is totally dependent of the game and its state.
-     * For some, a new player can play, and for toehrs, the current player may play another turn.
+     * For some, a new player can play, and for others, the current player may play another turn.
      */
     public void endOfTurn() {}
 

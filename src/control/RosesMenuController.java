@@ -16,6 +16,7 @@ import view.RosesView;
 public class RosesMenuController extends ControllerAction implements EventHandler<ActionEvent> {
         private RosesView rosesView;
         private Stage stage;
+
         public RosesMenuController(Model model, View view, Controller control){
             super(model, view, control);
             this.rosesView = (RosesView) view;

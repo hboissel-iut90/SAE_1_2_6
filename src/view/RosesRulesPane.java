@@ -114,7 +114,7 @@ public class RosesRulesPane extends RootPane {
             pageTitle.setFont(new Font(size));
             back.setFont(new Font(size));
         }
-        pageTitle.setX(width/4);
+        pageTitle.setX(width/6);
         pageTitle.setY(height/4.5);
         pageTitle.setFill(Color.WHITE);
         rulesContainer.getChildren().addAll(title1, content1, title2, content2, title3, content3, title4, content4, title5, content5);
